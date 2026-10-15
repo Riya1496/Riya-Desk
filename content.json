@@ -1,0 +1,270 @@
+{
+  "nameLeft": "Riya",
+  "nameRight": "Desk",
+  "year": "2026",
+  "tags": [
+    "marketing",
+    "growth",
+    "creative",
+    "ai"
+  ],
+  "heroKicker": "( creative marketing desk )",
+  "heroLine1": "brands that grow.",
+  "heroLine2": "stories that stay.",
+  "ctaLabel": "Start your story ↗",
+  "contactLink": "",
+  "aboutTitle": "About me",
+  "aboutText": "I’m Riya, founder of Riya Desk, and I help businesses become the brand people choose. With 7+ years of experience and an MBA from the UK, I get to the heart of your business challenges and combine strategy, creativity and AI to turn what makes you different into a reason customers notice, trust and buy from you.",
+  "servicesTitle": "Services",
+  "services": [
+    {
+      "name": "Brand Strategy",
+      "desc": "Find the one thing only you can own. I dig into your business, your audience and your competitors to shape the positioning, messaging and story that make choosing you feel obvious.",
+      "tags": [
+        "Positioning",
+        "Messaging",
+        "Brand story",
+        "Audience insight"
+      ],
+      "image": "media/min-brand-strategy.jpg"
+    },
+    {
+      "name": "Social Media Marketing",
+      "desc": "Turn scrolling into following, and following into buying. A clear platform plan, content that sounds like you, and AI-assisted planning that keeps you consistent without wearing out your team.",
+      "tags": [
+        "Platform strategy",
+        "Content creation",
+        "Content calendars",
+        "Performance reports"
+      ],
+      "image": "media/min-social-media.jpg"
+    },
+    {
+      "name": "Campaign Concepts",
+      "desc": "Big ideas with a clear job to do. Launches and campaigns built around one sharp insight, carried through every channel so people notice, remember and act.",
+      "tags": [
+        "Creative concepts",
+        "Launch campaigns",
+        "Copy & visuals",
+        "Multi-channel rollout"
+      ],
+      "image": "media/min-campaign-concepts.jpg"
+    },
+    {
+      "name": "Website Design, Strategy & Development",
+      "desc": "A website that works as hard as you do. From structure and messaging to design and build, every page is planned to turn visitors into enquiries.",
+      "tags": [
+        "Site strategy & UX",
+        "Web design",
+        "Development",
+        "Conversion copy"
+      ],
+      "image": "media/min-website-design.jpg"
+    },
+    {
+      "name": "Business Consulting",
+      "desc": "Clarity before campaigns. With an MBA and 7+ years of hands-on experience, I help you untangle growth challenges, sharpen your offer and build a practical plan your team can act on.",
+      "tags": [
+        "Growth planning",
+        "Market research",
+        "Offer & pricing",
+        "Go-to-market"
+      ],
+      "image": "media/min-business-consulting.jpg"
+    },
+    {
+      "name": "IT Services",
+      "desc": "The tech behind your brand, handled. Domains, hosting, business email and the tools your team relies on, set up properly, connected together and kept running smoothly.",
+      "tags": [
+        "Domains & hosting",
+        "Business email",
+        "Tool setup & integrations",
+        "Ongoing support"
+      ],
+      "image": "media/min-it-services.jpg"
+    },
+    {
+      "name": "AI Solutions",
+      "desc": "Put AI to work where it actually saves time. Custom workflows for content, research, customer support and reporting, so your team spends less time on busywork and more on what matters.",
+      "tags": [
+        "AI workflows",
+        "Content automation",
+        "Chatbots & assistants",
+        "Team training"
+      ],
+      "image": "media/min-ai-solutions.jpg"
+    }
+  ],
+  "projectsTitle": "Projects",
+  "projects": [
+    {
+      "name": "Mamaearth Onion Shampoo",
+      "cat": "Influencer Marketing",
+      "link": "case-studies/mamaearth/index.html",
+      "cta": "View Case Study",
+      "images": {
+        "a": "media/case-shampoo-washday.jpg",
+        "b": "media/case-shampoo-reel.jpg",
+        "c": "media/case-shampoo-bottle.jpg"
+      }
+    },
+    {
+      "name": "Fevicol Friendship Day",
+      "cat": "Campaign Study & Concept",
+      "link": "case-studies/fevicol/index.html",
+      "cta": "View Case Study",
+      "images": {
+        "a": "media/case-fevicol-bubbles.jpg",
+        "b": "media/case-fevicol-headline.jpg",
+        "c": "media/case-fevicol-poster.jpg"
+      }
+    },
+    {
+      "name": "OnePlus",
+      "cat": "Influencer Marketing",
+      "link": "case-studies/oneplus/index.html",
+      "cta": "View Case Study",
+      "images": {
+        "a": "media/case-op-detail.jpg",
+        "b": "media/case-oc-hero.jpg",
+        "c": "media/case-oc-band.jpg"
+      }
+    },
+    {
+      "name": "PokerBaazi",
+      "cat": "Influencer Marketing",
+      "link": "case-studies/pokerbaazi/index.html",
+      "cta": "View Case Study",
+      "images": {
+        "a": "media/case-pb-detail.jpg",
+        "b": "media/case-oc-hero.jpg",
+        "c": "media/case-oc-cards.jpg"
+      }
+    }
+  ],
+  "tiles": [
+    {
+      "label": "Insync",
+      "sub": "Brand launch",
+      "image": "media/tiles-0-image-1791377349087.jpg"
+    },
+    {
+      "label": "Mamaearth",
+      "sub": "Influencer marketing",
+      "image": "media/tiles-1-image-1791882356848.jpg"
+    },
+    {
+      "label": "OnePlus",
+      "sub": "Influencer marketing",
+      "image": "media/tiles-2-image-1791882364420.jpg"
+    },
+    {
+      "label": "Dainik Bhaskar",
+      "sub": "Brand strategy",
+      "image": "media/tiles-3-image-1791882381938.jpg"
+    },
+    {
+      "label": "Chingari",
+      "sub": "Social media strategy",
+      "image": "media/tiles-4-image-1791882417090.jpg"
+    },
+    {
+      "label": "Fevicol",
+      "sub": "Campaign strategy",
+      "image": "media/tiles-5-image-1791882453073.jpg"
+    }
+  ],
+  "strategyTitle": "Social Strategy",
+  "strategyKicker": "( pinned to the strategy board )",
+  "strategies": [
+    {
+      "name": "Insync",
+      "cat": "Social media strategy",
+      "text": "Launch plan for a couple-tee brand, built so every post has a job.",
+      "points": [
+        "Account audit & content pillars",
+        "6 sample posts + 3 Reel scripts",
+        "One-week content calendar"
+      ],
+      "link": "strategy/insync/index.html",
+      "cta": "Read the strategy",
+      "image": "media/case-insync-logo.jpg"
+    },
+    {
+      "name": "Wedding Lensation",
+      "cat": "Social & brand strategy",
+      "text": "Ten million Reel views, 3,463 followers. A plan to turn reach into recall.",
+      "points": [
+        "30 Reels audited by views",
+        "Positioning, mood board & logo idea",
+        "Instagram fixes + 90-day roadmap"
+      ],
+      "link": "strategy/wedding-lensation/index.html",
+      "cta": "Read the strategy",
+      "image": "media/case-wl-lehenga.jpg"
+    }
+  ],
+  "conceptTitle": "Concept Work",
+  "conceptKicker": "( fictional brands · real thinking )",
+  "concepts": [
+    {
+      "name": "Fernhouse Pilates",
+      "type": "Landing page concept",
+      "text": "A one-page journey that turns Instagram curiosity into a booked first class, with an offer built around the beginner’s real fear.",
+      "steps": [
+        "Brief",
+        "Audience",
+        "Problem",
+        "Insight",
+        "Strategy",
+        "Creative",
+        "Measurement"
+      ],
+      "link": "concepts/fernhouse/index.html",
+      "cta": "View concept",
+      "image": "media/concept-fernhouse.jpg"
+    },
+    {
+      "name": "Halfmoon Tiffins",
+      "type": "Advertising concept",
+      "text": "One offer, three hooks: money, home and time. Three paid social ads with audiences, a three-round test plan and a measurement plan.",
+      "steps": [
+        "Brief",
+        "Audience",
+        "Problem",
+        "Insight",
+        "Strategy",
+        "3 ads",
+        "Test plan",
+        "Measurement"
+      ],
+      "link": "concepts/halfmoon/index.html",
+      "cta": "View concept",
+      "image": "media/concept-halfmoon.jpg"
+    },
+    {
+      "name": "Velline",
+      "type": "Customer journey concept",
+      "text": "A luxury hair and skin atelier. A redesigned journey from Instagram follower to first booking to private client, built on being remembered rather than discounts.",
+      "steps": [
+        "Brief",
+        "Audience",
+        "Problem",
+        "Insight",
+        "Strategy",
+        "Touchpoints",
+        "Measurement"
+      ],
+      "link": "concepts/velline/index.html",
+      "cta": "View concept",
+      "image": "media/concept-velline.jpg"
+    }
+  ],
+  "contactInvite": "Have a brand to grow, a launch to plan or a problem worth solving? Let’s work together.",
+  "contactEmail": "riyapatelbusiness@gmail.com",
+  "contactLinkedIn": "https://www.linkedin.com/in/rp-riya-p-marketing/",
+  "contactInstagram": "https://www.instagram.com/riya_desk/",
+  "contactCta": "Tell me about your brand ↗",
+  "signoffTitle": "Let’s talk",
+  "heroIntro": "Brand strategy, creative marketing and AI solutions for businesses ready to grow."
+}
