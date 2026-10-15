@@ -1,0 +1,675 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{box-sizing:border-box}body{margin:0;padding:0}img{max-width:100%}[hidden]{display:none!important}</style></head><body>
+<title>Fernhouse Landing Page</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Bodoni+Moda:opsz,wght@6..96,400&family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet">
+<style>
+/* Riya Desk case-study frame (paper + navy) around a fictional studio brand (oat, fern, sage, clay). */
+:root {
+  --paper: #F2EEE6;
+  --paper-2: #E9E3D8;
+  --ink: #1C2240;
+  --muted: #5A5F73;
+  --rule: rgba(28, 34, 64, 0.18);
+  --acc: #B5532F;
+  --oat: #F6F1E8;
+  --fern: #2F4A3A;
+  --sage: #8FA88A;
+  --sage-2: #DCE5D6;
+  --clay: #C4673F;
+  --good: #2F7A3E;
+  --display: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif;
+  --label: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --fh-serif: 'Fraunces', Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--paper); color: var(--ink); font-family: var(--display); -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; display: block; }
+button { font: inherit; cursor: pointer; border: 0; background: none; color: inherit; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-inline: clamp(16px, 5vw, 72px); }
+.label { font: 600 12px/1.2 var(--label); letter-spacing: .2em; text-transform: uppercase; }
+.label.acc { color: var(--acc); }
+.card { background: #fff; border-radius: 6px; box-shadow: 0 10px 30px rgba(28,34,64,.06); }
+.note { margin-top: 16px; font: italic 400 15px/1.5 var(--display); color: var(--muted); max-width: 80ch; }
+
+/* Riya Desk nav */
+.brand { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 26px 22px; border-bottom: 1px solid var(--rule); }
+.rd { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); }
+.mono { position: relative; display: inline-block; font-family: 'Bodoni Moda', Didot, Georgia, serif; line-height: 1; height: 1em; width: 1.05em; font-size: 32px; }
+.mono .r { position: absolute; left: 0; top: 0; }
+.mono .d { position: absolute; left: 0.34em; top: 0.3em; font-size: 0.78em; }
+.mono .stem { position: absolute; left: 0.47em; top: 0.72em; width: 1px; height: 0.3em; background: currentColor; }
+.mono .stem::after { content: ""; position: absolute; left: -0.06em; bottom: -0.06em; width: 0.13em; height: 0.13em; border-radius: 50%; background: currentColor; }
+.rdw { font-family: 'Cormorant Garamond', Didot, Georgia, serif; font-weight: 500; text-transform: uppercase; letter-spacing: 0.3em; font-size: 15px; }
+.back { font: 600 12px/1 var(--label); letter-spacing: .16em; text-transform: uppercase; text-decoration: none; color: var(--ink); }
+
+/* hero */
+.hero { padding-block: 56px 32px; }
+.chip { display: inline-block; margin-left: 10px; padding: 5px 9px; border-radius: 4px; background: var(--ink); color: var(--paper); font: 600 10px/1 var(--label); letter-spacing: .14em; text-transform: uppercase; vertical-align: 2px; }
+.hero h1 { margin-top: 18px; font: 800 clamp(48px, 8.4vw, 116px)/0.9 var(--display); letter-spacing: -0.055em; text-wrap: balance; }
+.hero h1 i { font-style: normal; color: var(--acc); }
+.hook { margin-top: 24px; max-width: 46ch; font: 400 clamp(19px, 2.2vw, 26px)/1.32 var(--display); letter-spacing: -0.015em; }
+.byline { margin-top: 20px; font: 400 17px/1.3 var(--display); color: var(--muted); }
+.byline b { color: var(--ink); font-weight: 600; }
+.hero-img { margin-top: 40px; border-radius: 6px; overflow: hidden; aspect-ratio: 16 / 8; position: relative; }
+.hero-img img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; }
+.hero-img .tag { position: absolute; left: 18px; bottom: 16px; font: 500 11px/1 var(--label); letter-spacing: .12em; text-transform: uppercase; color: #fff; text-shadow: 0 1px 8px rgba(0,0,0,.5); }
+.facts { margin-top: 28px; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 2px solid var(--ink); }
+.facts div { padding: 16px 16px 0 0; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.facts p { font: 500 18px/1.3 var(--display); }
+.flow { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.flow a { text-decoration: none; color: var(--ink); padding: 10px 14px; border-radius: 999px; border: 1.5px solid var(--rule); font: 600 13px/1 var(--label); letter-spacing: .04em; }
+.flow a:hover { border-color: var(--ink); }
+.flow span { color: var(--muted); font: 500 14px/1 var(--label); }
+
+/* sections */
+section.s { padding-top: clamp(64px, 9vw, 112px); scroll-margin-top: 20px; }
+.s-head { display: grid; grid-template-columns: 220px 1fr; gap: 32px; align-items: start; }
+.s-head h2 { font: 800 clamp(34px, 4.8vw, 62px)/0.96 var(--display); letter-spacing: -0.045em; text-wrap: balance; }
+.purpose { margin-top: 18px; display: flex; gap: 12px; align-items: baseline; max-width: 66ch; font: 400 19px/1.45 var(--display); }
+.purpose b { flex: 0 0 auto; font: 600 11px/1 var(--label); letter-spacing: .18em; text-transform: uppercase; color: #fff; background: var(--acc); padding: 6px 9px; border-radius: 4px; transform: translateY(-2px); }
+.body { margin-top: 32px; display: grid; grid-template-columns: 220px 1fr; gap: 32px; }
+.body p { max-width: 64ch; font: 400 19px/1.55 var(--display); }
+.body p + p { margin-top: 14px; }
+
+/* brief */
+.brief { margin-top: 36px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.brief div { padding: 22px; display: flex; flex-direction: column; gap: 8px; }
+.brief h3 { font: 600 19px/1.25 var(--display); }
+.brief p { font: 400 15px/1.5 var(--display); color: var(--muted); }
+
+/* personas */
+.personas { margin-top: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.persona { padding: 26px; display: flex; flex-direction: column; gap: 14px; }
+.persona h3 { font: 800 28px/1 var(--display); letter-spacing: -0.03em; }
+.persona .who { font: 400 15px/1.45 var(--display); color: var(--muted); }
+.persona q { font: italic 400 21px/1.3 var(--fh-serif); color: var(--fern); quotes: "\201C" "\201D"; }
+.persona dl { display: grid; grid-template-columns: 96px 1fr; gap: 10px 14px; }
+.persona dt { font: 600 11px/1.6 var(--label); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.persona dd { font: 400 15.5px/1.45 var(--display); }
+
+/* problem journey */
+.leaks { margin-top: 40px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; }
+.leak { position: relative; padding: 20px 18px 20px 0; border-top: 2px solid var(--ink); display: flex; flex-direction: column; gap: 10px; }
+.leak .n { font: 800 34px/1 var(--display); letter-spacing: -0.04em; }
+.leak h3 { font: 600 17px/1.25 var(--display); }
+.leak p { font: 400 14.5px/1.5 var(--display); color: var(--muted); }
+.leak .drop { align-self: flex-start; font: 600 11px/1 var(--label); letter-spacing: .1em; text-transform: uppercase; color: #fff; background: var(--acc); padding: 6px 8px; border-radius: 3px; }
+.leak .ok { background: var(--sage); }
+
+/* insight */
+.insight { margin-top: 40px; background: var(--fern); color: var(--oat); border-radius: 6px; padding: clamp(28px, 5vw, 56px); display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; }
+.insight q { font: italic 400 clamp(28px, 3.6vw, 46px)/1.1 var(--fh-serif); quotes: "\201C" "\201D"; }
+.insight p { font: 400 18px/1.55 var(--display); color: rgba(246,241,232,.85); }
+.insight .label { color: #E8B79E; display: block; margin-bottom: 14px; }
+
+/* strategy */
+.rules3 { margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.rules3 div { border-top: 2px solid var(--ink); padding-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+.rules3 span { font: 600 11px/1 var(--label); letter-spacing: .16em; color: var(--acc); }
+.rules3 h3 { font: 600 22px/1.15 var(--display); letter-spacing: -0.02em; }
+.rules3 p { font: 400 15.5px/1.5 var(--display); color: var(--muted); }
+.order { margin-top: 32px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.order div { background: #fff; border-radius: 6px; padding: 16px; display: flex; flex-direction: column; gap: 6px; box-shadow: 0 10px 30px rgba(28,34,64,.06); }
+.order b { font: 800 22px/1 var(--display); color: var(--acc); }
+.order h4 { font: 600 16px/1.2 var(--display); }
+.order p { font: 400 13.5px/1.45 var(--display); color: var(--muted); }
+.offer { margin-top: 32px; display: grid; grid-template-columns: 1fr 1.2fr; gap: 0; border-radius: 6px; overflow: hidden; box-shadow: 0 10px 30px rgba(28,34,64,.08); }
+.offer .l { background: var(--clay); color: #fff; padding: clamp(24px, 4vw, 40px); display: flex; flex-direction: column; justify-content: space-between; gap: 20px; }
+.offer .l .big { font: 400 clamp(44px, 6vw, 76px)/0.95 var(--fh-serif); letter-spacing: -0.02em; }
+.offer .l p { font: 400 17px/1.45 var(--display); }
+.offer .r { background: #fff; padding: clamp(24px, 4vw, 40px); }
+.offer ul { list-style: none; display: flex; flex-direction: column; gap: 0; }
+.offer li { display: grid; grid-template-columns: 180px 1fr; gap: 16px; padding: 12px 0; border-top: 1px solid var(--rule); font: 400 15.5px/1.45 var(--display); }
+.offer li:first-child { border-top: 0; }
+.offer li b { font-weight: 600; }
+.offer li span { color: var(--muted); }
+
+/* ---------- Fernhouse landing page mock ---------- */
+.mock-wrap { margin-top: 40px; display: grid; grid-template-columns: 1fr 300px; gap: 28px; align-items: start; }
+.browser { border-radius: 12px; overflow: hidden; background: #fff; box-shadow: 0 24px 60px rgba(28,34,64,.16); }
+.bar { display: flex; align-items: center; gap: 6px; padding: 10px 14px; background: #ECE6DC; }
+.bar i { width: 10px; height: 10px; border-radius: 50%; background: #CFC4B6; display: block; }
+.bar .url { margin-left: 12px; flex: 1; max-width: 360px; padding: 5px 12px; border-radius: 6px; background: #fff; font: 400 12px/1.2 var(--label); color: var(--muted); }
+.fh { background: var(--oat); color: var(--fern); font-family: var(--label); }
+.fh-nav { display: flex; justify-content: space-between; align-items: center; padding: 16px 28px; }
+.fh-logo { display: inline-flex; align-items: center; gap: 8px; font: 500 20px/1 var(--fh-serif); letter-spacing: -0.01em; color: var(--fern); }
+.fh-logo svg { width: 22px; height: 22px; }
+.fh-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 20px; border-radius: 999px; background: var(--clay); color: #fff; font: 600 13px/1 var(--label); letter-spacing: .02em; white-space: nowrap; }
+.fh-btn.sm { padding: 9px 14px; font-size: 12px; }
+.fh-btn.ghost { background: transparent; color: var(--fern); box-shadow: inset 0 0 0 1.5px var(--fern); }
+.fh-hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 0; align-items: stretch; }
+.fh-hero .txt { padding: 36px 28px 40px; display: flex; flex-direction: column; gap: 16px; justify-content: center; }
+.fh-eyebrow { font: 600 11px/1 var(--label); letter-spacing: .16em; text-transform: uppercase; color: var(--clay); }
+.fh-h1 { font: 400 clamp(34px, 4.2vw, 54px)/1 var(--fh-serif); letter-spacing: -0.025em; color: var(--fern); }
+.fh-h1 i { font-style: italic; }
+.fh-sub { font: 400 15.5px/1.5 var(--label); color: #4E5D52; max-width: 36ch; }
+.fh-micro { display: flex; flex-wrap: wrap; gap: 6px 14px; font: 500 12px/1.3 var(--label); color: #4E5D52; }
+.fh-micro span::before { content: "✓ "; color: var(--clay); font-weight: 700; }
+.fh-hero .ph { position: relative; min-height: 320px; }
+.fh-hero .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.fh-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; background: var(--fern); color: var(--oat); }
+.fh-strip div { padding: 18px 22px; display: flex; flex-direction: column; gap: 4px; border-left: 1px solid rgba(246,241,232,.15); }
+.fh-strip div:first-child { border-left: 0; }
+.fh-strip b { font: 400 22px/1 var(--fh-serif); color: #E8B79E; }
+.fh-strip span { font: 400 13px/1.45 var(--label); }
+.fh-sec { padding: 30px 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.fh-sec h3 { font: 400 26px/1.1 var(--fh-serif); margin-bottom: 14px; }
+.fh-faq { display: flex; flex-direction: column; }
+.fh-faq div { padding: 11px 0; border-top: 1px solid rgba(47,74,58,.15); }
+.fh-faq b { display: block; font: 600 13.5px/1.35 var(--label); }
+.fh-faq span { font: 400 13px/1.45 var(--label); color: #4E5D52; }
+.fh-sched { background: #fff; border-radius: 10px; padding: 16px; box-shadow: 0 6px 18px rgba(47,74,58,.08); }
+.fh-days { display: flex; gap: 6px; margin-bottom: 12px; }
+.fh-days span { flex: 1; text-align: center; padding: 8px 0; border-radius: 8px; background: var(--sage-2); font: 600 11px/1.2 var(--label); }
+.fh-days span.on { background: var(--fern); color: var(--oat); }
+.fh-slot { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px 0; border-top: 1px solid rgba(47,74,58,.12); font: 400 13px/1.3 var(--label); }
+.fh-slot b { font-weight: 600; }
+.fh-slot em { font-style: normal; font: 500 11px/1 var(--label); color: var(--clay); }
+.fh-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 18px 28px; background: var(--sage-2); font: 400 12.5px/1.4 var(--label); }
+.pin-n { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: var(--ink); color: #fff; font: 700 12px/1 var(--label); box-shadow: 0 0 0 3px #fff; flex: 0 0 auto; }
+.anchor { position: relative; }
+.anchor > .pin-n { position: absolute; z-index: 2; }
+.callouts { display: flex; flex-direction: column; gap: 0; position: sticky; top: 20px; }
+.callouts > div { display: grid; grid-template-columns: 24px 1fr; gap: 12px; padding: 14px 0; border-top: 1px solid var(--rule); }
+.callouts > div:first-child { border-top: 2px solid var(--ink); }
+.callouts b { display: block; font: 600 15.5px/1.3 var(--display); margin-bottom: 3px; }
+.callouts p { font: 400 14px/1.5 var(--display); color: var(--muted); }
+
+/* mobile flow (interactive) */
+.mflow { margin-top: 56px; display: grid; grid-template-columns: 340px 1fr; gap: 48px; align-items: center; }
+.phone { width: 320px; margin: 0 auto; border-radius: 40px; padding: 12px; background: #1d1d1f; box-shadow: 0 30px 60px rgba(28,34,64,.25); }
+.screen { position: relative; height: 620px; border-radius: 30px; overflow: hidden; background: var(--oat); color: var(--fern); font-family: var(--label); display: flex; flex-direction: column; }
+.sc-top { display: flex; justify-content: space-between; align-items: center; padding: 18px 18px 10px; }
+.sc-top .fh-logo { font-size: 17px; }
+.steps { display: flex; gap: 4px; padding: 0 18px 12px; }
+.steps i { flex: 1; height: 4px; border-radius: 2px; background: var(--sage-2); }
+.steps i.on { background: var(--clay); }
+.sc-body { flex: 1; padding: 6px 18px 18px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+.sc-body h4 { font: 400 25px/1.05 var(--fh-serif); }
+.sc-body p.sm { font: 400 13px/1.45 var(--label); color: #4E5D52; }
+.sc-days { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.sc-days button, .sc-slots button { padding: 10px 6px; border-radius: 10px; background: #fff; font: 600 12px/1.25 var(--label); color: var(--fern); box-shadow: inset 0 0 0 1.5px rgba(47,74,58,.15); }
+.sc-days button small { display: block; font-weight: 400; opacity: .7; }
+.sc-days button.on, .sc-slots button.on { background: var(--fern); color: var(--oat); box-shadow: none; }
+.sc-slots { display: flex; flex-direction: column; gap: 6px; }
+.sc-slots button { display: flex; justify-content: space-between; align-items: center; padding: 12px; text-align: left; }
+.sc-slots button em { font-style: normal; font-weight: 500; font-size: 11px; color: var(--clay); }
+.sc-slots button.on em { color: #F2C7B3; }
+.sc-field { display: flex; flex-direction: column; gap: 6px; font: 600 12px/1 var(--label); }
+.sc-field input { padding: 12px; border-radius: 10px; border: 1.5px solid rgba(47,74,58,.2); background: #fff; font: 400 14px/1.2 var(--label); color: var(--fern); }
+.sc-field input:focus { outline: none; border-color: var(--fern); }
+.sc-check { display: flex; gap: 8px; align-items: flex-start; font: 400 12.5px/1.4 var(--label); color: #4E5D52; }
+.sc-sum { background: #fff; border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 4px; font: 400 13px/1.4 var(--label); }
+.sc-sum b { font-weight: 600; }
+.sc-cta { padding: 12px 18px 18px; background: linear-gradient(0deg, var(--oat) 70%, rgba(246,241,232,0)); }
+.sc-cta .fh-btn { width: 100%; padding: 15px; font-size: 14px; }
+.sc-cta .fh-btn[disabled] { opacity: .45; cursor: not-allowed; }
+.sc-back { font: 600 12px/1 var(--label); color: var(--fern); opacity: .7; }
+.ok-badge { width: 54px; height: 54px; border-radius: 50%; background: var(--sage); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 26px; }
+.sc-list { display: flex; flex-direction: column; gap: 6px; font: 400 13px/1.4 var(--label); }
+.sc-list span::before { content: "• "; color: var(--clay); font-weight: 700; }
+.demo { font: 500 11px/1.3 var(--label); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); text-align: center; margin-top: 14px; }
+.mtext h3 { font: 800 clamp(28px, 3.4vw, 40px)/1 var(--display); letter-spacing: -0.035em; }
+.mtext > p { margin-top: 14px; font: 400 18px/1.5 var(--display); max-width: 52ch; }
+.mtext ol { margin-top: 22px; list-style: none; display: flex; flex-direction: column; gap: 0; counter-reset: s; }
+.mtext li { counter-increment: s; display: grid; grid-template-columns: 36px 1fr; gap: 12px; padding: 14px 0; border-top: 1px solid var(--rule); font: 400 15.5px/1.5 var(--display); color: var(--muted); }
+.mtext li::before { content: counter(s); width: 28px; height: 28px; border-radius: 50%; background: var(--clay); color: #fff; display: flex; align-items: center; justify-content: center; font: 700 13px/1 var(--label); }
+.mtext li b { color: var(--ink); font-weight: 600; }
+
+/* why act */
+.why { margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.why div { padding: 22px; display: flex; flex-direction: column; gap: 8px; }
+.why .k { font: 600 11px/1 var(--label); letter-spacing: .14em; text-transform: uppercase; color: var(--acc); }
+.why h3 { font: 600 19px/1.2 var(--display); letter-spacing: -0.01em; }
+.why p { font: 400 15px/1.5 var(--display); color: var(--muted); }
+.why em { font-style: normal; color: var(--ink); font-weight: 500; }
+
+/* after booking */
+.after { margin-top: 40px; display: grid; grid-template-columns: 1fr 340px; gap: 32px; align-items: start; }
+.timeline { display: flex; flex-direction: column; }
+.timeline > div { display: grid; grid-template-columns: 120px 1fr; gap: 16px; padding: 16px 0; border-top: 1px solid var(--rule); }
+.timeline > div:first-child { border-top: 2px solid var(--ink); }
+.timeline .when { font: 600 11px/1.5 var(--label); letter-spacing: .12em; text-transform: uppercase; color: var(--acc); }
+.timeline b { display: block; font: 600 17px/1.3 var(--display); margin-bottom: 4px; }
+.timeline p { font: 400 15px/1.5 var(--display); color: var(--muted); }
+.wa { background: #E9DFD3; border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 8px; box-shadow: 0 12px 30px rgba(28,34,64,.1); }
+.wa-h { display: flex; align-items: center; gap: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(0,0,0,.08); font: 600 13px/1.2 var(--label); }
+.wa-h .av { width: 30px; height: 30px; border-radius: 50%; background: var(--fern); display: flex; align-items: center; justify-content: center; }
+.wa-h .av svg { width: 16px; height: 16px; }
+.wa-h small { display: block; font-weight: 400; color: var(--muted); }
+.bub { align-self: flex-start; max-width: 92%; background: #fff; border-radius: 4px 12px 12px 12px; padding: 9px 11px; font: 400 13px/1.45 var(--label); color: #222; box-shadow: 0 1px 1px rgba(0,0,0,.06); }
+.bub small { display: block; text-align: right; font-size: 10px; color: #999; margin-top: 2px; }
+.bub .qr { display: flex; gap: 6px; margin-top: 8px; }
+.bub .qr span { flex: 1; text-align: center; padding: 7px; border-radius: 8px; background: #F1F6EF; color: var(--fern); font-weight: 600; font-size: 12px; }
+
+/* measurement */
+.tbl-wrap { overflow-x: auto; margin-top: 40px; }
+table { width: 100%; border-collapse: collapse; min-width: 720px; }
+th { text-align: left; font: 600 11px/1 var(--label); letter-spacing: .16em; text-transform: uppercase; padding: 12px 14px 12px 0; border-bottom: 2px solid var(--ink); }
+td { padding: 14px 14px 14px 0; border-bottom: 1px solid var(--rule); font: 400 15px/1.45 var(--display); vertical-align: top; }
+td:first-child { font-weight: 600; }
+.stage { display: inline-block; padding: 4px 8px; border-radius: 3px; font: 600 10px/1 var(--label); letter-spacing: .12em; text-transform: uppercase; color: #fff; }
+.tests { margin-top: 32px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.test { padding: 22px; display: flex; flex-direction: column; gap: 12px; }
+.test h3 { font: 600 18px/1.25 var(--display); }
+.ab { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.ab div { border-radius: 6px; padding: 12px; background: var(--paper); display: flex; flex-direction: column; gap: 6px; font: 400 14px/1.4 var(--display); }
+.ab div b { font: 700 11px/1 var(--label); letter-spacing: .14em; color: var(--acc); }
+.test p { font: 400 14px/1.5 var(--display); color: var(--muted); }
+.goals { margin-top: 32px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.goals div { border-top: 4px solid var(--fern); padding: 20px; display: flex; flex-direction: column; gap: 8px; }
+.goals h3 { font: 700 19px/1.2 var(--display); }
+.goals p { font: 400 15px/1.5 var(--display); color: var(--muted); }
+
+/* sign-off */
+.sign { margin-top: clamp(72px, 10vw, 128px); display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: end; padding-top: 28px; border-top: 2px solid var(--ink); }
+.sign h2 { font: 800 clamp(40px, 6vw, 84px)/0.92 var(--display); letter-spacing: -0.05em; }
+.sign h2 i { font-style: normal; color: var(--acc); }
+.sign p { margin-top: 16px; max-width: 44ch; font: 400 19px/1.45 var(--display); color: var(--muted); }
+.cta { display: inline-flex; align-items: center; gap: 10px; padding: 18px 30px; border-radius: 999px; background: var(--ink); color: var(--paper); text-decoration: none; font: 600 14px/1 var(--label); letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; }
+.cta:hover { background: var(--acc); }
+.foot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 64px; padding-block: 22px 40px; border-top: 2px solid var(--ink); }
+
+@media (max-width: 1000px) {
+  .mock-wrap { grid-template-columns: 1fr; }
+  .callouts { position: static; }
+  .leaks { grid-template-columns: 1fr 1fr; }
+  .order { grid-template-columns: 1fr 1fr; }
+  .why, .tests, .goals { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 760px) {
+  .s-head, .body, .personas, .insight, .offer, .mflow, .after, .sign, .rules3, .brief { grid-template-columns: 1fr; }
+  .facts { grid-template-columns: 1fr 1fr; row-gap: 18px; }
+  .leaks, .order, .why, .tests, .goals { grid-template-columns: 1fr; }
+  .offer li { grid-template-columns: 1fr; gap: 4px; }
+  .fh-hero, .fh-sec, .fh-strip { grid-template-columns: 1fr; }
+  .fh-hero .ph { min-height: 200px; order: -1; }
+  .fh-strip div { border-left: 0; border-top: 1px solid rgba(246,241,232,.15); }
+  .fh-nav, .fh-sec, .fh-foot { padding-inline: 18px; }
+  .fh-hero .txt { padding: 24px 18px 28px; }
+  .bar .url { max-width: none; }
+  .anchor > .pin-n { display: none; }
+  .wa { max-width: 360px; }
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="frond" viewBox="0 0 24 24"><path d="M12 22V6" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round"/><path d="M12 8c-2.5-.2-4.5-1.6-5.2-4 2.6-.1 4.6 1.4 5.2 4Zm0 0c2.5-.2 4.5-1.6 5.2-4-2.6-.1-4.6 1.4-5.2 4Zm0 5c-3-.2-5.4-1.9-6.2-4.8 3.1-.1 5.5 1.7 6.2 4.8Zm0 0c3-.2 5.4-1.9 6.2-4.8-3.1-.1-5.5 1.7-6.2 4.8Zm0 5c-3.4-.2-6-2.1-6.9-5.3 3.5-.1 6.1 1.9 6.9 5.3Zm0 0c3.4-.2 6-2.1 6.9-5.3-3.5-.1-6.1 1.9-6.9 5.3Z" fill="currentColor"/></symbol>
+  </defs>
+</svg>
+
+<div class="wrap">
+  <nav class="brand"><a class="rd" href="../../index.html" aria-label="Riya Desk portfolio"><span class="mono" aria-hidden="true"><span class="r">R</span><span class="d">D</span><span class="stem"></span></span><span class="rdw">Riya Desk</span></a><a class="back" href="../../index.html">&larr; Back to portfolio</a></nav>
+
+  <header class="hero">
+    <span class="label acc">Riya Desk · Landing page concept</span><span class="chip">Fictional brand</span>
+    <h1>Never done Pilates<i>?</i><br>Perfect.</h1>
+    <p class="hook">A landing page and booking journey for Fernhouse Pilates, a fictional reformer studio. It is built to turn Instagram curiosity into a booked first class, in under a minute.</p>
+    <p class="byline">Concept by <b>Riya</b>, founder of <b>Riya Desk</b></p>
+    <div class="hero-img"><img src="img/studio.jpg" alt="Bright, empty reformer Pilates studio with plants and morning light"><span class="tag">Concept imagery</span></div>
+    <div class="facts">
+      <div><span class="label acc">Brand</span><p>Fernhouse Pilates (fictional), a new reformer studio</p></div>
+      <div><span class="label acc">Deliverable</span><p>Landing page, offer and booking journey</p></div>
+      <div><span class="label acc">Traffic</span><p>Instagram &amp; Facebook ads, bio link</p></div>
+      <div><span class="label acc">Goal</span><p>Booked (and attended) first classes</p></div>
+    </div>
+    <nav class="flow" aria-label="Contents">
+      <a href="#brief">Brief</a><span>→</span><a href="#audience">Audience</a><span>→</span><a href="#problem">Problem</a><span>→</span><a href="#insight">Insight</a><span>→</span><a href="#strategy">Strategy</a><span>→</span><a href="#creative">Creative</a><span>→</span><a href="#measure">Measurement</a>
+    </nav>
+  </header>
+
+  <!-- 01 BRIEF -->
+  <section class="s" id="brief">
+    <div class="s-head">
+      <span class="label">01 — The brief</span>
+      <div>
+        <h2>Fill the first classes of a new studio.</h2>
+        <p class="purpose"><b>Purpose</b> Agree what the page has to do before designing anything.</p>
+      </div>
+    </div>
+    <div class="brief">
+      <div class="card"><span class="label acc">The business</span><h3>A new reformer studio</h3><p>Small groups, one neighbourhood, opening soon. It needs a steady flow of first-time visitors who stay on as members.</p></div>
+      <div class="card"><span class="label acc">The ask</span><h3>One page for paid traffic</h3><p>A landing page that ads and the Instagram bio can point to, separate from the main website.</p></div>
+      <div class="card"><span class="label acc">Success looks like</span><h3>Booked and attended</h3><p>Not clicks or page views. A first class that is booked, attended, and leads to a second visit.</p></div>
+    </div>
+  </section>
+
+  <!-- 02 AUDIENCE -->
+  <section class="s" id="audience">
+    <div class="s-head">
+      <span class="label">02 — Audience</span>
+      <div>
+        <h2>Curious, but not sure it&rsquo;s for them.</h2>
+        <p class="purpose"><b>Purpose</b> Know who lands on the page, and what stops them from booking.</p>
+      </div>
+    </div>
+    <div class="personas">
+      <div class="card persona">
+        <span class="label acc">Primary</span>
+        <h3>The curious beginner</h3>
+        <p class="who">Working professional, 25–40, lives or works nearby. Has saved Pilates Reels for months but never tried it.</p>
+        <q>I&rsquo;d love to try it, but I&rsquo;m not flexible and I don&rsquo;t want to look lost.</q>
+        <dl>
+          <dt>Wants</dt><dd>A gentle, guided start and to know exactly what happens in class.</dd>
+          <dt>Worries</dt><dd>Being the only beginner, hidden costs, a long commitment.</dd>
+          <dt>Decides on</dt><dd>Phone, mostly in the evening, straight from an Instagram ad.</dd>
+        </dl>
+      </div>
+      <div class="card persona">
+        <span class="label acc">Secondary</span>
+        <h3>The gym switcher</h3>
+        <p class="who">Already works out but is bored of the gym, or wants something lower-impact alongside it.</p>
+        <q>Is it actually a workout, or just stretching?</q>
+        <dl>
+          <dt>Wants</dt><dd>A real challenge, good instructors and times that fit around work.</dd>
+          <dt>Worries</dt><dd>Paying boutique prices for something too easy.</dd>
+          <dt>Decides on</dt><dd>Schedule, location and a clear first-class price.</dd>
+        </dl>
+      </div>
+    </div>
+    <p class="note">Personas are assumptions for this concept. In a real project, I&rsquo;d check them against the studio&rsquo;s enquiries and a few short customer calls.</p>
+  </section>
+
+  <!-- 03 PROBLEM -->
+  <section class="s" id="problem">
+    <div class="s-head">
+      <span class="label">03 — Business problem</span>
+      <div>
+        <h2>Interest leaks out before anyone books.</h2>
+        <p class="purpose"><b>Purpose</b> Map where a typical studio journey loses people, so the page can fix each step.</p>
+      </div>
+    </div>
+    <div class="leaks">
+      <div class="leak"><span class="n">1</span><h3>Ad &rarr; homepage</h3><p>The ad promises a beginner class. The click lands on a general homepage with six menu links.</p><span class="drop">Message mismatch</span></div>
+      <div class="leak"><span class="n">2</span><h3>Looking for price</h3><p>Prices are missing, or hidden behind &ldquo;DM us&rdquo;. Many people won&rsquo;t send that DM.</p><span class="drop">Hidden cost</span></div>
+      <div class="leak"><span class="n">3</span><h3>&ldquo;Is this for me?&rdquo;</h3><p>Nothing answers the beginner&rsquo;s worries about flexibility or fitness level.</p><span class="drop">Unanswered fear</span></div>
+      <div class="leak"><span class="n">4</span><h3>Booking</h3><p>Booking means downloading an app and creating an account before seeing a time slot.</p><span class="drop">Too many steps</span></div>
+      <div class="leak"><span class="n">5</span><h3>After booking</h3><p>No reminder and no &ldquo;what to bring&rdquo;, so some people simply don&rsquo;t show up.</p><span class="drop">No-shows</span></div>
+    </div>
+    <p class="note">A common pattern for boutique studios, used here as the starting point for a fictional brand. It is not data from a real business.</p>
+  </section>
+
+  <!-- 04 INSIGHT -->
+  <section class="s" id="insight">
+    <div class="s-head">
+      <span class="label">04 — Insight</span>
+      <div>
+        <h2>The fear isn&rsquo;t the workout.</h2>
+        <p class="purpose"><b>Purpose</b> Find the one truth that the headline, offer and page should be built around.</p>
+      </div>
+    </div>
+    <div class="insight">
+      <div><span class="label">The insight</span><q>Beginners don&rsquo;t fear the exercise. They fear walking into a room where everyone else already knows what they&rsquo;re doing.</q></div>
+      <p>So the page shouldn&rsquo;t sell Pilates. It should sell a safe first hour: a beginners-only class, a small group, an instructor who explains the machine, and a clear price. Once that fear is gone, booking feels easy.</p>
+    </div>
+  </section>
+
+  <!-- 05 STRATEGY -->
+  <section class="s" id="strategy">
+    <div class="s-head">
+      <span class="label">05 — Strategy</span>
+      <div>
+        <h2>One page. One offer. One action.</h2>
+        <p class="purpose"><b>Purpose</b> Remove every choice that isn&rsquo;t &ldquo;book your first class&rdquo;.</p>
+      </div>
+    </div>
+    <div class="rules3">
+      <div><span>01</span><h3>Match the ad</h3><p>The headline repeats the ad&rsquo;s promise word for word, so the click feels like the right place.</p></div>
+      <div><span>02</span><h3>Make the first step small</h3><p>A low-cost first class rather than a membership. Ask for the smallest yes first.</p></div>
+      <div><span>03</span><h3>Answer fear before asking</h3><p>Show what happens in class and answer the beginner questions before the booking button repeats.</p></div>
+    </div>
+    <div class="order">
+      <div><b>1</b><h4>Reassure</h4><p>&ldquo;Never done Pilates? Perfect.&rdquo;</p></div>
+      <div><b>2</b><h4>Offer</h4><p>First class, beginners only, clear price.</p></div>
+      <div><b>3</b><h4>Explain</h4><p>What happens in your first 50 minutes.</p></div>
+      <div><b>4</b><h4>Answer</h4><p>Flexibility, fitness, what to wear, parking.</p></div>
+      <div><b>5</b><h4>Book</h4><p>Pick a time. Name + WhatsApp. Done.</p></div>
+    </div>
+    <div class="offer">
+      <div class="l"><span class="label" style="color:#FCE3D6">The offer</span><div class="big">First class,<br>₹499</div><p>Beginners-only reformer class in a group of six, with grip socks included.</p></div>
+      <div class="r">
+        <ul>
+          <li><b>Beginners only</b><span>Removes the fear of being the only new person in the room.</span></li>
+          <li><b>Groups of six</b><span>Signals attention from the instructor, not a crowded class.</span></li>
+          <li><b>Price shown upfront</b><span>No &ldquo;DM for price&rdquo;. A clear, low number is easy to say yes to.</span></li>
+          <li><b>Grip socks included</b><span>One less thing to buy or worry about before the first visit.</span></li>
+          <li><b>Free reschedule</b><span>Up to 12 hours before, so booking doesn&rsquo;t feel risky.</span></li>
+        </ul>
+      </div>
+    </div>
+    <p class="note">The price is a placeholder for the concept. In a real project it would be set with the studio, based on its costs and class capacity.</p>
+  </section>
+
+  <!-- 06 CREATIVE -->
+  <section class="s" id="creative">
+    <div class="s-head">
+      <span class="label">06 — Creative</span>
+      <div>
+        <h2>The page.</h2>
+        <p class="purpose"><b>Purpose</b> Show the design, the copy and the reason behind every block.</p>
+      </div>
+    </div>
+
+    <div class="mock-wrap">
+      <div class="browser" role="img" aria-label="Desktop landing page design for Fernhouse Pilates">
+        <div class="bar"><i></i><i></i><i></i><span class="url">fernhouse.studio/first-class</span></div>
+        <div class="fh">
+          <div class="fh-nav anchor"><span class="fh-logo"><svg><use href="#frond"/></svg>Fernhouse</span><span class="fh-btn sm">Book first class</span><span class="pin-n" style="right:6px;top:4px">1</span></div>
+          <div class="fh-hero">
+            <div class="txt anchor">
+              <span class="pin-n" style="left:4px;top:8px">2</span>
+              <span class="fh-eyebrow">Beginner reformer Pilates</span>
+              <div class="fh-h1">Never done Pilates? <i>Perfect.</i></div>
+              <p class="fh-sub">Our beginners-only classes start from zero. Six people, one instructor who shows you everything, and a first class for ₹499.</p>
+              <div class="anchor" style="align-self:flex-start"><span class="fh-btn">Pick your first class →</span><span class="pin-n" style="right:-12px;top:-12px">3</span></div>
+              <div class="fh-micro"><span>Beginners only</span><span>Grip socks included</span><span>Free reschedule</span></div>
+            </div>
+            <div class="ph"><img src="img/studio.jpg" alt=""></div>
+          </div>
+          <div class="fh-strip anchor">
+            <span class="pin-n" style="left:6px;top:-12px">4</span>
+            <div><b>10 min</b><span>Meet your instructor and learn the reformer</span></div>
+            <div><b>35 min</b><span>A gentle, guided full-body class</span></div>
+            <div><b>5 min</b><span>Stretch, questions and a cup of tea</span></div>
+          </div>
+          <div class="fh-sec">
+            <div class="anchor">
+              <span class="pin-n" style="left:-25px;top:-4px">5</span>
+              <h3>Is this for me?</h3>
+              <div class="fh-faq">
+                <div><b>I&rsquo;m not flexible.</b><span>That&rsquo;s fine. Flexibility is something Pilates builds, not something you need first.</span></div>
+                <div><b>Is it a real workout?</b><span>Yes. The springs add resistance, so it&rsquo;s as gentle or as hard as you need.</span></div>
+                <div><b>What do I wear?</b><span>Comfortable, close-fitting clothes. We give you grip socks.</span></div>
+              </div>
+            </div>
+            <div class="anchor">
+              <span class="pin-n" style="right:-10px;top:-10px">6</span>
+              <h3>Choose a time</h3>
+              <div class="fh-sched">
+                <div class="fh-days"><span class="on">Mon</span><span>Tue</span><span>Wed</span><span>Thu</span></div>
+                <div class="fh-slot"><span><b>7:00 am</b> · Beginners</span><em>2 spots left</em></div>
+                <div class="fh-slot"><span><b>12:30 pm</b> · Beginners</span><em></em></div>
+                <div class="fh-slot"><span><b>7:30 pm</b> · Beginners</span><em>3 spots left</em></div>
+              </div>
+            </div>
+          </div>
+          <div class="fh-foot anchor"><span>Questions first? We reply on WhatsApp.</span><span class="fh-btn ghost sm">Chat on WhatsApp</span><span class="pin-n" style="right:6px;top:-12px">7</span></div>
+        </div>
+      </div>
+      <div class="callouts">
+        <div><span class="pin-n">1</span><div><b>No menu, one button</b><p>The only thing to click is booking. No paths that lead away from the goal.</p></div></div>
+        <div><span class="pin-n">2</span><div><b>Headline matches the ad</b><p>Speaks straight to the beginner&rsquo;s worry and turns it into a reason to come.</p></div></div>
+        <div><span class="pin-n">3</span><div><b>Price in the button area</b><p>₹499 is visible before the click, with three reassurances right under the button.</p></div></div>
+        <div><span class="pin-n">4</span><div><b>What happens in class</b><p>A minute-by-minute picture removes the fear of the unknown.</p></div></div>
+        <div><span class="pin-n">5</span><div><b>Objections answered</b><p>The three questions beginners actually ask, answered in one line each.</p></div></div>
+        <div><span class="pin-n">6</span><div><b>Schedule on the page</b><p>Real times without an app download. Spots left are shown only when true.</p></div></div>
+        <div><span class="pin-n">7</span><div><b>A softer option</b><p>For people not ready to book, a WhatsApp chat keeps the lead instead of losing it.</p></div></div>
+      </div>
+    </div>
+
+    <div class="mflow">
+      <div>
+        <div class="phone">
+          <div class="screen" id="screen" aria-live="polite"></div>
+        </div>
+        <p class="demo">Interactive demo · nothing is sent</p>
+      </div>
+      <div class="mtext">
+        <span class="label acc">The booking journey · mobile</span>
+        <h3 style="margin-top:12px">Three taps to a booked class.</h3>
+        <p>Most visitors arrive from Instagram on their phone, so the booking flow is designed mobile-first. Try it on the left.</p>
+        <ol>
+          <li><div><b>Pick a time.</b> Days and slots in one screen. No account, no app.</div></li>
+          <li><div><b>Two details.</b> Name and WhatsApp number only. Email and health questions can wait until the first visit.</div></li>
+          <li><div><b>Confirmed.</b> A clear summary, what to bring, and a WhatsApp confirmation. Payment can happen online or at the studio, whichever the studio prefers.</div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 WHY ACT -->
+  <section class="s" id="why">
+    <div class="s-head">
+      <span class="label">07 — Why visitors act</span>
+      <div>
+        <h2>What makes someone book.</h2>
+        <p class="purpose"><b>Purpose</b> Name the levers on the page, so each one can be tested and improved.</p>
+      </div>
+    </div>
+    <div class="why">
+      <div class="card"><span class="k">Relevance</span><h3>&ldquo;This is for me&rdquo;</h3><p>The headline speaks to beginners by name. <em>People act when the page clearly describes them.</em></p></div>
+      <div class="card"><span class="k">Low risk</span><h3>A small first yes</h3><p>One class, a clear price, free reschedule. <em>A small, reversible decision is easier than a big one.</em></p></div>
+      <div class="card"><span class="k">Certainty</span><h3>No surprises</h3><p>The class timeline and FAQ show exactly what will happen. <em>Uncertainty is what makes people delay.</em></p></div>
+      <div class="card"><span class="k">Ease</span><h3>Three taps</h3><p>No app, no account, two fields. <em>Every extra step loses some people.</em></p></div>
+      <div class="card"><span class="k">Honest urgency</span><h3>Real spots left</h3><p>Small groups mean limited places, shown only when it&rsquo;s true. <em>No fake countdown timers.</em></p></div>
+      <div class="card"><span class="k">Trust</span><h3>Proof, when it exists</h3><p>Instructor names and certifications at launch, then real member reviews once the studio has them. <em>No invented testimonials.</em></p></div>
+    </div>
+  </section>
+
+  <!-- 08 AFTER BOOKING -->
+  <section class="s" id="after">
+    <div class="s-head">
+      <span class="label">08 — After the booking</span>
+      <div>
+        <h2>A booking isn&rsquo;t a visit.</h2>
+        <p class="purpose"><b>Purpose</b> Make sure booked people show up, and that the first class leads to a second.</p>
+      </div>
+    </div>
+    <div class="after">
+      <div class="timeline">
+        <div><span class="when">Instantly</span><div><b>WhatsApp confirmation</b><p>Time, address with a map pin, and a one-tap reschedule link.</p></div></div>
+        <div><span class="when">Day before</span><div><b>Friendly reminder</b><p>&ldquo;See you tomorrow&rdquo;, what to wear, and where to park.</p></div></div>
+        <div><span class="when">In the studio</span><div><b>A proper welcome</b><p>The instructor knows it&rsquo;s their first class and explains the reformer before starting.</p></div></div>
+        <div><span class="when">Same evening</span><div><b>How did it feel?</b><p>A short check-in, and an offer to book the next class while the feeling is fresh.</p></div></div>
+        <div><span class="when">Within a week</span><div><b>Intro pack</b><p>A first-month pack for new members, valid for a few days only after the first class.</p></div></div>
+      </div>
+      <div class="wa" aria-label="Example WhatsApp confirmation message">
+        <div class="wa-h"><span class="av" style="color:#F6F1E8"><svg><use href="#frond"/></svg></span><div>Fernhouse Pilates<small>Business account</small></div></div>
+        <div class="bub">Hi Ananya! 🌿 You&rsquo;re booked for <b>Beginners Reformer</b>, Mon 7:30 pm.<br><br>Wear comfy, close-fitting clothes. We&rsquo;ll have grip socks ready for you. Arrive 10 minutes early and we&rsquo;ll show you the reformer.<small>7:42 pm</small></div>
+        <div class="bub">📍 Fernhouse Pilates, 2nd floor (map link)<div class="qr"><span>See you there</span><span>Reschedule</span></div><small>7:42 pm</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 MEASUREMENT -->
+  <section class="s" id="measure">
+    <div class="s-head">
+      <span class="label">09 — Measurement plan</span>
+      <div>
+        <h2>What I would measure.</h2>
+        <p class="purpose"><b>Purpose</b> Track the whole journey, not just clicks, so we know which step to fix next.</p>
+      </div>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Metric</th><th>Stage</th><th>What it tells us</th><th>How it&rsquo;s tracked</th></tr></thead>
+        <tbody>
+          <tr><td>Landing page views from ads</td><td><span class="stage" style="background:var(--sage)">Arrive</span></td><td>Whether the ads bring the right people at a sensible cost</td><td>Ad platform + page analytics with UTM tags</td></tr>
+          <tr><td>&ldquo;Pick your first class&rdquo; click rate</td><td><span class="stage" style="background:var(--sage)">Interest</span></td><td>Whether the headline and offer convince people</td><td>Button click event</td></tr>
+          <tr><td>Booking completion rate</td><td><span class="stage" style="background:var(--clay)">Book</span></td><td>Whether the 3-step flow is easy enough</td><td>Step 1 → step 3 funnel events</td></tr>
+          <tr><td>WhatsApp chats started</td><td><span class="stage" style="background:var(--clay)">Book</span></td><td>How many people need a conversation before booking</td><td>Click-to-chat event + WhatsApp Business labels</td></tr>
+          <tr><td>Show-up rate</td><td><span class="stage" style="background:var(--fern)">Visit</span></td><td>Whether reminders work</td><td>Studio booking system check-ins</td></tr>
+          <tr><td>Second-class / intro-pack rate</td><td><span class="stage" style="background:var(--fern)">Stay</span></td><td>Whether the first experience is good enough</td><td>Booking system, tagged by first-class source</td></tr>
+          <tr><td>Cost per attended first class</td><td><span class="stage" style="background:var(--ink)">Overall</span></td><td>The real cost of a new visitor, not just a click</td><td>Ad spend ÷ attended first classes</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tests">
+      <div class="card test"><span class="label acc">Test 1 · Headline</span><div class="ab"><div><b>A</b>Never done Pilates? Perfect.</div><div><b>B</b>Your first reformer class, ₹499.</div></div><h3>Reassurance vs. price-first</h3><p>Does easing the fear beat leading with the offer? Measured on click rate and completed bookings.</p></div>
+      <div class="card test"><span class="label acc">Test 2 · Booking step</span><div class="ab"><div><b>A</b>3-step flow on the page</div><div><b>B</b>&ldquo;Book on WhatsApp&rdquo; only</div></div><h3>Form vs. conversation</h3><p>Some people prefer to chat first. Measured on bookings and show-up rate, not just leads.</p></div>
+      <div class="card test"><span class="label acc">Test 3 · Proof block</span><div class="ab"><div><b>A</b>Instructor intro + certifications</div><div><b>B</b>Studio photos + class timeline</div></div><h3>People vs. place</h3><p>What builds more trust for a new studio with no reviews yet? Measured on click rate.</p></div>
+    </div>
+    <div class="goals">
+      <div class="card"><span class="label acc">Weeks 1–2</span><h3>Set the baseline</h3><p>Run the page as designed and record every metric above. No targets until there is real data.</p></div>
+      <div class="card"><span class="label acc">Weeks 3–6</span><h3>Fix the biggest leak</h3><p>Find the step with the largest drop-off and test one change at a time.</p></div>
+      <div class="card"><span class="label acc">Ongoing</span><h3>Optimise for members</h3><p>Judge ads and page changes by cost per attended class and second-visit rate, not by clicks.</p></div>
+    </div>
+    <p class="note">This is a concept project for a fictional brand. There are no results to report, so this section sets out proposed goals and a measurement plan instead.</p>
+  </section>
+
+  <div class="sign">
+    <div><span class="label acc">Riya Desk</span><h2 style="margin-top:14px">Need a page that<br>actually converts<i>?</i></h2><p>I&rsquo;m Riya, founder of Riya Desk. I combine strategy, creativity and AI to help businesses become the brand people choose.</p></div>
+    <a class="cta" href="../../index.html">Work with me &rarr;</a>
+  </div>
+  <footer class="foot"><span class="label">Riya Desk</span><span class="label">&copy; 2026 Riya Desk · Concept project</span></footer>
+</div>
+
+<script>
+// Interactive booking demo. Nothing leaves the page: inputs are only used to fill the confirmation screen.
+(function () {
+  var screen = document.getElementById('screen');
+  var DAYS = [['Mon', '14'], ['Tue', '15'], ['Wed', '16'], ['Thu', '17']];
+  var SLOTS = [['7:00 am', '2 spots left'], ['12:30 pm', ''], ['7:30 pm', '3 spots left']];
+  var st = { step: 1, day: 0, slot: null, name: '', phone: '' };
+  function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+  function top() {
+    return '<div class="sc-top"><span class="fh-logo"><svg><use href="#frond"/></svg>Fernhouse</span>' +
+      (st.step === 2 ? '<button class="sc-back" data-a="back">← Back</button>' : '<span style="font:500 11px/1 Inter,sans-serif;opacity:.6">First class · ₹499</span>') + '</div>' +
+      '<div class="steps">' + [1, 2, 3].map(function (n) { return '<i class="' + (n <= st.step ? 'on' : '') + '"></i>'; }).join('') + '</div>';
+  }
+  function render() {
+    var h = top();
+    if (st.step === 1) {
+      h += '<div class="sc-body"><h4>Pick your first class</h4><p class="sm">Beginners only · 50 minutes · groups of 6</p>' +
+        '<div class="sc-days">' + DAYS.map(function (d, i) { return '<button data-a="day" data-i="' + i + '" class="' + (st.day === i ? 'on' : '') + '">' + d[0] + '<small>' + d[1] + '</small></button>'; }).join('') + '</div>' +
+        '<div class="sc-slots">' + SLOTS.map(function (s, i) { return '<button data-a="slot" data-i="' + i + '" class="' + (st.slot === i ? 'on' : '') + '"><span>' + s[0] + ' · Beginners</span><em>' + s[1] + '</em></button>'; }).join('') + '</div></div>' +
+        '<div class="sc-cta"><button class="fh-btn" data-a="next"' + (st.slot === null ? ' disabled' : '') + '>Continue</button></div>';
+    } else if (st.step === 2) {
+      h += '<div class="sc-body"><h4>Almost there</h4><div class="sc-sum"><b>' + DAYS[st.day][0] + ' ' + DAYS[st.day][1] + ', ' + SLOTS[st.slot][0] + '</b><span>Beginners Reformer · ₹499 · grip socks included</span></div>' +
+        '<label class="sc-field">Your first name<input id="dName" type="text" autocomplete="off" placeholder="e.g. Ananya" value="' + esc(st.name) + '"></label>' +
+        '<label class="sc-field">WhatsApp number<input id="dPhone" type="tel" autocomplete="off" placeholder="Demo, nothing is sent" value="' + esc(st.phone) + '"></label>' +
+        '<p class="sc-check">✓ Free reschedule up to 12 hours before your class.</p></div>' +
+        '<div class="sc-cta"><button class="fh-btn" data-a="book">Book my class</button></div>';
+    } else {
+      var nm = st.name.trim() || 'there';
+      h += '<div class="sc-body" style="align-items:flex-start"><span class="ok-badge">✓</span><h4>You&rsquo;re booked, ' + esc(nm) + '!</h4>' +
+        '<div class="sc-sum" style="align-self:stretch"><b>' + DAYS[st.day][0] + ' ' + DAYS[st.day][1] + ', ' + SLOTS[st.slot][0] + '</b><span>Beginners Reformer at Fernhouse</span></div>' +
+        '<p class="sm" style="font-weight:600;color:var(--fern)">What to bring</p><div class="sc-list"><span>Comfortable, close-fitting clothes</span><span>A water bottle</span><span>Nothing else. Grip socks are on us.</span></div>' +
+        '<p class="sm">We&rsquo;ve sent the details to your WhatsApp.</p></div>' +
+        '<div class="sc-cta"><button class="fh-btn ghost" data-a="reset">Restart demo</button></div>';
+    }
+    screen.innerHTML = h;
+  }
+  screen.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-a]'); if (!b) return;
+    var a = b.dataset.a;
+    if (a === 'day') { st.day = +b.dataset.i; }
+    else if (a === 'slot') { st.slot = +b.dataset.i; }
+    else if (a === 'next' && st.slot !== null) { st.step = 2; }
+    else if (a === 'back') { st.step = 1; }
+    else if (a === 'book') { st.step = 3; }
+    else if (a === 'reset') { st = { step: 1, day: 0, slot: null, name: '', phone: '' }; }
+    render();
+  });
+  screen.addEventListener('input', function (e) {
+    if (e.target.id === 'dName') st.name = e.target.value;
+    if (e.target.id === 'dPhone') st.phone = e.target.value;
+  });
+  render();
+})();
+</script>
+
+</body></html>

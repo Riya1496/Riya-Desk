@@ -1,0 +1,708 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{box-sizing:border-box}body{margin:0;padding:0}img{max-width:100%}[hidden]{display:none!important}</style></head><body>
+<title>Wedding Lensation Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Jost:wght@400;500&family=Bodoni+Moda:opsz,wght@6..96,400&display=swap" rel="stylesheet">
+<style>
+/* Riya Desk frame (paper + navy) around Wedding Lensation's palette (velvet maroon, sindoor, ivory, sandstone, antique gold). */
+:root {
+  --paper: #F2EEE6;
+  --paper-2: #E9E3D8;
+  --ink: #1C2240;
+  --muted: #5A5F73;
+  --rule: rgba(28, 34, 64, 0.18);
+  --velvet: #4A0A10;
+  --sindoor: #B3262B;
+  --ivory: #F4EDE3;
+  --sand: #C9B49B;
+  --gold: #B08D57;
+  --kohl: #1D1714;
+  --good: #2F7A3E;
+  --display: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif;
+  --label: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --serif: 'Cormorant Garamond', Didot, Georgia, serif;
+  --sans: 'Jost', 'Helvetica Neue', Arial, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--paper); color: var(--ink); font-family: var(--display); -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; display: block; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-inline: clamp(16px, 5vw, 72px); }
+.label { font: 600 12px/1.2 var(--label); letter-spacing: .2em; text-transform: uppercase; }
+.label.acc { color: var(--sindoor); }
+.muted { color: var(--muted); }
+
+/* Riya Desk nav */
+.brand { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 26px 22px; border-bottom: 1px solid var(--rule); }
+.rd { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); }
+.mono { position: relative; display: inline-block; font-family: 'Bodoni Moda', Didot, Georgia, serif; line-height: 1; height: 1em; width: 1.05em; font-size: 32px; }
+.mono .r { position: absolute; left: 0; top: 0; }
+.mono .d { position: absolute; left: 0.34em; top: 0.3em; font-size: 0.78em; }
+.mono .stem { position: absolute; left: 0.47em; top: 0.72em; width: 1px; height: 0.3em; background: currentColor; }
+.mono .stem::after { content: ""; position: absolute; left: -0.06em; bottom: -0.06em; width: 0.13em; height: 0.13em; border-radius: 50%; background: currentColor; }
+.rdw { font-family: var(--serif); font-weight: 500; text-transform: uppercase; letter-spacing: 0.3em; font-size: 15px; }
+.back { font: 600 12px/1 var(--label); letter-spacing: .16em; text-transform: uppercase; text-decoration: none; color: var(--ink); }
+
+/* Proposed Wedding Lensation wordmark: the "o" is two interlocked rings (kept from the current logo) */
+.wl { display: inline-flex; flex-direction: column; align-items: center; line-height: 1; color: var(--ivory); }
+.wl .top { font: 500 0.17em/1 var(--sans); letter-spacing: 0.7em; margin-right: -0.7em; text-transform: uppercase; }
+.wl .main { margin-top: 0.08em; font: italic 500 1em/0.95 var(--serif); letter-spacing: -0.005em; display: inline-flex; align-items: baseline; }
+.wl .rings { display: inline-block; width: 0.62em; height: 0.42em; margin: 0 0.01em; }
+.wl .rings svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.wl .sub { margin-top: 0.3em; font: 500 0.11em/1 var(--sans); letter-spacing: 0.45em; margin-right: -0.45em; text-transform: uppercase; color: var(--gold); }
+.velvet { background: radial-gradient(120% 90% at 30% 20%, #6A1018 0%, #4A0A10 45%, #2E0509 100%); color: var(--ivory); }
+
+/* hero */
+.hero { padding-block: 56px 32px; }
+.hero h1 { margin-top: 18px; font: 800 clamp(48px, 8.4vw, 118px)/0.9 var(--display); letter-spacing: -0.055em; text-wrap: balance; }
+.hero h1 i { font-style: normal; color: var(--sindoor); }
+.hook { margin-top: 24px; max-width: 46ch; font: 400 clamp(19px, 2.2vw, 26px)/1.32 var(--display); letter-spacing: -0.015em; }
+.byline { margin-top: 20px; font: 400 17px/1.3 var(--display); color: var(--muted); }
+.byline b { color: var(--ink); font-weight: 600; }
+.hero-band { margin-top: 40px; border-radius: 6px; overflow: hidden; display: grid; grid-template-columns: 1.25fr 1fr; min-height: 380px; }
+.hero-band .l { display: flex; align-items: center; justify-content: center; padding: 40px 20px; }
+.hero-band .l .wl { font-size: clamp(60px, 8vw, 110px); }
+.hero-band .r { position: relative; }
+.hero-band .r img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.facts { margin-top: 28px; display: grid; grid-template-columns: repeat(6, 1fr); border-top: 2px solid var(--ink); }
+.facts div { padding: 16px 16px 0 0; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.facts b { font: 800 clamp(26px, 3vw, 38px)/1 var(--display); letter-spacing: -0.04em; }
+.facts span:last-child { font: 400 14px/1.35 var(--display); color: var(--muted); }
+.toc { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 10px; }
+.toc a { text-decoration: none; color: var(--ink); padding: 10px 16px; border-radius: 999px; border: 1.5px solid var(--rule); font: 600 13px/1 var(--label); letter-spacing: .06em; }
+.toc a:hover { border-color: var(--ink); }
+
+/* sections */
+section.s { padding-top: clamp(64px, 9vw, 112px); scroll-margin-top: 20px; }
+.s-head { display: grid; grid-template-columns: 220px 1fr; gap: 32px; align-items: start; }
+.s-head h2 { font: 800 clamp(34px, 4.8vw, 62px)/0.96 var(--display); letter-spacing: -0.045em; text-wrap: balance; }
+.purpose { margin-top: 18px; display: flex; gap: 12px; align-items: baseline; max-width: 66ch; font: 400 19px/1.45 var(--display); }
+.purpose b { flex: 0 0 auto; font: 600 11px/1 var(--label); letter-spacing: .18em; text-transform: uppercase; color: #fff; background: var(--sindoor); padding: 6px 9px; border-radius: 4px; transform: translateY(-2px); }
+.note { margin-top: 16px; font: italic 400 15px/1.5 var(--display); color: var(--muted); max-width: 80ch; }
+.card { background: #fff; border-radius: 6px; box-shadow: 0 10px 30px rgba(28,34,64,.06); }
+
+/* audit */
+.audit { margin-top: 40px; display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 28px; align-items: start; }
+.profile { padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+.profile .top { display: flex; gap: 18px; align-items: center; }
+.profile .pic { width: 120px; flex: 0 0 120px; aspect-ratio: 1; border-radius: 50%; overflow: hidden; background: #fff; box-shadow: inset 0 0 0 1px var(--rule); display: flex; align-items: center; justify-content: center; }
+.profile .pic img { width: 110%; max-width: none; }
+.profile .handle { font: 600 18px/1.2 var(--label); }
+.profile .stats { display: flex; gap: 18px; margin-top: 8px; font: 400 14px/1.3 var(--label); color: var(--muted); }
+.profile .stats b { color: var(--ink); font-weight: 600; }
+.profile .bio { font: 400 15px/1.5 var(--label); }
+.profile .hl { display: flex; gap: 10px; flex-wrap: wrap; }
+.profile .hl span { font: 500 12px/1 var(--label); padding: 8px 10px; border-radius: 999px; background: var(--paper-2); }
+.obs { display: flex; flex-direction: column; gap: 0; }
+.obs > div { display: grid; grid-template-columns: 34px 1fr; gap: 12px; padding: 16px 0; border-top: 1px solid var(--rule); }
+.obs > div:first-child { border-top: 2px solid var(--ink); }
+.obs .tag { width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font: 700 13px/1 var(--label); color: #fff; }
+.obs .ok .tag { background: var(--good); }
+.obs .fix .tag { background: var(--sindoor); }
+.obs b { display: block; font: 600 17px/1.3 var(--display); margin-bottom: 4px; }
+.obs p { font: 400 15px/1.5 var(--display); color: var(--muted); }
+
+/* views */
+.big { margin-top: 40px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.big div { padding: 22px; border-radius: 6px; display: flex; flex-direction: column; gap: 10px; min-height: 170px; justify-content: space-between; }
+.big b { font: 800 clamp(38px, 4.6vw, 60px)/0.95 var(--display); letter-spacing: -0.05em; }
+.big p { font: 400 15px/1.4 var(--display); }
+.big .v1 { background: var(--velvet); color: var(--ivory); }
+.big .v1 b { color: #F3C9A0; }
+.big .v2 { background: var(--sindoor); color: var(--ivory); }
+.big .v3, .big .v4 { background: #fff; box-shadow: 0 10px 30px rgba(28,34,64,.06); }
+.big .v4 b { color: var(--sindoor); }
+.gap { margin-top: 24px; padding: clamp(24px, 4vw, 40px); border-radius: 6px; background: var(--kohl); color: var(--ivory); display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
+.gap q { font: italic 500 clamp(28px, 3.6vw, 46px)/1.06 var(--serif); quotes: "\201C" "\201D"; }
+.gap p { font: 400 17px/1.55 var(--display); color: rgba(244,237,227,.82); }
+.gap .label { color: var(--gold); display: block; margin-bottom: 12px; }
+.types { margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.type { padding: 22px; display: flex; flex-direction: column; gap: 10px; }
+.type .dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 8px; transform: translateY(1px); }
+.type h3 { font: 600 19px/1.2 var(--display); letter-spacing: -0.01em; }
+.type b { font: 800 34px/1 var(--display); letter-spacing: -0.04em; }
+.type p { font: 400 14px/1.5 var(--display); color: var(--muted); }
+.chart { margin-top: 32px; padding: 24px; }
+.chart-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; font: 500 12px/1 var(--label); color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+.bars { display: flex; flex-direction: column; gap: 5px; }
+.bar { display: grid; grid-template-columns: minmax(150px, 290px) 1fr 64px; gap: 12px; align-items: center; font: 400 13.5px/1.25 var(--label); }
+.bar .t { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bar .track { height: 16px; background: var(--paper); border-radius: 3px; position: relative; overflow: hidden; }
+.bar .fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 3px; }
+.bar .fill.off { right: 0; background-image: repeating-linear-gradient(-45deg, rgba(255,255,255,.35) 0 6px, transparent 6px 12px); }
+.bar .n { text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; }
+.scale { font: 400 12px/1.4 var(--label); color: var(--muted); margin-top: 12px; }
+
+/* problems / solutions */
+.ps { margin-top: 40px; display: flex; flex-direction: column; gap: 14px; }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-radius: 6px; overflow: hidden; box-shadow: 0 10px 30px rgba(28,34,64,.06); }
+.row > div { padding: 22px 24px; display: flex; flex-direction: column; gap: 8px; }
+.row .p { background: #fff; border-left: 4px solid var(--sindoor); }
+.row .sol { background: var(--ivory); }
+.row .k { font: 600 11px/1 var(--label); letter-spacing: .16em; text-transform: uppercase; }
+.row .p .k { color: var(--sindoor); }
+.row .sol .k { color: var(--good); }
+.row h3 { font: 600 19px/1.25 var(--display); letter-spacing: -0.01em; }
+.row p { font: 400 15px/1.5 var(--display); color: var(--muted); }
+
+/* positioning */
+.pos { margin-top: 40px; border-left: 4px solid var(--sindoor); padding: 8px 0 8px 28px; font: 400 clamp(22px, 2.8vw, 33px)/1.3 var(--display); letter-spacing: -0.02em; max-width: 36ch; }
+.pos b { font-weight: 700; }
+.idea { margin-top: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-radius: 6px; overflow: hidden; }
+.idea > div { padding: clamp(24px, 4vw, 44px); display: flex; flex-direction: column; gap: 14px; min-height: 260px; justify-content: space-between; }
+.idea .a { background: var(--ivory); box-shadow: inset 0 0 0 1.5px var(--rule); }
+.idea .b { background: var(--kohl); color: var(--ivory); }
+.idea h3 { font: italic 500 clamp(36px, 4.6vw, 58px)/0.98 var(--serif); }
+.idea p { font: 400 16px/1.5 var(--display); }
+.idea .a p { color: var(--muted); }
+.idea .b p { color: rgba(244,237,227,.78); }
+.idea .b .label { color: var(--gold); }
+.plus { text-align: center; margin-top: 18px; font: italic 500 clamp(24px, 3vw, 36px)/1.2 var(--serif); }
+.plus b { color: var(--sindoor); font-weight: 600; }
+.aud { margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.aud div { padding: 22px; display: flex; flex-direction: column; gap: 8px; }
+.aud h3 { font: 700 22px/1.1 var(--display); letter-spacing: -0.02em; }
+.aud p { font: 400 15px/1.5 var(--display); color: var(--muted); }
+
+/* mood board */
+.mood { margin-top: 40px; display: grid; grid-template-columns: repeat(6, 1fr); grid-auto-rows: 120px; gap: 10px; grid-auto-flow: dense; }
+.mood > * { border-radius: 4px; overflow: hidden; position: relative; }
+.mood img { width: 100%; height: 100%; object-fit: cover; }
+.mood .cap { position: absolute; left: 10px; bottom: 9px; font: 600 10px/1 var(--label); letter-spacing: .14em; text-transform: uppercase; color: #fff; text-shadow: 0 1px 6px rgba(0,0,0,.6); }
+.mood .word { display: flex; align-items: center; justify-content: center; text-align: center; padding: 12px; font: italic 500 clamp(22px, 2.4vw, 32px)/1.05 var(--serif); }
+.m-lehenga { grid-column: span 3; grid-row: span 3; }
+.m-velvet { grid-column: span 2; grid-row: span 1; }
+.m-sw1 { grid-column: span 1; }
+.m-arch { grid-column: span 2; grid-row: span 2; }
+.m-hands { grid-column: span 1; grid-row: span 2; }
+.m-lights { grid-column: span 4; grid-row: span 1; }
+.m-sherwani { grid-column: span 2; grid-row: span 2; }
+.m-word1 { grid-column: span 2; grid-row: span 1; }
+.m-chand { grid-column: span 2; grid-row: span 1; }
+.m-word2 { grid-column: span 2; grid-row: span 1; }
+.m-sw { grid-column: span 1; }
+.m-word3 { grid-column: span 2; }
+.palette { margin-top: 28px; display: grid; grid-template-columns: 2fr 1.4fr 1.4fr 1fr 1fr 0.8fr; gap: 10px; }
+.sw { border-radius: 6px; height: 150px; padding: 14px; display: flex; flex-direction: column; justify-content: flex-end; gap: 4px; }
+.sw b { font: 600 15px/1.2 var(--display); }
+.sw span { font: 400 12px/1.3 var(--label); opacity: .85; }
+.typo { margin-top: 20px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 16px; }
+.ts { padding: 24px; display: flex; flex-direction: column; gap: 10px; }
+.ts .b1 { font: italic 500 58px/1 var(--serif); color: var(--velvet); }
+.ts .b2 { font: 400 30px/1.15 var(--sans); letter-spacing: .02em; color: var(--kohl); }
+.ts p { font: 400 15px/1.5 var(--display); color: var(--muted); }
+
+/* logo */
+.logo-cmp { margin-top: 40px; display: grid; grid-template-columns: 1fr 1.5fr; gap: 20px; }
+.lg { border-radius: 6px; position: relative; display: flex; align-items: center; justify-content: center; padding: 34px 20px 50px; min-height: 300px; }
+.lg .cap { position: absolute; left: 16px; bottom: 14px; font: 600 10px/1 var(--label); letter-spacing: .14em; text-transform: uppercase; }
+.lg.now { background: #fff; box-shadow: inset 0 0 0 1.5px var(--rule); }
+.lg.now img { width: 82%; }
+.lg.new .wl { font-size: clamp(56px, 7vw, 96px); }
+.logo-why { margin-top: 20px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.logo-why div { border-top: 2px solid var(--ink); padding-top: 14px; display: flex; flex-direction: column; gap: 6px; }
+.logo-why h3 { font: 600 17px/1.25 var(--display); }
+.logo-why p { font: 400 14px/1.5 var(--display); color: var(--muted); }
+.system { margin-top: 24px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.system > div { border-radius: 6px; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; position: relative; }
+.system .cap { position: absolute; left: 14px; bottom: 12px; font: 600 10px/1 var(--label); letter-spacing: .14em; text-transform: uppercase; opacity: .75; }
+.pp { width: 62%; aspect-ratio: 1; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-direction: column; box-shadow: 0 0 0 3px var(--ivory), 0 0 0 5px var(--velvet); }
+.pp .ini { font: italic 500 clamp(34px, 4vw, 54px)/1 var(--serif); color: var(--ivory); letter-spacing: -0.04em; }
+.pp .rg { width: 34%; margin-top: 6px; color: var(--gold); }
+.hlc { display: flex; gap: 10px; }
+.hlc span { width: 58px; height: 58px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-align: center; font: italic 500 13px/1 var(--serif); color: var(--ivory); box-shadow: 0 0 0 2px var(--paper), 0 0 0 3px var(--sand); }
+.wm { font: 500 11px/1 var(--sans); letter-spacing: .4em; text-transform: uppercase; color: var(--ivory); opacity: .9; }
+
+/* voice & messaging */
+.lines { margin-top: 40px; display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 16px; }
+.ln { border-radius: 6px; padding: 26px; display: flex; flex-direction: column; justify-content: space-between; gap: 26px; min-height: 210px; }
+.ln .t { font: italic 500 clamp(32px, 3.6vw, 48px)/1 var(--serif); }
+.ln .n { font: 600 11px/1.4 var(--label); letter-spacing: .14em; text-transform: uppercase; }
+.ln.a { background: var(--velvet); color: var(--ivory); }
+.ln.a .n { color: var(--gold); }
+.ln.b { background: var(--ivory); box-shadow: inset 0 0 0 1.5px var(--rule); }
+.ln.c { background: var(--sindoor); color: var(--ivory); }
+.tbl-wrap { overflow-x: auto; margin-top: 28px; }
+table { width: 100%; border-collapse: collapse; min-width: 640px; }
+th { text-align: left; font: 600 11px/1 var(--label); letter-spacing: .16em; text-transform: uppercase; padding: 12px 14px 12px 0; border-bottom: 2px solid var(--ink); }
+td { padding: 14px 14px 14px 0; border-bottom: 1px solid var(--rule); font: 400 15.5px/1.45 var(--display); vertical-align: top; }
+td.no { color: var(--muted); }
+
+/* instagram fixes */
+.ig-fix { margin-top: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
+.phone { padding: 22px; display: flex; flex-direction: column; gap: 14px; }
+.phone .top { display: flex; gap: 16px; align-items: center; }
+.phone .pp { width: 92px; flex: 0 0 92px; box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--velvet); }
+.phone .pp .ini { font-size: 34px; }
+.phone .nm { font: 600 15px/1.3 var(--label); }
+.phone .bio { font: 400 14.5px/1.55 var(--label); }
+.phone .bio .lnk { color: #00376B; font-weight: 500; }
+.phone .btns { display: flex; gap: 8px; }
+.phone .btns span { flex: 1; text-align: center; padding: 9px; border-radius: 8px; background: var(--paper-2); font: 600 13px/1 var(--label); }
+.phone .btns span.pri { background: var(--velvet); color: var(--ivory); }
+.phone .hlc { flex-wrap: wrap; }
+.phone .hlc div { display: flex; flex-direction: column; align-items: center; gap: 6px; font: 500 11px/1 var(--label); }
+.chg { display: flex; flex-direction: column; }
+.chg div { padding: 14px 0; border-top: 1px solid var(--rule); display: grid; grid-template-columns: 110px 1fr; gap: 14px; }
+.chg div:first-child { border-top: 2px solid var(--ink); }
+.chg dt { font: 600 11px/1.5 var(--label); letter-spacing: .14em; text-transform: uppercase; color: var(--sindoor); }
+.chg dd { font: 400 15px/1.5 var(--display); }
+.chg dd s { color: var(--muted); }
+.mix { margin-top: 28px; display: grid; grid-template-columns: 4fr 3fr 2fr 1fr; border-radius: 6px; overflow: hidden; }
+.mix div { padding: 18px; color: var(--ivory); display: flex; flex-direction: column; gap: 6px; min-height: 150px; justify-content: space-between; }
+.mix b { font: 800 30px/1 var(--display); letter-spacing: -0.03em; }
+.mix h3 { font: 600 16px/1.2 var(--display); }
+.mix p { font: 400 13px/1.45 var(--display); opacity: .85; }
+
+/* in use */
+.use { margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: start; }
+.reel { aspect-ratio: 9 / 16; border-radius: 10px; overflow: hidden; position: relative; box-shadow: 0 12px 34px rgba(28,34,64,.12); }
+.reel img { width: 100%; height: 100%; object-fit: cover; }
+.reel::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(29,23,20,.78), transparent 50%, rgba(29,23,20,.35)); }
+.reel .over { position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; padding: 18px; color: var(--ivory); }
+.reel .ttl { margin-top: auto; margin-bottom: 18px; font: italic 500 34px/1 var(--serif); text-shadow: 0 2px 14px rgba(0,0,0,.5); }
+.reel .chip { align-self: flex-start; font: 600 10px/1 var(--label); letter-spacing: .14em; text-transform: uppercase; background: var(--sindoor); padding: 6px 8px; border-radius: 3px; }
+.reel .wl { font-size: 26px; align-self: center; }
+.reel .wl .sub { display: none; }
+.cap2 { font: 400 14px/1.45 var(--display); color: var(--muted); margin-top: 10px; }
+.bc { aspect-ratio: 1.75; border-radius: 6px; padding: 18px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 12px 34px rgba(28,34,64,.1); }
+.bc + .bc { margin-top: 14px; }
+.bc.f { align-items: center; justify-content: center; }
+.bc.f .wl { font-size: 38px; }
+.bc.b { background: var(--ivory); color: var(--kohl); }
+.bc.b .nm { font: italic 600 22px/1 var(--serif); }
+.bc.b .rl { font: 500 10px/1.3 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--sindoor); margin-top: 4px; }
+.bc.b .ct { font: 400 11px/1.6 var(--sans); color: #5c534d; }
+
+/* next steps */
+.plan { margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.plan div { padding: 22px; border-top: 4px solid var(--velvet); display: flex; flex-direction: column; gap: 10px; }
+.plan h3 { font: 700 20px/1.15 var(--display); }
+.plan ul { padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
+.plan li { font: 400 15px/1.45 var(--display); color: var(--muted); }
+
+/* sign-off */
+.sign { margin-top: clamp(72px, 10vw, 128px); display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: end; padding-top: 28px; border-top: 2px solid var(--ink); }
+.sign h2 { font: 800 clamp(40px, 6vw, 84px)/0.92 var(--display); letter-spacing: -0.05em; }
+.sign h2 i { font-style: normal; color: var(--sindoor); }
+.sign p { margin-top: 16px; max-width: 44ch; font: 400 19px/1.45 var(--display); color: var(--muted); }
+.cta { display: inline-flex; align-items: center; gap: 10px; padding: 18px 30px; border-radius: 999px; background: var(--ink); color: var(--paper); text-decoration: none; font: 600 14px/1 var(--label); letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; }
+.cta:hover { background: var(--sindoor); }
+.foot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 64px; padding-block: 22px 40px; border-top: 2px solid var(--ink); }
+
+@media (max-width: 960px) {
+  .facts { grid-template-columns: repeat(3, 1fr); row-gap: 18px; }
+  .big { grid-template-columns: 1fr 1fr; }
+  .types, .aud, .plan { grid-template-columns: 1fr 1fr; }
+  .logo-why, .system { grid-template-columns: 1fr 1fr; }
+  .use { grid-template-columns: 1fr 1fr; }
+  .mood { grid-template-columns: repeat(4, 1fr); }
+  .m-lehenga { grid-column: span 2; } .m-lights { grid-column: span 2; } .m-sherwani { grid-column: span 2; }
+}
+@media (max-width: 760px) {
+  .s-head, .audit, .gap, .row, .idea, .typo, .logo-cmp, .ig-fix, .sign, .lines, .hero-band { grid-template-columns: 1fr; }
+  .hero-band .r { min-height: 240px; }
+  .facts { grid-template-columns: 1fr 1fr; }
+  .types, .aud, .plan, .use { grid-template-columns: 1fr; }
+  .palette { grid-template-columns: 1fr 1fr 1fr; }
+  .mix { grid-template-columns: 1fr 1fr; }
+  .bar { grid-template-columns: 120px 1fr 52px; font-size: 12px; }
+  .mood { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 110px; }
+  .mood > * { grid-column: span 1 !important; grid-row: span 1 !important; }
+  .mood .m-lehenga, .mood .m-sherwani, .mood .m-arch { grid-row: span 2 !important; }
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="rings" viewBox="0 0 150 100">
+      <circle cx="52" cy="50" r="38" fill="none" stroke="currentColor" stroke-width="8"/>
+      <circle cx="98" cy="50" r="38" fill="none" stroke="currentColor" stroke-width="8"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="wrap">
+  <nav class="brand"><a class="rd" href="../../index.html" aria-label="Riya Desk portfolio"><span class="mono" aria-hidden="true"><span class="r">R</span><span class="d">D</span><span class="stem"></span></span><span class="rdw">Riya Desk</span></a><a class="back" href="../../index.html">&larr; Back to portfolio</a></nav>
+
+  <header class="hero">
+    <span class="label acc">Riya Desk · Brand strategy</span>
+    <h1>Wedding Lensation<i>.</i><br>Ten million views. Now make them count.</h1>
+    <p class="hook">A brand strategy for a 12-year-old wedding photography and film studio from Jabalpur. Its Reels already reach millions, but the brand itself is hard to remember.</p>
+    <p class="byline">Strategy by <b>Riya</b>, founder of <b>Riya Desk</b></p>
+    <div class="hero-band">
+      <div class="l velvet"><span class="wl"><span class="top">Wedding</span><span class="main">Lensati<span class="rings"><svg><use href="#rings"/></svg></span>n</span><span class="sub">Photography &amp; Films</span></span></div>
+      <div class="r"><img src="real/lehenga.jpg" alt="Detail of a red and ivory embroidered bridal lehenga, from Wedding Lensation's work"></div>
+    </div>
+    <div class="facts">
+      <div><span class="label acc">Experience</span><b>12 yrs</b><span>in wedding photography</span></div>
+      <div><span class="label acc">Weddings</span><b>500+</b><span>covered</span></div>
+      <div><span class="label acc">Based in</span><b>2</b><span>cities: Jabalpur &amp; Mumbai</span></div>
+      <div><span class="label acc">Destinations</span><b>5</b><span>countries outside India</span></div>
+      <div><span class="label acc">Instagram</span><b>3,463</b><span>followers · 493 posts</span></div>
+      <div><span class="label acc">Reel views</span><b id="f-total">10.2M</b><span>across the <span data-s="count">30</span> Reels audited</span></div>
+    </div>
+    <nav class="toc" aria-label="Contents">
+      <a href="#audit">01 Audit</a><a href="#views">02 Views</a><a href="#problems">03 Problems &amp; solutions</a><a href="#positioning">04 Positioning</a><a href="#mood">05 Mood board</a><a href="#logo">06 Logo idea</a><a href="#voice">07 Voice</a><a href="#instagram">08 Instagram</a><a href="#use">09 In use</a><a href="#next">10 Roadmap</a>
+    </nav>
+  </header>
+
+  <!-- 01 AUDIT -->
+  <section class="s" id="audit">
+    <div class="s-head">
+      <span class="label">01 — Where the brand is today</span>
+      <div>
+        <h2>Great work, unclear brand.</h2>
+        <p class="purpose"><b>Purpose</b> Start from what a couple actually sees when they land on the Instagram profile.</p>
+      </div>
+    </div>
+    <div class="audit">
+      <div class="card profile">
+        <div class="top">
+          <div class="pic"><img src="real/logo.jpg" alt="Current Wedding Lensation logo: watercolour brush, gold leaves, two rings, 'by Snapbyte'"></div>
+          <div>
+            <div class="handle">wedding_lensation</div>
+            <div class="stats"><span><b>493</b> posts</span><span><b>3,463</b> followers</span><span><b>45</b> following</span></div>
+          </div>
+        </div>
+        <p class="bio"><b>Wedding Lensation Jabalpur</b><br>Stories etched in light and love ❣️<br>Wedding Photography and Cinematography<br>12 Years ! Enveloped 500+ Weddings 🧿<br>📍 Mumbai | Jabalpur 🇮🇳 🇹🇭 🇸🇬 🇻🇳 🇲🇾 🇦🇪<br><span class="muted">linktr.ee/snapbyte?fbclid=PAQ0xDSwKlSQ…</span></p>
+        <div class="hl"><span>Btshadi</span><span>K&amp;P</span><span>Lensation Brides</span><span>Testimonials</span><span>H&amp;S</span><span>M&amp;M</span><span>R&amp;S</span></div>
+        <span class="label muted">The current profile, as seen today</span>
+      </div>
+      <div class="obs">
+        <div class="ok"><span class="tag">✓</span><div><b>Real proof most studios don&rsquo;t have</b><p>12 years, 500+ weddings and shoots in five countries. That&rsquo;s strong credibility, but right now it sits in the bio as a line of emoji.</p></div></div>
+        <div class="ok"><span class="tag">✓</span><div><b>Two strengths that work</b><p>Editorial portraits (the &ldquo;Vogue&rdquo; bride and &ldquo;The groom&rdquo; posts) and funny, real Hinglish Reels. Both already pull views.</p></div></div>
+        <div class="fix"><span class="tag">!</span><div><b>Four visual styles at once</b><p>A pastel watercolour logo, maroon velvet highlights, beige editorial posts, and Reel text in neon yellow, purple script and pink. Nothing ties them together.</p></div></div>
+        <div class="fix"><span class="tag">!</span><div><b>Two names</b><p>The logo says &ldquo;by Snapbyte&rdquo;, the link goes to linktr.ee/snapbyte, and the profile name is Wedding Lensation. A new visitor doesn&rsquo;t know which brand they&rsquo;re booking.</p></div></div>
+        <div class="fix"><span class="tag">!</span><div><b>No clear next step</b><p>Highlights are named with couple initials (K&amp;P, H&amp;S, M&amp;M), which mean nothing to a stranger. There&rsquo;s no &ldquo;Packages&rdquo;, &ldquo;How to book&rdquo; or &ldquo;Destination&rdquo; highlight, and the link is a long tracking URL.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 VIEWS -->
+  <section class="s" id="views">
+    <div class="s-head">
+      <span class="label">02 — The views</span>
+      <div>
+        <h2>The reach is there. The followers aren&rsquo;t.</h2>
+        <p class="purpose"><b>Purpose</b> Use the studio&rsquo;s own Reel numbers to see what people actually watch, and what they skip.</p>
+      </div>
+    </div>
+    <div class="big">
+      <div class="v1"><b>5.9M</b><p>Top Reel: a candid moment of the couple laughing, with a &ldquo;POV&rdquo; caption</p></div>
+      <div class="v2"><b>4M</b><p>Second: guests holding up phone torches, a real emotional moment</p></div>
+      <div class="v3"><b data-s="median">—</b><p>Median views per Reel across <span data-s="count">30</span> Reels, so a normal Reel already reaches about 3× the follower count</p></div>
+      <div class="v4"><b>3,463</b><p>Followers. Roughly <span data-s="ratio">—</span> views for every follower</p></div>
+    </div>
+    <div class="gap">
+      <div><span class="label">The gap</span><q>Millions of people have seen Wedding Lensation&rsquo;s work. Very few know its name.</q></div>
+      <p>Viral Reels bring strangers in, but nothing tells them who made the video, why this studio is different, or how to book. The watermark is tiny, the logo doesn&rsquo;t read at small sizes, and every Reel looks different. The strategy below is about turning views into recall, and recall into enquiries.</p>
+    </div>
+    <div class="types" id="types"></div>
+    <div class="card chart">
+      <div class="chart-head"><span class="label">Every Reel audited, by views</span><div class="legend" id="legend"></div></div>
+      <div class="bars" id="bars"></div>
+      <p class="scale">The bar scale tops out at 60K so the everyday Reels are readable. The two viral Reels run off the scale (striped). Views are as shown on the public profile; client faces and names are left out on purpose.</p>
+    </div>
+  </section>
+
+  <!-- 03 PROBLEMS & SOLUTIONS -->
+  <section class="s" id="problems">
+    <div class="s-head">
+      <span class="label">03 — Problems &amp; solutions</span>
+      <div>
+        <h2>Six problems. Six fixes.</h2>
+        <p class="purpose"><b>Purpose</b> Turn the audit into clear changes the team can start this month.</p>
+      </div>
+    </div>
+    <div class="ps">
+      <div class="row"><div class="p"><span class="k">Problem 01</span><h3>Views don&rsquo;t turn into followers</h3><p>About 10M views, 3,463 followers. Viewers enjoy the Reel and scroll on.</p></div><div class="sol"><span class="k">Solution</span><h3>Brand every Reel, and give a reason to follow</h3><p>A consistent end card (logo + &ldquo;Follow for real shaadi moments&rdquo;), a visible watermark, and a pinned comment pointing to the booking highlight.</p></div></div>
+      <div class="row"><div class="p"><span class="k">Problem 02</span><h3>The logo doesn&rsquo;t work small</h3><p>Watercolour, leaves, a frame, rings and a tiny &ldquo;by Snapbyte&rdquo; all fight in a 110px circle, and the watermark is unreadable on Reels.</p></div><div class="sol"><span class="k">Solution</span><h3>A simpler wordmark and a monogram</h3><p>Keep the name and the rings, drop the rest. A WL monogram for the profile picture and watermark (see section 06).</p></div></div>
+      <div class="row"><div class="p"><span class="k">Problem 03</span><h3>No consistent look</h3><p>Pastel logo, velvet highlights, beige posts, neon Reel text. The feed doesn&rsquo;t feel like one studio.</p></div><div class="sol"><span class="k">Solution</span><h3>Build on what&rsquo;s already best: velvet maroon + ivory</h3><p>The highlight covers and editorial posts are the strongest visuals. Make them the system: one palette, one serif, one Reel text style.</p></div></div>
+      <div class="row"><div class="p"><span class="k">Problem 04</span><h3>Two brand names</h3><p>Wedding Lensation and Snapbyte both appear, so trust and search split between them.</p></div><div class="sol"><span class="k">Solution</span><h3>Lead with Wedding Lensation</h3><p>Use Wedding Lensation everywhere couples look. Keep Snapbyte as the company name on invoices and the website footer (&ldquo;A Snapbyte studio&rdquo;), not in the logo.</p></div></div>
+      <div class="row"><div class="p"><span class="k">Problem 05</span><h3>The real differentiators are hidden</h3><p>12 years, 500+ weddings, Mumbai + Jabalpur and destination weddings in five countries are buried in emoji.</p></div><div class="sol"><span class="k">Solution</span><h3>Say it plainly, everywhere</h3><p>A rewritten bio, a &ldquo;Destination&rdquo; highlight and a regular proof post (&ldquo;Wedding no. 501&rdquo;).</p></div></div>
+      <div class="row"><div class="p"><span class="k">Problem 06</span><h3>No path from &ldquo;wow&rdquo; to booking</h3><p>Highlights named by initials, no packages or process, a long tracking link.</p></div><div class="sol"><span class="k">Solution</span><h3>A clear booking path</h3><p>Highlights renamed (Book a date, Films, Brides, Real Shaadi, Destination, Reviews), a clean link, and a &ldquo;Check your date&rdquo; call to action on every post.</p></div></div>
+    </div>
+  </section>
+
+  <!-- 04 POSITIONING -->
+  <section class="s" id="positioning">
+    <div class="s-head">
+      <span class="label">04 — Positioning</span>
+      <div>
+        <h2>Editorial frames. Real shaadi.</h2>
+        <p class="purpose"><b>Purpose</b> Name the one thing Wedding Lensation already does better than local studios, then build everything around it.</p>
+      </div>
+    </div>
+    <div class="idea">
+      <div class="a"><span class="label acc">What the couple wants</span><h3>Magazine-worthy portraits.</h3><p>The &ldquo;Vogue&rdquo; bride, &ldquo;The groom&rdquo;: polished, editorial frames to frame on the wall.</p></div>
+      <div class="b"><span class="label">What the family remembers</span><h3>The real shaadi.</h3><p>Dads sounding like Jethalal, the bride saying &ldquo;no more photos&rdquo;, the phone-torch moment. Their Reels prove people love this.</p></div>
+    </div>
+    <p class="plus">Most studios pick one. <b>Wedding Lensation does both.</b></p>
+    <p class="pos">For families in Central India and couples planning weddings in Mumbai or abroad, <b>Wedding Lensation</b> is the 12-year photography and film team that delivers <b>editorial portraits and the real, funny, emotional shaadi</b>, all in one story.</p>
+    <div class="aud">
+      <div class="card"><span class="label acc">Audience 01</span><h3>Jabalpur &amp; Central India families</h3><p>The core market. They value experience, every ritual covered, and a team they can trust. Proof: 12 years, 500+ weddings.</p></div>
+      <div class="card"><span class="label acc">Audience 02</span><h3>Mumbai couples</h3><p>Instagram-first, want editorial style and Reels they can share. Proof: the views and the editorial grid.</p></div>
+      <div class="card"><span class="label acc">Audience 03</span><h3>Destination weddings</h3><p>Higher budgets, need a team that has done it before abroad. Proof: Thailand, Singapore, Vietnam, Malaysia, UAE.</p></div>
+    </div>
+    <p class="note">Audiences are drawn from the locations and work on the profile. Validate with where actual enquiries come from.</p>
+  </section>
+
+  <!-- 05 MOOD BOARD -->
+  <section class="s" id="mood">
+    <div class="s-head">
+      <span class="label">05 — Mood board</span>
+      <div>
+        <h2>Velvet, sandstone, fairy lights.</h2>
+        <p class="purpose"><b>Purpose</b> Pull the look from Wedding Lensation&rsquo;s own best work, so the brand feels like the photos.</p>
+      </div>
+    </div>
+    <div class="mood">
+      <figure class="m-lehenga"><img src="real/lehenga.jpg" alt="Embroidered bridal lehenga detail"><span class="cap">Embroidery</span></figure>
+      <figure class="m-velvet"><img src="real/velvet.jpg" alt="Maroon velvet texture from the highlight covers"><span class="cap">Velvet maroon</span></figure>
+      <div class="m-sw1" style="background:var(--gold)"></div>
+      <figure class="m-arch"><img src="real/arch.jpg" alt="Carved sandstone arch"><span class="cap">Sandstone</span></figure>
+      <figure class="m-hands"><img src="real/hands.jpg" alt="Black and white detail of hands with rings"><span class="cap">Rings</span></figure>
+      <div class="m-word1 word velvet">Etched in light &amp; love</div>
+      <figure class="m-lights"><img src="real/lights.jpg" alt="Canopy of warm fairy lights"><span class="cap">Fairy lights</span></figure>
+      <figure class="m-sherwani"><img src="real/sherwani.jpg" alt="Ivory sherwani detail"><span class="cap">Ivory</span></figure>
+      <figure class="m-chand"><img src="real/chandelier.jpg" alt="Warm chandelier lights"><span class="cap">Warm glow</span></figure>
+      <div class="m-word2 word" style="background:var(--ivory);color:var(--velvet)">Bas ek aur photo.</div>
+      <div class="m-sw" style="background:var(--sindoor)"></div>
+      <div class="m-sw" style="background:var(--sand)"></div>
+      <div class="m-word3 word" style="background:var(--kohl);color:var(--gold)">Real shaadi.</div>
+    </div>
+    <p class="note">All images are crops from Wedding Lensation&rsquo;s own posts. Faces are left out on purpose.</p>
+    <div class="palette">
+      <div class="sw" style="background:var(--velvet);color:var(--ivory)"><b>Velvet maroon</b><span>#4A0A10 · primary</span></div>
+      <div class="sw" style="background:var(--ivory);color:var(--kohl);box-shadow:inset 0 0 0 1.5px var(--rule)"><b>Ivory</b><span>#F4EDE3 · backgrounds</span></div>
+      <div class="sw" style="background:var(--sand);color:var(--kohl)"><b>Sandstone</b><span>#C9B49B · editorial</span></div>
+      <div class="sw" style="background:var(--sindoor);color:var(--ivory)"><b>Sindoor</b><span>#B3262B · accent</span></div>
+      <div class="sw" style="background:var(--gold);color:var(--kohl)"><b>Antique gold</b><span>#B08D57 · details</span></div>
+      <div class="sw" style="background:var(--kohl);color:var(--ivory)"><b>Kohl</b><span>#1D1714 · text</span></div>
+    </div>
+    <div class="typo">
+      <div class="card ts"><span class="label acc">Display · Cormorant Garamond Italic</span><span class="b1">Etched in light &amp; love.</span><p>For the logo, Reel titles, couple names and album covers. Close to the serif already used on the editorial posts.</p></div>
+      <div class="card ts"><span class="label acc">Text · Jost</span><span class="b2">HALDI · SANGEET · PHERAS</span><p>For captions, Reel subtitles and small text. Replaces the mix of neon and script fonts in Reels.</p></div>
+    </div>
+  </section>
+
+  <!-- 06 LOGO -->
+  <section class="s" id="logo">
+    <div class="s-head">
+      <span class="label">06 — Logo idea</span>
+      <div>
+        <h2>Keep the rings. Lose the clutter.</h2>
+        <p class="purpose"><b>Purpose</b> A logo that reads in a profile circle and as a Reel watermark, while keeping what people already associate with the studio.</p>
+      </div>
+    </div>
+    <div class="logo-cmp">
+      <div class="lg now"><img src="real/logo.jpg" alt="Current logo"><span class="cap">Today</span></div>
+      <div class="lg new velvet"><span class="wl"><span class="top">Wedding</span><span class="main">Lensati<span class="rings"><svg><use href="#rings"/></svg></span>n</span><span class="sub">Photography &amp; Films</span></span><span class="cap" style="color:var(--gold)">Proposed</span></div>
+    </div>
+    <div class="logo-why">
+      <div><h3>Rings kept</h3><p>The two rings from today&rsquo;s logo become the &ldquo;o&rdquo; in Lensation. Familiar, but built into the name.</p></div>
+      <div><h3>Clutter removed</h3><p>No watercolour brush, leaves, frame box or &ldquo;by Snapbyte&rdquo; in the mark.</p></div>
+      <div><h3>One serif</h3><p>An italic serif in the same family as the editorial posts, so logo and feed match.</p></div>
+      <div><h3>Velvet colours</h3><p>Ivory on maroon, taken from the highlight covers, which are already the most &ldquo;on brand&rdquo; thing on the profile.</p></div>
+    </div>
+    <div class="system">
+      <div class="velvet"><div class="pp velvet"><span class="ini">WL</span><svg class="rg" viewBox="0 0 150 100"><use href="#rings"/></svg></div><span class="cap">Profile picture</span></div>
+      <div style="background:var(--ivory);box-shadow:inset 0 0 0 1.5px var(--rule)"><span class="wl" style="color:var(--velvet);font-size:44px"><span class="top">Wedding</span><span class="main">Lensati<span class="rings"><svg><use href="#rings"/></svg></span>n</span></span><span class="cap">On light</span></div>
+      <div style="background:var(--paper-2)"><div class="hlc"><span class="velvet">Book</span><span class="velvet">Films</span><span class="velvet">Reviews</span></div><span class="cap">Highlight covers</span></div>
+      <div style="position:relative;overflow:hidden"><img src="real/sherwani.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"><span class="wm" style="position:absolute;right:14px;top:14px">Wedding Lensation</span><span class="cap" style="color:#fff">Watermark</span></div>
+    </div>
+  </section>
+
+  <!-- 07 VOICE -->
+  <section class="s" id="voice">
+    <div class="s-head">
+      <span class="label">07 — Voice &amp; messaging</span>
+      <div>
+        <h2>Elegant on the grid. Desi in the Reels.</h2>
+        <p class="purpose"><b>Purpose</b> Keep the two sides of the brand (editorial and fun) in one recognisable voice.</p>
+      </div>
+    </div>
+    <div class="lines">
+      <div class="ln a"><span class="t">Etched in light &amp; love.</span><span class="n">Brand line · kept from the current bio</span></div>
+      <div class="ln b"><span class="t">Editorial frames. Real shaadi.</span><span class="n">Positioning line · website, ads</span></div>
+      <div class="ln c"><span class="t">Bas ek aur photo.</span><span class="n">Signature Reel line · from their own 14.1K Reel</span></div>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Where</th><th>Sounds like</th><th>Avoid</th></tr></thead>
+        <tbody>
+          <tr><td>Editorial post</td><td>&ldquo;The groom. Ivory, calm, ready.&rdquo;</td><td class="no">Long captions full of hashtags and emoji</td></tr>
+          <tr><td>Fun Reel</td><td>&ldquo;POV: bride ne bola 5 minute aur.&rdquo; (Hinglish, real, quick)</td><td class="no">Jokes that make fun of the couple or family</td></tr>
+          <tr><td>Bio &amp; ads</td><td>&ldquo;12 years. 500+ weddings. Jabalpur, Mumbai &amp; abroad.&rdquo;</td><td class="no">&ldquo;Enveloped 500+ weddings&rdquo; (unclear wording)</td></tr>
+          <tr><td>DM reply</td><td>&ldquo;Congratulations! Which dates and city? We&rsquo;ll check availability today.&rdquo;</td><td class="no">Sending a price list with no conversation</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 08 INSTAGRAM -->
+  <section class="s" id="instagram">
+    <div class="s-head">
+      <span class="label">08 — Instagram fixes</span>
+      <div>
+        <h2>Same account. Clear next step.</h2>
+        <p class="purpose"><b>Purpose</b> Make the profile do the selling when a viral Reel sends people to it.</p>
+      </div>
+    </div>
+    <div class="ig-fix">
+      <div class="card phone">
+        <div class="top"><div class="pp velvet"><span class="ini">WL</span></div><div><div class="nm">wedding_lensation</div><div class="stats" style="font:400 13px/1.3 var(--label);color:var(--muted);margin-top:4px">Proposed profile</div></div></div>
+        <p class="bio"><b>Wedding Lensation · Photo &amp; Film</b><br>Editorial frames. Real shaadi.<br>12 years · 500+ weddings 🧿<br>📍 Jabalpur · Mumbai · Destination ✈️<br>👇 Check your wedding date<br><span class="lnk">weddinglensation.com</span></p>
+        <div class="btns"><span class="pri">Check date</span><span>Message</span><span>Contact</span></div>
+        <div class="hlc">
+          <div><span class="velvet">Book</span>Book a date</div>
+          <div><span class="velvet">Films</span>Films</div>
+          <div><span class="velvet">Brides</span>Brides</div>
+          <div><span class="velvet">Shaadi</span>Real shaadi</div>
+          <div><span class="velvet">Abroad</span>Destination</div>
+          <div><span class="velvet">Love</span>Reviews</div>
+        </div>
+      </div>
+      <dl class="chg">
+        <div><dt>Name field</dt><dd>&ldquo;Wedding Lensation | Wedding Photographer&rdquo;, so it shows up in Instagram search for &ldquo;wedding photographer&rdquo;.</dd></div>
+        <div><dt>Bio</dt><dd>Lead with the positioning and the proof. <s>&ldquo;Enveloped&rdquo;</s> becomes &ldquo;500+ weddings&rdquo;. Destinations in words, not just flags.</dd></div>
+        <div><dt>Link</dt><dd>A clean link (website or a renamed Linktree, e.g. linktr.ee/weddinglensation) with no <s>?fbclid=…</s> tracking code.</dd></div>
+        <div><dt>Highlights</dt><dd>Rename by purpose, not couple initials. Couple stories move into &ldquo;Brides&rdquo; and &ldquo;Real shaadi&rdquo;.</dd></div>
+        <div><dt>Pinned posts</dt><dd>1. The 5.9M Reel (proof of reach) · 2. Best editorial carousel · 3. &ldquo;How booking works&rdquo; post.</dd></div>
+        <div><dt>Every Reel</dt><dd>Same title style, a visible watermark, a 1-second end card, and a pinned comment: &ldquo;Planning your shaadi? Check your date 👆&rdquo;.</dd></div>
+      </dl>
+    </div>
+    <div class="mix">
+      <div style="background:var(--velvet)"><b>40%</b><div><h3>Real shaadi</h3><p>Emotional, candid moments. The format behind the 5.9M and 4M Reels.</p></div></div>
+      <div style="background:var(--sindoor)"><b>30%</b><div><h3>Desi humour</h3><p>Relatable POVs. The best ones reached 14K–28K views.</p></div></div>
+      <div style="background:#7A5A3A"><b>20%</b><div><h3>Editorial</h3><p>Portrait carousels for the grid and for credibility.</p></div></div>
+      <div style="background:var(--kohl)"><b>10%</b><div><h3>Proof</h3><p>Reviews, BTS, booking.</p></div></div>
+    </div>
+    <p class="note">Suggested content mix, based on what the view numbers above show performs best.</p>
+  </section>
+
+  <!-- 09 IN USE -->
+  <section class="s" id="use">
+    <div class="s-head">
+      <span class="label">09 — Brand in use</span>
+      <div>
+        <h2>One studio, everywhere.</h2>
+        <p class="purpose"><b>Purpose</b> Show the system on the things couples actually see: Reels, the first meeting and the welcome card.</p>
+      </div>
+    </div>
+    <div class="use">
+      <div><div class="reel"><img src="real/lehenga.jpg" alt=""><div class="over"><span class="chip">Real shaadi</span><div class="ttl">Bas ek aur photo.</div><span class="wl"><span class="main">Lensati<span class="rings"><svg><use href="#rings"/></svg></span>n</span></span></div></div><p class="cap2">Reel cover template: one serif title, one chip, logo at the bottom.</p></div>
+      <div><div class="reel"><img src="real/sherwani.jpg" alt=""><div class="over"><span class="chip" style="background:var(--velvet)">Editorial</span><div class="ttl">The groom.</div><span class="wl"><span class="main">Lensati<span class="rings"><svg><use href="#rings"/></svg></span>n</span></span></div></div><p class="cap2">Editorial cover: the same template in a calmer tone.</p></div>
+      <div>
+        <div class="bc f velvet"><span class="wl"><span class="top">Wedding</span><span class="main">Lensati<span class="rings"><svg><use href="#rings"/></svg></span>n</span><span class="sub">Photography &amp; Films</span></span></div>
+        <div class="bc b"><div><div class="nm">Name Surname</div><div class="rl">Lead photographer</div></div><div class="ct">hello@weddinglensation.com<br>+91 00000 00000 · Jabalpur · Mumbai</div></div>
+        <p class="cap2">Business card. Contact details are placeholders.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 ROADMAP -->
+  <section class="s" id="next">
+    <div class="s-head">
+      <span class="label">10 — Roadmap</span>
+      <div>
+        <h2>First 90 days.</h2>
+        <p class="purpose"><b>Purpose</b> Put the changes in order, so the quick wins come first.</p>
+      </div>
+    </div>
+    <div class="plan">
+      <div class="card"><span class="label acc">Month 1</span><h3>Fix the profile</h3><ul><li>New bio, name field and clean link</li><li>Rename highlights and design new covers</li><li>Pin three posts</li><li>Finalise the new logo and monogram</li></ul></div>
+      <div class="card"><span class="label acc">Month 2</span><h3>Make Reels recognisable</h3><ul><li>One Reel title style and end card</li><li>Visible watermark on every video</li><li>Content mix: 40 / 30 / 20 / 10</li><li>Pinned &ldquo;check your date&rdquo; comment</li></ul></div>
+      <div class="card"><span class="label acc">Month 3</span><h3>Measure what matters</h3><ul><li>Track follows and DMs per Reel, not just views</li><li>Ask every enquiry &ldquo;How did you find us?&rdquo;</li><li>Launch a Destination highlight and post series</li><li>Review and adjust the mix</li></ul></div>
+    </div>
+  </section>
+
+  <div class="sign">
+    <div><span class="label acc">Riya Desk</span><h2 style="margin-top:14px">Got reach but<br>no recall<i>?</i></h2><p>I&rsquo;m Riya, founder of Riya Desk. I combine strategy, creativity and AI to help businesses become the brand people choose.</p></div>
+    <a class="cta" href="../../index.html">Work with me &rarr;</a>
+  </div>
+  <footer class="foot"><span class="label">Riya Desk</span><span class="label">&copy; 2026 Riya Desk · Brand strategy</span></footer>
+</div>
+
+<script>
+// Reel views as shown on @wedding_lensation's public profile. Labels describe the content only (no client names).
+var TYPES = {
+  E: { name: 'Real emotional moments', color: '#4A0A10', note: 'Candid reactions, pheras, family. Home of both viral Reels.' },
+  H: { name: 'Desi humour & POV', color: '#B3262B', note: 'Relatable Hinglish jokes about the shaadi and the photographer.' },
+  R: { name: 'Rituals, entries & vibe', color: '#B08D57', note: 'Haldi, sangeet, entries, couple walks, outfit details.' },
+  T: { name: 'Title & name cards', color: '#8E8577', note: 'Couple names or titles on screen as the main hook.' },
+  B: { name: 'Gear & studio', color: '#5A5F73', note: 'Behind the camera: equipment and the team.' },
+  G: { name: 'Group / stage photos', color: '#B9B2A6', note: 'Posed family on stage.' }
+};
+var REELS = [
+  ['Haldi celebration (pinned)', 54000, 'R'],
+  ['Family group on stage', 512, 'G'],
+  ['Camera gear shopping', 11000, 'B'],
+  ['Bride with her father', 14100, 'E'],
+  ['Pheras, with a song lyric', 13700, 'E'],
+  ['Baraat with a vintage car', 8070, 'R'],
+  ['"Sangeet night" title', 9934, 'T'],
+  ['Bride seen through a glass', 11600, 'R'],
+  ['Bridal outfit details', 12200, 'R'],
+  ['"Just two… story begins" entry', 7145, 'R'],
+  ['"POV: he told the bridesmaids…" couple laughing', 5900000, 'E'],
+  ['"A dreamy Marathi bride"', 13900, 'R'],
+  ['"Waited 6 years for this moment"', 13400, 'E'],
+  ['Hers / his / theirs', 16100, 'R'],
+  ['Couple in bokeh lights', 8604, 'R'],
+  ['"Bride: no more photos / Photographer: bas 1 aur"', 14100, 'H'],
+  ['Sangeet entry', 3666, 'R'],
+  ['Couple name title card', 4687, 'T'],
+  ['"Anniversary toh chalti rahegi"', 2086, 'H'],
+  ['"When the dads sound like Jethalal"', 20600, 'H'],
+  ['"POV: asked the bride for 5 min extra shoot"', 28500, 'H'],
+  ['"Season hai bhaiii"', 8911, 'H'],
+  ['Couple portrait collage', 9839, 'R'],
+  ['Groom with his friends', 9806, 'R'],
+  ['"Brothers" black & white', 6592, 'R'],
+  ['Guests holding up phone torches', 4000000, 'E'],
+  ['Couple walk-in', 14600, 'R'],
+  ['"Finally this beautiful" caption', 3595, 'T'],
+  ['Bride-to-be sash and outfit', 4441, 'H'],
+  ['"Wedding fit check"', 13500, 'R']
+];
+function med(a) { a = a.slice().sort(function (x, y) { return x - y; }); var m = a.length >> 1; return a.length % 2 ? a[m] : (a[m - 1] + a[m]) / 2; }
+function fmt(n) { return n >= 1e6 ? (n / 1e6).toFixed(1).replace(/\.0$/, '') + 'M' : n >= 1000 ? (n / 1000).toFixed(1).replace(/\.0$/, '') + 'K' : String(Math.round(n)); }
+var views = REELS.map(function (r) { return r[1]; });
+var total = views.reduce(function (a, b) { return a + b; }, 0);
+var stats = { count: REELS.length, median: fmt(med(views)), ratio: fmt(total / 3463) };
+document.querySelectorAll('[data-s]').forEach(function (el) { el.textContent = stats[el.dataset.s]; });
+document.getElementById('f-total').textContent = fmt(total);
+
+// per-type medians
+var typesEl = document.getElementById('types');
+Object.keys(TYPES).filter(function (k) { return k !== 'G' && k !== 'B'; }).map(function (k) {
+  var v = REELS.filter(function (r) { return r[2] === k; }).map(function (r) { return r[1]; });
+  return { k: k, n: v.length, med: med(v) };
+}).sort(function (a, b) { return b.med - a.med; }).forEach(function (t) {
+  var d = document.createElement('div'); d.className = 'card type';
+  d.innerHTML = '<h3><span class="dot" style="background:' + TYPES[t.k].color + '"></span>' + TYPES[t.k].name + '</h3><b>' + fmt(t.med) + '</b><p>Median views · ' + t.n + ' Reels. ' + TYPES[t.k].note + '</p>';
+  typesEl.appendChild(d);
+});
+var lo = document.createElement('div'); lo.className = 'card type';
+lo.innerHTML = '<h3><span class="dot" style="background:' + TYPES.G.color + '"></span>Lowest performer</h3><b>512</b><p>A posed family group on stage. The least-watched Reel by far: posed group shots work in the album, not on Instagram.</p>';
+typesEl.appendChild(lo);
+
+// legend + bars
+var lg = document.getElementById('legend');
+Object.keys(TYPES).forEach(function (k) { var s = document.createElement('span'); s.innerHTML = '<i style="background:' + TYPES[k].color + '"></i>' + TYPES[k].name; lg.appendChild(s); });
+var MAX = 60000, bars = document.getElementById('bars');
+REELS.slice().sort(function (a, b) { return b[1] - a[1]; }).forEach(function (r) {
+  var off = r[1] > MAX, w = Math.max(0.6, Math.min(100, r[1] / MAX * 100));
+  var row = document.createElement('div'); row.className = 'bar';
+  row.innerHTML = '<span class="t"></span><span class="track"><span class="fill' + (off ? ' off' : '') + '" style="width:' + w + '%;background-color:' + TYPES[r[2]].color + '"></span></span><span class="n">' + fmt(r[1]) + '</span>';
+  row.querySelector('.t').textContent = r[0]; row.title = r[0] + ': ' + r[1].toLocaleString('en-IN') + ' views';
+  bars.appendChild(row);
+});
+</script>
+
+</body></html>

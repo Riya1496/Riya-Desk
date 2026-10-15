@@ -1,0 +1,515 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{box-sizing:border-box}body{margin:0;padding:0}img{max-width:100%}[hidden]{display:none!important}</style></head><body>
+<title>Halfmoon Ad Concept</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&family=Bodoni+Moda:opsz,wght@6..96,400&family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet">
+<style>
+/* Riya Desk case-study frame (paper + navy) around a fictional lunch brand (cream, turmeric, chilli, curry-leaf green). */
+:root {
+  --paper: #F2EEE6;
+  --paper-2: #E9E3D8;
+  --ink: #1C2240;
+  --muted: #5A5F73;
+  --rule: rgba(28, 34, 64, 0.18);
+  --acc: #C2412D;
+  --cream: #FBF5EA;
+  --turmeric: #E8A33D;
+  --chilli: #C2412D;
+  --leaf: #2F5D3A;
+  --steel: #8C949C;
+  --a: #C2412D;
+  --b: #B7791F;
+  --c: #2F5D3A;
+  --display: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif;
+  --label: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --hm-serif: 'DM Serif Display', Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--paper); color: var(--ink); font-family: var(--display); -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; display: block; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-inline: clamp(16px, 5vw, 72px); }
+.label { font: 600 12px/1.2 var(--label); letter-spacing: .2em; text-transform: uppercase; }
+.label.acc { color: var(--acc); }
+.card { background: #fff; border-radius: 6px; box-shadow: 0 10px 30px rgba(28,34,64,.06); }
+.note { margin-top: 16px; font: italic 400 15px/1.5 var(--display); color: var(--muted); max-width: 80ch; }
+
+/* Riya Desk nav */
+.brand { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 26px 22px; border-bottom: 1px solid var(--rule); }
+.rd { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); }
+.mono { position: relative; display: inline-block; font-family: 'Bodoni Moda', Didot, Georgia, serif; line-height: 1; height: 1em; width: 1.05em; font-size: 32px; }
+.mono .r { position: absolute; left: 0; top: 0; }
+.mono .d { position: absolute; left: 0.34em; top: 0.3em; font-size: 0.78em; }
+.mono .stem { position: absolute; left: 0.47em; top: 0.72em; width: 1px; height: 0.3em; background: currentColor; }
+.mono .stem::after { content: ""; position: absolute; left: -0.06em; bottom: -0.06em; width: 0.13em; height: 0.13em; border-radius: 50%; background: currentColor; }
+.rdw { font-family: 'Cormorant Garamond', Didot, Georgia, serif; font-weight: 500; text-transform: uppercase; letter-spacing: 0.3em; font-size: 15px; }
+.back { font: 600 12px/1 var(--label); letter-spacing: .16em; text-transform: uppercase; text-decoration: none; color: var(--ink); }
+
+/* hero */
+.hero { padding-block: 56px 32px; }
+.chip { display: inline-block; margin-left: 10px; padding: 5px 9px; border-radius: 4px; background: var(--ink); color: var(--paper); font: 600 10px/1 var(--label); letter-spacing: .14em; text-transform: uppercase; vertical-align: 2px; }
+.hero h1 { margin-top: 18px; font: 800 clamp(48px, 8.4vw, 116px)/0.9 var(--display); letter-spacing: -0.055em; text-wrap: balance; }
+.hero h1 i { font-style: normal; color: var(--acc); }
+.hook { margin-top: 24px; max-width: 46ch; font: 400 clamp(19px, 2.2vw, 26px)/1.32 var(--display); letter-spacing: -0.015em; }
+.byline { margin-top: 20px; font: 400 17px/1.3 var(--display); color: var(--muted); }
+.byline b { color: var(--ink); font-weight: 600; }
+.trio { margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.trio figure { position: relative; aspect-ratio: 4 / 5; border-radius: 6px; overflow: hidden; }
+.trio img { width: 100%; height: 100%; object-fit: cover; }
+.trio figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 16px 14px; background: linear-gradient(0deg, rgba(20,16,12,.75), transparent); color: #fff; }
+.trio figcaption b { display: block; font: 400 clamp(18px, 2vw, 24px)/1.1 var(--hm-serif); }
+.trio figcaption span { font: 600 10px/1 var(--label); letter-spacing: .16em; text-transform: uppercase; opacity: .85; }
+.facts { margin-top: 28px; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 2px solid var(--ink); }
+.facts div { padding: 16px 16px 0 0; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.facts p { font: 500 18px/1.3 var(--display); }
+.flow { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.flow a { text-decoration: none; color: var(--ink); padding: 10px 14px; border-radius: 999px; border: 1.5px solid var(--rule); font: 600 13px/1 var(--label); letter-spacing: .04em; }
+.flow a:hover { border-color: var(--ink); }
+.flow span { color: var(--muted); font: 500 14px/1 var(--label); }
+
+/* sections */
+section.s { padding-top: clamp(64px, 9vw, 112px); scroll-margin-top: 20px; }
+.s-head { display: grid; grid-template-columns: 220px 1fr; gap: 32px; align-items: start; }
+.s-head h2 { font: 800 clamp(34px, 4.8vw, 62px)/0.96 var(--display); letter-spacing: -0.045em; text-wrap: balance; }
+.purpose { margin-top: 18px; display: flex; gap: 12px; align-items: baseline; max-width: 66ch; font: 400 19px/1.45 var(--display); }
+.purpose b { flex: 0 0 auto; font: 600 11px/1 var(--label); letter-spacing: .18em; text-transform: uppercase; color: #fff; background: var(--acc); padding: 6px 9px; border-radius: 4px; transform: translateY(-2px); }
+
+/* brief */
+.brief { margin-top: 36px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.brief > div { padding: 22px; display: flex; flex-direction: column; gap: 8px; }
+.brief h3 { font: 600 19px/1.25 var(--display); }
+.brief p { font: 400 15px/1.5 var(--display); color: var(--muted); }
+
+/* segments */
+.segs { margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.seg { padding: 24px; display: flex; flex-direction: column; gap: 12px; border-top: 5px solid var(--k); }
+.seg .tag { align-self: flex-start; padding: 5px 9px; border-radius: 4px; background: var(--k); color: #fff; font: 700 11px/1 var(--label); letter-spacing: .12em; text-transform: uppercase; }
+.seg h3 { font: 800 24px/1.05 var(--display); letter-spacing: -0.03em; }
+.seg .who { font: 400 14.5px/1.45 var(--display); color: var(--muted); }
+.seg q { font: italic 400 19px/1.3 var(--hm-serif); color: var(--k); quotes: "\201C" "\201D"; }
+.seg dl { display: grid; grid-template-columns: 84px 1fr; gap: 8px 12px; }
+.seg dt { font: 600 10.5px/1.6 var(--label); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.seg dd { font: 400 14.5px/1.45 var(--display); }
+
+/* problem */
+.probs { margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+.probs > div { padding: 20px 22px 20px 0; border-top: 2px solid var(--ink); display: flex; flex-direction: column; gap: 8px; }
+.probs .n { font: 800 34px/1 var(--display); letter-spacing: -0.04em; color: var(--acc); }
+.probs h3 { font: 600 19px/1.25 var(--display); }
+.probs p { font: 400 15px/1.5 var(--display); color: var(--muted); }
+.lookalike { margin-top: 28px; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 24px; align-items: center; background: #fff; border-radius: 6px; padding: 22px; box-shadow: 0 10px 30px rgba(28,34,64,.06); }
+.same { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.same div { aspect-ratio: 1; border-radius: 6px; background: radial-gradient(circle at 50% 50%, #E7B067 0 26%, #F3E3C6 27% 42%, #e9e3d8 43%); position: relative; display: flex; align-items: flex-end; justify-content: center; padding: 8px; }
+.same div span { background: var(--acc); color: #fff; font: 700 10px/1 var(--label); padding: 4px 6px; border-radius: 3px; }
+.lookalike p { font: 400 16px/1.5 var(--display); }
+.lookalike b { font-weight: 600; }
+
+/* insight */
+.insight { margin-top: 40px; background: var(--leaf); color: var(--cream); border-radius: 6px; padding: clamp(28px, 5vw, 56px); display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; }
+.insight q { font: italic 400 clamp(28px, 3.6vw, 46px)/1.08 var(--hm-serif); quotes: "\201C" "\201D"; }
+.insight p { font: 400 18px/1.55 var(--display); color: rgba(251,245,234,.88); }
+.insight .label { color: var(--turmeric); display: block; margin-bottom: 14px; }
+.doors { margin-top: 20px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.doors div { border-radius: 6px; padding: 18px; color: #fff; display: flex; flex-direction: column; gap: 6px; }
+.doors b { font: 400 26px/1 var(--hm-serif); }
+.doors span { font: 400 14px/1.45 var(--display); opacity: .9; }
+
+/* strategy */
+.const { margin-top: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-radius: 6px; overflow: hidden; box-shadow: 0 10px 30px rgba(28,34,64,.08); }
+.const > div { padding: clamp(22px, 3.5vw, 36px); display: flex; flex-direction: column; gap: 12px; }
+.const .fixed { background: #fff; }
+.const .vary { background: var(--ink); color: var(--paper); }
+.const h3 { font: 800 24px/1.1 var(--display); letter-spacing: -0.02em; }
+.const ul { list-style: none; display: flex; flex-direction: column; gap: 0; }
+.const li { padding: 10px 0; border-top: 1px solid var(--rule); font: 400 15.5px/1.45 var(--display); display: grid; grid-template-columns: 110px 1fr; gap: 12px; }
+.const .vary li { border-top-color: rgba(242,238,230,.18); }
+.const li b { font: 600 11px/1.6 var(--label); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.const .vary li b { color: var(--turmeric); }
+.offer { margin-top: 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 28px; padding: 22px 26px; border-radius: 6px; background: var(--turmeric); color: #2a1a06; }
+.offer .big { font: 400 clamp(32px, 4vw, 48px)/1 var(--hm-serif); }
+.offer p { font: 500 16px/1.45 var(--display); max-width: 48ch; }
+
+/* ads */
+.ads { margin-top: 44px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; align-items: start; }
+.ad-col { display: flex; flex-direction: column; gap: 18px; }
+.ad-head { display: flex; align-items: center; gap: 10px; }
+.ad-head .letter { width: 34px; height: 34px; border-radius: 50%; background: var(--k); color: #fff; display: flex; align-items: center; justify-content: center; font: 700 15px/1 var(--label); }
+.ad-head b { font: 700 17px/1.2 var(--display); }
+.ad-head small { display: block; font: 600 10.5px/1.3 var(--label); letter-spacing: .14em; text-transform: uppercase; color: var(--k); }
+.ig { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 16px 40px rgba(28,34,64,.12); font-family: var(--label); }
+.ig-h { display: flex; align-items: center; gap: 9px; padding: 10px 12px; font: 600 13px/1.2 var(--label); }
+.ig-h .av { width: 30px; height: 30px; border-radius: 50%; background: var(--cream); box-shadow: inset 0 0 0 1.5px #e3d6bf; display: flex; align-items: center; justify-content: center; }
+.ig-h .av svg { width: 18px; height: 18px; }
+.ig-h small { display: block; font-weight: 400; font-size: 11px; color: #777; }
+.ig-h .dots { margin-left: auto; color: #888; letter-spacing: 1px; }
+.creative { position: relative; aspect-ratio: 4 / 5; overflow: hidden; }
+.creative img { width: 100%; height: 100%; object-fit: cover; }
+.ov { position: absolute; left: 0; right: 0; padding: 18px; color: #fff; }
+.ov.top { top: 0; background: linear-gradient(180deg, rgba(20,14,8,.72), transparent); padding-bottom: 60px; }
+.ov.bot { bottom: 0; background: linear-gradient(0deg, rgba(20,14,8,.78), transparent); padding-top: 70px; }
+.ov h4 { font: 400 clamp(25px, 2.4vw, 32px)/1.02 var(--hm-serif); letter-spacing: -0.005em; text-shadow: 0 2px 16px rgba(0,0,0,.3); }
+.ov h4 i { font-style: italic; color: #FFD58A; }
+.ov .pill { display: inline-block; margin-top: 10px; padding: 6px 10px; border-radius: 999px; background: var(--turmeric); color: #2a1a06; font: 700 11px/1 var(--label); letter-spacing: .04em; }
+.ov .logo { display: inline-flex; align-items: center; gap: 6px; font: 400 16px/1 var(--hm-serif); }
+.ov .logo svg { width: 16px; height: 16px; }
+.ig-cta { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: #F2F3F5; font: 600 13px/1 var(--label); }
+.ig-cta span:last-child { padding: 7px 12px; border-radius: 6px; background: #fff; box-shadow: inset 0 0 0 1px #dcdfe4; }
+.ig-txt { padding: 10px 12px 14px; font: 400 13px/1.5 var(--label); color: #222; }
+.ig-txt b { font-weight: 600; }
+.ig-txt .more { color: #8e8e8e; }
+.why { display: flex; flex-direction: column; gap: 0; }
+.why > div { padding: 12px 0; border-top: 1px solid var(--rule); }
+.why > div:first-child { border-top: 2px solid var(--ink); }
+.why dt { font: 600 10.5px/1.5 var(--label); letter-spacing: .14em; text-transform: uppercase; color: var(--k); margin-bottom: 4px; }
+.why dd { font: 400 14.5px/1.5 var(--display); }
+
+/* stories */
+.stories { margin-top: 48px; display: grid; grid-template-columns: 1fr 1.6fr; gap: 32px; align-items: center; }
+.st-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.story { position: relative; aspect-ratio: 9 / 16; border-radius: 14px; overflow: hidden; box-shadow: 0 14px 30px rgba(28,34,64,.14); }
+.story img { width: 100%; height: 100%; object-fit: cover; }
+.story .bar3 { position: absolute; top: 8px; left: 8px; right: 8px; display: flex; gap: 3px; z-index: 2; }
+.story .bar3 i { flex: 1; height: 2px; border-radius: 1px; background: rgba(255,255,255,.45); }
+.story .bar3 i:first-child { background: #fff; }
+.story .sx { position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; justify-content: space-between; padding: 26px 12px 14px; color: #fff;
+  background: linear-gradient(180deg, rgba(20,14,8,.6), transparent 40%, transparent 60%, rgba(20,14,8,.75)); }
+.story .sx h5 { font: 400 clamp(17px, 1.7vw, 22px)/1.05 var(--hm-serif); }
+.story .sx .sw { align-self: center; padding: 8px 12px; border-radius: 999px; background: #fff; color: #222; font: 700 11px/1 var(--label); }
+.stories .txt h3 { font: 800 clamp(26px, 3vw, 36px)/1.02 var(--display); letter-spacing: -0.035em; }
+.stories .txt p { margin-top: 12px; font: 400 17px/1.5 var(--display); color: var(--muted); }
+.stories .txt ul { margin-top: 14px; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.stories .txt li { font: 400 15px/1.5 var(--display); padding-left: 18px; position: relative; }
+.stories .txt li::before { content: ""; position: absolute; left: 0; top: .6em; width: 8px; height: 8px; border-radius: 50%; background: var(--acc); }
+
+/* test plan */
+.phases { margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.phase { padding: 24px; display: flex; flex-direction: column; gap: 10px; border-top: 4px solid var(--ink); }
+.phase .label { color: var(--acc); }
+.phase h3 { font: 700 21px/1.15 var(--display); letter-spacing: -0.02em; }
+.phase p { font: 400 15px/1.5 var(--display); color: var(--muted); }
+.phase .setup { margin-top: 4px; padding: 12px; border-radius: 6px; background: var(--paper); font: 400 13.5px/1.5 var(--display); }
+.phase .setup b { font-weight: 600; }
+.tbl-wrap { overflow-x: auto; margin-top: 32px; }
+table { width: 100%; border-collapse: collapse; min-width: 720px; }
+th { text-align: left; font: 600 11px/1 var(--label); letter-spacing: .16em; text-transform: uppercase; padding: 12px 14px 12px 0; border-bottom: 2px solid var(--ink); }
+td { padding: 14px 14px 14px 0; border-bottom: 1px solid var(--rule); font: 400 15px/1.45 var(--display); vertical-align: top; }
+td:first-child { font-weight: 600; white-space: nowrap; }
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; }
+.rules { margin-top: 32px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.rules > div { border-top: 2px solid var(--ink); padding-top: 14px; display: flex; flex-direction: column; gap: 6px; }
+.rules h3 { font: 600 17px/1.25 var(--display); }
+.rules p { font: 400 14.5px/1.5 var(--display); color: var(--muted); }
+
+/* measurement */
+.funnel { margin-top: 40px; display: flex; flex-direction: column; gap: 6px; }
+.fstep { display: grid; grid-template-columns: 200px 1fr 1.2fr; gap: 16px; align-items: center; }
+.fbar { height: 46px; border-radius: 6px; background: var(--ink); color: var(--paper); display: flex; align-items: center; padding: 0 16px; font: 600 14px/1.2 var(--display); }
+.fstep .m { font: 400 14.5px/1.45 var(--display); }
+.fstep .q { font: 400 14.5px/1.45 var(--display); color: var(--muted); }
+.goals { margin-top: 32px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.goals > div { border-top: 4px solid var(--leaf); padding: 20px; display: flex; flex-direction: column; gap: 8px; }
+.goals h3 { font: 700 19px/1.2 var(--display); }
+.goals p { font: 400 15px/1.5 var(--display); color: var(--muted); }
+
+/* sign-off */
+.sign { margin-top: clamp(72px, 10vw, 128px); display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: end; padding-top: 28px; border-top: 2px solid var(--ink); }
+.sign h2 { font: 800 clamp(40px, 6vw, 84px)/0.92 var(--display); letter-spacing: -0.05em; }
+.sign h2 i { font-style: normal; color: var(--acc); }
+.sign p { margin-top: 16px; max-width: 44ch; font: 400 19px/1.45 var(--display); color: var(--muted); }
+.cta { display: inline-flex; align-items: center; gap: 10px; padding: 18px 30px; border-radius: 999px; background: var(--ink); color: var(--paper); text-decoration: none; font: 600 14px/1 var(--label); letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; }
+.cta:hover { background: var(--acc); }
+.foot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 64px; padding-block: 22px 40px; border-top: 2px solid var(--ink); }
+
+@media (max-width: 1000px) {
+  .ads { grid-template-columns: 1fr 1fr; }
+  .rules { grid-template-columns: 1fr 1fr; }
+  .stories { grid-template-columns: 1fr; }
+  .fstep { grid-template-columns: 160px 1fr; }
+  .fstep .q { grid-column: 2; }
+}
+@media (max-width: 760px) {
+  .s-head, .insight, .const, .sign, .lookalike { grid-template-columns: 1fr; }
+  .facts { grid-template-columns: 1fr 1fr; row-gap: 18px; }
+  .brief, .segs, .probs, .doors, .ads, .phases, .goals, .rules { grid-template-columns: 1fr; }
+  .trio { grid-template-columns: 1fr 1fr; }
+  .trio figure:last-child { display: none; }
+  .const li { grid-template-columns: 1fr; gap: 2px; }
+  .ads { max-width: 420px; }
+  .fstep { grid-template-columns: 1fr; gap: 6px; }
+  .fstep .q { grid-column: auto; }
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="moon" viewBox="0 0 24 24"><path d="M15.5 3.2A9 9 0 1 0 20.8 15 7.2 7.2 0 0 1 15.5 3.2Z" fill="#E8A33D"/><path d="M4 16.5h16" stroke="#2F5D3A" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  </defs>
+</svg>
+
+<div class="wrap">
+  <nav class="brand"><a class="rd" href="../../index.html" aria-label="Riya Desk portfolio"><span class="mono" aria-hidden="true"><span class="r">R</span><span class="d">D</span><span class="stem"></span></span><span class="rdw">Riya Desk</span></a><a class="back" href="../../index.html">&larr; Back to portfolio</a></nav>
+
+  <header class="hero">
+    <span class="label acc">Riya Desk · Advertising concept</span><span class="chip">Fictional brand</span>
+    <h1>One offer.<br>Three hooks<i>.</i></h1>
+    <p class="hook">A paid social concept for Halfmoon Tiffins, a fictional home-style lunch service for Bengaluru offices. Three ads sell the same offer through three different motivations: money, home and time.</p>
+    <p class="byline">Concept by <b>Riya</b>, founder of <b>Riya Desk</b></p>
+    <div class="trio">
+      <figure><img src="img/desk.jpg" alt="Open steel tiffin with dal, rice, sabzi and roti on an office desk"><figcaption><span>Hook A · Money</span><b>₹400 for a sad salad? Again?</b></figcaption></figure>
+      <figure><img src="img/home.jpg" alt="Steel tiffin opened at a desk with rajma chawal and roti"><figcaption><span>Hook B · Home</span><b>Tastes like someone packed it for you.</b></figcaption></figure>
+      <figure><img src="img/office.jpg" alt="Steel tiffin in a canvas tote at an office reception"><figcaption><span>Hook C · Time</span><b>Lunch: sorted before your 10 am stand-up.</b></figcaption></figure>
+    </div>
+    <div class="facts">
+      <div><span class="label acc">Brand</span><p>Halfmoon Tiffins (fictional), home-style lunch delivery</p></div>
+      <div><span class="label acc">Offer</span><p>First 5 lunches at ₹99 each</p></div>
+      <div><span class="label acc">Channel</span><p>Instagram &amp; Facebook feed and Stories</p></div>
+      <div><span class="label acc">Goal</span><p>First orders that turn into weekly plans</p></div>
+    </div>
+    <nav class="flow" aria-label="Contents">
+      <a href="#brief">Brief</a><span>→</span><a href="#audience">Audience</a><span>→</span><a href="#problem">Problem</a><span>→</span><a href="#insight">Insight</a><span>→</span><a href="#strategy">Strategy</a><span>→</span><a href="#ads">Creative</a><span>→</span><a href="#test">Test plan</a><span>→</span><a href="#measure">Measurement</a>
+    </nav>
+  </header>
+
+  <!-- 01 BRIEF -->
+  <section class="s" id="brief">
+    <div class="s-head">
+      <span class="label">01 — The brief</span>
+      <div>
+        <h2>Get strangers to try a lunch subscription.</h2>
+        <p class="purpose"><b>Purpose</b> Be clear about the one job the ads have to do.</p>
+      </div>
+    </div>
+    <div class="brief">
+      <div class="card"><span class="label acc">The business</span><h3>Home-style lunch, in steel</h3><p>Everyday North and South Indian meals, cooked fresh, delivered to office receptions by 12:30. Steel tiffins are collected the next day.</p></div>
+      <div class="card"><span class="label acc">The ask</span><h3>Launch paid social</h3><p>Three ad variations for one offer, so the team learns which reason to buy is strongest before scaling spend.</p></div>
+      <div class="card"><span class="label acc">Success looks like</span><h3>Trials that stay</h3><p>Not the cheapest click. First orders that turn into weekly plans after the trial ends.</p></div>
+    </div>
+  </section>
+
+  <!-- 02 AUDIENCE -->
+  <section class="s" id="audience">
+    <div class="s-head">
+      <span class="label">02 — Audience</span>
+      <div>
+        <h2>Same lunch, three different reasons.</h2>
+        <p class="purpose"><b>Purpose</b> Each ad targets one group, so the hook can speak to exactly what that group cares about.</p>
+      </div>
+    </div>
+    <div class="segs">
+      <div class="card seg" style="--k:var(--a)">
+        <span class="tag">Ad A</span>
+        <h3>The daily orderer</h3>
+        <p class="who">22–28, first or second job, orders lunch on a delivery app most days.</p>
+        <q>I spend so much on lunch and it&rsquo;s not even good.</q>
+        <dl><dt>Cares about</dt><dd>Price per meal, value, not feeling ripped off.</dd><dt>Reached by</dt><dd>Interest in food delivery, deals, budgeting; office areas.</dd></dl>
+      </div>
+      <div class="card seg" style="--k:var(--b)">
+        <span class="tag">Ad B</span>
+        <h3>The one who moved</h3>
+        <p class="who">24–32, moved to Bengaluru for work, lives in a PG or shared flat, misses home food.</p>
+        <q>I haven&rsquo;t had proper dal-chawal since I left home.</q>
+        <dl><dt>Cares about</dt><dd>Familiar taste, less oil, feeling looked after.</dd><dt>Reached by</dt><dd>Recently moved, home-state interests, Hindi/regional food content.</dd></dl>
+      </div>
+      <div class="card seg" style="--k:var(--c)">
+        <span class="tag">Ad C</span>
+        <h3>The lunch skipper</h3>
+        <p class="who">28–40, back-to-back meetings, often eats late, at the desk, or not at all.</p>
+        <q>By the time I think about lunch, it&rsquo;s 3 pm.</q>
+        <dl><dt>Cares about</dt><dd>Not having to decide, reliable timing, no effort.</dd><dt>Reached by</dt><dd>Job titles (managers, leads), productivity interests, tech parks.</dd></dl>
+      </div>
+    </div>
+    <p class="note">Segments are assumptions for this concept. A real project would check them with a short survey of early customers.</p>
+  </section>
+
+  <!-- 03 PROBLEM -->
+  <section class="s" id="problem">
+    <div class="s-head">
+      <span class="label">03 — Business problem</span>
+      <div>
+        <h2>Food ads all look the same.</h2>
+        <p class="purpose"><b>Purpose</b> Understand why a new lunch brand gets scrolled past.</p>
+      </div>
+    </div>
+    <div class="probs">
+      <div><span class="n">1</span><h3>The default is an app</h3><p>Ordering lunch on a delivery app is a habit. A new brand has to give a reason to break it.</p></div>
+      <div><span class="n">2</span><h3>Subscriptions feel risky</h3><p>A stranger is asked to commit to a week of food they&rsquo;ve never tasted.</p></div>
+      <div><span class="n">3</span><h3>Nobody remembers the ad</h3><p>Most food ads show a plate from above and a discount. People scroll past without noticing which brand it was.</p></div>
+    </div>
+    <div class="lookalike">
+      <div class="same" aria-hidden="true"><div><span>50% OFF</span></div><div><span>FLAT ₹100</span></div><div><span>50% OFF</span></div><div><span>BUY 1 GET 1</span></div></div>
+      <p><b>The typical food ad:</b> a plate from above, a discount badge, &ldquo;Order now&rdquo;. If you can swap the logo and nothing changes, the ad isn&rsquo;t building a brand. So these three ads each lead with a <b>human reason</b>, and the price comes second.</p>
+    </div>
+  </section>
+
+  <!-- 04 INSIGHT -->
+  <section class="s" id="insight">
+    <div class="s-head">
+      <span class="label">04 — Insight</span>
+      <div>
+        <h2>Nobody wants to decide lunch again.</h2>
+        <p class="purpose"><b>Purpose</b> Find the shared truth, then the three doors into it.</p>
+      </div>
+    </div>
+    <div class="insight">
+      <div><span class="label">The insight</span><q>Office lunch isn&rsquo;t really a food decision. It&rsquo;s a 1 pm problem people have to solve every single day.</q></div>
+      <p>Halfmoon removes that problem. But people feel it differently: some feel it in their wallet, some feel it as homesickness, some feel it as lost time. So the ads don&rsquo;t argue about food. Each one opens a different door to the same relief.</p>
+    </div>
+    <div class="doors">
+      <div style="background:var(--a)"><b>Money</b><span>&ldquo;I&rsquo;m overpaying for food I don&rsquo;t even enjoy.&rdquo;</span></div>
+      <div style="background:var(--b)"><b>Home</b><span>&ldquo;I miss food that someone made with care.&rdquo;</span></div>
+      <div style="background:var(--c)"><b>Time</b><span>&ldquo;I don&rsquo;t have the headspace to think about lunch.&rdquo;</span></div>
+    </div>
+  </section>
+
+  <!-- 05 STRATEGY -->
+  <section class="s" id="strategy">
+    <div class="s-head">
+      <span class="label">05 — Strategy</span>
+      <div>
+        <h2>Change one thing. Learn one thing.</h2>
+        <p class="purpose"><b>Purpose</b> Keep everything fixed except the hook, so the results show which reason to buy is strongest.</p>
+      </div>
+    </div>
+    <div class="const">
+      <div class="fixed"><span class="label acc">Kept the same</span><h3>So the test is fair</h3>
+        <ul><li><b>Offer</b><span>First 5 lunches at ₹99 each</span></li><li><b>Landing page</b><span>One page with the menu, delivery areas and order button</span></li><li><b>Visual system</b><span>Steel tiffin, warm light, serif headline, turmeric price pill</span></li><li><b>Format</b><span>4:5 feed image + 9:16 Story version</span></li><li><b>Budget</b><span>Split evenly across the three ads</span></li></ul></div>
+      <div class="vary"><span class="label" style="color:var(--turmeric)">Changes</span><h3>The hook</h3>
+        <ul><li><b>Ad A</b><span>Money: &ldquo;₹400 for a sad salad? Again?&rdquo;</span></li><li><b>Ad B</b><span>Home: &ldquo;Tastes like someone packed it for you.&rdquo;</span></li><li><b>Ad C</b><span>Time: &ldquo;Lunch: sorted before your 10 am stand-up.&rdquo;</span></li><li><b>Copy</b><span>Body text that supports that one reason</span></li><li><b>Image</b><span>The moment that matches the hook</span></li></ul></div>
+    </div>
+    <div class="offer"><span class="big">5 lunches · ₹99 each</span><p>Delivered to your office by 12:30. Weekly plans only start if you choose one. Steel tiffins collected the next day.</p></div>
+    <p class="note">The price is a placeholder for the concept. A real offer would be set from food cost, delivery cost and the expected trial-to-plan rate.</p>
+  </section>
+
+  <!-- 06 CREATIVE -->
+  <section class="s" id="ads">
+    <div class="s-head">
+      <span class="label">06 — Creative</span>
+      <div>
+        <h2>The three ads.</h2>
+        <p class="purpose"><b>Purpose</b> Show each ad as it would appear in the feed, and why it should work for its audience.</p>
+      </div>
+    </div>
+    <div class="ads">
+      <!-- A -->
+      <div class="ad-col" style="--k:var(--a)">
+        <div class="ad-head"><span class="letter">A</span><div><small>Hook · Money</small><b>The daily orderer</b></div></div>
+        <div class="ig" role="img" aria-label="Instagram feed ad A: '₹400 for a sad salad? Again?'">
+          <div class="ig-h"><span class="av"><svg><use href="#moon"/></svg></span><div>halfmoon.tiffins<small>Sponsored</small></div><span class="dots">•••</span></div>
+          <div class="creative"><img src="img/desk.jpg" alt=""><div class="ov top"><h4>₹400 for a sad salad?<br><i>Again?</i></h4></div><div class="ov bot"><span class="logo"><svg><use href="#moon"/></svg>Halfmoon</span><br><span class="pill">Real lunch · ₹99 for your first 5</span></div></div>
+          <div class="ig-cta"><span>Order now</span><span>Order now</span></div>
+          <p class="ig-txt"><b>halfmoon.tiffins</b> Dal, sabzi, rice, rotis and curd. Cooked this morning, delivered to your desk by 12:30. Your first 5 lunches are ₹99 each. <span class="more">… more</span></p>
+        </div>
+        <dl class="why">
+          <div><dt>Why it works</dt><dd>Names a cost they already feel every day, then shows a better lunch for less.</dd></div>
+          <div><dt>Watch out for</dt><dd>It may attract deal-seekers who leave after the ₹99 lunches. Check week-2 plans, not just orders.</dd></div>
+        </dl>
+      </div>
+      <!-- B -->
+      <div class="ad-col" style="--k:var(--b)">
+        <div class="ad-head"><span class="letter">B</span><div><small>Hook · Home</small><b>The one who moved</b></div></div>
+        <div class="ig" role="img" aria-label="Instagram feed ad B: 'Tastes like someone packed it for you.'">
+          <div class="ig-h"><span class="av"><svg><use href="#moon"/></svg></span><div>halfmoon.tiffins<small>Sponsored</small></div><span class="dots">•••</span></div>
+          <div class="creative"><img src="img/home.jpg" alt=""><div class="ov bot"><h4>Tastes like someone<br><i>packed it for you.</i></h4><span class="pill">First 5 lunches · ₹99 each</span></div></div>
+          <div class="ig-cta"><span>See this week&rsquo;s menu</span><span>Order now</span></div>
+          <p class="ig-txt"><b>halfmoon.tiffins</b> Moved to Bengaluru for work? We cook the everyday food you grew up on. Less oil, no shortcuts, packed in steel. Rajma chawal on Tuesdays. <span class="more">… more</span></p>
+        </div>
+        <dl class="why">
+          <div><dt>Why it works</dt><dd>Turns a tiffin into a feeling: being looked after. That&rsquo;s hard for a delivery app to copy.</dd></div>
+          <div><dt>Watch out for</dt><dd>Emotional ads can get likes without orders. Judge on cost per first order, not engagement.</dd></div>
+        </dl>
+      </div>
+      <!-- C -->
+      <div class="ad-col" style="--k:var(--c)">
+        <div class="ad-head"><span class="letter">C</span><div><small>Hook · Time</small><b>The lunch skipper</b></div></div>
+        <div class="ig" role="img" aria-label="Instagram feed ad C: 'Lunch: sorted before your 10 am stand-up.'">
+          <div class="ig-h"><span class="av"><svg><use href="#moon"/></svg></span><div>halfmoon.tiffins<small>Sponsored</small></div><span class="dots">•••</span></div>
+          <div class="creative"><img src="img/office.jpg" alt=""><div class="ov top"><h4>Lunch: <i>sorted.</i><br>Before your 10 am stand-up.</h4></div><div class="ov bot"><span class="pill">At reception by 12:30 · ₹99 for your first 5</span></div></div>
+          <div class="ig-cta"><span>Pick your week</span><span>Order now</span></div>
+          <p class="ig-txt"><b>halfmoon.tiffins</b> Choose your week&rsquo;s lunches in two minutes. We bring them to your office reception by 12:30 and pick up the tiffin tomorrow. Nothing to decide at 1 pm. <span class="more">… more</span></p>
+        </div>
+        <dl class="why">
+          <div><dt>Why it works</dt><dd>Sells the absence of a decision. It speaks to people who value reliability over price.</dd></div>
+          <div><dt>Watch out for</dt><dd>Only works where delivery is on time. Launch only in office areas the kitchen can reach by 12:30.</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="stories">
+      <div class="txt">
+        <span class="label acc">Stories &amp; Reels placement</span>
+        <h3 style="margin-top:12px">The hook in the first second.</h3>
+        <p>In full-screen formats people decide in a moment, so each Story opens with the hook alone, then shows the tiffin, then the offer.</p>
+        <ul><li>Second 0–1: the hook line, big, nothing else.</li><li>Second 1–4: the tiffin opening, with real food.</li><li>Second 4–6: the offer and &ldquo;Swipe up to order&rdquo;.</li></ul>
+      </div>
+      <div class="st-row">
+        <div class="story" style="--k:var(--a)"><img src="img/desk.jpg" alt="Story version of ad A"><div class="bar3"><i></i><i></i><i></i></div><div class="sx"><h5>₹400 for a sad salad? Again?</h5><span class="sw">Order now ↑</span></div></div>
+        <div class="story"><img src="img/home.jpg" alt="Story version of ad B"><div class="bar3"><i></i><i></i><i></i></div><div class="sx"><h5>Tastes like someone packed it for you.</h5><span class="sw">See the menu ↑</span></div></div>
+        <div class="story"><img src="img/office.jpg" alt="Story version of ad C"><div class="bar3"><i></i><i></i><i></i></div><div class="sx"><h5>Lunch: sorted. Before your 10 am stand-up.</h5><span class="sw">Pick your week ↑</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 TEST PLAN -->
+  <section class="s" id="test">
+    <div class="s-head">
+      <span class="label">07 — What I would test</span>
+      <div>
+        <h2>Three rounds, one question each.</h2>
+        <p class="purpose"><b>Purpose</b> Learn step by step, so every rupee of spend teaches the team something.</p>
+      </div>
+    </div>
+    <div class="phases">
+      <div class="card phase"><span class="label">Round 1</span><h3>Which hook wins?</h3><p>All three ads run to the same broad audience in office-dense areas, using a split test so each ad gets equal budget.</p><div class="setup"><b>Changes:</b> only the hook.<br><b>Decides on:</b> cost per first order.</div></div>
+      <div class="card phase"><span class="label">Round 2</span><h3>Does matching help?</h3><p>Each hook runs to the audience it was written for, against the Round 1 winner shown to that same audience.</p><div class="setup"><b>Changes:</b> audience + hook pairing.<br><b>Decides on:</b> cost per first order + week-2 plans.</div></div>
+      <div class="card phase"><span class="label">Round 3</span><h3>Make the winner better</h3><p>Keep the winning hook. Test formats: a short Reel of the tiffin being opened, a carousel of the week&rsquo;s menu, and a customer-style video once real customers exist.</p><div class="setup"><b>Changes:</b> format and visual.<br><b>Decides on:</b> cost per weekly plan.</div></div>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Ad</th><th>Hypothesis</th><th>We&rsquo;re right if…</th><th>We&rsquo;re wrong if…</th></tr></thead>
+        <tbody>
+          <tr><td><span class="dot" style="background:var(--a)"></span>A · Money</td><td>Price pain is the fastest way to a first order.</td><td>Lowest cost per first order in Round 1.</td><td>Orders come cheaply but few people choose a weekly plan.</td></tr>
+          <tr><td><span class="dot" style="background:var(--b)"></span>B · Home</td><td>Emotion builds the most loyal customers.</td><td>Highest share of trials that become weekly plans.</td><td>Lots of saves and comments, but a high cost per order.</td></tr>
+          <tr><td><span class="dot" style="background:var(--c)"></span>C · Time</td><td>Busy professionals value reliability over price.</td><td>Strong results with older, senior job titles in Round 2.</td><td>Click-through is low, because &ldquo;saving time&rdquo; feels vague for lunch.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="rules">
+      <div><h3>Set the stopping rule first</h3><p>Agree the minimum spend and number of orders per ad before the test starts, so nobody calls a winner too early.</p></div>
+      <div><h3>Change one thing at a time</h3><p>If the hook and the image both change, you can&rsquo;t tell which one made the difference.</p></div>
+      <div><h3>Don&rsquo;t pick on clicks alone</h3><p>The cheapest click can bring the least loyal customer. Follow people through to week two.</p></div>
+      <div><h3>Refresh before fatigue</h3><p>When frequency rises and results drop, rotate in a new image with the same hook.</p></div>
+    </div>
+  </section>
+
+  <!-- 08 MEASUREMENT -->
+  <section class="s" id="measure">
+    <div class="s-head">
+      <span class="label">08 — Measurement plan</span>
+      <div>
+        <h2>What I would measure.</h2>
+        <p class="purpose"><b>Purpose</b> Measure each ad all the way from the scroll to the second week.</p>
+      </div>
+    </div>
+    <div class="funnel">
+      <div class="fstep"><div class="fbar" style="width:100%">Stop the scroll</div><span class="m">3-second view rate (video) · reach &amp; frequency</span><span class="q">Does the hook make people pause?</span></div>
+      <div class="fstep"><div class="fbar" style="width:88%;background:#38406a">Click</div><span class="m">Link click-through rate · cost per click</span><span class="q">Does the hook make them curious enough to look?</span></div>
+      <div class="fstep"><div class="fbar" style="width:74%;background:var(--b)">First order</div><span class="m">Landing page conversion · cost per first order</span><span class="q">Does the offer close the deal?</span></div>
+      <div class="fstep"><div class="fbar" style="width:60%;background:var(--a)">Five lunches</div><span class="m">Lunches actually delivered and eaten · feedback</span><span class="q">Did the food live up to the ad?</span></div>
+      <div class="fstep"><div class="fbar" style="width:46%;background:var(--c)">Weekly plan</div><span class="m">Trial → weekly plan rate · cost per weekly plan</span><span class="q">The real measure: which hook brings customers who stay?</span></div>
+    </div>
+    <div class="goals">
+      <div class="card"><span class="label acc">Before launch</span><h3>Set up tracking</h3><p>Pixel and conversion events for &ldquo;first order&rdquo; and &ldquo;weekly plan&rdquo;, UTM tags per ad, and a &ldquo;How did you hear about us?&rdquo; question at checkout.</p></div>
+      <div class="card"><span class="label acc">Round 1</span><h3>Set the baseline</h3><p>No targets until there is real data. Record cost per first order for each hook as the starting point.</p></div>
+      <div class="card"><span class="label acc">After Round 2</span><h3>Scale what lasts</h3><p>Move budget to the hook with the lowest cost per weekly plan, not the lowest cost per click.</p></div>
+    </div>
+    <p class="note">This is a concept project for a fictional brand. There are no results to report, so this section sets out proposed goals and a measurement plan instead.</p>
+  </section>
+
+  <div class="sign">
+    <div><span class="label acc">Riya Desk</span><h2 style="margin-top:14px">Want ads that<br>teach you something<i>?</i></h2><p>I&rsquo;m Riya, founder of Riya Desk. I combine strategy, creativity and AI to help businesses become the brand people choose.</p></div>
+    <a class="cta" href="../../index.html">Work with me &rarr;</a>
+  </div>
+  <footer class="foot"><span class="label">Riya Desk</span><span class="label">&copy; 2026 Riya Desk · Concept project</span></footer>
+</div>
+
+</body></html>

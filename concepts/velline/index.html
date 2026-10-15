@@ -1,0 +1,532 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{box-sizing:border-box}body{margin:0;padding:0}img{max-width:100%}[hidden]{display:none!important}</style></head><body>
+<title>Velline Client Journey</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&family=Pinyon+Script&family=Bodoni+Moda:opsz,wght@6..96,400&display=swap" rel="stylesheet">
+<style>
+/* Luxury frame: espresso ground, ivory type, champagne accents, one deep green (the ribbon). Riya Desk nav and sign-off kept. */
+:root {
+  --bg: #15110E;
+  --bg-2: #1E1915;
+  --bg-3: #2A231D;
+  --ivory: #EFE7DA;
+  --muted: #A89C8B;
+  --dim: #7D7264;
+  --gold: #C8A970;
+  --gold-2: #E3CFA3;
+  --green: #1F3A2E;
+  --rose: #B9796A;
+  --rule: rgba(239, 231, 218, 0.14);
+  --serif: 'Cormorant Garamond', Didot, Georgia, serif;
+  --sans: 'Jost', 'Helvetica Neue', Arial, sans-serif;
+  --script: 'Pinyon Script', 'Snell Roundhand', cursive;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--bg); color: var(--ivory); font-family: var(--sans); font-weight: 300; -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; display: block; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-inline: clamp(16px, 5vw, 72px); }
+.label { font: 500 11px/1.3 var(--sans); letter-spacing: .28em; text-transform: uppercase; color: var(--gold); }
+.note { margin-top: 18px; font: italic 400 17px/1.5 var(--serif); color: var(--muted); max-width: 80ch; }
+.gold-rule { width: 56px; height: 1px; background: var(--gold); }
+
+/* Riya Desk nav */
+.brand { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 26px 22px; border-bottom: 1px solid var(--rule); }
+.rd { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ivory); }
+.mono { position: relative; display: inline-block; font-family: 'Bodoni Moda', Didot, Georgia, serif; line-height: 1; height: 1em; width: 1.05em; font-size: 32px; }
+.mono .r { position: absolute; left: 0; top: 0; }
+.mono .d { position: absolute; left: 0.34em; top: 0.3em; font-size: 0.78em; }
+.mono .stem { position: absolute; left: 0.47em; top: 0.72em; width: 1px; height: 0.3em; background: currentColor; }
+.mono .stem::after { content: ""; position: absolute; left: -0.06em; bottom: -0.06em; width: 0.13em; height: 0.13em; border-radius: 50%; background: currentColor; }
+.rdw { font-family: var(--serif); font-weight: 500; text-transform: uppercase; letter-spacing: 0.3em; font-size: 15px; }
+.back { font: 500 11px/1 var(--sans); letter-spacing: .22em; text-transform: uppercase; text-decoration: none; color: var(--ivory); }
+
+/* hero */
+.hero { padding-block: 64px 32px; text-align: center; display: flex; flex-direction: column; align-items: center; }
+.chip { display: inline-block; margin-top: 14px; padding: 6px 12px; border: 1px solid var(--gold); color: var(--gold); font: 500 10px/1 var(--sans); letter-spacing: .24em; text-transform: uppercase; }
+.wm { margin-top: 36px; font: 400 clamp(20px, 2.4vw, 26px)/1 var(--serif); letter-spacing: .55em; margin-right: -.55em; text-transform: uppercase; color: var(--gold-2); }
+.hero h1 { margin-top: 22px; font: 400 clamp(52px, 9vw, 128px)/0.92 var(--serif); letter-spacing: -0.02em; text-wrap: balance; }
+.hero h1 i { font-style: italic; color: var(--gold-2); }
+.hook { margin-top: 26px; max-width: 54ch; font: 300 clamp(17px, 1.8vw, 20px)/1.6 var(--sans); color: var(--muted); }
+.byline { margin-top: 18px; font: 300 15px/1.3 var(--sans); color: var(--dim); letter-spacing: .04em; }
+.byline b { color: var(--ivory); font-weight: 400; }
+.hero-img { margin-top: 48px; width: 100%; aspect-ratio: 16 / 8; overflow: hidden; position: relative; }
+.hero-img img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 55%; }
+.hero-img::after { content: ""; position: absolute; inset: 0; box-shadow: inset 0 0 0 1px rgba(200,169,112,.35); pointer-events: none; }
+.hero-img .tag { position: absolute; left: 18px; bottom: 16px; font: 500 10px/1 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: rgba(239,231,218,.75); }
+.facts { margin-top: 36px; width: 100%; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--gold); text-align: left; }
+.facts > div { padding: 18px 18px 0 0; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.facts p { font: 400 20px/1.3 var(--serif); }
+.flow { margin-top: 40px; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 6px; align-items: center; }
+.flow a { text-decoration: none; color: var(--ivory); padding: 10px 14px; border: 1px solid var(--rule); font: 400 11px/1 var(--sans); letter-spacing: .18em; text-transform: uppercase; transition: border-color .3s; }
+.flow a:hover { border-color: var(--gold); }
+.flow span { color: var(--dim); }
+
+/* sections */
+section.s { padding-top: clamp(80px, 10vw, 140px); scroll-margin-top: 20px; }
+.s-head { display: grid; grid-template-columns: 220px 1fr; gap: 32px; align-items: start; }
+.s-head .num { display: flex; flex-direction: column; gap: 14px; }
+.s-head h2 { font: 400 clamp(38px, 5vw, 68px)/1 var(--serif); letter-spacing: -0.01em; text-wrap: balance; }
+.s-head h2 i { font-style: italic; color: var(--gold-2); }
+.purpose { margin-top: 18px; max-width: 64ch; font: 300 18px/1.6 var(--sans); color: var(--muted); }
+.purpose b { font-weight: 500; color: var(--gold); letter-spacing: .2em; text-transform: uppercase; font-size: 11px; margin-right: 10px; }
+
+/* brief */
+.brief { margin-top: 44px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+.brief > div { background: var(--bg); padding: 28px; display: flex; flex-direction: column; gap: 10px; }
+.brief h3 { font: 400 26px/1.1 var(--serif); }
+.brief p { font: 300 15.5px/1.6 var(--sans); color: var(--muted); }
+
+/* personas */
+.personas { margin-top: 44px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.persona { background: var(--bg-2); padding: 32px; display: flex; flex-direction: column; gap: 16px; border-top: 1px solid var(--gold); }
+.persona h3 { font: 400 34px/1 var(--serif); }
+.persona .who { font: 300 15px/1.55 var(--sans); color: var(--muted); }
+.persona q { font: italic 400 23px/1.3 var(--serif); color: var(--gold-2); quotes: "\201C" "\201D"; }
+.persona dl { display: grid; grid-template-columns: 100px 1fr; gap: 10px 16px; }
+.persona dt { font: 500 10px/1.8 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--dim); }
+.persona dd { font: 300 15px/1.55 var(--sans); }
+
+/* journey maps */
+.map { margin-top: 44px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 0; border-top: 1px solid var(--rule); }
+.map > div { padding: 22px 16px 22px 0; display: flex; flex-direction: column; gap: 10px; border-right: 1px solid var(--rule); padding-left: 16px; }
+.map > div:first-child { padding-left: 0; }
+.map > div:last-child { border-right: 0; }
+.map .st { font: 500 10px/1 var(--sans); letter-spacing: .22em; text-transform: uppercase; color: var(--dim); }
+.map h3 { font: 400 22px/1.1 var(--serif); }
+.map p { font: 300 14px/1.55 var(--sans); color: var(--muted); }
+.map .fr { margin-top: auto; align-self: flex-start; padding: 5px 8px; border: 1px solid var(--rose); color: #E2A898; font: 500 9.5px/1.2 var(--sans); letter-spacing: .14em; text-transform: uppercase; }
+.curve { margin-top: 18px; background: var(--bg-2); padding: 22px 22px 14px; }
+.curve svg { width: 100%; height: auto; display: block; overflow: visible; }
+.curve .lg { display: flex; gap: 22px; flex-wrap: wrap; margin-top: 10px; font: 400 12px/1 var(--sans); color: var(--muted); }
+.curve .lg span { display: inline-flex; align-items: center; gap: 8px; }
+.curve .lg i { width: 22px; height: 2px; display: inline-block; }
+
+/* insight */
+.insight { margin-top: 44px; position: relative; overflow: hidden; display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 0; background: var(--green); }
+.insight .txt { padding: clamp(32px, 5vw, 64px); display: flex; flex-direction: column; justify-content: center; gap: 22px; }
+.insight q { font: italic 400 clamp(32px, 4vw, 54px)/1.08 var(--serif); quotes: "\201C" "\201D"; color: var(--ivory); }
+.insight p { font: 300 17px/1.65 var(--sans); color: rgba(239,231,218,.82); max-width: 52ch; }
+.insight .ph { position: relative; min-height: 360px; }
+.insight .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+/* principles */
+.princ { margin-top: 44px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.princ > div { border-top: 1px solid var(--gold); padding-top: 18px; display: flex; flex-direction: column; gap: 10px; }
+.princ span { font: 400 30px/1 var(--serif); color: var(--gold); font-style: italic; }
+.princ h3 { font: 400 24px/1.15 var(--serif); }
+.princ p { font: 300 14.5px/1.6 var(--sans); color: var(--muted); }
+
+/* new journey */
+.journey { margin-top: 52px; position: relative; }
+.journey::before { content: ""; position: absolute; left: 23px; top: 10px; bottom: 10px; width: 1px; background: linear-gradient(180deg, var(--gold), rgba(200,169,112,.15)); }
+.jstep { position: relative; display: grid; grid-template-columns: 48px 200px 1fr 1fr; gap: 24px; padding: 26px 0; border-bottom: 1px solid var(--rule); }
+.jstep:last-child { border-bottom: 0; }
+.jstep .dot { width: 47px; height: 47px; border-radius: 50%; border: 1px solid var(--gold); background: var(--bg); display: flex; align-items: center; justify-content: center; font: italic 400 20px/1 var(--serif); color: var(--gold-2); position: relative; z-index: 1; }
+.jstep .when { display: flex; flex-direction: column; gap: 6px; }
+.jstep .when b { font: 400 26px/1.05 var(--serif); }
+.jstep .when small { font: 500 10px/1.4 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--dim); }
+.jstep .do { font: 300 15.5px/1.6 var(--sans); }
+.jstep .do b { font-weight: 500; color: var(--gold-2); }
+.jstep .why { font: italic 400 17px/1.45 var(--serif); color: var(--muted); border-left: 1px solid var(--rule); padding-left: 20px; }
+
+/* creative / touchpoints */
+.tp { margin-top: 52px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 28px; align-items: start; }
+.tp-col { display: flex; flex-direction: column; gap: 14px; }
+.tp-col .cap { font: 300 14px/1.55 var(--sans); color: var(--muted); }
+.tp-col .cap b { display: block; font: 400 21px/1.15 var(--serif); color: var(--ivory); margin-bottom: 4px; }
+.phone { border-radius: 30px; padding: 10px; background: #000; box-shadow: 0 30px 60px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.06); }
+.screen { border-radius: 22px; overflow: hidden; background: #0f0f0f; font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; color: #f2f2f2; min-height: 470px; display: flex; flex-direction: column; }
+.sc-h { display: flex; align-items: center; gap: 10px; padding: 14px 14px 12px; border-bottom: 1px solid rgba(255,255,255,.08); font-size: 13px; font-weight: 600; }
+.sc-h .av { width: 30px; height: 30px; border-radius: 50%; background: var(--bg-3); display: flex; align-items: center; justify-content: center; font: 400 15px/1 var(--serif); color: var(--gold-2); border: 1px solid rgba(200,169,112,.5); }
+.sc-h small { display: block; font-weight: 400; font-size: 11px; color: #9a9a9a; }
+.thread { padding: 14px 12px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.msg { max-width: 84%; padding: 9px 12px; border-radius: 18px; font-size: 13px; line-height: 1.42; }
+.msg.in { align-self: flex-end; background: #3A5BFF; color: #fff; border-bottom-right-radius: 6px; }
+.msg.out { align-self: flex-start; background: #262626; border-bottom-left-radius: 6px; }
+.msg.wa-in { align-self: flex-end; background: #144d37; }
+.msg.wa-out { align-self: flex-start; background: #1f2c34; }
+.time { align-self: center; font-size: 10.5px; color: #8a8a8a; margin: 4px 0; }
+.qr { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
+.qr span { padding: 7px 11px; border-radius: 999px; border: 1px solid rgba(255,255,255,.25); font-size: 12px; }
+.paper { background: #F4EEE3; color: #2A231D; padding: 26px 24px; box-shadow: 0 30px 60px rgba(0,0,0,.45); }
+.paper .ph { font: 400 13px/1 var(--serif); letter-spacing: .5em; text-transform: uppercase; color: #8a7451; text-align: center; }
+.paper h4 { margin-top: 12px; font: italic 400 30px/1 var(--serif); text-align: center; }
+.paper .q { margin-top: 18px; display: flex; flex-direction: column; gap: 14px; }
+.paper .q > div { display: flex; flex-direction: column; gap: 7px; }
+.paper .q label { font: 500 10px/1.4 var(--sans); letter-spacing: .18em; text-transform: uppercase; color: #6f624f; }
+.paper .opts { display: flex; flex-wrap: wrap; gap: 6px; }
+.paper .opts span { padding: 6px 10px; border: 1px solid rgba(42,35,29,.25); font: 400 12.5px/1 var(--sans); }
+.paper .opts span.on { background: #2A231D; color: #F4EEE3; border-color: #2A231D; }
+.paper .line { height: 1px; background: rgba(42,35,29,.35); margin-top: 16px; }
+.paper .ln-txt { font: italic 400 16px/1.3 var(--serif); color: #4a4036; }
+.cardshot { container-type: inline-size; position: relative; aspect-ratio: 4 / 5; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,.45); }
+.cardshot img { width: 100%; height: 100%; object-fit: cover; }
+.cardshot .hand { position: absolute; left: 33%; top: 28%; width: 42%; height: 20%; transform: rotate(-1.5deg); display: flex; flex-direction: column; justify-content: center; gap: 2px; color: #3a2f25; padding: 4px 6px; }
+.cardshot .hand p { font: 400 4.3cqw/1.1 var(--script); }
+.cardshot .hand .sig { text-align: right; }
+.member { aspect-ratio: 1.586; border-radius: 14px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; color: var(--gold-2);
+  background: radial-gradient(120% 120% at 0% 0%, #2c2620 0%, #14110e 60%), #14110e; box-shadow: 0 30px 60px rgba(0,0,0,.5), inset 0 0 0 1px rgba(200,169,112,.4); position: relative; overflow: hidden; }
+.member::after { content: ""; position: absolute; inset: -40%; background: linear-gradient(115deg, transparent 42%, rgba(227,207,163,.14) 50%, transparent 58%); animation: sheen 6s ease-in-out infinite; }
+@keyframes sheen { 0%, 40% { transform: translateX(-30%); } 100% { transform: translateX(30%); } }
+.member .t { display: flex; justify-content: space-between; align-items: flex-start; position: relative; z-index: 1; }
+.member .t b { font: 400 22px/1 var(--serif); letter-spacing: .4em; text-transform: uppercase; }
+.member .t span { font: 500 9px/1.3 var(--sans); letter-spacing: .24em; text-transform: uppercase; text-align: right; }
+.member .b { position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: flex-end; }
+.member .b em { font: italic 400 20px/1 var(--serif); color: var(--ivory); }
+.member .b small { font: 400 10px/1.5 var(--sans); letter-spacing: .18em; text-transform: uppercase; color: var(--muted); text-align: right; }
+.perks { list-style: none; display: flex; flex-direction: column; gap: 0; }
+.perks li { padding: 11px 0; border-top: 1px solid var(--rule); font: 300 14.5px/1.5 var(--sans); display: grid; grid-template-columns: 22px 1fr; gap: 8px; }
+.perks li::before { content: "✦"; color: var(--gold); font-size: 11px; line-height: 2; }
+.never { margin-top: 6px; padding: 14px 16px; border: 1px solid rgba(185,121,106,.5); font: 300 14px/1.55 var(--sans); color: var(--muted); }
+.never b { color: #E2A898; font-weight: 500; }
+.tp2 { margin-top: 36px; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; }
+.prod { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 0; background: var(--bg-2); }
+.prod img { width: 100%; height: 100%; object-fit: cover; min-height: 260px; }
+.prod > div { padding: 24px; display: flex; flex-direction: column; gap: 10px; justify-content: center; }
+.prod h4 { font: 400 26px/1.1 var(--serif); }
+.prod p { font: 300 14.5px/1.6 var(--sans); color: var(--muted); }
+
+/* measurement */
+.tbl-wrap { overflow-x: auto; margin-top: 44px; }
+table { width: 100%; border-collapse: collapse; min-width: 760px; }
+th { text-align: left; font: 500 10px/1 var(--sans); letter-spacing: .22em; text-transform: uppercase; color: var(--gold); padding: 14px 16px 14px 0; border-bottom: 1px solid var(--gold); }
+td { padding: 16px 16px 16px 0; border-bottom: 1px solid var(--rule); font: 300 15px/1.5 var(--sans); vertical-align: top; color: var(--muted); }
+td:first-child { font: 400 19px/1.25 var(--serif); color: var(--ivory); white-space: nowrap; }
+td:nth-child(2) { color: var(--ivory); }
+.tests { margin-top: 36px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.tests > div { background: var(--bg-2); padding: 26px; display: flex; flex-direction: column; gap: 12px; }
+.tests h3 { font: 400 24px/1.15 var(--serif); }
+.tests .ab { display: flex; flex-direction: column; gap: 8px; }
+.tests .ab div { padding: 10px 12px; border: 1px solid var(--rule); font: 300 14px/1.45 var(--sans); }
+.tests .ab b { font: 500 10px/1 var(--sans); letter-spacing: .2em; color: var(--gold); margin-right: 8px; }
+.tests p { font: 300 14px/1.55 var(--sans); color: var(--muted); }
+.goals { margin-top: 36px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.goals > div { border-top: 1px solid var(--gold); padding-top: 18px; display: flex; flex-direction: column; gap: 10px; }
+.goals h3 { font: 400 24px/1.15 var(--serif); }
+.goals p { font: 300 15px/1.6 var(--sans); color: var(--muted); }
+
+/* sign-off */
+.sign { margin-top: clamp(90px, 11vw, 150px); padding-top: 40px; border-top: 1px solid var(--gold); display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: end; }
+.sign h2 { font: 400 clamp(44px, 6vw, 88px)/0.95 var(--serif); }
+.sign h2 i { font-style: italic; color: var(--gold-2); }
+.sign p { margin-top: 16px; max-width: 46ch; font: 300 17px/1.6 var(--sans); color: var(--muted); }
+.cta { display: inline-flex; align-items: center; gap: 12px; padding: 18px 30px; border: 1px solid var(--gold); color: var(--gold-2); text-decoration: none; font: 500 12px/1 var(--sans); letter-spacing: .24em; text-transform: uppercase; white-space: nowrap; transition: background-color .3s, color .3s; }
+.cta:hover { background: var(--gold); color: var(--bg); }
+.foot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 64px; padding-block: 22px 40px; border-top: 1px solid var(--rule); }
+.foot .label { color: var(--dim); }
+
+/* reveal */
+.rv { opacity: 0; transform: translateY(24px); transition: opacity 1s ease, transform 1.1s cubic-bezier(.22,1,.36,1); }
+.rv.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; transition: none; } .member::after { animation: none; } }
+
+@media (max-width: 1000px) {
+  .map { grid-template-columns: repeat(3, 1fr); }
+  .map > div:nth-child(3) { border-right: 0; }
+  .map > div:nth-child(4) { padding-left: 0; }
+  .map > div { border-bottom: 1px solid var(--rule); }
+  .princ { grid-template-columns: 1fr 1fr; }
+  .tp { grid-template-columns: 1fr 1fr; }
+  .jstep { grid-template-columns: 48px 1fr; }
+  .jstep .do, .jstep .why { grid-column: 2; }
+}
+@media (max-width: 760px) {
+  .s-head, .personas, .insight, .sign, .tp, .tp2, .prod, .brief, .tests, .goals { grid-template-columns: 1fr; }
+  .facts { grid-template-columns: 1fr 1fr; row-gap: 18px; }
+  .map { grid-template-columns: 1fr; }
+  .map > div { border-right: 0; padding-left: 0; }
+  .princ { grid-template-columns: 1fr; }
+  .insight .ph { min-height: 260px; order: -1; }
+  .jstep .why { border-left: 0; padding-left: 0; }
+  .tp { max-width: 380px; margin-inline: auto; }
+}
+</style>
+
+<div class="wrap">
+  <nav class="brand"><a class="rd" href="../../index.html" aria-label="Riya Desk portfolio"><span class="mono" aria-hidden="true"><span class="r">R</span><span class="d">D</span><span class="stem"></span></span><span class="rdw">Riya Desk</span></a><a class="back" href="../../index.html">&larr; Back to portfolio</a></nav>
+
+  <header class="hero">
+    <span class="label">Riya Desk · Customer journey concept</span>
+    <span class="chip">Fictional brand</span>
+    <span class="wm">Velline</span>
+    <h1>From follower<br>to <i>private client.</i></h1>
+    <p class="hook">A redesigned client journey for Velline, a fictional appointment-only hair and skin atelier in Mumbai. It turns Instagram admiration into a first booking, and a first booking into a relationship.</p>
+    <p class="byline">Concept by <b>Riya</b>, founder of <b>Riya Desk</b></p>
+    <div class="hero-img"><img src="img/suite.jpg" alt="A private salon suite with a cognac leather chair, arched brass mirror and travertine walls"><span class="tag">Concept imagery</span></div>
+    <div class="facts">
+      <div><span class="label">Brand</span><p>Velline (fictional), a private hair &amp; skin atelier</p></div>
+      <div><span class="label">Positioning</span><p>High-end, appointment-only, Mumbai</p></div>
+      <div><span class="label">Focus</span><p>Instagram interest → first visit → return visits</p></div>
+      <div><span class="label">Deliverable</span><p>Journey map, touchpoints, client programme, measurement</p></div>
+    </div>
+    <nav class="flow" aria-label="Contents">
+      <a href="#brief">Brief</a><span>·</span><a href="#audience">Audience</a><span>·</span><a href="#problem">Problem</a><span>·</span><a href="#insight">Insight</a><span>·</span><a href="#strategy">Strategy</a><span>·</span><a href="#creative">Creative</a><span>·</span><a href="#measure">Measurement</a>
+    </nav>
+  </header>
+
+  <!-- 01 BRIEF -->
+  <section class="s" id="brief">
+    <div class="s-head rv">
+      <div class="num"><span class="label">01 · The brief</span><span class="gold-rule"></span></div>
+      <div>
+        <h2>Admired online. <i>Forgotten after one visit.</i></h2>
+        <p class="purpose"><b>Purpose</b>Agree what the journey must change before designing a single touchpoint.</p>
+      </div>
+    </div>
+    <div class="brief rv">
+      <div><span class="label">The business</span><h3>A private atelier</h3><p>Four suites, senior stylists and skin specialists, by appointment only. The experience in the chair is excellent.</p></div>
+      <div><span class="label">The challenge</span><h3>Two leaks</h3><p>People admire the Instagram but rarely book. Many first-time clients enjoy their visit and then don&rsquo;t come back.</p></div>
+      <div><span class="label">The ask</span><h3>A journey worth the price</h3><p>Make every step before and after the appointment feel as considered as the appointment itself.</p></div>
+    </div>
+  </section>
+
+  <!-- 02 AUDIENCE -->
+  <section class="s" id="audience">
+    <div class="s-head rv">
+      <div class="num"><span class="label">02 · Audience</span><span class="gold-rule"></span></div>
+      <div>
+        <h2>They don&rsquo;t need a salon. <i>They need to be understood.</i></h2>
+        <p class="purpose"><b>Purpose</b>Know what a high-end client expects, and what makes them hesitate.</p>
+      </div>
+    </div>
+    <div class="personas rv">
+      <div class="persona">
+        <span class="label">Primary</span>
+        <h3>The discerning client</h3>
+        <p class="who">35–50, senior professional or business owner. Already spends well on beauty, travels, and has been let down by salons that didn&rsquo;t listen.</p>
+        <q>I&rsquo;m happy to pay. I&rsquo;m not happy to explain my hair from scratch every time.</q>
+        <dl><dt>Values</dt><dd>Expertise, privacy, being remembered, time used well.</dd><dt>Hesitates</dt><dd>When a DM gets a price list, or booking takes three calls.</dd><dt>Decides by</dt><dd>Instagram, then a trusted friend&rsquo;s recommendation.</dd></dl>
+      </div>
+      <div class="persona">
+        <span class="label">Secondary</span>
+        <h3>The occasion client</h3>
+        <p class="who">Booking for a wedding, a milestone or a visit home from abroad. A single, important appointment.</p>
+        <q>It has to be perfect, and I can&rsquo;t afford a trial that goes wrong.</q>
+        <dl><dt>Values</dt><dd>Certainty, a consultation first, a clear plan.</dd><dt>Hesitates</dt><dd>When there&rsquo;s no way to meet the stylist before the day.</dd><dt>Could become</dt><dd>A regular, if the first experience feels personal.</dd></dl>
+      </div>
+    </div>
+    <p class="note">Personas are assumptions for this concept. In a real project they would be checked through client interviews and booking data.</p>
+  </section>
+
+  <!-- 03 PROBLEM -->
+  <section class="s" id="problem">
+    <div class="s-head rv">
+      <div class="num"><span class="label">03 · Business problem</span><span class="gold-rule"></span></div>
+      <div>
+        <h2>A luxury service, <i>with an ordinary journey.</i></h2>
+        <p class="purpose"><b>Purpose</b>Map the typical journey today, and where it falls below the price point.</p>
+      </div>
+    </div>
+    <div class="map rv">
+      <div><span class="st">Discover</span><h3>Admires the feed</h3><p>Beautiful posts, but nothing says who it&rsquo;s for or what to do next.</p><span class="fr">No next step</span></div>
+      <div><span class="st">Enquire</span><h3>DMs &ldquo;price?&rdquo;</h3><p>Hours later, a PDF price list. Luxury suddenly feels transactional.</p><span class="fr">Feels like a menu</span></div>
+      <div><span class="st">Book</span><h3>Phone tag</h3><p>Two calls and several messages to find a time with the right stylist.</p><span class="fr">Effort</span></div>
+      <div><span class="st">Visit</span><h3>A great appointment</h3><p>Excellent work, but nothing is recorded about her hair, preferences or goals.</p><span class="fr">Not remembered</span></div>
+      <div><span class="st">Leave</span><h3>&ldquo;See you soon&rdquo;</h3><p>She pays and leaves. No next appointment, no aftercare plan.</p><span class="fr">No reason to return</span></div>
+      <div><span class="st">After</span><h3>Silence, then a sale</h3><p>Weeks later, a generic &ldquo;20% off&rdquo; SMS. It cheapens the brand.</p><span class="fr">Discounting</span></div>
+    </div>
+    <div class="curve rv" aria-label="Illustrative chart of how the client feels at each step, today versus the proposed journey">
+      <svg viewBox="0 0 1000 230" role="img">
+        <defs><linearGradient id="gfill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C8A970" stop-opacity=".22"/><stop offset="1" stop-color="#C8A970" stop-opacity="0"/></linearGradient></defs>
+        <line x1="0" y1="115" x2="1000" y2="115" stroke="rgba(239,231,218,.12)" stroke-dasharray="4 6"/>
+        <text x="0" y="14" fill="#7D7264" font-family="Jost" font-size="12" letter-spacing="2">DELIGHTED</text>
+        <text x="0" y="226" fill="#7D7264" font-family="Jost" font-size="12" letter-spacing="2">FRUSTRATED</text>
+        <path d="M83,70 C150,70 200,165 250,165 S350,180 417,175 S520,40 583,45 S700,150 750,150 S850,190 917,195" fill="none" stroke="#B9796A" stroke-width="2" stroke-dasharray="6 6"/>
+        <path d="M83,60 C150,60 200,50 250,48 S350,40 417,38 S520,22 583,20 S700,30 750,32 S850,22 917,18 L917,230 L83,230 Z" fill="url(#gfill)"/>
+        <path d="M83,60 C150,60 200,50 250,48 S350,40 417,38 S520,22 583,20 S700,30 750,32 S850,22 917,18" fill="none" stroke="#C8A970" stroke-width="2.5"/>
+        <g fill="#15110E" stroke="#C8A970" stroke-width="2"><circle cx="83" cy="60" r="5"/><circle cx="250" cy="48" r="5"/><circle cx="417" cy="38" r="5"/><circle cx="583" cy="20" r="5"/><circle cx="750" cy="32" r="5"/><circle cx="917" cy="18" r="5"/></g>
+        <g fill="#15110E" stroke="#B9796A" stroke-width="2"><circle cx="83" cy="70" r="4"/><circle cx="250" cy="165" r="4"/><circle cx="417" cy="175" r="4"/><circle cx="583" cy="45" r="4"/><circle cx="750" cy="150" r="4"/><circle cx="917" cy="195" r="4"/></g>
+      </svg>
+      <div class="lg"><span><i style="background:#B9796A"></i>Today</span><span><i style="background:#C8A970"></i>Proposed journey</span><span style="color:#7D7264">Illustrative, not measured data</span></div>
+    </div>
+  </section>
+
+  <!-- 04 INSIGHT -->
+  <section class="s" id="insight">
+    <div class="s-head rv">
+      <div class="num"><span class="label">04 · Insight</span><span class="gold-rule"></span></div>
+      <div>
+        <h2>What luxury clients <i>are really paying for.</i></h2>
+        <p class="purpose"><b>Purpose</b>Find the truth that every touchpoint should be built around.</p>
+      </div>
+    </div>
+    <div class="insight rv">
+      <div class="txt">
+        <span class="label">The insight</span>
+        <q>At this price, clients aren&rsquo;t paying for a haircut. They&rsquo;re paying to be known.</q>
+        <p>The chair is already excellent. What&rsquo;s missing is memory: someone who knows her hair history, her preferences and when she should come back, and who reaches out at the right moment without ever discounting.</p>
+      </div>
+      <div class="ph"><img src="img/card.jpg" alt="A cream card in a dark green ribbon box beside a fountain pen and tea"></div>
+    </div>
+  </section>
+
+  <!-- 05 STRATEGY -->
+  <section class="s" id="strategy">
+    <div class="s-head rv">
+      <div class="num"><span class="label">05 · Strategy</span><span class="gold-rule"></span></div>
+      <div>
+        <h2>Concierge, <i>not customer service.</i></h2>
+        <p class="purpose"><b>Purpose</b>Four principles, then a new journey built on them, step by step.</p>
+      </div>
+    </div>
+    <div class="princ rv">
+      <div><span>i.</span><h3>A person, not an inbox</h3><p>Every client has a named concierge who replies, books and follows up.</p></div>
+      <div><span>ii.</span><h3>Consult before you quote</h3><p>The first reply asks about her hair goals. The price comes with a plan, not a PDF.</p></div>
+      <div><span>iii.</span><h3>Remember everything</h3><p>Hair history, formulas, preferences, even her tea. Recorded once, used every visit.</p></div>
+      <div><span>iv.</span><h3>Privilege, never discounts</h3><p>Loyalty earns access (priority times, private evenings), never a lower price.</p></div>
+    </div>
+
+    <div class="journey">
+      <div class="jstep rv"><span class="dot">1</span><div class="when"><small>Discover</small><b>A feed with a door</b></div><p class="do">Posts explain expertise (&ldquo;Why your colour fades by week 6&rdquo;). Highlights for <b>The Consultation</b>, <b>The Atelier</b> and <b>Meet the Stylists</b>. Bio: &ldquo;Begin with a private consultation.&rdquo;</p><p class="why">Admiration needs an invitation, not a price.</p></div>
+      <div class="jstep rv"><span class="dot">2</span><div class="when"><small>Enquire</small><b>A concierge replies</b></div><p class="do">Within working hours, a named concierge replies, asks about her goals and offers a <b>complimentary 15-minute consultation</b>, in the atelier or by video.</p><p class="why">The first reply sets the price expectation. Make it feel like care.</p></div>
+      <div class="jstep rv"><span class="dot">3</span><div class="when"><small>Book</small><b>One private link</b></div><p class="do">Choose stylist and time in one step, then a short <b>&ldquo;Before we meet&rdquo;</b> card: hair history, goals, and how she likes her visit (quiet or conversation, tea or coffee).</p><p class="why">Every question asked now is one she won&rsquo;t answer in the chair.</p></div>
+      <div class="jstep rv"><span class="dot">4</span><div class="when"><small>Arrive</small><b>Expected</b></div><p class="do">Greeted by name. Her drink is ready. The stylist has read her card and opens with <b>her</b> goals, not a menu.</p><p class="why">Being expected is the first luxury.</p></div>
+      <div class="jstep rv"><span class="dot">5</span><div class="when"><small>Depart</small><b>The next visit, held</b></div><p class="do">Before she leaves, the stylist suggests the right return date and <b>holds that slot for 48 hours</b>. She leaves with a small aftercare set and a handwritten card.</p><p class="why">The best time to book the next visit is while she loves the result.</p></div>
+      <div class="jstep rv"><span class="dot">6</span><div class="when"><small>Day 2 &amp; week 5</small><b>Care, then a nudge</b></div><p class="do">Day 2: a personal WhatsApp from her stylist with care notes. Week 5: &ldquo;Your colour is at its best until about week 6. I&rsquo;ve kept two times for you.&rdquo;</p><p class="why">A reminder that sounds like expertise, not marketing.</p></div>
+      <div class="jstep rv"><span class="dot">7</span><div class="when"><small>Third visit</small><b>The Velline Circle</b></div><p class="do">An invitation to the private client circle: priority times, a seasonal evening at the atelier, a birthday ritual, and first access to new specialists.</p><p class="why">Loyalty rewarded with belonging, so the price never has to drop.</p></div>
+    </div>
+  </section>
+
+  <!-- 06 CREATIVE -->
+  <section class="s" id="creative">
+    <div class="s-head rv">
+      <div class="num"><span class="label">06 · Creative</span><span class="gold-rule"></span></div>
+      <div>
+        <h2>The touchpoints, <i>designed.</i></h2>
+        <p class="purpose"><b>Purpose</b>Show what the client actually sees and receives at the key moments.</p>
+      </div>
+    </div>
+    <div class="tp">
+      <div class="tp-col rv">
+        <div class="phone" role="img" aria-label="Instagram DM: a concierge replies to a price enquiry with questions and a consultation offer">
+          <div class="screen">
+            <div class="sc-h"><span class="av">V</span><div>velline.atelier<small>Concierge · Meher</small></div></div>
+            <div class="thread">
+              <span class="time">Today 7:42 pm</span>
+              <div class="msg in">Hi! How much is balayage?</div>
+              <div class="msg out">Good evening, I&rsquo;m Meher, Velline&rsquo;s concierge. Thank you for reaching out.</div>
+              <div class="msg out">Every colour is planned around your hair and the result you want, so may I ask: is this a first colour, or a refresh of existing work?</div>
+              <div class="msg out">You&rsquo;re also welcome to a complimentary 15-minute consultation with a colour specialist, here or by video, before deciding anything.</div>
+              <div class="qr"><span>Book a consultation</span><span>Ask a question</span></div>
+            </div>
+          </div>
+        </div>
+        <p class="cap"><b>The first reply</b>A named person, a question about her, and a no-pressure next step. Pricing follows with a plan.</p>
+      </div>
+      <div class="tp-col rv">
+        <div class="paper" role="img" aria-label="Pre-visit card titled 'Before we meet' with questions about hair goals and visit preferences">
+          <div class="ph">Velline</div>
+          <h4>Before we meet</h4>
+          <div class="q">
+            <div><label>What would you love from this visit?</label><div class="ln-txt">Softer, lived-in colour that grows out well.</div><div class="line"></div></div>
+            <div><label>Colour in the last 12 months?</label><div class="opts"><span>None</span><span class="on">Highlights</span><span>Box dye</span><span>Keratin</span></div></div>
+            <div><label>During your visit you prefer</label><div class="opts"><span class="on">Quiet time</span><span>Conversation</span></div></div>
+            <div><label>We&rsquo;ll have ready</label><div class="opts"><span>Coffee</span><span class="on">Green tea</span><span>Sparkling water</span></div></div>
+          </div>
+        </div>
+        <p class="cap"><b>&ldquo;Before we meet&rdquo;</b>Sent with the booking confirmation. Takes two minutes, saves fifteen in the chair, and makes her arrival feel expected.</p>
+      </div>
+      <div class="tp-col rv">
+        <div class="cardshot" role="img" aria-label="Handwritten aftercare card in a ribbon box">
+          <img src="img/card.jpg" alt="">
+          <div class="hand"><p>Ananya, cool water and two drops of oil, mid-lengths only.</p><p class="sig">Until week six, Tara</p></div>
+        </div>
+        <p class="cap"><b>The handwritten card</b>In every aftercare box: a few lines from her stylist with one personal care tip and the ideal return time.</p>
+      </div>
+    </div>
+
+    <div class="tp2">
+      <div class="tp-col rv">
+        <div class="phone" role="img" aria-label="WhatsApp message from the stylist in week five offering two held appointment times">
+          <div class="screen" style="min-height:380px">
+            <div class="sc-h"><span class="av">T</span><div>Tara · Velline<small>Business account</small></div></div>
+            <div class="thread">
+              <span class="time">Week 5 · Thu 11:05 am</span>
+              <div class="msg wa-out">Hi Ananya, it&rsquo;s Tara. Your colour will look its best until about week six, so I&rsquo;ve kept two times for a gloss and refresh:</div>
+              <div class="msg wa-out">Sat 14th · 11:00 am<br>Tue 17th · 6:30 pm<br><br>Shall I hold one for you? No rush, they&rsquo;re yours until Friday.</div>
+              <div class="qr"><span>Saturday</span><span>Tuesday</span><span>Another time</span></div>
+              <div class="msg wa-in">Saturday please! 🤍</div>
+            </div>
+          </div>
+        </div>
+        <p class="cap"><b>The week-5 note</b>From the stylist, not &ldquo;the salon&rdquo;. It sounds like expertise, gives two real options and a deadline that&rsquo;s honest.</p>
+      </div>
+      <div class="tp-col rv">
+        <div class="member" role="img" aria-label="Velline Circle private client card">
+          <div class="t"><b>Velline</b><span>The<br>Circle</span></div>
+          <div class="b"><em>Ananya R.</em><small>Private client<br>Since 2026</small></div>
+        </div>
+        <ul class="perks">
+          <li>Priority access to evening and weekend times</li>
+          <li>A seasonal private evening at the atelier</li>
+          <li>A birthday ritual: scalp treatment and blow-dry</li>
+          <li>First appointments with new specialists</li>
+        </ul>
+        <p class="never"><b>What the Circle never offers:</b> discounts. Price cuts train clients to wait for sales and quietly lower the value of every visit.</p>
+        <div class="prod">
+          <img src="img/oils.jpg" alt="Amber serum bottles on a travertine tray">
+          <div><span class="label">Aftercare set</span><h4>Taking the atelier home</h4><p>A small set chosen by her stylist for her hair, with the card. It extends the result and keeps Velline in her routine between visits.</p></div>
+        </div>
+      </div>
+    </div>
+    <p class="note rv">Names in the mock-ups (Meher, Tara, Ananya) are fictional. All imagery is concept imagery.</p>
+  </section>
+
+  <!-- 07 MEASUREMENT -->
+  <section class="s" id="measure">
+    <div class="s-head rv">
+      <div class="num"><span class="label">07 · Measurement plan</span><span class="gold-rule"></span></div>
+      <div>
+        <h2>What I would <i>measure.</i></h2>
+        <p class="purpose"><b>Purpose</b>Measure each stage of the journey, so the team knows exactly where clients are won and lost.</p>
+      </div>
+    </div>
+    <div class="tbl-wrap rv">
+      <table>
+        <thead><tr><th>Stage</th><th>Metric</th><th>What it tells us</th><th>How it&rsquo;s tracked</th></tr></thead>
+        <tbody>
+          <tr><td>Discover</td><td>Profile visits → DMs or link taps</td><td>Whether the feed invites action, not just admiration</td><td>Instagram insights, link UTM tags</td></tr>
+          <tr><td>Enquire</td><td>Reply time · enquiry → consultation rate</td><td>Whether the first reply feels like care</td><td>Concierge inbox labels</td></tr>
+          <tr><td>Book</td><td>Consultation → first appointment rate</td><td>Whether the consultation builds enough trust</td><td>Booking system, source tagged</td></tr>
+          <tr><td>Arrive</td><td>&ldquo;Before we meet&rdquo; completion rate</td><td>Whether clients engage before the visit</td><td>Form completions per booking</td></tr>
+          <tr><td>Depart</td><td>Rebooked before leaving</td><td>The strongest early sign of a returning client</td><td>Appointments booked at checkout</td></tr>
+          <tr><td>Return</td><td>Return within the ideal window · visits per year</td><td>Whether follow-ups and the week-5 note work</td><td>Booking history per client</td></tr>
+          <tr><td>Belong</td><td>Share of revenue from repeat clients · referrals</td><td>Whether Velline is building relationships, not one-off visits</td><td>Client records + &ldquo;Who referred you?&rdquo;</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tests rv">
+      <div><span class="label">Test 1</span><h3>Consultation first?</h3><div class="ab"><div><b>A</b>Offer the free consultation in the first reply</div><div><b>B</b>Offer direct booking with a stylist</div></div><p>Which leads to more first appointments, and to clients who return?</p></div>
+      <div><span class="label">Test 2</span><h3>Hold the slot?</h3><div class="ab"><div><b>A</b>Stylist holds the next slot for 48 hours</div><div><b>B</b>A reminder message only</div></div><p>Measured on rebooking and return within the ideal window.</p></div>
+      <div><span class="label">Test 3</span><h3>Does the card matter?</h3><div class="ab"><div><b>A</b>Handwritten card in the aftercare set</div><div><b>B</b>Printed care instructions</div></div><p>Measured on return rate and on mentions in reviews.</p></div>
+    </div>
+    <div class="goals rv">
+      <div><span class="label">First month</span><h3>Record the baseline</h3><p>Track today&rsquo;s journey with these metrics before changing anything. No targets without real data.</p></div>
+      <div><span class="label">Months 2–3</span><h3>Fix the two leaks</h3><p>Introduce the concierge reply and the held next slot first. They address the two biggest drop-offs.</p></div>
+      <div><span class="label">Ongoing</span><h3>Grow the Circle</h3><p>Judge success by return visits and repeat revenue, not by the number of new followers.</p></div>
+    </div>
+    <p class="note rv">This is a concept project for a fictional brand. There are no results to report, so this section sets out proposed goals and a measurement plan instead.</p>
+  </section>
+
+  <div class="sign rv">
+    <div><span class="label">Riya Desk</span><h2 style="margin-top:16px">Make every client<br><i>feel known.</i></h2><p>I&rsquo;m Riya, founder of Riya Desk. I combine strategy, creativity and AI to help businesses become the brand people choose.</p></div>
+    <a class="cta" href="../../index.html">Work with me &rarr;</a>
+  </div>
+  <footer class="foot"><span class="label">Riya Desk</span><span class="label">&copy; 2026 Riya Desk · Concept project</span></footer>
+</div>
+
+<script>
+// Gentle reveal on scroll. Content is visible without it (no JS, reduced motion, or no IntersectionObserver).
+(function () {
+  var els = document.querySelectorAll('.rv');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || !('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('in'); }); return; }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -8% 0px' });
+  els.forEach(function (e) { io.observe(e); });
+})();
+</script>
+
+</body></html>

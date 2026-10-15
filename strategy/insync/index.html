@@ -1,0 +1,520 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{box-sizing:border-box}body{margin:0;padding:0}img{max-width:100%}[hidden]{display:none!important}</style></head><body>
+<title>Insync Social Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;0,800;1,400&family=Inter:wght@400;500;600&family=Baloo+2:wght@600;800&family=Bodoni+Moda:opsz,wght@6..96,400&family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet">
+<style>
+/* Layout: Riya Desk editorial strategy document. Paper + navy ink, Insync green and coral as the only accents. */
+:root {
+  --paper: #F2EEE6;
+  --paper-2: #E9E3D8;
+  --ink: #1C2240;
+  --muted: #5A5F73;
+  --rule: rgba(28, 34, 64, 0.18);
+  --green: #0E4A40;
+  --green-2: #2F7A69;
+  --coral: #E05E66;
+  --cream: #F8ECDD;
+  --display: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif;
+  --label: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --brand: 'Baloo 2', 'Inter Tight', sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--paper); color: var(--ink); font-family: var(--display); -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; display: block; }
+a { color: var(--ink); text-underline-offset: 3px; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-inline: clamp(16px, 5vw, 72px); }
+.label { font: 600 12px/1 var(--label); letter-spacing: .2em; text-transform: uppercase; }
+.label.acc { color: var(--coral); }
+
+/* brand bar */
+.brand { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 26px 22px; border-bottom: 1px solid var(--rule); }
+.logo { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); }
+.mono { position: relative; display: inline-block; font-family: 'Bodoni Moda', Didot, Georgia, serif; line-height: 1; height: 1em; width: 1.05em; font-size: 32px; }
+.mono .r { position: absolute; left: 0; top: 0; }
+.mono .d { position: absolute; left: 0.34em; top: 0.3em; font-size: 0.78em; }
+.mono .stem { position: absolute; left: 0.47em; top: 0.72em; width: 1px; height: 0.3em; background: currentColor; }
+.mono .stem::after { content: ""; position: absolute; left: -0.06em; bottom: -0.06em; width: 0.13em; height: 0.13em; border-radius: 50%; background: currentColor; }
+.wordmark { font-family: 'Cormorant Garamond', Didot, Georgia, serif; font-weight: 500; text-transform: uppercase; letter-spacing: 0.3em; font-size: 15px; }
+.back { font: 600 12px/1 var(--label); letter-spacing: .16em; text-transform: uppercase; text-decoration: none; }
+
+/* hero */
+.hero { padding-block: 56px 32px; display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 32px 56px; align-items: end; }
+.hero h1 { font: 800 clamp(52px, 9vw, 128px)/0.9 var(--display); letter-spacing: -0.055em; text-wrap: balance; }
+.hero h1 i { font-style: normal; color: var(--coral); }
+.hook { margin-top: 24px; max-width: 34ch; font: 400 clamp(19px, 2.2vw, 27px)/1.3 var(--display); letter-spacing: -0.015em; }
+.byline { margin-top: 22px; display: flex; align-items: center; gap: 12px; font: 400 17px/1.3 var(--display); color: var(--muted); }
+.byline b { color: var(--ink); font-weight: 600; }
+.hero-logo { border-radius: 6px; overflow: hidden; aspect-ratio: 1; background: var(--cream); }
+.facts { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 2px solid var(--ink); }
+.facts div { padding: 16px 16px 0 0; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.facts p { font: 500 18px/1.3 var(--display); }
+
+/* contents */
+.toc { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 10px; }
+.toc a { text-decoration: none; padding: 10px 16px; border-radius: 999px; border: 1.5px solid var(--rule); font: 600 13px/1 var(--label); letter-spacing: .06em; }
+.toc a:hover { border-color: var(--ink); }
+
+/* sections */
+section.s { padding-top: clamp(64px, 9vw, 112px); scroll-margin-top: 20px; }
+.s-head { display: grid; grid-template-columns: 220px 1fr; gap: 32px; align-items: start; }
+.s-head h2 { font: 800 clamp(34px, 4.8vw, 62px)/0.96 var(--display); letter-spacing: -0.045em; text-wrap: balance; }
+.purpose { margin-top: 18px; display: flex; gap: 12px; align-items: baseline; max-width: 64ch; font: 400 19px/1.45 var(--display); }
+.purpose b { flex: 0 0 auto; font: 600 11px/1 var(--label); letter-spacing: .18em; text-transform: uppercase; color: #fff; background: var(--green); padding: 6px 9px; border-radius: 4px; transform: translateY(-2px); }
+.lead { margin-top: 16px; max-width: 64ch; font: 400 19px/1.5 var(--display); color: var(--muted); }
+
+/* audit */
+.audit { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 40px; }
+.panel { border-top: 2px solid var(--ink); padding-top: 18px; }
+.panel h3 { font: 600 24px/1.15 var(--display); letter-spacing: -0.02em; margin-bottom: 14px; }
+.panel ul { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+.panel li { font: 400 17px/1.5 var(--display); padding-left: 24px; position: relative; }
+.panel li b { font-weight: 600; }
+.panel.good li::before, .panel.fix li::before { position: absolute; left: 0; top: 0; font: 700 15px/1.5 var(--label); }
+.panel.good li::before { content: "+"; color: var(--green-2); }
+.panel.fix li::before { content: "!"; color: var(--coral); }
+.profile { margin-top: 32px; display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 28px; align-items: start; }
+.ig-profile { background: #fff; border-radius: 16px; padding: 22px; box-shadow: 0 12px 34px rgba(28,34,64,.08); font-family: var(--label); }
+.ig-profile .top { display: flex; align-items: center; gap: 18px; }
+.ig-profile .av { width: 78px; height: 78px; border-radius: 50%; overflow: hidden; flex: 0 0 auto; box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--coral); }
+.ig-profile .av img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.5); }
+.ig-profile .nm { font: 600 17px/1.2 var(--label); }
+.ig-profile .cat { font: 400 13px/1.3 var(--label); color: #737373; margin-top: 3px; }
+.ig-profile .bio { margin-top: 14px; font: 400 14px/1.5 var(--label); white-space: pre-line; }
+.ig-profile .lnk { color: #00376B; font-weight: 500; }
+.hl { display: flex; gap: 14px; margin-top: 16px; overflow-x: auto; }
+.hl div { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 6px; font: 400 12px/1 var(--label); }
+.hl span { width: 58px; height: 58px; border-radius: 50%; border: 1.5px solid #dbdbdb; display: flex; align-items: center; justify-content: center; font: 800 20px/1 var(--brand); color: var(--green); background: var(--cream); }
+.why { display: flex; flex-direction: column; gap: 16px; }
+.why div { border-top: 1px solid var(--rule); padding-top: 12px; }
+.why b { display: block; font: 600 17px/1.3 var(--display); margin-bottom: 4px; }
+.why p { font: 400 16px/1.5 var(--display); color: var(--muted); }
+.tbl-wrap { overflow-x: auto; margin-top: 32px; }
+table { width: 100%; border-collapse: collapse; min-width: 640px; font-family: var(--display); }
+th { text-align: left; font: 600 11px/1 var(--label); letter-spacing: .16em; text-transform: uppercase; padding: 12px 12px 12px 0; border-bottom: 2px solid var(--ink); }
+td { padding: 14px 12px 14px 0; border-bottom: 1px solid var(--rule); font: 400 16px/1.4 var(--display); vertical-align: top; }
+td.blank { color: var(--muted); font-style: italic; }
+.note { margin-top: 14px; font: italic 400 15px/1.5 var(--display); color: var(--muted); max-width: 70ch; }
+
+/* pillars */
+.pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 40px; }
+.pillar { border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.pillar .pct { font: 800 44px/1 var(--display); letter-spacing: -0.04em; }
+.pillar h3 { font: 600 22px/1.15 var(--display); letter-spacing: -0.02em; }
+.pillar p { font: 400 15px/1.5 var(--display); }
+.pillar .goal { margin-top: auto; padding-top: 12px; border-top: 1px solid currentColor; font: 600 11px/1.4 var(--label); letter-spacing: .14em; text-transform: uppercase; opacity: .85; }
+.p1 { background: var(--coral); color: #fff; }
+.p2 { background: var(--green); color: #fff; }
+.p3 { background: var(--cream); color: var(--green); }
+.p4 { background: #fff; color: var(--ink); }
+
+/* posts */
+.posts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px 24px; margin-top: 40px; }
+.post { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.ig { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 12px 34px rgba(28,34,64,.08); font-family: var(--label); }
+.ig-h { display: flex; align-items: center; gap: 10px; padding: 10px 12px; font: 600 13px/1 var(--label); }
+.ig-h .av { width: 30px; height: 30px; border-radius: 50%; overflow: hidden; box-shadow: 0 0 0 1.5px #fff, 0 0 0 3px var(--coral); }
+.ig-h .av img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.5); }
+.ig-h .dots { margin-left: auto; font: 700 16px/1 var(--label); letter-spacing: 1px; color: #262626; }
+.ig-h .sub { display: block; font: 400 11px/1 var(--label); color: #737373; margin-top: 3px; }
+.art { position: relative; aspect-ratio: 4 / 5; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 18px; text-align: center; }
+.art .tees { display: flex; gap: 6px; width: 100%; justify-content: center; }
+.art .tees img { width: 48%; mix-blend-mode: multiply; }
+.art .t1 { font: 800 30px/1 var(--brand); letter-spacing: -0.01em; }
+.art .t2 { font: 600 16px/1.25 var(--brand); }
+.art .tag { position: absolute; top: 12px; right: 12px; background: rgba(0,0,0,.55); color: #fff; border-radius: 999px; padding: 4px 9px; font: 600 11px/1 var(--label); }
+.art .mark { position: absolute; bottom: 10px; left: 0; right: 0; font: 800 14px/1 var(--brand); opacity: .75; }
+.ig-a { display: flex; gap: 14px; padding: 10px 12px 4px; align-items: center; }
+.ig-a svg { width: 22px; height: 22px; }
+.ig-a .sv { margin-left: auto; }
+.ig-c { padding: 4px 12px 14px; font: 400 13px/1.45 var(--label); }
+.ig-c b { font-weight: 600; }
+.ig-c .ht { color: #00376B; }
+.ann { display: flex; flex-direction: column; gap: 8px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: 600 11px/1 var(--label); letter-spacing: .08em; text-transform: uppercase; padding: 6px 9px; border-radius: 999px; }
+.chip.pl { background: var(--ink); color: #fff; }
+.chip.fm { border: 1.5px solid var(--rule); }
+.ann p { font: 400 15px/1.45 var(--display); }
+.ann p b { font-weight: 600; }
+.ann .tr { font-size: 13px; color: var(--muted); }
+
+/* reels */
+.reels { display: flex; flex-direction: column; gap: 40px; margin-top: 40px; }
+.reel { display: grid; grid-template-columns: 220px 1fr; gap: 32px; border-top: 2px solid var(--ink); padding-top: 24px; }
+.cover { aspect-ratio: 9 / 16; border-radius: 16px; overflow: hidden; position: relative; display: flex; flex-direction: column; justify-content: space-between; padding: 16px; color: #fff; }
+.cover .hk { font: 800 22px/1.05 var(--brand); text-shadow: 0 2px 10px rgba(0,0,0,.25); }
+.cover img { width: 78%; align-self: center; border-radius: 10px; }
+.cover .pl { font: 600 11px/1 var(--label); letter-spacing: .1em; text-transform: uppercase; opacity: .9; }
+.reel h3 { font: 800 clamp(26px, 3vw, 36px)/1 var(--display); letter-spacing: -0.03em; }
+.meta { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px 18px; font: 400 15px/1.4 var(--display); color: var(--muted); }
+.meta b { color: var(--ink); font-weight: 600; }
+.script { width: 100%; margin-top: 18px; min-width: 560px; }
+.script td:first-child { white-space: nowrap; font-variant-numeric: tabular-nums; font-weight: 600; width: 70px; }
+.script td.os { font-family: var(--brand); font-weight: 600; color: var(--green); }
+
+/* calendar */
+.cal { display: grid; grid-template-columns: repeat(7, minmax(150px, 1fr)); gap: 10px; margin-top: 40px; min-width: 1080px; }
+.cal-wrap { overflow-x: auto; padding-bottom: 8px; }
+.day { background: #fff; border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 6px 18px rgba(28,34,64,.05); }
+.day .dn { font: 800 22px/1 var(--display); letter-spacing: -0.03em; }
+.slot { border-left: 3px solid var(--green); padding-left: 10px; display: flex; flex-direction: column; gap: 3px; }
+.slot.r { border-color: var(--coral); }
+.slot.st { border-color: #C9B79F; }
+.slot .tm { font: 600 11px/1 var(--label); letter-spacing: .1em; color: var(--muted); }
+.slot .wt { font: 600 14px/1.3 var(--display); }
+.slot .pp { font: 400 13px/1.35 var(--display); color: var(--muted); }
+.legend { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 18px; font: 400 14px/1 var(--display); color: var(--muted); }
+.legend span::before { content: ""; display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 8px; vertical-align: -1px; background: var(--c); }
+
+/* sign-off */
+.sign { margin-top: clamp(72px, 10vw, 128px); display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: end; padding-top: 28px; border-top: 2px solid var(--ink); }
+.sign h2 { font: 800 clamp(40px, 6vw, 84px)/0.92 var(--display); letter-spacing: -0.05em; }
+.sign h2 i { font-style: normal; color: var(--coral); }
+.sign p { margin-top: 16px; max-width: 44ch; font: 400 19px/1.45 var(--display); color: var(--muted); }
+.cta { display: inline-flex; align-items: center; gap: 10px; padding: 18px 30px; border-radius: 999px; background: var(--ink); color: var(--paper); text-decoration: none; font: 600 14px/1 var(--label); letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; }
+.cta:hover { background: var(--green); }
+.foot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 64px; padding-block: 22px 40px; border-top: 2px solid var(--ink); }
+
+@media (max-width: 960px) {
+  .posts { grid-template-columns: 1fr 1fr; }
+  .pillars { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 760px) {
+  .hero, .s-head, .audit, .profile, .reel, .sign { grid-template-columns: 1fr; }
+  .hero-logo { max-width: 260px; }
+  .facts { grid-template-columns: 1fr 1fr; row-gap: 18px; }
+  .posts, .pillars { grid-template-columns: 1fr; }
+  .reel .cover { max-width: 220px; }
+  .reel > div:last-child { min-width: 0; overflow-x: auto; }
+}
+</style>
+
+<div class="wrap">
+  <nav class="brand"><a class="logo" href="../../index.html" aria-label="Riya Desk portfolio"><span class="mono" aria-hidden="true"><span class="r">R</span><span class="d">D</span><span class="stem"></span></span><span class="wordmark">Riya Desk</span></a><a class="back" href="../../index.html">&larr; Back to portfolio</a></nav>
+
+  <header class="hero">
+    <div>
+      <span class="label acc">Riya Desk · Social media strategy</span>
+      <h1 style="margin-top:18px">Insync<i>.</i><br>Couples, in on the joke.</h1>
+      <p class="hook">An Instagram strategy for Insync, a couple t-shirt brand built on Marathi in-jokes, made to turn &ldquo;haha, that&rsquo;s us&rdquo; into &ldquo;add both to cart&rdquo;.</p>
+      <p class="byline">Strategy by <b>Riya</b>, founder of <b>Riya Desk</b></p>
+    </div>
+    <div class="hero-logo"><img src="img/logo.jpg" alt="Insync couple t-shirts logo"></div>
+    <div class="facts">
+      <div><span class="label acc">Brand</span><p>Insync · couple t-shirts</p></div>
+      <div><span class="label acc">Platform</span><p>Instagram: posts, Reels, Stories</p></div>
+      <div><span class="label acc">Audience</span><p>Marathi-speaking couples, 22–35, and the friends who gift them</p></div>
+      <div><span class="label acc">Goal</span><p>Grow reach through shares, then turn it into pair sales</p></div>
+    </div>
+  </header>
+
+  <nav class="toc" aria-label="Contents">
+    <a href="#audit">01 Audit</a><a href="#pillars">02 Content pillars</a><a href="#posts">03 Six posts</a><a href="#reels">04 Three Reels</a><a href="#calendar">05 One-week calendar</a>
+  </nav>
+
+  <!-- 01 AUDIT -->
+  <section class="s" id="audit">
+    <div class="s-head">
+      <span class="label">01 — Account audit</span>
+      <div>
+        <h2>What Insync has, and what&rsquo;s holding it back.</h2>
+        <p class="purpose"><b>Purpose</b> Know exactly where we&rsquo;re starting, so every later piece fixes a real gap instead of guessing.</p>
+      </div>
+    </div>
+    <div class="audit">
+      <div class="panel good">
+        <h3>Strengths to build on</h3>
+        <ul>
+          <li><b>A sharp niche.</b> Marathi couple humour (नवरा / बायको, शांत नवरा / भांडखोर बायको) is specific enough to feel like it was made for you.</li>
+          <li><b>Every product is a pair.</b> Twelve designs in six matching pairs give a built-in reason to buy two, not one.</li>
+          <li><b>Made for sharing.</b> The jokes work as content on their own. People tag their partner before they ever think about buying.</li>
+          <li><b>A recognisable identity.</b> The bubbly green-and-coral logo is warm, playful and easy to repeat across every post.</li>
+        </ul>
+      </div>
+      <div class="panel fix">
+        <h3>Gaps to fix first</h3>
+        <ul>
+          <li><b>Flat mock-ups only.</b> The current product images are t-shirt mock-ups. Real couples wearing them would show fit, colour and, above all, the joke landing.</li>
+          <li><b>Mixed colours across designs.</b> Maroon, black, red, teal and cream sit side by side. Grouping them into named pairs on the grid would make the feed feel planned.</li>
+          <li><b>Marathi-only punchlines.</b> They&rsquo;re the charm, but a short English line in captions lets gifting friends and non-Marathi partners in on the joke too.</li>
+          <li><b>No clear path to buy.</b> Every post needs one obvious next step: link in bio, a pinned &ldquo;Shop the pairs&rdquo; post, or a DM keyword.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="profile">
+      <div class="ig-profile" aria-label="Recommended profile set-up">
+        <div class="top">
+          <div class="av"><img src="img/logo.jpg" alt=""></div>
+          <div><div class="nm">insync</div><div class="cat">Clothing (brand)</div></div>
+        </div>
+        <p class="bio">Couple t-shirts for जोडी that get the joke 💚
+नवरा · बायको · and everything in between
+Sold in pairs · Gift-wrapped on request
+<span class="lnk">🔗 Shop the pairs</span></p>
+        <div class="hl"><div><span>💑</span>Pairs</div><div><span>📦</span>Orders</div><div><span>🎁</span>Gifting</div><div><span>📸</span>You in it</div><div><span>📏</span>Size</div></div>
+      </div>
+      <div class="why">
+        <div><b>Recommended profile set-up</b><p>Left: how the profile should read. A first-time visitor should know in three seconds what Insync sells, who it&rsquo;s for and where to buy.</p></div>
+        <div><b>Bio</b><p>Leads with the product and the in-joke, then answers the two questions that stop people buying: &ldquo;Do I have to buy both?&rdquo; and &ldquo;Can I gift it?&rdquo;</p></div>
+        <div><b>Highlights</b><p>Pairs (the catalogue), Orders (packing and delivery proof), Gifting, You in it (customer photos) and Size (fit guide).</p></div>
+      </div>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Metric</th><th>Why it matters for Insync</th><th>Week 0 baseline</th><th>Direction</th></tr></thead>
+        <tbody>
+          <tr><td>Shares &amp; sends</td><td>The jokes travel by DM. This is the clearest sign a post is working.</td><td class="blank">From Insights</td><td>Up</td></tr>
+          <tr><td>Saves</td><td>Gift guides and pair posts get saved for later purchases.</td><td class="blank">From Insights</td><td>Up</td></tr>
+          <tr><td>Reach from non-followers</td><td>Shows Reels are finding new couples, not just existing fans.</td><td class="blank">From Insights</td><td>Up</td></tr>
+          <tr><td>Profile visits → link taps</td><td>The bridge from &ldquo;haha&rdquo; to the shop.</td><td class="blank">From Insights</td><td>Up</td></tr>
+          <tr><td>DMs with &ldquo;PAIR&rdquo;</td><td>Direct buying intent from the DM keyword in captions.</td><td class="blank">Count manually</td><td>Up</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Baselines are recorded from Instagram Insights before the first post goes live, so every week can be compared against real starting numbers.</p>
+  </section>
+
+  <!-- 02 PILLARS -->
+  <section class="s" id="pillars">
+    <div class="s-head">
+      <span class="label">02 — Content pillars</span>
+      <div>
+        <h2>Four kinds of post, each with one job.</h2>
+        <p class="purpose"><b>Purpose</b> Keep the feed varied without being random. Every post fits a pillar, and every pillar moves people one step closer to buying.</p>
+      </div>
+    </div>
+    <div class="pillars">
+      <div class="pillar p1"><span class="pct">40%</span><h3>Inside jokes</h3><p>Relatable couple moments built on the designs: the fights, the &ldquo;तू म्हणशील तसं&rdquo;, the डोकेदुखी.</p><span class="goal">Job: reach &amp; shares</span></div>
+      <div class="pillar p2"><span class="pct">30%</span><h3>Pair it up</h3><p>The products, always shown as matching pairs, with who each one is for and how they look together.</p><span class="goal">Job: consideration &amp; saves</span></div>
+      <div class="pillar p3"><span class="pct">20%</span><h3>Gift it</h3><p>Anniversaries, birthdays, Valentine&rsquo;s, Diwali and weddings: ready-made answers for &ldquo;what do I get them?&rdquo;</p><span class="goal">Job: sales</span></div>
+      <div class="pillar p4"><span class="pct">10%</span><h3>Behind the print</h3><p>Packing orders, handwritten notes, new designs in progress: the small brand behind the jokes.</p><span class="goal">Job: trust</span></div>
+    </div>
+  </section>
+
+  <!-- 03 POSTS -->
+  <section class="s" id="posts">
+    <div class="s-head">
+      <span class="label">03 — Six sample posts</span>
+      <div>
+        <h2>Real products, ready to post.</h2>
+        <p class="purpose"><b>Purpose</b> Show how the pillars look in the feed, using Insync&rsquo;s actual designs and captions written to be posted as they are.</p>
+      </div>
+    </div>
+    <div class="posts">
+
+      <div class="post">
+        <div class="ig">
+          <div class="ig-h"><span class="av"><img src="img/logo.jpg" alt=""></span><span>insync<span class="sub">Shop the pairs</span></span><span class="dots">···</span></div>
+          <div class="art" style="background:var(--cream);color:var(--green)">
+            <span class="tag">1/4</span>
+            <span class="t1">नवरा + बायको</span>
+            <div class="tees" style="margin:12px 0"><img src="img/navra.jpg" alt="Navra t-shirt"><img src="img/bayko.jpg" alt="Bayko t-shirt"></div>
+            <span class="t2" style="color:var(--coral)">Sold as a pair. Fights sold separately.</span>
+          </div>
+          <div class="ig-a"><svg viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2"><path d="M12 21s-7-4.4-9.3-8.7C1 9 3 5 6.6 5c2 0 3.4 1.1 4.4 2.5C12 6.1 13.4 5 15.4 5 19 5 21 9 19.3 12.3 17 16.6 12 21 12 21z"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.9A8 8 0 1 1 21 12z"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2"><path d="M22 3 11 13M22 3l-7 18-4-8-8-4z"/></svg><svg class="sv" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2"><path d="M19 21l-7-5-7 5V3h14z"/></svg></div>
+          <p class="ig-c"><b>insync</b> The original pair. One नवरा, one बायको, zero arguments about who wears which. 💚 Swipe for the fit on real sizes →<br>Comment <b>PAIR</b> and we&rsquo;ll DM you the link.<br><span class="ht">#insynccouples #coupletshirts #marathicouple #navrabayko</span></p>
+        </div>
+        <div class="ann"><div class="chips"><span class="chip pl">Pair it up</span><span class="chip fm">Carousel</span></div><p><b>Purpose:</b> Introduce the hero product and start the &ldquo;comment PAIR&rdquo; habit that turns interest into DMs.</p><p class="tr">नवरा = husband · बायको = wife</p></div>
+      </div>
+
+      <div class="post">
+        <div class="ig">
+          <div class="ig-h"><span class="av"><img src="img/logo.jpg" alt=""></span><span>insync</span><span class="dots">···</span></div>
+          <div class="art" style="background:#FBE3E3;color:var(--green)">
+            <span class="t2">Every couple has one</span>
+            <div class="tees" style="margin:10px 0"><img src="img/dokedukhi.jpg" alt="Dokedukhi t-shirt"><img src="img/karan.jpg" alt="Karan t-shirt"></div>
+            <span class="t1" style="font-size:24px">…and the कारण.</span>
+            <span class="mark" style="color:var(--coral)">insync</span>
+          </div>
+          <div class="ig-a"><svg viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2"><path d="M12 21s-7-4.4-9.3-8.7C1 9 3 5 6.6 5c2 0 3.4 1.1 4.4 2.5C12 6.1 13.4 5 15.4 5 19 5 21 9 19.3 12.3 17 16.6 12 21 12 21z"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.9A8 8 0 1 1 21 12z"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2"><path d="M22 3 11 13M22 3l-7 18-4-8-8-4z"/></svg><svg class="sv" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2"><path d="M19 21l-7-5-7 5V3h14z"/></svg></div>
+          <p class="ig-c"><b>insync</b> One is the डोकेदुखी. The other is the कारण. You both know who&rsquo;s who. 😌<br>Tag the कारण. We won&rsquo;t tell.<br><span class="ht">#insynccouples #marathimemes #couplegoals</span></p>
+        </div>
+        <div class="ann"><div class="chips"><span class="chip pl">Inside jokes</span><span class="chip fm">Single image</span></div><p><b>Purpose:</b> Built to be tagged and sent. Each tag puts Insync in front of a new couple for free.</p><p class="tr">डोकेदुखी = headache · कारण = the reason</p></div>
+      </div>
+
+      <div class="post">
+        <div class="ig">
+          <div class="ig-h"><span class="av"><img src="img/logo.jpg" alt=""></span><span>insync</span><span class="dots">···</span></div>
+          <div class="art" style="background:var(--green);color:#fff">
+            <span class="t1" style="font-size:26px">Which one are you?</span>
+            <div class="tees" style="margin:12px 0;gap:10px"><img src="img/shant-nawra.jpg" alt="Shant Nawra t-shirt" style="mix-blend-mode:normal;border-radius:10px;width:46%"><img src="img/bhandkhor-bayko.jpg" alt="Bhandkhor Bayko t-shirt" style="mix-blend-mode:normal;border-radius:10px;width:46%"></div>
+            <span class="t2">💬 शांत or भांडखोर? Comment below.</span>
+          </div>
+          <div class="ig-a"><svg viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2"><path d="M12 21s-7-4.4-9.3-8.7C1 9 3 5 6.6 5c2 0 3.4 1.1 4.4 2.5C12 6.1 13.4 5 15.4 5 19 5 21 9 19.3 12.3 17 16.6 12 21 12 21z"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.9A8 8 0 1 1 21 12z"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2"><path d="M22 3 11 13M22 3l-7 18-4-8-8-4z"/></svg><svg class="sv" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2"><path d="M19 21l-7-5-7 5V3h14z"/></svg></div>
+          <p class="ig-c"><b>insync</b> Be honest. Are you the शांत नवरा or the भांडखोर बायको? (Your partner is reading this, so choose wisely.) 👀<br><span class="ht">#insynccouples #shantnawra #bhandkhorbayko</span></p>
+        </div>
+        <div class="ann"><div class="chips"><span class="chip pl">Inside jokes</span><span class="chip fm">Single image</span></div><p><b>Purpose:</b> Spark comments. Couples answer for each other, and comments push the post to more people.</p><p class="tr">शांत नवरा = calm husband · भांडखोर बायको = argumentative wife</p></div>
+      </div>
+
+      <div class="post">
+        <div class="ig">
+          <div class="ig-h"><span class="av"><img src="img/logo.jpg" alt=""></span><span>insync</span><span class="dots">···</span></div>
+          <div class="art" style="background:#FFF4E6;color:var(--green)">
+            <span class="tag">1/3</span>
+            <span class="t2" style="color:var(--coral)">Every marriage, in two lines:</span>
+            <div class="tees" style="margin:10px 0"><img src="img/malkin-firayla-jaycha.jpg" alt="Malkin: Firayla jaycha? t-shirt"><img src="img/navra-tu-mhanshil-tas.jpg" alt="Navra: Tu mhanshil tas t-shirt"></div>
+            <span class="t1" style="font-size:20px">&ldquo;फिरायला जायचं?&rdquo; &rarr; &ldquo;तू म्हणशील तसं.&rdquo;</span>
+          </div>
+          <div class="ig-a"><svg viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2"><path d="M12 21s-7-4.4-9.3-8.7C1 9 3 5 6.6 5c2 0 3.4 1.1 4.4 2.5C12 6.1 13.4 5 15.4 5 19 5 21 9 19.3 12.3 17 16.6 12 21 12 21z"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.9A8 8 0 1 1 21 12z"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2"><path d="M22 3 11 13M22 3l-7 18-4-8-8-4z"/></svg><svg class="sv" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2"><path d="M19 21l-7-5-7 5V3h14z"/></svg></div>
+          <p class="ig-c"><b>insync</b> She asks. He agrees. Nobody knows where they&rsquo;re going. 🛵 Swipe for the full conversation →<br>Save this for your next &ldquo;where should we go?&rdquo;<br><span class="ht">#insynccouples #marathicouple #coupletshirts</span></p>
+        </div>
+        <div class="ann"><div class="chips"><span class="chip pl">Inside jokes</span><span class="chip fm">Carousel</span></div><p><b>Purpose:</b> A swipeable joke that earns saves and shows both tees in one story.</p><p class="tr">मालकीण: फिरायला जायचं? = Shall we go out? · नवरा: तू म्हणशील तसं = Whatever you say</p></div>
+      </div>
+
+      <div class="post">
+        <div class="ig">
+          <div class="ig-h"><span class="av"><img src="img/logo.jpg" alt=""></span><span>insync<span class="sub">Gift guide</span></span><span class="dots">···</span></div>
+          <div class="art" style="background:var(--coral);color:#fff">
+            <span class="tag">1/5</span>
+            <span class="t2">Anniversary gift guide</span>
+            <span class="t1" style="font-size:24px;margin-top:4px">For the couple who can&rsquo;t agree on a drink</span>
+            <div class="tees" style="margin-top:12px;gap:10px"><img src="img/matcha-girlie.jpg" alt="Matcha Girlie t-shirt" style="mix-blend-mode:normal;border-radius:10px;width:44%"><img src="img/coffee-guy.jpg" alt="Coffee Guy t-shirt" style="mix-blend-mode:normal;border-radius:10px;width:44%"></div>
+          </div>
+          <div class="ig-a"><svg viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2"><path d="M12 21s-7-4.4-9.3-8.7C1 9 3 5 6.6 5c2 0 3.4 1.1 4.4 2.5C12 6.1 13.4 5 15.4 5 19 5 21 9 19.3 12.3 17 16.6 12 21 12 21z"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.9A8 8 0 1 1 21 12z"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2"><path d="M22 3 11 13M22 3l-7 18-4-8-8-4z"/></svg><svg class="sv" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2"><path d="M19 21l-7-5-7 5V3h14z"/></svg></div>
+          <p class="ig-c"><b>insync</b> Matcha girlie, coffee guy, one shared love story. ☕🍵 One pair for every kind of couple. Swipe to find theirs, and save this before the anniversary sneaks up.<br>Gift-wrapping available. Link in bio.<br><span class="ht">#anniversarygift #coupletshirts #insynccouples</span></p>
+        </div>
+        <div class="ann"><div class="chips"><span class="chip pl">Gift it</span><span class="chip fm">Carousel</span></div><p><b>Purpose:</b> Catch buyers who are shopping for someone else. Each slide is one pair and one kind of couple.</p></div>
+      </div>
+
+      <div class="post">
+        <div class="ig">
+          <div class="ig-h"><span class="av"><img src="img/logo.jpg" alt=""></span><span>insync</span><span class="dots">···</span></div>
+          <div class="art" style="background:#E4F0EC;color:var(--green)">
+            <div class="tees"><img src="img/somebody.jpg" alt="Somebody t-shirt"><img src="img/somebodys-problem.jpg" alt="Somebody's Problem t-shirt"></div>
+            <span class="t1" style="font-size:24px;margin-top:10px">Everyone is somebody&rsquo;s problem.</span>
+            <span class="t2" style="color:var(--coral);margin-top:6px">Make it official.</span>
+          </div>
+          <div class="ig-a"><svg viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2"><path d="M12 21s-7-4.4-9.3-8.7C1 9 3 5 6.6 5c2 0 3.4 1.1 4.4 2.5C12 6.1 13.4 5 15.4 5 19 5 21 9 19.3 12.3 17 16.6 12 21 12 21z"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.9A8 8 0 1 1 21 12z"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2"><path d="M22 3 11 13M22 3l-7 18-4-8-8-4z"/></svg><svg class="sv" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2"><path d="M19 21l-7-5-7 5V3h14z"/></svg></div>
+          <p class="ig-c"><b>insync</b> You&rsquo;re somebody. They&rsquo;re somebody&rsquo;s problem. 🫶 Our English-language pair, for couples who joke in any language.<br>Comment <b>PAIR</b> for the link.<br><span class="ht">#insynccouples #coupletshirts #matchingoutfits</span></p>
+        </div>
+        <div class="ann"><div class="chips"><span class="chip pl">Pair it up</span><span class="chip fm">Single image</span></div><p><b>Purpose:</b> Widen the audience beyond Marathi speakers with an English pair, using the same humour and the same call to action.</p></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 REELS -->
+  <section class="s" id="reels">
+    <div class="s-head">
+      <span class="label">04 — Three Reel scripts</span>
+      <div>
+        <h2>Short, filmable, built on the joke.</h2>
+        <p class="purpose"><b>Purpose</b> Reels reach people who don&rsquo;t follow Insync yet. Each script needs only a phone, a couple and the tees.</p>
+      </div>
+    </div>
+    <div class="reels">
+
+      <div class="reel">
+        <div class="cover" style="background:var(--green)"><span class="hk">&ldquo;I bought us matching tees. He hasn&rsquo;t seen his yet.&rdquo;</span><img src="img/shant-nawra.jpg" alt=""><span class="pl">Reel 1 · Inside jokes</span></div>
+        <div>
+          <h3>The reveal</h3>
+          <div class="meta"><span><b>Length:</b> 12–15 s</span><span><b>Audio:</b> a trending comedic sound</span><span><b>Purpose:</b> reach &amp; shares</span></div>
+          <table class="script">
+            <thead><tr><th>Time</th><th>Shot</th><th>On-screen text</th></tr></thead>
+            <tbody>
+              <tr><td>0–2 s</td><td>Close-up of her, grinning, holding a folded tee behind her back.</td><td class="os">I bought us matching tees. He hasn&rsquo;t seen his yet.</td></tr>
+              <tr><td>2–5 s</td><td>She unfolds hers to camera: भांडखोर बायको.</td><td class="os">Mine 😇</td></tr>
+              <tr><td>5–9 s</td><td>She hands him his. He unfolds it: शांत नवरा. A slow, deadpan look to camera.</td><td class="os">His 😐</td></tr>
+              <tr><td>9–13 s</td><td>Both wearing them on the sofa. She smiles; he sighs and nods.</td><td class="os">Accurate? Tag the शांत one.</td></tr>
+            </tbody>
+          </table>
+          <p class="note">Caption: &ldquo;He said it&rsquo;s accurate. He didn&rsquo;t have a choice. 😌 Comment PAIR for the link.&rdquo;</p>
+        </div>
+      </div>
+
+      <div class="reel">
+        <div class="cover" style="background:var(--coral)"><span class="hk">Every Marathi marriage in 10 seconds</span><img src="img/malkin-firayla-jaycha.jpg" alt=""><span class="pl">Reel 2 · Inside jokes</span></div>
+        <div>
+          <h3>Two lines, every weekend</h3>
+          <div class="meta"><span><b>Length:</b> 10–12 s</span><span><b>Audio:</b> original dialogue, light music under it</span><span><b>Purpose:</b> saves &amp; comments</span></div>
+          <table class="script">
+            <thead><tr><th>Time</th><th>Shot</th><th>On-screen text</th></tr></thead>
+            <tbody>
+              <tr><td>0–2 s</td><td>Saturday morning. She leans into frame in the फिरायला जायचं? tee.</td><td class="os">Every Marathi marriage in 10 seconds:</td></tr>
+              <tr><td>2–4 s</td><td>She asks, deadpan: &ldquo;फिरायला जायचं?&rdquo;</td><td class="os">Shall we go out?</td></tr>
+              <tr><td>4–7 s</td><td>Cut to him on the sofa in the तू म्हणशील तसं tee: &ldquo;तू म्हणशील तसं.&rdquo;</td><td class="os">Whatever you say.</td></tr>
+              <tr><td>7–11 s</td><td>Both of them still at home, eating chakli on the sofa. Freeze frame.</td><td class="os">(They did not go out.) Save for the weekend.</td></tr>
+            </tbody>
+          </table>
+          <p class="note">Caption: &ldquo;Plans: ✅ made. Plans: ❌ followed. Which one of you says तू म्हणशील तसं? 👀&rdquo;</p>
+        </div>
+      </div>
+
+      <div class="reel">
+        <div class="cover" style="background:#B9A58A"><span class="hk">Packing your order (yes, both tees)</span><img src="img/navra.jpg" alt=""><span class="pl">Reel 3 · Behind the print</span></div>
+        <div>
+          <h3>Packing a pair</h3>
+          <div class="meta"><span><b>Length:</b> 15–20 s</span><span><b>Audio:</b> natural packing sounds (ASMR)</span><span><b>Purpose:</b> trust &amp; sales</span></div>
+          <table class="script">
+            <thead><tr><th>Time</th><th>Shot</th><th>On-screen text</th></tr></thead>
+            <tbody>
+              <tr><td>0–2 s</td><td>Top-down: two folded tees, नवरा and बायको, side by side on a table.</td><td class="os">Packing your order (yes, both tees)</td></tr>
+              <tr><td>2–8 s</td><td>Hands fold each tee, wrap them together in tissue and add a sticker.</td><td class="os">Wrapped together, like the two of you</td></tr>
+              <tr><td>8–13 s</td><td>Close-up of a handwritten note: &ldquo;Happy anniversary, from Insync 💚&rdquo;.</td><td class="os">Gift note? Just ask.</td></tr>
+              <tr><td>13–18 s</td><td>Box closed, address label on, tapped twice.</td><td class="os">On its way. Link in bio.</td></tr>
+            </tbody>
+          </table>
+          <p class="note">Caption: &ldquo;Every pair is packed together, by hand. Want a gift note inside? Add it at checkout or DM us.&rdquo;</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 05 CALENDAR -->
+  <section class="s" id="calendar">
+    <div class="s-head">
+      <span class="label">05 — One-week calendar</span>
+      <div>
+        <h2>One week, everything in its place.</h2>
+        <p class="purpose"><b>Purpose</b> Turn the plan into a rhythm the brand can keep up: reach early in the week, conversation mid-week, sales at the weekend.</p>
+      </div>
+    </div>
+    <div class="cal-wrap">
+      <div class="cal">
+        <div class="day"><span class="dn">Mon</span>
+          <div class="slot"><span class="tm">7:30 PM · POST</span><span class="wt">नवरा + बायको carousel</span><span class="pp">Open the week with the hero pair.</span></div>
+          <div class="slot st"><span class="tm">STORY</span><span class="wt">&ldquo;New week, same नवरा&rdquo;</span><span class="pp">Reshare the post with a link sticker.</span></div>
+        </div>
+        <div class="day"><span class="dn">Tue</span>
+          <div class="slot r"><span class="tm">8:00 PM · REEL</span><span class="wt">The reveal</span><span class="pp">Reach new couples.</span></div>
+          <div class="slot st"><span class="tm">STORY</span><span class="wt">Behind the shoot</span><span class="pp">Bloopers from filming.</span></div>
+        </div>
+        <div class="day"><span class="dn">Wed</span>
+          <div class="slot"><span class="tm">7:30 PM · POST</span><span class="wt">डोकेदुखी / कारण</span><span class="pp">Mid-week share bait.</span></div>
+          <div class="slot st"><span class="tm">STORY</span><span class="wt">Poll: &ldquo;Who&rsquo;s the कारण?&rdquo;</span><span class="pp">Easy interaction.</span></div>
+        </div>
+        <div class="day"><span class="dn">Thu</span>
+          <div class="slot"><span class="tm">7:30 PM · POST</span><span class="wt">Which one are you?</span><span class="pp">Drive comments.</span></div>
+          <div class="slot st"><span class="tm">STORY</span><span class="wt">Poll: शांत or भांडखोर?</span><span class="pp">Feed the debate.</span></div>
+        </div>
+        <div class="day"><span class="dn">Fri</span>
+          <div class="slot"><span class="tm">1:00 PM · POST</span><span class="wt">Two-line marriage carousel</span><span class="pp">Saved for the weekend.</span></div>
+          <div class="slot r"><span class="tm">8:00 PM · REEL</span><span class="wt">Two lines, every weekend</span><span class="pp">Ride the Friday mood.</span></div>
+        </div>
+        <div class="day"><span class="dn">Sat</span>
+          <div class="slot"><span class="tm">11:00 AM · POST</span><span class="wt">Anniversary gift guide</span><span class="pp">Catch weekend shoppers.</span></div>
+          <div class="slot st"><span class="tm">STORY</span><span class="wt">Gift guide + link sticker</span><span class="pp">Shortest path to buy.</span></div>
+        </div>
+        <div class="day"><span class="dn">Sun</span>
+          <div class="slot r"><span class="tm">6:00 PM · REEL</span><span class="wt">Packing a pair</span><span class="pp">Build trust before the week.</span></div>
+          <div class="slot"><span class="tm">8:00 PM · POST</span><span class="wt">Somebody&rsquo;s problem</span><span class="pp">Close on a broad-appeal pair.</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="legend"><span style="--c:var(--green)">Feed post</span><span style="--c:var(--coral)">Reel</span><span style="--c:#C9B79F">Story</span></div>
+    <p class="note">Posting times are a starting point for an Indian audience. After two weeks, move them to the hours Insights shows the followers are most active.</p>
+  </section>
+
+  <div class="sign">
+    <div><span class="label acc">Riya Desk</span><h2 style="margin-top:14px">Want a strategy<br>this specific<i>?</i></h2><p>I&rsquo;m Riya, founder of Riya Desk. I combine strategy, creativity and AI to help businesses become the brand people choose.</p></div>
+    <a class="cta" href="../../index.html">Work with me &rarr;</a>
+  </div>
+  <footer class="foot"><span class="label">Riya Desk</span><span class="label">&copy; 2026 Riya Desk · Social media strategy</span></footer>
+</div>
+
+</body></html>
