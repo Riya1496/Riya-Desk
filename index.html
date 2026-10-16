@@ -1770,7 +1770,9 @@ textarea.rq-input { resize: none; min-height: 86px; font-size: 22px; }
 <script>
 (function () {
   var TO = "riyapatelbusiness@gmail.com";
-  var ENDPOINT = "https://formsubmit.co/ajax/" + TO; // first submission sends FormSubmit's one-time activation email to this address
+  var FORM_KEY = ""; // FormSubmit's private code from the activation email; when set, the address isn't sent from the page
+  var ENDPOINT = "https://formsubmit.co/ajax/" + (FORM_KEY || TO); // first submission sends FormSubmit's one-time activation email to this address
+  var SHEET_URL = "https://script.google.com/macros/s/AKfycbw-Xs_36_DjZLHRP8lnQfTXEB3A-SzTD7R1SBqelopkf6T4ibDWOnc4UbeqdZAhIbVkmg/exec"; // Google Apps Script web app that adds each enquiry as a row in the Riya Desk Enquiries sheet
   var DELAY_MS = 10000;
 
   var INDUSTRIES = ["Fashion & Apparel", "Beauty & Wellness", "Food, Cafés & Restaurants", "Hospitality & Travel", "Luxury & Lifestyle", "Real Estate", "Healthcare", "Education", "Technology & SaaS", "E-commerce & Retail", "Finance & Professional Services", "Entertainment & Events", "Personal Branding", "Other"];
@@ -1971,6 +1973,7 @@ textarea.rq-input { resize: none; min-height: 86px; font-size: 22px; }
     sending = true; state.sendError = ""; render();
     var ctrl = window.AbortController ? new AbortController() : null;
     var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 15000);
+    if (SHEET_URL) fetch(SHEET_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload()) }).catch(function () {}); // copy to the sheet; email delivery doesn't depend on it
     fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify(payload()), signal: ctrl ? ctrl.signal : undefined })
       .then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { return { ok: r.ok, d: d }; }); })
       .then(function (res) {
