@@ -457,6 +457,9 @@ body.has-cursor .cursor-dot, body.has-cursor .cursor-ring { opacity: 1; }
 .ct-social small { font: 400 12px/1 var(--hero-font); letter-spacing: .02em; text-transform: none; opacity: .6; }
 .signoff-bar .sb-links { display: inline-flex; gap: 1.2rem; }
 .signoff-bar .sb-links a:hover { color: var(--gold-hi); }
+.about-ctas { display: flex; flex-direction: column; align-items: center; gap: 1.4rem; }
+.about-more { font: 500 12px/1 var(--hero-font); letter-spacing: .2em; text-transform: uppercase; color: var(--gold-hi); text-decoration: none; padding-bottom: 6px; border-bottom: 1px solid rgba(241, 226, 196, .35); transition: border-color .3s; }
+.about-more:hover { border-color: var(--gold-hi); }
 .editing .ct .edit-link { width: min(420px, 80vw); }
 @media (max-width: 520px) { .ct-social a { width: 100%; justify-content: center; } }
 
@@ -606,6 +609,7 @@ body.has-cursor .cursor-dot, body.has-cursor .cursor-ring { opacity: 1; }
   <a class="sn-logo" href="#top" aria-label="Riya Desk, back to top"><span class="mono" aria-hidden="true"><span class="r">R</span><span class="d">D</span><span class="stem"></span></span></a>
   <button type="button" class="sn-menu" id="snMenu" aria-expanded="false" aria-controls="snLinks">Menu</button>
   <ul class="sn-links" id="snLinks">
+    <li><a href="about/">About</a></li>
     <li><a href="#process">Process</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#projects">Work</a></li>
@@ -704,7 +708,7 @@ body.has-cursor .cursor-dot, body.has-cursor .cursor-ring { opacity: 1; }
     <h2 class="big-heading hero-heading" data-fade="0,0,40" data-edit="aboutTitle">About me</h2>
         <p class="anim-text" id="animText" data-edit="aboutText">I&rsquo;m Riya, founder of Riya Desk, and I help businesses become the brand people choose. With 7+ years of experience and an MBA from the UK, I get to the heart of your business challenges and combine strategy, creativity and AI to turn what makes you different into a reason customers notice, trust and buy from you.</p>
       </div>
-      <div data-fade="0.2,0,20"><span class="magnetic"><a class="btn-contact js-contact" href="#contact" data-edit="ctaLabel" data-open-enquiry>Start your story ↗</a></span></div>
+      <div class="about-ctas" data-fade="0.2,0,20"><span class="magnetic"><a class="btn-contact js-contact" href="#contact" data-edit="ctaLabel" data-open-enquiry>Start your story ↗</a></span><a class="about-more" href="about/">More about me &rarr;</a></div>
     </div>
   </section>
 
@@ -769,7 +773,7 @@ body.has-cursor .cursor-dot, body.has-cursor .cursor-ring { opacity: 1; }
       <span class="wordmark">Riya Desk</span>
       <span class="tagline" id="footTags">marketing<i>•</i>growth<i>•</i>creative<i>•</i>ai</span>
     </div>
-    <div class="signoff-bar"><span>&copy;<span data-edit="year">2026</span> <span class="js-brand">Riya Desk</span></span><span class="sb-links"><a class="js-li" href="https://www.linkedin.com/in/rp-riya-p-marketing/" target="_blank" rel="noopener">LinkedIn</a><a class="js-ig" href="https://www.instagram.com/riya_desk/" target="_blank" rel="noopener">Instagram</a><a href="#top">Back to top ↑</a></span></div>
+    <div class="signoff-bar"><span>&copy;<span data-edit="year">2026</span> <span class="js-brand">Riya Desk</span></span><span class="sb-links"><a href="about/">About</a><a class="js-li" href="https://www.linkedin.com/in/rp-riya-p-marketing/" target="_blank" rel="noopener">LinkedIn</a><a class="js-ig" href="https://www.instagram.com/riya_desk/" target="_blank" rel="noopener">Instagram</a><a href="#top">Back to top ↑</a></span></div>
   </footer>
 </main>
 
@@ -2070,6 +2074,7 @@ textarea.rq-input { resize: none; min-height: 86px; font-size: 22px; }
   setTimeout(function () { if (!ss("rq-seen") && !ss("rq-sent")) open(); }, DELAY_MS);
 
   window.RiyaDeskEnquiry = { open: open, close: close };
+  if (location.hash === "#start-your-story") setTimeout(open, 600); // "Start your story" links from other pages
 })();
 </script>
 </body>
