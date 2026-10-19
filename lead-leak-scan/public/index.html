@@ -10,223 +10,232 @@
   <div class="container">
     <!-- Header -->
     <header class="header">
-      <div class="logo">Riya Desk</div>
-      <h1>Lead Leak Scan</h1>
-      <p class="tagline">Find the gaps costing you customers. Free, 2-minute audit.</p>
+      <div class="logo-section">
+        <div class="logo-icon">🔍</div>
+        <div>
+          <div class="logo">Riya Desk</div>
+          <div class="tagline-small">Lead Leak Scan</div>
+        </div>
+      </div>
     </header>
 
     <!-- Main content -->
     <main class="main">
+      <!-- Hero section -->
       <section class="hero">
-        <h2>How many leads are you losing right now?</h2>
-        <p>Your competitors are capturing leads you should own. We'll show you exactly where.</p>
+        <div class="hero-content">
+          <h1>Your Marketing Audit in 60 Seconds</h1>
+          <p>See exactly where you're losing leads. No hidden data required.</p>
 
-        <!-- Scan form -->
-        <form id="scanForm" class="scan-form">
-          <div class="form-group">
-            <label for="businessName">Business name</label>
-            <input
-              type="text"
-              id="businessName"
-              name="businessName"
-              placeholder="e.g., Sydney Home Insurance Co."
-              required
-            >
+          <!-- Form card -->
+          <div class="form-card">
+            <form id="scanForm" class="scan-form">
+              <div class="form-field">
+                <input
+                  type="text"
+                  id="businessName"
+                  name="businessName"
+                  placeholder="Business name"
+                  required
+                >
+              </div>
+
+              <div class="form-field">
+                <input
+                  type="url"
+                  id="website"
+                  name="website"
+                  placeholder="Website URL"
+                  required
+                >
+              </div>
+
+              <div class="form-row-2">
+                <div class="form-field">
+                  <input
+                    type="text"
+                    id="city"
+                    name="city"
+                    placeholder="City"
+                    required
+                  >
+                </div>
+
+                <div class="form-field">
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Email"
+                    required
+                  >
+                </div>
+              </div>
+
+              <button type="submit" class="btn-scan">
+                <span class="btn-text">Get Free Scan</span>
+                <span class="btn-icon">→</span>
+              </button>
+
+              <p class="form-footer">Takes 60 seconds. Zero credit card needed.</p>
+            </form>
           </div>
 
-          <div class="form-group">
-            <label for="website">Website URL</label>
-            <input
-              type="url"
-              id="website"
-              name="website"
-              placeholder="https://example.com"
-              required
-            >
+          <!-- Trust badges -->
+          <div class="trust-badges">
+            <div class="badge">✓ 100% Free</div>
+            <div class="badge">✓ Instant Results</div>
+            <div class="badge">✓ No Signup</div>
           </div>
+        </div>
 
-          <div class="form-row">
-            <div class="form-group">
-              <label for="city">City</label>
-              <input
-                type="text"
-                id="city"
-                name="city"
-                placeholder="e.g., Sydney"
-                required
-              >
-            </div>
-
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="your@email.com"
-                required
-              >
-            </div>
+        <!-- Hero visuals -->
+        <div class="hero-visual">
+          <div class="visual-card critical">
+            <div class="visual-score">38</div>
+            <div class="visual-label">Critical</div>
           </div>
-
-          <!-- Additional info for AI & Reputation checks -->
-          <div class="form-divider">
-            <h4>Quick Questions (to complete the scan)</h4>
-            <p style="color: #999; font-size: 14px;">Help us check your AI visibility and reputation gap</p>
+          <div class="visual-card opportunity">
+            <div class="visual-score">58</div>
+            <div class="visual-label">Opportunity</div>
           </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="aiAppearance">How many times do you appear in ChatGPT?</label>
-              <select id="aiAppearance" name="aiAppearance">
-                <option value="0">Never</option>
-                <option value="1">1-2 times per week</option>
-                <option value="3">3-5 times per week</option>
-                <option value="6">6-10 times per week</option>
-                <option value="11">11+ times per week</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="yourRating">Your Google rating (0-5)</label>
-              <input
-                type="number"
-                id="yourRating"
-                name="yourRating"
-                min="0"
-                max="5"
-                step="0.1"
-                placeholder="e.g., 4.2"
-              >
-            </div>
+          <div class="visual-card good">
+            <div class="visual-score">79</div>
+            <div class="visual-label">Good</div>
           </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="yourReviews">Your review count</label>
-              <input
-                type="number"
-                id="yourReviews"
-                name="yourReviews"
-                min="0"
-                placeholder="e.g., 25"
-              >
-            </div>
-
-            <div class="form-group">
-              <label for="competitorRating">Top competitor's rating</label>
-              <input
-                type="number"
-                id="competitorRating"
-                name="competitorRating"
-                min="0"
-                max="5"
-                step="0.1"
-                placeholder="e.g., 4.8"
-              >
-            </div>
-          </div>
-
-          <button type="submit" class="btn btn-primary btn-large">
-            Get Your Free Scan
-          </button>
-          <p class="form-note">Takes 2 minutes. No credit card required.</p>
-        </form>
+        </div>
       </section>
 
       <!-- What we check -->
-      <section class="checks-preview">
-        <h3>What we audit</h3>
+      <section class="checks-section">
+        <h2>What We Analyze</h2>
         <div class="checks-grid">
           <div class="check-card">
             <div class="check-icon">📊</div>
-            <h4>Ad Tracking Pixels</h4>
-            <p>Are your Google, Meta, and other ad pixels firing? Can you track conversions?</p>
+            <h3>Ad Tracking</h3>
+            <p>Are your pixels set up to track conversions?</p>
           </div>
 
           <div class="check-card">
             <div class="check-icon">🤖</div>
-            <h4>AI Visibility</h4>
-            <p>When customers ask ChatGPT for your service in your city, do they see you?</p>
+            <h3>AI Visibility</h3>
+            <p>Do you appear when customers ask ChatGPT?</p>
           </div>
 
           <div class="check-card">
             <div class="check-icon">📋</div>
-            <h4>Lead Capture</h4>
-            <p>How easy is it for customers to contact you? Forms, phone, scheduling?</p>
+            <h3>Lead Capture</h3>
+            <p>How easy is it for customers to contact you?</p>
           </div>
 
           <div class="check-card">
             <div class="check-icon">⭐</div>
-            <h4>Reputation vs. Competitors</h4>
-            <p>How do your Google ratings and reviews stack up against local competition?</p>
+            <h3>Reputation</h3>
+            <p>How do your reviews compare to competitors?</p>
           </div>
         </div>
       </section>
 
-      <!-- Sample result preview -->
-      <section class="sample-result">
-        <h3>Example: What you'll get</h3>
-        <div class="result-preview">
-          <div class="score-display">
-            <div class="score-circle">
-              <span class="score-number">42</span>
-              <span class="score-label">/100</span>
-            </div>
-            <div class="score-status critical">
-              CRITICAL FINDINGS
-            </div>
+      <!-- Sample results preview -->
+      <section class="preview-section">
+        <h2>Example Report</h2>
+        <div class="preview-card">
+          <div class="preview-score critical">
+            <div class="score-big">38</div>
+            <div class="score-label">Critical</div>
           </div>
 
-          <div class="findings-preview">
-            <div class="finding-card">
+          <div class="preview-findings">
+            <div class="finding">
               <h4>Found 0 of 7 tracking pixels</h4>
-              <ul>
-                <li><strong>Why it matters:</strong> You can't track which ads convert</li>
-                <li><strong>Panic hook:</strong> Your competitor has Meta Pixel + GA4. You're flying blind.</li>
-              </ul>
+              <p>You're spending $500-2,000/month on ads blind. Your competitor has Meta Pixel + GA4 configured.</p>
             </div>
 
-            <div class="finding-card">
+            <div class="finding">
               <h4>41% of leads arrive after hours</h4>
-              <ul>
-                <li><strong>Why it matters:</strong> First reply wins. You're responding in 3+ hours.</li>
-                <li><strong>Panic hook:</strong> Sydney customers expect 5-minute replies. You're losing them.</li>
-              </ul>
+              <p>First reply wins. Sydney customers expect 5-minute responses. You're losing them.</p>
             </div>
 
-            <div class="finding-card">
-              <h4>Your contact form has 8 fields</h4>
-              <ul>
-                <li><strong>Why it matters:</strong> Each field above 4 loses 15-25% of inquiries</li>
-                <li><strong>Panic hook:</strong> Competitor only has 3 fields. They convert more per click.</li>
-              </ul>
+            <div class="finding">
+              <h4>Your form has 8 fields</h4>
+              <p>Each field above 4 costs 15-25% of inquiries. Competitors use 3 and convert 2x more.</p>
             </div>
           </div>
 
-          <div class="result-cta">
-            <p><strong>These gaps are fixable in 2-4 weeks.</strong></p>
-            <button class="btn btn-secondary">Let's discuss your situation</button>
+          <div class="preview-cta">
+            <p>These gaps are fixable in 2-4 weeks.</p>
+            <button class="btn-secondary">Discuss your situation</button>
           </div>
         </div>
       </section>
 
-      <!-- Trust signals -->
-      <section class="trust">
-        <h3>How it works</h3>
-        <ol class="steps">
-          <li><strong>You enter your details</strong> — business name, website, city, email</li>
-          <li><strong>We scan your site</strong> — checks 4 critical areas in 2 minutes</li>
-          <li><strong>You see results immediately</strong> — specific gaps + why they matter</li>
-          <li><strong>Schedule a chat</strong> — we discuss fixes and quote you properly</li>
-        </ol>
+      <!-- How it works -->
+      <section class="how-it-works">
+        <h2>How It Works</h2>
+        <div class="steps-visual">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>Share Your Details</h3>
+            <p>Business name, website, city, email</p>
+          </div>
+
+          <div class="arrow">→</div>
+
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>We Analyze</h3>
+            <p>Scan your site, check visibility, compare competitors</p>
+          </div>
+
+          <div class="arrow">→</div>
+
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>Get Results</h3>
+            <p>See your score and exactly what to fix</p>
+          </div>
+
+          <div class="arrow">→</div>
+
+          <div class="step">
+            <div class="step-number">4</div>
+            <h3>Book a Chat</h3>
+            <p>Discuss how we can implement fixes</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="faq-section">
+        <h2>Questions?</h2>
+        <div class="faq-grid">
+          <div class="faq-item">
+            <h4>Is my data safe?</h4>
+            <p>Yes. We analyze your website like any visitor would. No sensitive data stored.</p>
+          </div>
+
+          <div class="faq-item">
+            <h4>Do you use my data for anything else?</h4>
+            <p>No. We only use it to create your report and suggest fixes.</p>
+          </div>
+
+          <div class="faq-item">
+            <h4>Will you charge me later?</h4>
+            <p>No. The scan is free. You only pay if you decide to fix the gaps.</p>
+          </div>
+
+          <div class="faq-item">
+            <h4>How fast is this?</h4>
+            <p>60 seconds. We analyze your site instantly and show results immediately.</p>
+          </div>
+        </div>
       </section>
     </main>
 
     <!-- Footer -->
     <footer class="footer">
       <p>&copy; 2026 Riya Desk. All rights reserved.</p>
-      <p><a href="#">Privacy Policy</a> • <a href="#">Terms</a></p>
+      <p><a href="#">Privacy</a> • <a href="#">Terms</a></p>
     </footer>
   </div>
 
