@@ -1,0 +1,199 @@
+{
+  "findings": {
+    "criticalBand": [
+      {
+        "id": "pixel_audit_critical",
+        "title": "Found 0 of 7 tracking pixels on your website",
+        "band": "critical",
+        "findings": [
+          {
+            "title": "Why It Matters",
+            "items": [
+              "You can't track which Google/Meta ads actually convert",
+              "You're spending ~$500-1,000/month on ads with zero visibility into ROI"
+            ]
+          },
+          {
+            "title": "Panic Hook",
+            "items": [
+              "Your competitor has Meta Pixel + GA4 properly configured",
+              "They optimize their ad spend. You're flying blind."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "response_time_critical",
+        "title": "41% of your leads arrive after hours",
+        "band": "critical",
+        "findings": [
+          {
+            "title": "Why It Matters",
+            "items": [
+              "Leads contact multiple agents; first reply wins",
+              "Your median first response is 3 hours 40 minutes"
+            ]
+          },
+          {
+            "title": "Panic Hook",
+            "items": [
+              "[CITY] customers expect replies within 5 minutes",
+              "They're contacting competitors who text back instantly"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "form_friction_critical",
+        "title": "Your contact form has 8 fields",
+        "band": "critical",
+        "findings": [
+          {
+            "title": "Why It Matters",
+            "items": [
+              "Industry standard is 3-4 fields. You have 8.",
+              "Each extra field loses 15-25% of potential inquiries"
+            ]
+          },
+          {
+            "title": "Panic Hook",
+            "items": [
+              "Competitors with 3-field forms convert 2x more per click",
+              "People are abandoning your form halfway through"
+            ]
+          }
+        ]
+      }
+    ],
+    "opportunityBand": [
+      {
+        "id": "channel_concentration",
+        "title": "Your best lead source brings 9 of 19 policies",
+        "band": "opportunity",
+        "findings": [
+          {
+            "title": "Why It Matters",
+            "items": [
+              "You're dependent on one channel—Google search",
+              "One algorithm change tanks your entire lead flow"
+            ]
+          },
+          {
+            "title": "Panic Hook",
+            "items": [
+              "Competitor B gets 40% from referrals and AI answers",
+              "One Google update, and they win. You lose."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "quote_follow_up",
+        "title": "32 quotes went quiet. 80% were just emailed.",
+        "band": "opportunity",
+        "findings": [
+          {
+            "title": "Why It Matters",
+            "items": [
+              "You paid for those quotes—they're wasted without follow-up",
+              "Agents who call every quote bind 45%. You bind 37%."
+            ]
+          },
+          {
+            "title": "Panic Hook",
+            "items": [
+              "You built a fast response system but aren't using it",
+              "That's 8+ lost policies per month from bad follow-up"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ai_visibility_gap",
+        "title": "You're named in 3 of 20 AI answers. Competitor A is in 11.",
+        "band": "opportunity",
+        "findings": [
+          {
+            "title": "Why It Matters",
+            "items": [
+              "46% of your market asks AI before Google",
+              "You win some questions, lose others to competitors"
+            ]
+          },
+          {
+            "title": "Panic Hook",
+            "items": [
+              "When people ask 'cheap auto insurance in [CITY]', they get Competitor A",
+              "That's 2-3 lost leads per week to someone doing AI better"
+            ]
+          }
+        ]
+      }
+    ],
+    "goodBand": [
+      {
+        "id": "ai_dominance",
+        "title": "You're named in 8 of 20 AI answers",
+        "band": "good",
+        "findings": [
+          {
+            "title": "Why It Matters",
+            "items": [
+              "You dominate 'best agent in [CITY]' question",
+              "Organic channels bring higher-intent leads; you get free visibility"
+            ]
+          },
+          {
+            "title": "Competitive Moat",
+            "items": [
+              "Your referral rate is 28% of new business",
+              "Competitor B is stealing them through marketing outreach"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "google_search_roi",
+        "title": "Google search brings 9 policies/month at $84 CPC",
+        "band": "good",
+        "findings": [
+          {
+            "title": "Why It Matters",
+            "items": [
+              "You've cracked the machine that works",
+              "ROI is 8.2x on every dollar spent. Scale it."
+            ]
+          },
+          {
+            "title": "Opportunity",
+            "items": [
+              "Competitor C is still figuring out Meta",
+              "Double your Google budget and they scramble"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "response_speed_advantage",
+        "title": "97% of your leads get a reply in under 60 seconds",
+        "band": "good",
+        "findings": [
+          {
+            "title": "Why It Matters",
+            "items": [
+              "You've automated something competitors do manually",
+              "That's a competitive moat—15-20 extra policies per month"
+            ]
+          },
+          {
+            "title": "Your Advantage",
+            "items": [
+              "Competitor A averages 4 hours. Your bind rate shows it.",
+              "Defend this. It's your biggest edge."
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

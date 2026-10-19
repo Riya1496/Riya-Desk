@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Lead Leak Scan Results</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .results-container {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      margin-bottom: 40px;
+    }
+
+    .result-header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    .result-header h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .result-header p {
+      font-size: 16px;
+      color: #666;
+    }
+
+    .business-info {
+      background: #f9f9f9;
+      padding: 15px 20px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    .business-info strong {
+      color: #1a1a1a;
+    }
+
+    /* Score and band */
+    .score-section {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 40px;
+      align-items: center;
+      margin-bottom: 40px;
+      padding: 30px;
+      background: #f9f9f9;
+      border-radius: 8px;
+    }
+
+    .score-large {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+    }
+
+    .score-large.critical {
+      background: linear-gradient(135deg, #ff6b6b 0%, #ff8787 100%);
+    }
+
+    .score-large.opportunity {
+      background: linear-gradient(135deg, #f39c12 0%, #f5a623 100%);
+    }
+
+    .score-large.good {
+      background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+    }
+
+    .score-number-large {
+      font-size: 60px;
+      line-height: 1;
+    }
+
+    .score-label-large {
+      font-size: 16px;
+      opacity: 0.95;
+      margin-top: 5px;
+    }
+
+    .band-text h3 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: #1a1a1a;
+    }
+
+    .band-text p {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 15px;
+    }
+
+    /* Findings */
+    .findings-section {
+      margin-bottom: 40px;
+    }
+
+    .findings-section h2 {
+      font-size: 22px;
+      margin-bottom: 25px;
+      color: #1a1a1a;
+    }
+
+    .finding-item {
+      background: #f9f9f9;
+      padding: 25px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      border-left: 4px solid;
+    }
+
+    .finding-item.critical {
+      border-left-color: #ff6b6b;
+    }
+
+    .finding-item.opportunity {
+      border-left-color: #f39c12;
+    }
+
+    .finding-item.good {
+      border-left-color: #27ae60;
+    }
+
+    .finding-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 15px;
+    }
+
+    .finding-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .finding-section {
+      font-size: 14px;
+    }
+
+    .finding-section h4 {
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 8px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #666;
+    }
+
+    .finding-section ul {
+      list-style: none;
+      margin: 0;
+    }
+
+    .finding-section li {
+      padding: 6px 0;
+      color: #555;
+      line-height: 1.5;
+    }
+
+    /* CTA section */
+    .cta-section {
+      background: linear-gradient(135deg, #f0f7ff 0%, #e8f4ff 100%);
+      padding: 40px;
+      border-radius: 12px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .cta-section h2 {
+      font-size: 24px;
+      margin-bottom: 15px;
+      color: #1a1a1a;
+    }
+
+    .cta-section p {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 25px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .band-selector {
+      margin-bottom: 40px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .band-selector button {
+      padding: 10px 20px;
+      border: 2px solid #ddd;
+      background: white;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .band-selector button.active {
+      background: #0066cc;
+      color: white;
+      border-color: #0066cc;
+    }
+
+    @media (max-width: 768px) {
+      .score-section {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .finding-body {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+      }
+
+      .cta-buttons .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="logo">Riya Desk</div>
+      <h1>Lead Leak Scan Results</h1>
+    </header>
+
+    <main class="main">
+      <!-- Band selector -->
+      <div class="band-selector">
+        <button class="active" onclick="showBand('critical')">0-40: Critical</button>
+        <button onclick="showBand('opportunity')">40-70: Opportunity</button>
+        <button onclick="showBand('good')">70+: Excellent</button>
+      </div>
+
+      <div class="results-container">
+        <!-- Result header -->
+        <div class="result-header">
+          <h1>Your Lead Leak Scan Results</h1>
+          <div class="business-info">
+            <strong>Business:</strong> Example Insurance Co. | <strong>Location:</strong> Sydney | <strong>Scanned:</strong> Today at 2:30 PM
+          </div>
+          <p>We found specific gaps that are costing you leads. Here's what's happening and what to do about it.</p>
+        </div>
+
+        <!-- CRITICAL BAND (0-40) -->
+        <div id="critical-band" class="band-content">
+          <div class="score-section">
+            <div class="score-large critical">
+              <div class="score-number-large">38</div>
+              <div class="score-label-large">/100</div>
+            </div>
+            <div class="band-text">
+              <h3>Critical Findings</h3>
+              <p>You're losing leads to fixable gaps. These 3 issues are costing you customers every day.</p>
+              <p><strong>Timeline:</strong> Most of these can be fixed in 2-4 weeks.</p>
+            </div>
+          </div>
+
+          <div class="findings-section">
+            <h2>What We Found</h2>
+
+            <!-- Finding 1 -->
+            <div class="finding-item critical">
+              <div class="finding-title">Found 0 of 7 tracking pixels on your website</div>
+              <div class="finding-body">
+                <div class="finding-section">
+                  <h4>Why It Matters</h4>
+                  <ul>
+                    <li>You can't track which Google/Meta ads actually convert</li>
+                    <li>You're spending ~$500-1,000/month on ads with zero visibility into ROI</li>
+                  </ul>
+                </div>
+                <div class="finding-section">
+                  <h4>Panic Hook</h4>
+                  <ul>
+                    <li>Your competitor has Meta Pixel + GA4 properly configured</li>
+                    <li>They optimize their ad spend. You're flying blind.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Finding 2 -->
+            <div class="finding-item critical">
+              <div class="finding-title">41% of your leads arrive after hours</div>
+              <div class="finding-body">
+                <div class="finding-section">
+                  <h4>Why It Matters</h4>
+                  <ul>
+                    <li>Leads contact multiple agents; first reply wins</li>
+                    <li>Your median first response is 3 hours 40 minutes</li>
+                  </ul>
+                </div>
+                <div class="finding-section">
+                  <h4>Panic Hook</h4>
+                  <ul>
+                    <li>Sydney customers expect replies within 5 minutes</li>
+                    <li>They're contacting competitors who text back instantly</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Finding 3 -->
+            <div class="finding-item critical">
+              <div class="finding-title">Your contact form has 8 fields</div>
+              <div class="finding-body">
+                <div class="finding-section">
+                  <h4>Why It Matters</h4>
+                  <ul>
+                    <li>Industry standard is 3-4 fields. You have 8.</li>
+                    <li>Each extra field loses 15-25% of potential inquiries</li>
+                  </ul>
+                </div>
+                <div class="finding-section">
+                  <h4>Panic Hook</h4>
+                  <ul>
+                    <li>Competitors with 3-field forms convert 2x more per click</li>
+                    <li>People are abandoning your form halfway through</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cta-section">
+            <h2>These gaps are fixable in 2-4 weeks.</h2>
+            <p>We can help you add proper tracking, improve your response time, and simplify your lead capture. Let's discuss your situation and get a proper quote based on your needs.</p>
+            <div class="cta-buttons">
+              <button class="btn btn-primary btn-large">Schedule Free Consultation</button>
+              <button class="btn btn-secondary">Email My Results</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- OPPORTUNITY BAND (40-70) -->
+        <div id="opportunity-band" class="band-content" style="display: none;">
+          <div class="score-section">
+            <div class="score-large opportunity">
+              <div class="score-number-large">58</div>
+              <div class="score-label-large">/100</div>
+            </div>
+            <div class="band-text">
+              <h3>Strategic Opportunities</h3>
+              <p>You're competitive, but leaving money on the table. Here are the gaps that matter most.</p>
+              <p><strong>Timeline:</strong> These changes unlock 15-20% more policies from the same ad spend.</p>
+            </div>
+          </div>
+
+          <div class="findings-section">
+            <h2>What We Found</h2>
+
+            <!-- Finding 1 -->
+            <div class="finding-item opportunity">
+              <div class="finding-title">Your best lead source brings 9 of 19 policies</div>
+              <div class="finding-body">
+                <div class="finding-section">
+                  <h4>Why It Matters</h4>
+                  <ul>
+                    <li>You're dependent on one channel—Google search</li>
+                    <li>One algorithm change tanks your entire lead flow</li>
+                  </ul>
+                </div>
+                <div class="finding-section">
+                  <h4>Panic Hook</h4>
+                  <ul>
+                    <li>Competitor B gets 40% from referrals and AI answers</li>
+                    <li>One Google update, and they win. You lose.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Finding 2 -->
+            <div class="finding-item opportunity">
+              <div class="finding-title">32 quotes went quiet. 80% were just emailed.</div>
+              <div class="finding-body">
+                <div class="finding-section">
+                  <h4>Why It Matters</h4>
+                  <ul>
+                    <li>You paid for those quotes—they're wasted without follow-up</li>
+                    <li>Agents who call every quote bind 45%. You bind 37%.</li>
+                  </ul>
+                </div>
+                <div class="finding-section">
+                  <h4>Panic Hook</h4>
+                  <ul>
+                    <li>You built a fast response system but aren't using it</li>
+                    <li>That's 8+ lost policies per month from bad follow-up</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Finding 3 -->
+            <div class="finding-item opportunity">
+              <div class="finding-title">You're named in 3 of 20 AI answers. Competitor A is in 11.</div>
+              <div class="finding-body">
+                <div class="finding-section">
+                  <h4>Why It Matters</h4>
+                  <ul>
+                    <li>46% of your market asks AI before Google</li>
+                    <li>You win some questions, lose others to competitors</li>
+                  </ul>
+                </div>
+                <div class="finding-section">
+                  <h4>Panic Hook</h4>
+                  <ul>
+                    <li>When people ask "cheap auto insurance in Sydney", they get Competitor A</li>
+                    <li>That's 2-3 lost leads per week to someone doing AI better</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cta-section">
+            <h2>You're competitive. Let's push you ahead.</h2>
+            <p>These 3 changes will move you ahead of Competitor A. Most unlock ROI in 6-8 weeks. Let's discuss which to tackle first.</p>
+            <div class="cta-buttons">
+              <button class="btn btn-primary btn-large">Schedule Free Consultation</button>
+              <button class="btn btn-secondary">Email My Results</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- GOOD BAND (70+) -->
+        <div id="good-band" class="band-content" style="display: none;">
+          <div class="score-section">
+            <div class="score-large good">
+              <div class="score-number-large">79</div>
+              <div class="score-label-large">/100</div>
+            </div>
+            <div class="band-text">
+              <h3>You're Winning</h3>
+              <p>You're ahead of 80% of competitors. Here's how to defend your position and expand.</p>
+              <p><strong>Timeline:</strong> Double down on what's working, exit what's not.</p>
+            </div>
+          </div>
+
+          <div class="findings-section">
+            <h2>What We Found</h2>
+
+            <!-- Finding 1 -->
+            <div class="finding-item good">
+              <div class="finding-title">You're named in 8 of 20 AI answers</div>
+              <div class="finding-body">
+                <div class="finding-section">
+                  <h4>Why It Matters</h4>
+                  <ul>
+                    <li>You dominate "best agent in Sydney" question</li>
+                    <li>Organic channels bring higher-intent leads; you get free visibility</li>
+                  </ul>
+                </div>
+                <div class="finding-section">
+                  <h4>Competitive Moat</h4>
+                  <ul>
+                    <li>Your referral rate is 28% of new business</li>
+                    <li>Competitor B is stealing them through marketing outreach</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Finding 2 -->
+            <div class="finding-item good">
+              <div class="finding-title">Google search brings 9 policies/month at $84 CPC</div>
+              <div class="finding-body">
+                <div class="finding-section">
+                  <h4>Why It Matters</h4>
+                  <ul>
+                    <li>You've cracked the machine that works</li>
+                    <li>ROI is 8.2x on every dollar spent. Scale it.</li>
+                  </ul>
+                </div>
+                <div class="finding-section">
+                  <h4>Opportunity</h4>
+                  <ul>
+                    <li>Competitor C is still figuring out Meta</li>
+                    <li>Double your Google budget and they scramble</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Finding 3 -->
+            <div class="finding-item good">
+              <div class="finding-title">97% of your leads get a reply in under 60 seconds</div>
+              <div class="finding-body">
+                <div class="finding-section">
+                  <h4>Why It Matters</h4>
+                  <ul>
+                    <li>You've automated something competitors do manually</li>
+                    <li>That's a competitive moat—15-20 extra policies per month</li>
+                  </ul>
+                </div>
+                <div class="finding-section">
+                  <h4>Your Advantage</h4>
+                  <ul>
+                    <li>Competitor A averages 4 hours. Your bind rate shows it.</li>
+                    <li>Defend this. It's your biggest edge.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cta-section">
+            <h2>You're ahead. Let's keep you there.</h2>
+            <p>Your system is working. Let's talk about allocating next quarter's budget to double down on what's winning and exit what's not.</p>
+            <div class="cta-buttons">
+              <button class="btn btn-primary btn-large">Schedule Free Consultation</button>
+              <button class="btn btn-secondary">Email My Results</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p>&copy; 2026 Riya Desk. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    function showBand(band) {
+      // Hide all bands
+      document.getElementById('critical-band').style.display = 'none';
+      document.getElementById('opportunity-band').style.display = 'none';
+      document.getElementById('good-band').style.display = 'none';
+
+      // Show selected band
+      document.getElementById(band + '-band').style.display = 'block';
+
+      // Update button states
+      document.querySelectorAll('.band-selector button').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+    }
+  </script>
+</body>
+</html>

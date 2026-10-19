@@ -1,0 +1,31 @@
+{
+  "buildCommand": "",
+  "outputDirectory": "public",
+  "functions": {
+    "api/**/*.mjs": {
+      "runtime": "nodejs18.x",
+      "memory": 1024
+    }
+  },
+  "env": {
+    "AIRTABLE_TOKEN": "@airtable_token",
+    "AIRTABLE_BASE_ID": "@airtable_base_id"
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "public/$1"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        }
+      ]
+    }
+  ]
+}

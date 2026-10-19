@@ -1,0 +1,16 @@
+{
+  "name": "lead-leak-scan",
+  "version": "1.0.0",
+  "description": "Free SME Lead Leak Scan - identify marketing and lead capture gaps",
+  "main": "api/scan.mjs",
+  "scripts": {
+    "dev": "node dev-server.mjs",
+    "start": "node dev-server.mjs"
+  },
+  "keywords": ["sme", "leads", "audit", "marketing", "free-scan"],
+  "author": "Riya Desk",
+  "license": "MIT",
+  "engines": {
+    "node": "18.x"
+  }
+}
