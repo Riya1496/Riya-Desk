@@ -2,15 +2,11 @@
 
 Your Groq API key is ready. Here's how to activate AI visibility checks.
 
-## Step 1: Install Groq SDK
+## Step 1: No Installation Needed!
 
-In your terminal (in the lead-leak-scan folder):
+Good news - we use Groq's REST API directly. **No npm packages required!**
 
-```bash
-npm install @groq-cloud/sdk
-```
-
-This installs the Groq client library.
+Just verify your .env file is set up (next step).
 
 ## Step 2: Verify .env File
 

@@ -3,21 +3,14 @@
  *
  * Four core checks:
  * 1. Ad Pixel Audit - GA4, Meta Pixel, Google Ads, TikTok, LinkedIn, Hotjar, Mouseflow
- * 2. AI Visibility - whether business appears in ChatGPT/Claude/Perplexity searches (via Groq)
+ * 2. AI Visibility - whether business appears in ChatGPT/Claude/Perplexity searches (via Groq REST API)
  * 3. Lead Capture Friction - form fields, phone link, booking, CTA visibility
  * 4. Reputation Velocity - rating and review count comparison to competitors (via Google scraping)
  */
 
-// Initialize Groq client for AI visibility checks
-let groqClient = null;
-try {
-  const Groq = (await import('@groq-cloud/sdk')).default;
-  if (process.env.GROQ_API_KEY) {
-    groqClient = new Groq({ apiKey: process.env.GROQ_API_KEY });
-  }
-} catch (e) {
-  console.log('Groq SDK not installed or API key not available');
-}
+// Groq API endpoint and key (used directly via REST API, no SDK needed)
+const GROQ_API_KEY = process.env.GROQ_API_KEY;
+const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
 
 // Pixel detection patterns
 const PIXEL_PATTERNS = {
@@ -63,25 +56,39 @@ export async function checkPixelAudit(html) {
 
 /**
  * Check 2: AI Search Visibility
- * Uses Groq API (free) to query and check if business appears in AI responses
+ * Uses Groq API (free via REST) to query and check if business appears in AI responses
  */
 export async function checkAIVisibility(businessName, city, userAIData = null) {
-  // If Groq is available, use it to auto-detect
-  if (groqClient) {
+  // If Groq API key is available, use it to auto-detect
+  if (GROQ_API_KEY) {
     try {
       console.log(`Checking AI visibility for "${businessName}" in ${city}...`);
 
-      const message = await groqClient.messages.create({
-        messages: [{
-          role: "user",
-          content: `Is "${businessName}" mentioned as a top service provider or business when someone in ${city}, Australia asks you "Who are the best ${businessName.toLowerCase()} businesses in ${city}?" Answer with only "yes" or "no", nothing else.`
-        }],
-        model: "mixtral-8x7b-32768",
-        max_tokens: 10,
+      const response = await fetch(GROQ_API_URL, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${GROQ_API_KEY}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          model: 'mixtral-8x7b-32768',
+          messages: [{
+            role: 'user',
+            content: `Is "${businessName}" mentioned as a top service provider or business when someone in ${city}, Australia asks you "Who are the best ${businessName.toLowerCase()} businesses in ${city}?" Answer with only "yes" or "no", nothing else.`
+          }],
+          max_tokens: 10,
+          temperature: 0.1
+        })
       });
 
-      const response = message.content[0].text.toLowerCase().trim();
-      const mentioned = response.includes('yes');
+      if (!response.ok) {
+        console.error('Groq API error:', response.status, response.statusText);
+        throw new Error(`Groq API error: ${response.status}`);
+      }
+
+      const data = await response.json();
+      const aiResponse = data.choices[0].message.content.toLowerCase().trim();
+      const mentioned = aiResponse.includes('yes');
 
       // Calculate score based on whether mentioned
       const score = mentioned ? 22 : 5;
@@ -99,8 +106,8 @@ export async function checkAIVisibility(businessName, city, userAIData = null) {
         method: 'groq'
       };
     } catch (error) {
-      console.error('Groq API error:', error);
-      // Fallback if Groq fails
+      console.error('Groq API error:', error.message);
+      // Fall through to fallback
     }
   }
 
@@ -133,7 +140,8 @@ export async function checkAIVisibility(businessName, city, userAIData = null) {
     };
   }
 
-  // Default fallback
+  // Default fallback (no Groq, no manual data)
+  console.log('Using default AI visibility data (Groq API not configured)');
   return {
     checkId: 'ai_visibility',
     checkName: 'AI Visibility',
