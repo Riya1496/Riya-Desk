@@ -5,20 +5,31 @@ import { fileURLToPath } from 'url';
 import { runAllChecks } from './lib/mvp-checks.mjs';
 import { initAirtable } from './lib/airtable.mjs';
 
-// Try to load .env file
-try {
-  const envPath = path.join(path.dirname(fileURLToPath(import.meta.url)), '.env');
-  const envContent = fs.readFileSync(envPath, 'utf8');
-  envContent.split('\n').forEach(line => {
-    if (!line.startsWith('#') && line.includes('=')) {
-      const [key, value] = line.split('=');
-      process.env[key.trim()] = value.trim();
+// Load .env file
+function loadEnv() {
+  try {
+    const envPath = path.join(path.dirname(fileURLToPath(import.meta.url)), '.env');
+    const envContent = fs.readFileSync(envPath, 'utf8');
+    envContent.split('\n').forEach(line => {
+      const trimmedLine = line.trim();
+      if (!trimmedLine.startsWith('#') && trimmedLine.includes('=')) {
+        const [key, ...valueParts] = trimmedLine.split('=');
+        const value = valueParts.join('=').trim();
+        if (key && value) {
+          process.env[key.trim()] = value;
+        }
+      }
+    });
+    console.log('✓ Loaded .env file');
+    if (process.env.GROQ_API_KEY) {
+      console.log('✓ GROQ_API_KEY found');
     }
-  });
-} catch (e) {
-  // .env file not required
+  } catch (e) {
+    console.log('⚠ .env file not found (optional)');
+  }
 }
 
+loadEnv();
 const airtable = initAirtable();
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));

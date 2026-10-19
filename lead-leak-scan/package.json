@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Free SME Lead Leak Scan - identify marketing and lead capture gaps",
   "main": "api/scan.mjs",
+  "type": "module",
   "scripts": {
     "dev": "node dev-server.mjs",
     "start": "node dev-server.mjs"
@@ -12,5 +13,8 @@
   "license": "MIT",
   "engines": {
     "node": "18.x"
+  },
+  "dependencies": {
+    "@groq-cloud/sdk": "^0.5.0"
   }
 }
