@@ -9,7 +9,28 @@ document.addEventListener('DOMContentLoaded', function() {
         businessName: document.getElementById('businessName').value,
         website: document.getElementById('website').value,
         city: document.getElementById('city').value,
-        email: document.getElementById('email').value
+        email: document.getElementById('email').value,
+        // Additional data for manual checks
+        aiData: {
+          appearanceCount: parseInt(document.getElementById('aiAppearance').value) || 3,
+          competitorCount: 11 // Will be compared to their appearance
+        },
+        reputationData: {
+          userRating: parseFloat(document.getElementById('yourRating').value) || 4.2,
+          userReviewCount: parseInt(document.getElementById('yourReviews').value) || 12,
+          competitors: [
+            {
+              name: 'Top Competitor',
+              rating: parseFloat(document.getElementById('competitorRating').value) || 4.8,
+              reviewCount: 140
+            },
+            {
+              name: 'Second Competitor',
+              rating: 4.7,
+              reviewCount: 94
+            }
+          ]
+        }
       };
 
       // Show loading state
@@ -145,16 +166,33 @@ function showBand(band) {
 
 // Mock data for MVP testing (when API not available)
 function generateMockResult(formData) {
-  const scores = [38, 58, 79];
-  const score = scores[Math.floor(Math.random() * scores.length)];
+  // Calculate AI visibility score based on user input
+  const aiAppearance = formData.aiData?.appearanceCount || 3;
+  const aiCompetitor = 11;
+  const aiGap = aiCompetitor - aiAppearance;
+  const aiScore = Math.max(0, 25 - (aiGap * 2));
+
+  // Calculate reputation score based on user input
+  const userRating = formData.reputationData?.userRating || 4.2;
+  const competitorRating = formData.reputationData?.competitors?.[0]?.rating || 4.8;
+  const userReviews = formData.reputationData?.userReviewCount || 12;
+  const competitorReviews = formData.reputationData?.competitors?.[0]?.reviewCount || 140;
+  const ratingGap = competitorRating - userRating;
+  const reviewGap = competitorReviews - userReviews;
+  const repScore = Math.max(0, 25 - (Math.abs(ratingGap) * 5) - (reviewGap / 50 * 2));
+
+  // Total score: average of all checks
+  const pixelScore = 4;
+  const frictionScore = 6;
+  const totalScore = Math.round((pixelScore + aiScore + frictionScore + repScore) / 4);
 
   return {
     businessName: formData.businessName,
     website: formData.website,
     city: formData.city,
     email: formData.email,
-    overallScore: score,
-    band: score < 40 ? 'critical' : score < 70 ? 'opportunity' : 'good',
+    overallScore: totalScore,
+    band: totalScore < 40 ? 'critical' : totalScore < 70 ? 'opportunity' : 'good',
     scannedAt: new Date().toISOString(),
     checks: [
       {
@@ -162,17 +200,17 @@ function generateMockResult(formData) {
         checkName: 'Ad Pixel Audit',
         found: ['GA4'],
         missing: ['Meta Pixel', 'Google Ads', 'TikTok Pixel', 'LinkedIn', 'Hotjar', 'Mouseflow'],
-        score: 4,
+        score: pixelScore,
         severity: 'critical'
       },
       {
         checkId: 'ai_visibility',
         checkName: 'AI Visibility',
-        appearanceCount: 3,
-        competitorCount: 11,
-        gap: 8,
-        score: 8,
-        severity: 'critical'
+        appearanceCount: aiAppearance,
+        competitorCount: aiCompetitor,
+        gap: aiGap,
+        score: Math.round(aiScore),
+        severity: aiScore > 15 ? 'good' : aiScore > 8 ? 'opportunity' : 'critical'
       },
       {
         checkId: 'lead_friction',
@@ -181,20 +219,20 @@ function generateMockResult(formData) {
         hasPhoneLink: false,
         hasScheduling: false,
         frictionScore: 50,
-        score: 6,
+        score: frictionScore,
         severity: 'critical'
       },
       {
         checkId: 'reputation',
         checkName: 'Reputation & Reviews',
-        userRating: 4.2,
-        userReviewCount: 12,
-        competitorAvgRating: 4.75,
-        competitorAvgReviewCount: 140,
-        ratingGap: 0.55,
-        reviewGap: 128,
-        score: 5,
-        severity: 'critical'
+        userRating: userRating,
+        userReviewCount: userReviews,
+        competitorAvgRating: competitorRating,
+        competitorAvgReviewCount: competitorReviews,
+        ratingGap: Math.round((ratingGap) * 10) / 10,
+        reviewGap: reviewGap,
+        score: Math.round(repScore),
+        severity: repScore > 15 ? 'good' : repScore > 8 ? 'opportunity' : 'critical'
       }
     ]
   };
