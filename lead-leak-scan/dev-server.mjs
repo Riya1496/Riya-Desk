@@ -2,10 +2,8 @@ import http from 'http';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { runAllChecks } from './lib/mvp-checks.mjs';
-import { initAirtable } from './lib/airtable.mjs';
 
-// Load .env file
+// Load .env file FIRST - before any module imports
 function loadEnv() {
   try {
     const envPath = path.join(path.dirname(fileURLToPath(import.meta.url)), '.env');
@@ -22,14 +20,20 @@ function loadEnv() {
     });
     console.log('✓ Loaded .env file');
     if (process.env.GROQ_API_KEY) {
-      console.log('✓ GROQ_API_KEY found');
+      console.log('✓ GROQ_API_KEY found:', process.env.GROQ_API_KEY.substring(0, 10) + '...');
     }
   } catch (e) {
     console.log('⚠ .env file not found (optional)');
   }
 }
 
+// Load env variables first
 loadEnv();
+
+// Now use dynamic imports so env is available
+const { runAllChecks } = await import('./lib/mvp-checks.mjs');
+const { initAirtable } = await import('./lib/airtable.mjs');
+
 const airtable = initAirtable();
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
