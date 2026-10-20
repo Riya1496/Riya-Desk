@@ -8,10 +8,10 @@
  * 4. Customer Reviews - Uses public review data (manual input or basic scraping)
  */
 
-const GROQ_API_KEY = process.env.GROQ_API_KEY;
-const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
 const GOOGLE_PLACES_API_KEY = process.env.GOOGLE_PLACES_API_KEY;
 const GOOGLE_PLACES_URL = 'https://maps.googleapis.com/maps/api/place';
+const GOOGLE_GEMINI_API_KEY = process.env.GOOGLE_GEMINI_API_KEY;
+const GOOGLE_GEMINI_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
 const TRUSTPILOT_API_KEY = process.env.TRUSTPILOT_API_KEY;
 const TRUSTPILOT_API_URL = 'https://api.trustpilot.com/v1';
 
@@ -72,20 +72,96 @@ export async function checkPixelAudit(html) {
 
 /**
  * CHECK 2: AI Visibility - REAL DATA
- * Uses heuristic to check business presence in search context
+ * Checks if business appears in AI recommendations using Gemini
  */
-export async function checkAIVisibility(businessName, city, html = '') {
-  // Strategy: Check if business name appears prominently on their website
-  // (indicator of brand strength that would make it appear in AI recommendations)
+async function checkAIVisibilityWithGemini(businessName, city) {
+  if (!GOOGLE_GEMINI_API_KEY) {
+    console.log('⚠️ Gemini API key not configured - using fallback');
+    return null;
+  }
 
   try {
-    console.log(`🔍 Checking AI visibility signals for "${businessName}" in ${city}`);
+    console.log(`🔍 Checking real AI visibility for "${businessName}" in ${city} using Gemini`);
 
-    // Count mentions of business name in HTML (case-insensitive)
+    const response = await fetch(
+      `${GOOGLE_GEMINI_URL}?key=${GOOGLE_GEMINI_API_KEY}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{
+            parts: [{
+              text: `Imagine someone searches for "best ${businessName.split(' ').slice(-1)[0].toLowerCase()} in ${city}".
+
+Would "${businessName}" likely appear in the top 5 recommendations?
+
+Consider:
+1. Business prominence and online presence
+2. Likelihood of appearing in AI search results
+3. Brand recognition in the local market
+
+Respond with ONLY valid JSON (no markdown, no extra text):
+{"appears": true, "score": 15-25, "reason": "brief reason"} or {"appears": false, "score": 0-8, "reason": "brief reason"}`
+            }]
+          }]
+        })
+      }
+    );
+
+    if (!response.ok) {
+      console.log(`  Gemini API error: ${response.status}`);
+      return null;
+    }
+
+    const data = await response.json();
+    const text = data.candidates[0].content.parts[0].text;
+
+    // Extract JSON from response
+    const jsonMatch = text.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) {
+      console.log(`  Could not parse Gemini response`);
+      return null;
+    }
+
+    const result = JSON.parse(jsonMatch[0]);
+    console.log(`  AI Visibility: ${result.appears ? 'YES' : 'NO'} - ${result.reason}`);
+
+    return {
+      appears: result.appears,
+      score: result.score || (result.appears ? 20 : 5),
+      reason: result.reason,
+      method: 'gemini_ai'
+    };
+  } catch (error) {
+    console.error('❌ Gemini AI Visibility check failed:', error.message);
+    return null;
+  }
+}
+
+export async function checkAIVisibility(businessName, city, html = '') {
+  try {
+    console.log(`🤖 Analyzing AI visibility for "${businessName}" in ${city}`);
+
+    // Try real AI visibility check first
+    const geminiResult = await checkAIVisibilityWithGemini(businessName, city);
+    if (geminiResult) {
+      return {
+        checkId: 'ai_visibility',
+        checkName: '🤖 AI Visibility',
+        mentioned: geminiResult.appears,
+        score: geminiResult.score,
+        reason: geminiResult.reason,
+        severity: geminiResult.score >= 15 ? 'good' : geminiResult.score >= 8 ? 'warning' : 'critical',
+        method: geminiResult.method
+      };
+    }
+
+    // Fallback to heuristic if Gemini unavailable
+    console.log(`⚠️ Falling back to website analysis`);
+
     const nameRegex = new RegExp(businessName, 'gi');
     const nameMatches = (html.match(nameRegex) || []).length;
 
-    // Check for brand signals: title tag, meta description, H1
     let brandStrength = 0;
     if (html.toLowerCase().includes(`<title>${businessName.toLowerCase()}`)) {
       brandStrength += 3;
@@ -97,42 +173,29 @@ export async function checkAIVisibility(businessName, city, html = '') {
       brandStrength += 2;
     }
 
-    // Check for location mentions (Sydney in this case)
     const locationMatches = (html.match(new RegExp(city, 'gi')) || []).length;
     if (locationMatches > 0) {
       brandStrength += 1;
     }
 
-    // Score based on brand signals (0-25)
-    // 5+ brand signals and mentions = good visibility
-    // 2-4 = moderate
-    // 0-1 = poor
     let score = 0;
-    let mentioned = false;
-
     if (brandStrength >= 5 && nameMatches >= 5) {
-      score = 20; // Good visibility
-      mentioned = true;
+      score = 20;
     } else if (brandStrength >= 3 && nameMatches >= 2) {
-      score = 15; // Moderate
-      mentioned = true;
+      score = 15;
     } else if (brandStrength > 0 || nameMatches > 0) {
-      score = 8; // Some presence
-      mentioned = false;
-    } else {
-      score = 0; // No presence
-      mentioned = false;
+      score = 8;
     }
 
-    console.log(`  Brand signals: ${brandStrength}, Name mentions: ${nameMatches}, Location mentions: ${locationMatches}`);
+    console.log(`  Brand signals: ${brandStrength}, Name mentions: ${nameMatches}`);
 
     return {
       checkId: 'ai_visibility',
       checkName: '🤖 AI Visibility',
-      mentioned,
+      mentioned: score >= 8,
       score,
       severity: score >= 15 ? 'good' : score >= 8 ? 'warning' : 'critical',
-      method: 'heuristic_analysis'
+      method: 'heuristic_fallback'
     };
   } catch (error) {
     console.error('❌ AI Visibility check failed:', error.message);
@@ -389,7 +452,7 @@ async function fetchTrustpilotReviews(businessName, city) {
  * Analyze reviews sentiment using Groq AI
  */
 async function analyzeReviewSentiment(reviews) {
-  if (!reviews || reviews.length === 0 || !GROQ_API_KEY) {
+  if (!reviews || reviews.length === 0 || !GOOGLE_GEMINI_API_KEY) {
     return null;
   }
 
@@ -423,68 +486,40 @@ async function analyzeReviewSentiment(reviews) {
       return null;
     }
 
-    console.log(`📊 Analyzing sentiment for ${reviewsWithText.length} reviews with Groq`);
+    console.log(`📊 Analyzing sentiment for ${reviewsWithText.length} reviews with Gemini`);
 
     const reviewTexts = reviewsWithText
       .map(r => `"${r.text}" (${r.rating}★)`)
       .join('\n');
 
-    // Try multiple models in case one is deprecated
-    const models = [
-      'llama-2-70b-4096',        // Most stable, been around longest
-      'llama-3.1-70b-versatile', // Newer alternative
-      'mixtral-8x7b-32k'         // Fallback
-    ];
-
-    let response = null;
-    let lastError = null;
-
-    for (const model of models) {
-      try {
-        response = await fetch(GROQ_API_URL, {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${GROQ_API_KEY}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            model: model,
-            messages: [{
-              role: 'user',
-              content: `Analyze the sentiment of these ${reviewsWithText.length} reviews. For each, classify as POSITIVE, NEUTRAL, or NEGATIVE. Also identify the top 2-3 common issues mentioned across negative reviews (if any). Format your response as JSON: { "sentiments": [array of POSITIVE/NEUTRAL/NEGATIVE], "top_issues": ["issue1", "issue2"], "overall_sentiment": "POSITIVE|NEUTRAL|NEGATIVE" }
+    const response = await fetch(
+      `${GOOGLE_GEMINI_URL}?key=${GOOGLE_GEMINI_API_KEY}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{
+            parts: [{
+              text: `Analyze the sentiment of these ${reviewsWithText.length} reviews. For each, classify as POSITIVE, NEGATIVE, or NEUTRAL. Identify the top 2-3 most common issues from negative reviews.
 
 Reviews:
-${reviewTexts}`
-            }],
-            max_tokens: 500,
-            temperature: 0.3
-          })
-        });
+${reviewTexts}
 
-        if (response.ok) {
-          console.log(`  Using model: ${model}`);
-          break;
-        } else {
-          lastError = response.status;
-          response = null;
-        }
-      } catch (e) {
-        lastError = e.message;
+Respond with ONLY valid JSON (no markdown, no extra text):
+{"sentiments": ["POSITIVE"|"NEGATIVE"|"NEUTRAL"], "top_issues": ["issue1", "issue2"], "overall_sentiment": "POSITIVE"|"NEGATIVE"|"NEUTRAL"}`
+            }]
+          }]
+        })
       }
-    }
-
-    if (!response) {
-      throw new Error(`No available Groq models (last error: ${lastError})`);
-    }
+    );
 
     if (!response.ok) {
-      const errorText = await response.text();
-      console.log(`  HTTP ${response.status}: ${errorText.substring(0, 200)}`);
-      throw new Error(`Groq API error: ${response.status}`);
+      console.log(`  Gemini error: ${response.status}`);
+      return null;
     }
 
     const data = await response.json();
-    const analysisText = data.choices[0].message.content;
+    const analysisText = data.candidates[0].content.parts[0].text;
 
     // Parse JSON from response
     const jsonMatch = analysisText.match(/\{[\s\S]*\}/);
@@ -507,7 +542,7 @@ ${reviewTexts}`
 
 /**
  * CHECK 4: Customer Reviews - REAL DATA
- * Fetches reviews from Google Places + Trustpilot + analyzes sentiment with Groq
+ * Fetches reviews from Google Places + Trustpilot + analyzes sentiment with Gemini
  */
 export async function checkReputation(businessName, city, html = '') {
   try {
@@ -558,9 +593,8 @@ export async function checkReputation(businessName, city, html = '') {
 
     // If we found real data from Google or Trustpilot
     if (finalData && finalData.reviewCount > 0) {
-      // Sentiment analysis disabled (Groq models deprecated)
-      // TODO: Switch to stable AI service (OpenAI, Anthropic, etc.)
-      const sentiment = null; // await analyzeReviewSentiment(finalData.reviews);
+      // Sentiment analysis with Gemini AI (enabled)
+      const sentiment = await analyzeReviewSentiment(finalData.reviews);
 
       // Calculate score based on rating and review count
       let score = 15; // Base score
