@@ -10,6 +10,8 @@
 
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
 const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
+const GOOGLE_PLACES_API_KEY = process.env.GOOGLE_PLACES_API_KEY;
+const GOOGLE_PLACES_URL = 'https://maps.googleapis.com/maps/api/place';
 
 // Pixel detection patterns
 const PIXEL_PATTERNS = {
@@ -212,22 +214,207 @@ export async function checkLeadFriction(html) {
 }
 
 /**
- * CHECK 4: Customer Reviews - REAL DATA
- * Analyzes website for review signals + optional Google Places API
+ * Fetch Google Reviews using Places API (New)
  */
-export async function checkReputation(businessName, city, html = '') {
-  // Strategy: Detect review signals from website HTML
-  // Primary: Analyze website for review badges, ratings, review counts
-  // Fallback: Use sensible defaults based on what we found
+async function fetchGoogleReviews(businessName, city) {
+  if (!GOOGLE_PLACES_API_KEY) {
+    console.warn('⚠️ Google Places API key not found');
+    return null;
+  }
 
   try {
-    console.log(`⭐ Analyzing reputation signals for "${businessName}" in ${city}`);
+    console.log(`🔍 Searching Google Places for "${businessName}" in ${city}`);
+
+    // STEP 1: Search for the business using NEW Places API endpoint
+    const searchResponse = await fetch(
+      `https://places.googleapis.com/v1/places:searchText?key=${GOOGLE_PLACES_API_KEY}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Goog-FieldMask': 'places.name,places.displayName,places.rating,places.userRatingCount,places.reviews'
+        },
+        body: JSON.stringify({
+          textQuery: `${businessName} ${city}`,
+          languageCode: 'en'
+        })
+      }
+    );
+
+    if (!searchResponse.ok) {
+      const errorText = await searchResponse.text();
+      console.log(`  HTTP ${searchResponse.status}: ${errorText.substring(0, 200)}`);
+      throw new Error(`Google Places search failed: ${searchResponse.status} - ${errorText.substring(0, 100)}`);
+    }
+
+    const searchData = await searchResponse.json();
+
+    if (searchData.error) {
+      console.log(`  API Error: ${JSON.stringify(searchData.error)}`);
+      return null;
+    }
+
+    if (!searchData.places || searchData.places.length === 0) {
+      console.log(`  No results found for ${businessName}`);
+      return null;
+    }
+
+    const place = searchData.places[0];
+    const placeId = place.name; // In new API, name is the place ID (e.g., "places/ChIJK...")
+    console.log(`  Found place: ${place.displayName.text}`);
+
+    // STEP 2: Get detailed reviews using new API
+    const detailsResponse = await fetch(
+      `https://places.googleapis.com/v1/${placeId}?key=${GOOGLE_PLACES_API_KEY}`,
+      {
+        headers: {
+          'X-Goog-FieldMask': 'displayName,rating,userRatingCount,reviews'
+        }
+      }
+    );
+
+    if (!detailsResponse.ok) {
+      throw new Error(`Google Places details failed: ${detailsResponse.status}`);
+    }
+
+    const placeDetails = await detailsResponse.json();
+
+    console.log(`  Rating: ${placeDetails.rating}★ (${placeDetails.userRatingCount} reviews)`);
+
+    return {
+      name: placeDetails.displayName?.text || place.displayName.text,
+      rating: placeDetails.rating || 0,
+      reviewCount: placeDetails.userRatingCount || 0,
+      reviews: placeDetails.reviews || [],
+      source: 'google_places'
+    };
+  } catch (error) {
+    console.error('❌ Google Places API error:', error.message);
+    return null;
+  }
+}
+
+/**
+ * Analyze reviews sentiment using Groq AI
+ */
+async function analyzeReviewSentiment(reviews) {
+  if (!reviews || reviews.length === 0 || !GROQ_API_KEY) {
+    return null;
+  }
+
+  try {
+    console.log(`📊 Analyzing sentiment for ${reviews.length} reviews with Groq`);
+
+    const reviewTexts = reviews
+      .slice(0, 10) // Limit to 10 reviews for API efficiency
+      .map(r => `"${r.text}" (${r.rating}★)`)
+      .join('\n');
+
+    const response = await fetch(GROQ_API_URL, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${GROQ_API_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        model: 'mixtral-8x7b-32768',
+        messages: [{
+          role: 'user',
+          content: `Analyze the sentiment of these reviews. For each, classify as POSITIVE, NEUTRAL, or NEGATIVE. Also identify the top 3 issues mentioned across negative reviews. Format your response as JSON with: { "sentiments": [list of classifications], "top_issues": ["issue1", "issue2", "issue3"], "overall_sentiment": "POSITIVE|NEUTRAL|NEGATIVE" }
+
+Reviews:
+${reviewTexts}`
+        }],
+        max_tokens: 500,
+        temperature: 0.3
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error(`Groq sentiment analysis failed: ${response.status}`);
+    }
+
+    const data = await response.json();
+    const analysisText = data.choices[0].message.content;
+
+    // Parse JSON from response
+    const jsonMatch = analysisText.match(/\{[\s\S]*\}/);
+    if (jsonMatch) {
+      const analysis = JSON.parse(jsonMatch[0]);
+      console.log(`  Sentiment: ${analysis.overall_sentiment}`);
+      console.log(`  Top issues: ${analysis.top_issues.join(', ')}`);
+      return analysis;
+    }
+
+    return null;
+  } catch (error) {
+    console.error('❌ Sentiment analysis error:', error.message);
+    return null;
+  }
+}
+
+/**
+ * CHECK 4: Customer Reviews - REAL DATA
+ * Fetches Google reviews + analyzes sentiment with Groq
+ */
+export async function checkReputation(businessName, city, html = '') {
+  try {
+    console.log(`⭐ Analyzing reputation for "${businessName}" in ${city}`);
+
+    // STRATEGY 1: Try Google Places API first (real data)
+    let googleData = await fetchGoogleReviews(businessName, city);
+
+    if (googleData && googleData.reviewCount > 0) {
+      console.log(`✅ Got Google Places data: ${googleData.rating}★ (${googleData.reviewCount} reviews)`);
+
+      // Analyze sentiment with Groq
+      const sentiment = await analyzeReviewSentiment(googleData.reviews);
+
+      // Calculate score based on rating and review count
+      let score = 15; // Base score
+
+      if (googleData.rating >= 4.7) {
+        score += 8;
+      } else if (googleData.rating >= 4.5) {
+        score += 6;
+      } else if (googleData.rating >= 4.0) {
+        score += 4;
+      } else if (googleData.rating >= 3.5) {
+        score += 2;
+      }
+
+      if (googleData.reviewCount >= 20) {
+        score += 2;
+      }
+
+      score = Math.max(0, Math.min(25, score));
+
+      let severity = 'critical';
+      if (score >= 20) severity = 'good';
+      else if (score >= 10) severity = 'warning';
+
+      return {
+        checkId: 'reputation',
+        checkName: '⭐ Customer Reviews',
+        rating: googleData.rating,
+        reviewCount: googleData.reviewCount,
+        source: 'Google Places',
+        sentiment: sentiment,
+        score,
+        severity,
+        method: 'google_places_api',
+        note: `Found real Google reviews: ${googleData.rating}★ with ${googleData.reviewCount} reviews`
+      };
+    }
+
+    // STRATEGY 2: Fall back to website HTML analysis
+    console.log(`⚠️ No Google Places data - analyzing website HTML`);
 
     let reviewCount = 0;
     let averageRating = 0;
     let foundReviewSignals = false;
 
-    // STRATEGY 1: Look for review platform badges/widgets
+    // Look for review platform badges/widgets
     const reviewPlatforms = {
       'google_reviews': /(google.*reviews?|reviews\.google|google.*rating)/gi,
       'trustpilot': /trustpilot|trustpilot\.com/gi,
@@ -243,8 +430,7 @@ export async function checkReputation(businessName, city, html = '') {
       }
     }
 
-    // STRATEGY 2: Try to extract review count from HTML
-    // Look for patterns like "123 reviews", "45 customer reviews", etc.
+    // Try to extract review count from HTML
     const reviewCountPattern = /(\d+)\s*(?:customer\s+)?review[s]?/gi;
     const matches = html.match(reviewCountPattern);
 
@@ -255,12 +441,12 @@ export async function checkReputation(businessName, city, html = '') {
       }).filter(n => n > 0);
 
       if (counts.length > 0) {
-        reviewCount = Math.max(...counts); // Use highest count found
+        reviewCount = Math.max(...counts);
         foundReviewSignals = true;
       }
     }
 
-    // STRATEGY 3: Look for star ratings
+    // Look for star ratings
     const ratingPatterns = [
       /(\d\.?\d?)\s*out\s+of\s*5|(\d\.?\d?)\s*\/\s*5|(\d\.?\d?)\s*star[s]?/gi,
       /★★★★★|⭐{1,5}/g,
@@ -270,7 +456,6 @@ export async function checkReputation(businessName, city, html = '') {
     for (const pattern of ratingPatterns) {
       const ratingMatch = html.match(pattern);
       if (ratingMatch) {
-        // Extract numeric rating
         const numMatch = ratingMatch[0].match(/\d\.?\d?/);
         if (numMatch) {
           averageRating = parseFloat(numMatch[0]);
@@ -282,28 +467,18 @@ export async function checkReputation(businessName, city, html = '') {
       }
     }
 
-    console.log(`  Platforms found: ${platformsFound.join(', ') || 'none'}`);
-    console.log(`  Review signals found: reviews=${reviewCount}, rating=${averageRating}`);
-
-    // SCORING LOGIC
-    let score = 10; // Base score for having any review system
+    // SCORING LOGIC for HTML analysis
+    let score = 10;
 
     if (!foundReviewSignals) {
-      // No review signals detected
-      console.log(`  No review signals detected - using industry baseline`);
       score = 0;
-      averageRating = 4.2; // Industry average baseline
+      averageRating = 4.2;
       reviewCount = 12;
     } else {
-      // Found real signals on website
       score = 5;
-
-      // Bonus points for having actual reviews
       if (reviewCount > 0) {
-        score += Math.min(10, Math.floor(reviewCount / 20)); // More reviews = more points
+        score += Math.min(10, Math.floor(reviewCount / 20));
       }
-
-      // Bonus points for high rating
       if (averageRating >= 4.5) {
         score += 10;
       } else if (averageRating >= 4.0) {
@@ -311,42 +486,36 @@ export async function checkReputation(businessName, city, html = '') {
       } else if (averageRating >= 3.5) {
         score += 4;
       }
-
-      // Bonus for multiple review platforms
       if (platformsFound.length > 1) {
         score += 3;
       }
     }
 
-    // Ensure score is within bounds
     score = Math.max(0, Math.min(25, score));
 
     let severity = 'critical';
-    if (score >= 20) {
-      severity = 'good';
-    } else if (score >= 10) {
-      severity = 'warning';
-    }
+    if (score >= 20) severity = 'good';
+    else if (score >= 10) severity = 'warning';
 
     return {
       checkId: 'reputation',
       checkName: '⭐ Customer Reviews',
+      rating: averageRating,
       reviewCount,
-      averageRating: Math.round(averageRating * 10) / 10,
+      source: 'Website Analysis',
       platformsFound,
       score,
       severity,
       method: foundReviewSignals ? 'website_analysis' : 'baseline',
-      note: foundReviewSignals ? `Found review signals from ${platformsFound.join(', ')}` : 'No reviews detected - showing baseline'
+      note: foundReviewSignals ? `Found on website: ${platformsFound.join(', ')}` : 'No reviews detected - using baseline'
     };
   } catch (error) {
     console.error('❌ Reputation check failed:', error.message);
     return {
       checkId: 'reputation',
       checkName: '⭐ Customer Reviews',
+      rating: 0,
       reviewCount: 0,
-      averageRating: 4.2,
-      platformsFound: [],
       score: 0,
       severity: 'critical',
       method: 'error',

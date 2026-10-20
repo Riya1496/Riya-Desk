@@ -206,20 +206,38 @@ function renderCheckMeters(checks) {
       }
     },
     'reputation': (check) => {
-      const rating = check.averageRating || 0;
+      const rating = check.rating || check.averageRating || 0;
       const reviewCount = check.reviewCount || 0;
-      const platforms = check.platformsFound?.join(', ') || 'none';
+      const source = check.source || 'Unknown';
+      const sentiment = check.sentiment;
 
-      if (check.method === 'baseline') {
-        return '<strong>We found:</strong> No reviews detected on website. <strong>Problem:</strong> Missing social proof. <strong>Action:</strong> Add Google Reviews, Trustpilot, or customer testimonials. More reviews = more conversions.';
+      // Display sentiment analysis if available
+      let sentimentText = '';
+      if (sentiment && sentiment.overall_sentiment) {
+        const positiveCount = sentiment.sentiments ? sentiment.sentiments.filter(s => s === 'POSITIVE').length : 0;
+        const negativeCount = sentiment.sentiments ? sentiment.sentiments.filter(s => s === 'NEGATIVE').length : 0;
+
+        if (negativeCount > 0 && sentiment.top_issues) {
+          sentimentText = ` <strong>Issues:</strong> ${sentiment.top_issues.slice(0, 2).join(', ')}.`;
+        }
+      }
+
+      if (check.method === 'google_places_api') {
+        if (rating >= 4.5) {
+          return `<strong>We found:</strong> ${rating}★ (${reviewCount} Google reviews). <strong>Status:</strong> Excellent reputation. Keep asking for reviews.${sentimentText}`;
+        } else if (rating >= 4.0) {
+          return `<strong>We found:</strong> ${rating}★ (${reviewCount} Google reviews). <strong>Status:</strong> Good reputation. Focus on the few concerns mentioned.${sentimentText}`;
+        } else {
+          return `<strong>We found:</strong> ${rating}★ (${reviewCount} Google reviews). <strong>Problem:</strong> Low rating hurts conversions. <strong>Action:</strong> Address customer concerns immediately.${sentimentText}`;
+        }
+      } else if (check.method === 'baseline') {
+        return '<strong>We found:</strong> No reviews detected on your website. <strong>Problem:</strong> Missing social proof. <strong>Action:</strong> Add Google Reviews widget or collect customer testimonials. Reviews increase conversions by 30%.';
       } else if (reviewCount === 0) {
-        return `<strong>We found:</strong> Review system (${platforms}) but no reviews yet. <strong>Action:</strong> Actively collect reviews from customers. Start with 5-10 to build momentum.`;
+        return `<strong>We found:</strong> Review system (${source}) but no reviews yet. <strong>Action:</strong> Actively collect reviews from customers. Start with 5-10 to build momentum.`;
       } else if (rating < 4.0) {
-        return `<strong>We found:</strong> ${reviewCount} reviews at ${rating}★. <strong>Problem:</strong> Rating below 4.0 hurts conversions. <strong>Action:</strong> Improve service + address negative reviews first.`;
-      } else if (reviewCount < 20) {
-        return `<strong>We found:</strong> ${reviewCount} reviews at ${rating}★ (${platforms}). <strong>Action:</strong> Collect more reviews. 20+ reviews significantly increases trust.`;
+        return `<strong>We found:</strong> ${reviewCount} reviews at ${rating}★. <strong>Problem:</strong> Rating below 4.0 hurts conversions. <strong>Action:</strong> Improve service + address negative reviews.`;
       } else {
-        return `<strong>We found:</strong> ${reviewCount} reviews at ${rating}★ (${platforms}). <strong>Status:</strong> Strong social proof. Keep momentum by asking every satisfied customer.`;
+        return `<strong>We found:</strong> ${reviewCount} reviews at ${rating}★. <strong>Status:</strong> Strong social proof. Keep asking for reviews.`;
       }
     }
   };
