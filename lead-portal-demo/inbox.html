@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Lead inbox · Lead Portal Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="inbox.html">
+<div class="portal">
+<nav class="portal-nav" data-nav="full" data-active="inbox.html" aria-label="Portal"></nav>
+<script src="assets/shell.js"></script>
+<main class="portal-main">
+
+<header class="page-head">
+<div>
+<h1 class="page-title">Lead inbox</h1>
+<p class="page-sub">Mark what happened with each lead. Every tap teaches Google and Meta who your buyers are.</p>
+</div>
+<div class="chips" aria-live="polite">
+<span id="unmarked-chip" class="chip chip-bad"><span data-unmarked-count>2</span> waiting to be marked</span>
+<span id="all-marked-chip" class="chip chip-good" hidden>All leads marked</span>
+</div>
+</header>
+
+<div class="legend-box">
+<span><b>Score</b> = how well the form answers match your “qualified” definition</span>
+<span><b>Auto-reply</b> = the instant text each lead got</span>
+<span><b>Your tap</b> = the signal sent to the ad platforms</span>
+</div>
+
+<section id="lead-list" class="stack-12" aria-label="Latest leads"></section>
+
+<p class="small muted">Showing the 7 most recent of 287 leads this month, from every channel.</p>
+
+</main>
+</div>
+
+<script>
+(function () {
+  // Sample leads. Edit here to change what the inbox shows.
+  var LEADS = [
+    { id: 'maria', name: 'Maria G.', when: '2 min ago', source: 'Google · Home & auto quotes', need: 'Home + auto bundle', renew: 'Renews in 21 days', owner: 'Homeowner', consent: true, score: 93, reply: 'Auto-replied in 31 sec', status: 'new' },
+    { id: 'ana', name: 'Ana P.', when: '9 min ago', source: 'ChatGPT · AI answer', need: 'Auto only', renew: 'Renews in 45 days', owner: 'Renter', consent: true, score: 72, reply: 'Auto-replied in 44 sec', status: 'new' },
+    { id: 'james', name: 'James T.', when: '18 min ago', source: 'Meta · Bundle & save offer', need: 'Home + auto bundle', renew: 'Renews in 14 days', owner: 'Homeowner', consent: true, score: 89, reply: 'Auto-replied in 52 sec', status: 'qualified' },
+    { id: 'priya', name: 'Priya R.', when: '1 hr ago', source: 'Google Business Profile · call', need: 'Home only', renew: 'Renews in 30 days', owner: 'Homeowner', consent: true, score: 81, reply: 'Auto-replied in 38 sec', status: 'quoted' },
+    { id: 'daniel', name: 'Daniel K.', when: '3 hr ago', source: 'Purchased shared lead', need: 'Auto only', renew: 'Just checking prices', owner: 'Renter', consent: false, score: 18, reply: 'Auto-replied in 29 sec', status: 'nofit' },
+    { id: 'sarah', name: 'Sarah M.', when: 'Yesterday', source: 'Google · Home & auto quotes', need: 'Home + auto bundle', renew: 'Renews in 10 days', owner: 'Homeowner', consent: true, score: 85, reply: 'Auto-replied in 41 sec', status: 'quoted' },
+    { id: 'tom', name: 'Tom H.', when: 'Yesterday', source: 'Google · Local Services Ads', need: 'Home + umbrella', renew: 'Renews in 2 weeks', owner: 'Homeowner', consent: true, score: 77, reply: 'Auto-replied in 47 sec', status: 'bound' }
+  ];
+  var OUTCOMES = [['qualified', 'Qualified'], ['quoted', 'Quoted'], ['bound', 'Bound'], ['nofit', 'Not a fit']];
+  var list = document.getElementById('lead-list');
+
+  function esc(text) {
+    return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function scoreClass(n) { return n >= 75 ? 'high' : n >= 50 ? 'mid' : 'low'; }
+
+  function leadHtml(lead) {
+    var isNew = lead.status === 'new';
+    var buttons = OUTCOMES.map(function (o) {
+      var on = lead.status === o[0];
+      return '<button class="outcome" type="button" data-lead="' + lead.id + '" data-status="' + o[0] + '" aria-pressed="' + on + '">' + o[1] + '</button>';
+    }).join('');
+    var sync = isNew
+      ? '<div class="tiny warn-text">Not sent yet: tap an outcome</div>'
+      : '<div class="tiny ok-text">✓ ' + (lead.status === 'nofit' ? 'Sent to Meta and Google as “not a fit”' : 'Sent to Meta and Google') + '</div>';
+    return '' +
+      '<article class="lead">' +
+        '<div class="lead-who">' +
+          '<div class="chipline center-y"><span class="lead-name">' + esc(lead.name) + '</span>' + (isNew ? '<span class="pill bad">New</span>' : '') + '</div>' +
+          '<div class="small muted">' + esc(lead.when) + ' · ' + esc(lead.source) + '</div>' +
+          '<div class="tiny muted mono">' + esc(lead.reply) + '</div>' +
+        '</div>' +
+        '<div class="lead-answers">' +
+          '<span class="tiny muted">Form answers</span>' +
+          '<div class="chipline"><span class="tagchip">' + esc(lead.need) + '</span><span class="tagchip">' + esc(lead.renew) + '</span><span class="tagchip">' + esc(lead.owner) + '</span>' +
+          (lead.consent ? '<span class="chip-consent-ok">✓ Consent recorded</span>' : '<span class="chip-consent-no">Consent: vendor’s claim only</span>') + '</div>' +
+        '</div>' +
+        '<div class="lead-score"><span class="score ' + scoreClass(lead.score) + '">' + lead.score + '</span><span class="tiny muted">Score</span></div>' +
+        '<div class="lead-actions"><div class="btn-row" role="group" aria-label="Outcome for ' + esc(lead.name) + '">' + buttons + '</div>' + sync + '</div>' +
+      '</article>';
+  }
+
+  function render() {
+    list.innerHTML = LEADS.map(leadHtml).join('');
+    var unmarked = LEADS.filter(function (l) { return l.status === 'new'; }).length;
+    document.querySelectorAll('[data-unmarked-count]').forEach(function (el) { el.textContent = unmarked; });
+    document.getElementById('unmarked-chip').hidden = unmarked === 0;
+    document.getElementById('all-marked-chip').hidden = unmarked !== 0;
+    document.querySelectorAll('[data-inbox-badge]').forEach(function (el) { el.textContent = unmarked; el.hidden = unmarked === 0; });
+  }
+
+  list.addEventListener('click', function (e) {
+    var button = e.target.closest('button[data-lead]');
+    if (!button) return;
+    var id = button.getAttribute('data-lead');
+    var status = button.getAttribute('data-status');
+    LEADS.forEach(function (l) { if (l.id === id) l.status = status; });
+    render();
+    var again = list.querySelector('button[data-lead="' + id + '"][data-status="' + status + '"]');
+    if (again) again.focus();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Agency onboarding · Lead Portal Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="onboarding.html">
+<script src="assets/shell.js"></script>
+
+<header class="site-header">
+<div class="wrap site-header-inner">
+<span class="site-brand"><span class="logo" aria-hidden="true">YB</span><span class="site-brand-name">[Your brand]</span></span>
+<span class="small muted">About 5 minutes · no card needed</span>
+</div>
+</header>
+
+<main class="wrap narrow flow">
+<ol class="steps" aria-label="Setup steps">
+<li data-step="1"><span class="step-mark">1</span><span>Your agency</span></li>
+<li data-step="2"><span class="step-mark">2</span><span>Your leads</span></li>
+<li data-step="3"><span class="step-mark">3</span><span>Your team</span></li>
+</ol>
+
+<section class="panel">
+
+<div class="panel-step" data-panel="1">
+<div>
+<h1 class="page-title">Tell us about your agency</h1>
+<p class="page-sub">We use this to build your free Lead Leak Scan.</p>
+</div>
+<div class="field"><label class="field-label" for="agency">Agency name</label><input class="input" id="agency" type="text" autocomplete="organization" placeholder="Northline Insurance Agency"></div>
+<div class="field"><label class="field-label" for="site">Website</label><input class="input" id="site" type="url" autocomplete="url" placeholder="youragency.com"></div>
+<div class="field">
+<span class="field-label" id="lines-l">What do you sell?</span>
+<div class="btn-row" role="group" aria-labelledby="lines-l">
+<button class="pill-btn" type="button" data-toggle aria-pressed="true">Home</button>
+<button class="pill-btn" type="button" data-toggle aria-pressed="true">Auto</button>
+<button class="pill-btn" type="button" data-toggle aria-pressed="false">Life</button>
+<button class="pill-btn" type="button" data-toggle aria-pressed="false">Commercial</button>
+</div>
+</div>
+<div class="field"><label class="field-label" for="states">States you’re licensed in</label><input class="input" id="states" type="text" placeholder="e.g. Texas, Oklahoma"></div>
+<div class="step-actions end"><button class="btn btn-primary" type="button" data-go="2">Continue</button></div>
+</div>
+
+<div class="panel-step" data-panel="2" hidden>
+<div>
+<h1 class="page-title">Where do your leads come from?</h1>
+<p class="page-sub">Connect what you can. Not sure about something? Skip it. Your consultant sets it up on the call.</p>
+</div>
+<div class="stack-10">
+<div class="source"><div class="source-text"><span class="source-name">Website quote form</span><span class="small muted">Forward your form emails to a private address we give you.</span></div><button class="btn btn-secondary btn-done" type="button" data-toggle data-source aria-pressed="false" data-off="Get my address" data-on="✓ Forwarding ready">Get my address</button></div>
+<div class="source"><div class="source-text"><span class="source-name">Facebook and Instagram lead ads</span><span class="small muted">Sign in once. New leads arrive on their own.</span></div><button class="btn btn-secondary btn-done" type="button" data-toggle data-source aria-pressed="false" data-off="Connect Meta" data-on="✓ Connected">Connect Meta</button></div>
+<div class="source"><div class="source-text"><span class="source-name">Google Ads</span><span class="small muted">Sign in once. We read your campaigns and send results back.</span></div><button class="btn btn-secondary btn-done" type="button" data-toggle data-source aria-pressed="false" data-off="Connect Google" data-on="✓ Connected">Connect Google</button></div>
+<div class="source"><div class="source-text"><span class="source-name">Phone calls</span><span class="small muted">A tracking number that rings your office as normal.</span></div><button class="btn btn-secondary btn-done" type="button" data-toggle data-source aria-pressed="false" data-off="Get a number" data-on="✓ Number ready">Get a number</button></div>
+<div class="source"><div class="source-text"><span class="source-name">Purchased leads</span><span class="small muted">Ask your lead vendor to copy leads to your private address.</span></div><button class="btn btn-secondary btn-done" type="button" data-toggle data-source aria-pressed="false" data-off="Get my address" data-on="✓ Address ready">Get my address</button></div>
+</div>
+<div class="step-actions">
+<button class="btn btn-secondary" type="button" data-go="1">Back</button>
+<div class="btn-row center-y"><span class="small muted"><span data-connected-count>0</span> of 5 connected</span><button class="btn btn-primary" type="button" data-go="3">Continue</button></div>
+</div>
+</div>
+
+<div class="panel-step" data-panel="3" hidden>
+<div>
+<h1 class="page-title">Who handles your leads?</h1>
+<p class="page-sub">We’ll send lead alerts and your free results here.</p>
+</div>
+<div class="field"><label class="field-label" for="owner">Your name</label><input class="input" id="owner" type="text" autocomplete="name" placeholder="Full name"></div>
+<div class="field"><label class="field-label" for="mobile">Mobile number for lead alerts</label><input class="input" id="mobile" type="tel" autocomplete="tel" placeholder="+1 555 000 0000"></div>
+<div class="field"><label class="field-label" for="mate">Invite a teammate (optional)</label><input class="input" id="mate" type="email" placeholder="producer@youragency.com"></div>
+<label class="check" for="share"><input id="share" type="checkbox"><span>I’m allowed to share this agency’s lead data with [Your brand] to run these reports.</span></label>
+<div class="step-actions">
+<button class="btn btn-secondary" type="button" data-go="2">Back</button>
+<button class="btn btn-primary" type="button" data-go="4">Finish setup</button>
+</div>
+</div>
+
+<div class="panel-step" data-panel="4" hidden>
+<div class="success-mark" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17l9-10"></path></svg></div>
+<div>
+<h1 class="page-title">You’re in</h1>
+<p class="body-copy top-8">Your free Lead Leak Scan has started. We’ll send one test enquiry to your agency, the way a customer would, and read your last 90 days of leads. Results in about 24 hours.</p>
+</div>
+<div class="note stack-10">
+<span class="small muted">Free on your dashboard</span>
+<span>Lead Leak Score, with your top 3 leaks</span>
+<span>How fast your agency replies to new leads</span>
+<span>Lead volume by source</span>
+<span>Whether AI assistants recommend you</span>
+</div>
+<p class="small muted"><span data-connected-count>0</span> of 5 lead sources connected. Your consultant connects the rest.</p>
+<a class="btn btn-primary self-start" href="free-plan.html">Preview your free dashboard →</a>
+</div>
+
+</section>
+
+<p class="small muted center">We only use your data to run your reports. Disconnect any source at any time.</p>
+</main>
+
+<script>
+(function () {
+  var panels = document.querySelectorAll('[data-panel]');
+  var steps = document.querySelectorAll('.steps li');
+
+  function show(n, moveFocus) {
+    panels.forEach(function (p) { p.hidden = Number(p.getAttribute('data-panel')) !== n; });
+    steps.forEach(function (li) {
+      var s = Number(li.getAttribute('data-step'));
+      li.classList.toggle('is-done', n > s);
+      li.classList.toggle('is-current', n === s);
+      li.querySelector('.step-mark').textContent = n > s ? '✓' : String(s);
+      if (n === s) li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current');
+    });
+    if (moveFocus) {
+      var heading = document.querySelector('[data-panel="' + n + '"] h1');
+      if (heading) { heading.setAttribute('tabindex', '-1'); heading.focus(); }
+    }
+  }
+
+  function updateCount() {
+    var n = document.querySelectorAll('[data-source][aria-pressed="true"]').length;
+    document.querySelectorAll('[data-connected-count]').forEach(function (el) { el.textContent = n; });
+  }
+
+  document.addEventListener('click', function (e) {
+    var go = e.target.closest('[data-go]');
+    if (go) { show(Number(go.getAttribute('data-go')), true); return; }
+    var toggle = e.target.closest('[data-toggle]');
+    if (toggle) {
+      var on = toggle.getAttribute('aria-pressed') !== 'true';
+      toggle.setAttribute('aria-pressed', String(on));
+      if (toggle.hasAttribute('data-on')) toggle.textContent = on ? toggle.getAttribute('data-on') : toggle.getAttribute('data-off');
+      updateCount();
+    }
+  });
+
+  show(1, false);
+  updateCount();
+})();
+</script>
+</body>
+</html>

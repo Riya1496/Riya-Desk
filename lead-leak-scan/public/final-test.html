@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Final Test - Complete Flow</title>
+  <style>
+    body { font-family: Arial; max-width: 800px; margin: 50px auto; padding: 20px; background: #f5f5f5; }
+    .section { background: white; padding: 20px; margin: 20px 0; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    button { padding: 10px 20px; margin: 5px; cursor: pointer; border: none; border-radius: 4px; background: #0066cc; color: white; }
+    button.danger { background: #cc0000; }
+    input { width: 100%; padding: 10px; margin: 10px 0; box-sizing: border-box; }
+    .success { color: green; font-weight: bold; }
+    .error { color: red; font-weight: bold; }
+    pre { background: #f0f0f0; padding: 10px; overflow: auto; border-radius: 4px; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <h1>Lead Leak Scan - Final Test</h1>
+
+  <div class="section">
+    <h2>Test Flow</h2>
+    <p>This tests the COMPLETE flow: Form → API → SessionStorage → Results Page</p>
+
+    <label><strong>Business Name:</strong></label>
+    <input type="text" id="businessName" value="Test Agency" />
+
+    <label><strong>Website:</strong></label>
+    <input type="url" id="website" value="https://testagency.com" />
+
+    <label><strong>City:</strong></label>
+    <input type="text" id="city" value="Sydney" />
+
+    <label><strong>Email:</strong></label>
+    <input type="email" id="email" value="test@testagency.com" />
+
+    <br>
+    <button class="danger" onclick="clearAndTest()">CLEAR & TEST COMPLETE FLOW</button>
+  </div>
+
+  <div class="section">
+    <h2>What This Does</h2>
+    <ol>
+      <li>Clears all sessionStorage</li>
+      <li>Submits form to /api/scan</li>
+      <li>Stores result in sessionStorage</li>
+      <li>Redirects to /results.html</li>
+      <li>Results page loads and script.js:
+        <ul>
+          <li>✓ Reads from sessionStorage</li>
+          <li>✓ Updates score circles with ACTUAL score (not 38)</li>
+          <li>✓ Updates business info with YOUR data (not mock)</li>
+          <li>✓ Shows correct band based on score</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+
+  <div class="section" id="status">
+    <p>Ready to test. Click "CLEAR & TEST COMPLETE FLOW" above.</p>
+  </div>
+
+  <script>
+    async function clearAndTest() {
+      const status = document.getElementById('status');
+      status.innerHTML = '<p>Testing...</p>';
+
+      try {
+        // Step 1: Clear sessionStorage
+        sessionStorage.clear();
+        status.innerHTML += '<p>✓ Cleared sessionStorage</p>';
+
+        // Step 2: Get form values
+        const formData = {
+          businessName: document.getElementById('businessName').value,
+          website: document.getElementById('website').value,
+          city: document.getElementById('city').value,
+          email: document.getElementById('email').value
+        };
+        status.innerHTML += `<p>✓ Form data: ${formData.businessName} (${formData.city})</p>`;
+
+        // Step 3: Call API
+        const response = await fetch('/api/scan', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        });
+
+        if (!response.ok) throw new Error(`API error: ${response.status}`);
+
+        const result = await response.json();
+        status.innerHTML += `<p>✓ API returned score: <strong>${result.overallScore}</strong>/100 (Band: ${result.band})</p>`;
+
+        // Step 4: Store in sessionStorage
+        sessionStorage.setItem('scanResult', JSON.stringify(result));
+        status.innerHTML += '<p>✓ Stored in sessionStorage</p>';
+
+        // Step 5: Navigate to results page
+        status.innerHTML += '<p style="color: blue;">→ Redirecting to results page...</p>';
+        setTimeout(() => {
+          window.location.href = '/results.html';
+        }, 1000);
+
+      } catch (err) {
+        status.innerHTML += `<p class="error">✗ Error: ${err.message}</p>`;
+      }
+    }
+  </script>
+</body>
+</html>

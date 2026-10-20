@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Setup tracker · Lead Portal Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="setup.html">
+<script src="assets/shell.js"></script>
+
+<header class="site-header">
+<div class="wrap site-header-inner">
+<span class="site-brand"><span class="logo" aria-hidden="true">YB</span><span class="site-brand-name">[Your brand]</span></span>
+<div class="chipline center-y"><span class="chip">Northline Insurance</span><span class="chip chip-good">Full plan</span></div>
+</div>
+</header>
+
+<main class="wrap flow">
+<section class="stack-12" aria-labelledby="wel-h">
+<h1 id="wel-h" class="page-title">Welcome aboard, Northline Insurance</h1>
+<p class="body-copy">Your system goes live on <b>Fri, Oct 30</b>. Here’s where setup stands.</p>
+<div class="progress-block">
+<div class="meter thin10"><span style="width: 31%;"></span></div>
+<span class="small muted">2 of 8 steps done, 2 in progress · on track</span>
+</div>
+</section>
+
+<div class="row align-start">
+<section class="card grow-2" aria-labelledby="trk-h">
+<h2 id="trk-h" class="section-title">Setup steps</h2>
+<ol class="track">
+<li><span class="track-mark done" aria-hidden="true">✓</span><span class="track-label">Kickoff call</span><span class="track-when done">Done · Oct 20</span></li>
+<li><span class="track-mark done" aria-hidden="true">✓</span><span class="track-label">Agree what “qualified” means for you</span><span class="track-when done">Done · Oct 20</span></li>
+<li><span class="track-mark doing" aria-hidden="true"></span><span class="track-label">Connect your lead sources</span><span class="track-when doing">In progress · 3 of 5</span></li>
+<li><span class="track-mark doing" aria-hidden="true"></span><span class="track-label">Consent wording on your quote forms</span><span class="track-when doing">Waiting for you</span></li>
+<li><span class="track-mark todo" aria-hidden="true"></span><span class="track-label">Instant replies switched on</span><span class="track-when">Oct 23</span></li>
+<li><span class="track-mark todo" aria-hidden="true"></span><span class="track-label">Feedback loop to Google and Meta</span><span class="track-when">Oct 26</span></li>
+<li><span class="track-mark todo" aria-hidden="true"></span><span class="track-label">SEO and AI visibility baseline</span><span class="track-when">Oct 27</span></li>
+<li><span class="track-mark todo" aria-hidden="true"></span><span class="track-label">Portal live and your first weekly insight</span><span class="track-when">Oct 30</span></li>
+</ol>
+</section>
+
+<div class="grow-1 stack-20">
+<section class="card" aria-labelledby="need-h">
+<div class="card-head"><h2 id="need-h" class="section-title">What we need from you</h2><span class="small muted"><span id="done-count">0</span> of 4 done</span></div>
+<div class="need"><span class="need-title">Give us access to Google Ads</span><span class="small muted">Two minutes. We’ve emailed you a step-by-step guide.</span><button class="btn btn-primary btn-done self-start" type="button" data-need aria-pressed="false">Mark as done</button></div>
+<div class="need"><span class="need-title">Ask your lead vendor to copy leads to your private address</span><span class="small muted">One email. We wrote it for you.</span><button class="btn btn-primary btn-done self-start" type="button" data-need aria-pressed="false">Mark as done</button></div>
+<div class="need"><span class="need-title">Approve the consent wording for your quote form</span><span class="small muted">So every lead can be texted and called with permission.</span><button class="btn btn-primary btn-done self-start" type="button" data-need aria-pressed="false">Mark as done</button></div>
+<div class="need"><span class="need-title">Export the last 90 days of policies from your agency system</span><span class="small muted">A spreadsheet file is fine.</span><button class="btn btn-primary btn-done self-start" type="button" data-need aria-pressed="false">Mark as done</button></div>
+</section>
+
+<section class="card consultant" aria-labelledby="who-h">
+<span class="avatar" aria-hidden="true">CN</span>
+<div><h2 id="who-h" class="card-title">[Consultant name], your consultant</h2><span class="small muted">Reply to any of our emails. We answer within one working day.</span></div>
+</section>
+</div>
+</div>
+
+<section class="band-strip">
+<span>When everything is live, your full portal opens here.</span>
+<a class="btn btn-primary" href="overview.html">Preview the full portal →</a>
+</section>
+</main>
+
+<script>
+(function () {
+  function update() {
+    var done = document.querySelectorAll('[data-need][aria-pressed="true"]').length;
+    document.getElementById('done-count').textContent = done;
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-need]');
+    if (!b) return;
+    var on = b.getAttribute('aria-pressed') !== 'true';
+    b.setAttribute('aria-pressed', String(on));
+    b.textContent = on ? '✓ Done' : 'Mark as done';
+    update();
+  });
+  update();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Book your free consult · Lead Portal Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="book-consult.html">
+<script src="assets/shell.js"></script>
+
+<header class="site-header">
+<div class="wrap site-header-inner">
+<span class="site-brand"><span class="logo" aria-hidden="true">YB</span><span class="site-brand-name">[Your brand]</span></span>
+<a class="plain-link" href="free-plan.html">← Back to your dashboard</a>
+</div>
+</header>
+
+<main class="wrap mid flow">
+<div>
+<h1 class="page-title">Book your free consult</h1>
+<p class="page-sub">30 minutes with your growth consultant. Video or phone. No contract.</p>
+</div>
+
+<div class="row align-start">
+<aside class="card grow-1">
+<div class="consultant"><span class="avatar" aria-hidden="true">CN</span><div><div class="strong">[Consultant name]</div><div class="small muted">Growth consultant · [Your brand]</div></div></div>
+<div class="stack-10">
+<span class="small muted">On the call we’ll</span>
+<span class="body-copy">Walk through your Lead Leak Score together</span>
+<span class="body-copy">Agree what a qualified lead means for your agency</span>
+<span class="body-copy">Show you exactly what setup involves and what it costs</span>
+</div>
+</aside>
+
+<section class="card grow-2" aria-labelledby="pick-h">
+<div id="picker" class="stack-20">
+<h2 id="pick-h" class="section-title">Pick a day</h2>
+<div class="day-grid" role="group" aria-label="Day">
+<button class="day" type="button" data-day="0" aria-pressed="false"><span class="small">Mon</span><b>Oct 19</b></button>
+<button class="day" type="button" data-day="1" aria-pressed="true"><span class="small">Tue</span><b>Oct 20</b></button>
+<button class="day" type="button" data-day="2" aria-pressed="false"><span class="small">Wed</span><b>Oct 21</b></button>
+<button class="day" type="button" data-day="3" aria-pressed="false"><span class="small">Thu</span><b>Oct 22</b></button>
+<button class="day" type="button" data-day="4" aria-pressed="false"><span class="small">Fri</span><b>Oct 23</b></button>
+</div>
+<h2 class="section-title">Pick a time <span class="muted small-weight">· Central Time</span></h2>
+<div class="slot-grid" role="group" aria-label="Time">
+<button class="slot" type="button" data-slot="8:30 am" aria-pressed="false">8:30 am</button>
+<button class="slot" type="button" data-slot="9:00 am" aria-pressed="false">9:00 am</button>
+<button class="slot" type="button" data-slot="10:30 am" aria-pressed="false">10:30 am</button>
+<button class="slot" type="button" data-slot="1:00 pm" aria-pressed="false">1:00 pm</button>
+<button class="slot" type="button" data-slot="3:30 pm" aria-pressed="false">3:30 pm</button>
+<button class="slot" type="button" data-slot="4:30 pm" aria-pressed="false">4:30 pm</button>
+</div>
+<div class="confirm-row">
+<div class="stack-4">
+<span class="strong" data-summary>No time picked yet</span>
+<span id="slot-error" class="error-text" role="alert" hidden>Pick a time first.</span>
+</div>
+<button id="confirm" class="btn btn-primary btn-lg" type="button">Confirm booking</button>
+</div>
+</div>
+
+<div id="booked" class="stack-20" hidden>
+<div class="success-mark" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17l9-10"></path></svg></div>
+<div role="status">
+<h2 class="booked-title" tabindex="-1">You’re booked</h2>
+<p class="booked-when" data-summary></p>
+<p class="small muted">We’ve emailed you a calendar invite.</p>
+</div>
+<div class="note stack-10">
+<span class="small muted">Have these ready (5 minutes)</span>
+<span>Your Google Ads and Meta logins. You’ll connect them yourself, live on the call.</span>
+<span>The lead vendors you buy from</span>
+<span>The name of your agency management system</span>
+<span>Your rough monthly ad spend</span>
+</div>
+<div class="btn-row">
+<a class="btn btn-primary" href="free-plan.html">Back to your dashboard</a>
+<button id="change" class="btn btn-secondary" type="button">Change time</button>
+</div>
+</div>
+</section>
+</div>
+</main>
+
+<script>
+(function () {
+  var DAYS = ['Mon, Oct 19', 'Tue, Oct 20', 'Wed, Oct 21', 'Thu, Oct 22', 'Fri, Oct 23'];
+  var day = 1;
+  var slot = '';
+  var picker = document.getElementById('picker');
+  var booked = document.getElementById('booked');
+  var error = document.getElementById('slot-error');
+
+  function summary() { return slot ? DAYS[day] + ' at ' + slot + ', Central Time' : 'No time picked yet'; }
+  function render() {
+    document.querySelectorAll('.day').forEach(function (b) { b.setAttribute('aria-pressed', String(Number(b.getAttribute('data-day')) === day)); });
+    document.querySelectorAll('.slot').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-slot') === slot)); });
+    document.querySelectorAll('[data-summary]').forEach(function (el) { el.textContent = summary(); });
+  }
+
+  picker.addEventListener('click', function (e) {
+    var d = e.target.closest('.day');
+    if (d) { day = Number(d.getAttribute('data-day')); slot = ''; error.hidden = true; render(); return; }
+    var s = e.target.closest('.slot');
+    if (s) { slot = s.getAttribute('data-slot'); error.hidden = true; render(); }
+  });
+  document.getElementById('confirm').addEventListener('click', function () {
+    if (!slot) { error.hidden = false; return; }
+    picker.hidden = true; booked.hidden = false; render();
+    booked.querySelector('.booked-title').focus();
+  });
+  document.getElementById('change').addEventListener('click', function () {
+    booked.hidden = true; picker.hidden = false; render();
+  });
+  render();
+})();
+</script>
+</body>
+</html>

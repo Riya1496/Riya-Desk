@@ -8,36 +8,13 @@ document.addEventListener('DOMContentLoaded', function() {
       e.preventDefault();
       console.log('Form submitted');
 
-      // Collect basic fields and optional reputation data
+      // Collect 4 basic fields only
       const formData = {
         businessName: document.getElementById('businessName').value,
         website: document.getElementById('website').value,
         city: document.getElementById('city').value,
         email: document.getElementById('email').value
       };
-
-      // Add optional reputation data if provided
-      const userRating = document.getElementById('userRating').value;
-      const userReviewCount = document.getElementById('userReviewCount').value;
-      const competitor1Rating = document.getElementById('competitor1Rating').value;
-      const competitor1Reviews = document.getElementById('competitor1Reviews').value;
-
-      if (userRating || userReviewCount || competitor1Rating || competitor1Reviews) {
-        formData.reputationData = {
-          userRating: userRating ? parseFloat(userRating) : undefined,
-          userReviewCount: userReviewCount ? parseInt(userReviewCount) : undefined,
-          competitors: []
-        };
-
-        // Add competitor data if provided
-        if (competitor1Rating || competitor1Reviews) {
-          formData.reputationData.competitors.push({
-            name: 'Competitor 1',
-            rating: competitor1Rating ? parseFloat(competitor1Rating) : 4.6,
-            reviews: competitor1Reviews ? parseInt(competitor1Reviews) : 100
-          });
-        }
-      }
 
       console.log('Form data collected:', formData);
 
@@ -229,13 +206,20 @@ function renderCheckMeters(checks) {
       }
     },
     'reputation': (check) => {
-      const gap = check.ratingGap || 0;
-      if (gap > 0.3) {
-        return `<strong>We found:</strong> ${check.userRating}★ (${check.userReviewCount} reviews). <strong>Gap:</strong> ${gap.toFixed(1)}★ behind competitors. <strong>Impact:</strong> Lower ratings reduce conversions.`;
-      } else if (check.userReviewCount < 20) {
-        return `<strong>We found:</strong> ${check.userReviewCount} reviews at ${check.userRating}★. <strong>Action:</strong> Collect more reviews. Builds trust & SEO.`;
+      const rating = check.averageRating || 0;
+      const reviewCount = check.reviewCount || 0;
+      const platforms = check.platformsFound?.join(', ') || 'none';
+
+      if (check.method === 'baseline') {
+        return '<strong>We found:</strong> No reviews detected on website. <strong>Problem:</strong> Missing social proof. <strong>Action:</strong> Add Google Reviews, Trustpilot, or customer testimonials. More reviews = more conversions.';
+      } else if (reviewCount === 0) {
+        return `<strong>We found:</strong> Review system (${platforms}) but no reviews yet. <strong>Action:</strong> Actively collect reviews from customers. Start with 5-10 to build momentum.`;
+      } else if (rating < 4.0) {
+        return `<strong>We found:</strong> ${reviewCount} reviews at ${rating}★. <strong>Problem:</strong> Rating below 4.0 hurts conversions. <strong>Action:</strong> Improve service + address negative reviews first.`;
+      } else if (reviewCount < 20) {
+        return `<strong>We found:</strong> ${reviewCount} reviews at ${rating}★ (${platforms}). <strong>Action:</strong> Collect more reviews. 20+ reviews significantly increases trust.`;
       } else {
-        return `<strong>We found:</strong> ${check.userReviewCount} reviews at ${check.userRating}★. <strong>Status:</strong> Strong social proof. Keep asking for reviews.`;
+        return `<strong>We found:</strong> ${reviewCount} reviews at ${rating}★ (${platforms}). <strong>Status:</strong> Strong social proof. Keep momentum by asking every satisfied customer.`;
       }
     }
   };

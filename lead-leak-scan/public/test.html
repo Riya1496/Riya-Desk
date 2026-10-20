@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test Form</title>
+  <style>
+    body { font-family: Arial; max-width: 600px; margin: 50px auto; padding: 20px; }
+    input { width: 100%; padding: 10px; margin: 10px 0; }
+    button { padding: 10px 20px; background: #0066cc; color: white; border: none; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Test Lead Leak Scan Form</h1>
+
+  <form id="testForm">
+    <input type="text" id="businessName" placeholder="Business name" required>
+    <input type="url" id="website" placeholder="Website URL" required>
+    <input type="text" id="city" placeholder="City" required>
+    <input type="email" id="email" placeholder="Email" required>
+    <button type="submit">Submit</button>
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    document.getElementById('testForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const data = {
+        businessName: document.getElementById('businessName').value,
+        website: document.getElementById('website').value,
+        city: document.getElementById('city').value,
+        email: document.getElementById('email').value
+      };
+
+      console.log('Submitting:', data);
+
+      try {
+        const response = await fetch('/api/scan', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+        console.log('Result:', result);
+
+        document.getElementById('result').innerHTML = `
+          <h2>Results</h2>
+          <p><strong>Business:</strong> ${result.businessName}</p>
+          <p><strong>Score:</strong> ${result.overallScore}/100</p>
+          <p><strong>Band:</strong> ${result.band}</p>
+        `;
+      } catch (err) {
+        console.error('Error:', err);
+        alert('Error: ' + err.message);
+      }
+    });
+  </script>
+</body>
+</html>

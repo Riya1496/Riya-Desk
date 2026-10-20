@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lead Leak Scan - Diagnostic Test</title>
+  <style>
+    body { font-family: Arial; max-width: 800px; margin: 50px auto; padding: 20px; }
+    .test { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+    .success { background: #e8f5e9; border-color: #4caf50; }
+    .error { background: #ffebee; border-color: #f44336; }
+    .pending { background: #fff3e0; border-color: #ff9800; }
+    button { padding: 10px 20px; background: #0066cc; color: white; border: none; cursor: pointer; border-radius: 4px; margin: 5px; }
+    pre { background: #f5f5f5; padding: 10px; overflow: auto; }
+  </style>
+</head>
+<body>
+  <h1>Lead Leak Scan - Diagnostic Test</h1>
+
+  <div class="test pending">
+    <h3>1. Check JavaScript Loading</h3>
+    <p id="js-test">Loading...</p>
+  </div>
+
+  <div class="test pending">
+    <h3>2. Test API Endpoint</h3>
+    <button onclick="testAPI()">Test API Call</button>
+    <p id="api-result">Not tested yet</p>
+  </div>
+
+  <div class="test pending">
+    <h3>3. Test Form Submission</h3>
+    <form id="testForm">
+      <input type="text" id="businessName" placeholder="Business name" value="Test Co" required>
+      <input type="url" id="website" placeholder="Website" value="https://test.com" required>
+      <input type="text" id="city" placeholder="City" value="Sydney" required>
+      <input type="email" id="email" placeholder="Email" value="test@test.com" required>
+      <button type="submit">Submit Test Form</button>
+    </form>
+    <p id="form-result">Not submitted yet</p>
+  </div>
+
+  <div class="test pending">
+    <h3>4. Check Session Storage</h3>
+    <button onclick="checkStorage()">Check Storage</button>
+    <p id="storage-result">Not checked yet</p>
+  </div>
+
+  <script>
+    // Test 1: JS loaded
+    document.getElementById('js-test').innerHTML = '<span style="color: green;">✓ JavaScript is working!</span>';
+
+    async function testAPI() {
+      const resultEl = document.getElementById('api-result');
+      resultEl.innerHTML = 'Testing...';
+      try {
+        const response = await fetch('/api/scan', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            businessName: 'Test Co',
+            website: 'https://test.com',
+            city: 'Sydney',
+            email: 'test@test.com'
+          })
+        });
+        if (response.ok) {
+          const data = await response.json();
+          resultEl.innerHTML = `<span style="color: green;">✓ API Working!</span><br><strong>Score:</strong> ${data.overallScore}, <strong>Band:</strong> ${data.band}`;
+          resultEl.parentElement.className = 'test success';
+        } else {
+          resultEl.innerHTML = `<span style="color: red;">✗ API Error:</span> ${response.status}`;
+          resultEl.parentElement.className = 'test error';
+        }
+      } catch (err) {
+        resultEl.innerHTML = `<span style="color: red;">✗ Error:</span> ${err.message}`;
+        resultEl.parentElement.className = 'test error';
+      }
+    }
+
+    document.getElementById('testForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const resultEl = document.getElementById('form-result');
+      resultEl.innerHTML = 'Submitting...';
+      try {
+        const response = await fetch('/api/scan', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            businessName: document.getElementById('businessName').value,
+            website: document.getElementById('website').value,
+            city: document.getElementById('city').value,
+            email: document.getElementById('email').value
+          })
+        });
+        const data = await response.json();
+        sessionStorage.setItem('scanResult', JSON.stringify(data));
+        resultEl.innerHTML = `<span style="color: green;">✓ Stored in sessionStorage!</span><br><button onclick="window.location.href='/results.html'">Go to Results Page</button>`;
+        resultEl.parentElement.className = 'test success';
+      } catch (err) {
+        resultEl.innerHTML = `<span style="color: red;">✗ Error:</span> ${err.message}`;
+        resultEl.parentElement.className = 'test error';
+      }
+    });
+
+    function checkStorage() {
+      const resultEl = document.getElementById('storage-result');
+      const data = sessionStorage.getItem('scanResult');
+      if (data) {
+        const parsed = JSON.parse(data);
+        resultEl.innerHTML = `<span style="color: green;">✓ Data in storage:</span><br><strong>Score:</strong> ${parsed.overallScore}`;
+        resultEl.parentElement.className = 'test success';
+      } else {
+        resultEl.innerHTML = '<span style="color: orange;">No data in sessionStorage yet</span>';
+      }
+    }
+  </script>
+</body>
+</html>

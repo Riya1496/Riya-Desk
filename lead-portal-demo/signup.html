@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Create your free account · Lead Portal Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="signup.html">
+<script src="assets/shell.js"></script>
+
+<header class="site-header">
+<div class="wrap site-header-inner">
+<a class="site-brand" href="website.html"><span class="logo" aria-hidden="true">YB</span><span class="site-brand-name">[Your brand]</span></a>
+<span class="small muted">Already have an account? <a href="free-plan.html">Sign in</a></span>
+</div>
+</header>
+
+<main class="wrap split">
+<section class="panel split-main" aria-labelledby="su-h">
+<div>
+<h1 id="su-h" class="page-title">Create your free account</h1>
+<p class="page-sub">Your free Lead Leak Scan starts as soon as you finish.</p>
+</div>
+<a class="btn btn-secondary btn-lg btn-block" href="onboarding.html">Continue with Google</a>
+<div class="divider-or">or</div>
+<form class="form-stack" action="onboarding.html" method="get">
+<div class="field"><label class="field-label" for="email">Work email</label><input class="input" id="email" name="email" type="email" autocomplete="email" placeholder="you@youragency.com"></div>
+<div class="field"><label class="field-label" for="agency">Agency name</label><input class="input" id="agency" name="agency" type="text" autocomplete="organization" placeholder="Northline Insurance Agency"></div>
+<label class="check" for="terms"><input id="terms" name="terms" type="checkbox"><span>I agree to the <a href="website.html#faq">Terms</a> and <a href="website.html#faq">Privacy policy</a>.</span></label>
+<button class="btn btn-primary btn-lg btn-block" type="submit">Create free account</button>
+<p class="small muted center">We’ll email you a sign-in link. No password to remember.</p>
+</form>
+</section>
+
+<aside class="split-side" aria-labelledby="next-h">
+<h2 id="next-h" class="section-title">What happens next</h2>
+<ol class="list-plain next-steps">
+<li><span class="step-dot">1</span><span><b>Answer a few quick questions</b><br><span class="muted">About your agency. Two minutes.</span></span></li>
+<li><span class="step-dot">2</span><span><b>Connect what you can</b><br><span class="muted">Optional. Skip anything you’re unsure about.</span></span></li>
+<li><span class="step-dot">3</span><span><b>Get your free score in 24 hours</b><br><span class="muted">With your top 3 leaks and what they cost.</span></span></li>
+</ol>
+<div class="chipline">
+<span class="badge-chip">No card needed</span>
+<span class="badge-chip">Disconnect anytime</span>
+<span class="badge-chip">Your data stays yours</span>
+</div>
+</aside>
+</main>
+
+<script>
+(function () {
+  // Demo only: nothing is sent anywhere. The form just moves on to onboarding.
+  document.querySelector('.form-stack').addEventListener('submit', function (e) {
+    e.preventDefault();
+    window.location.href = 'onboarding.html';
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,3 +1,17 @@
+/* Riya Desk Color Palette */
+:root {
+  --primary: #0d0b0a;
+  --accent: #c9a56c;
+  --light: #f1e2c4;
+  --cream: #f3ece0;
+  --dark: #17120e;
+  --gold: #a9864f;
+  --purple: #7621B0;
+  --orange: #BE4C00;
+  --navy: #2b3342;
+  --white: #fff;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -7,8 +21,8 @@
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
   line-height: 1.6;
-  color: #1a1a1a;
-  background: #f8f9fb;
+  color: var(--primary);
+  background: var(--cream);
 }
 
 .container {
@@ -20,8 +34,8 @@ body {
 /* Header */
 .header {
   padding: 24px 0;
-  border-bottom: 1px solid #e5e7eb;
-  background: white;
+  border-bottom: 2px solid var(--accent);
+  background: var(--white);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -40,13 +54,13 @@ body {
 .logo {
   font-size: 20px;
   font-weight: 700;
-  color: #0066cc;
+  color: var(--primary);
   letter-spacing: -0.5px;
 }
 
 .tagline-small {
   font-size: 12px;
-  color: #999;
+  color: var(--accent);
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: 600;
@@ -71,22 +85,23 @@ body {
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 16px;
-  color: #1a1a1a;
+  color: var(--primary);
 }
 
 .hero-content > p {
   font-size: 20px;
-  color: #666;
+  color: var(--dark);
   margin-bottom: 40px;
 }
 
 /* Form Card */
 .form-card {
-  background: white;
+  background: var(--white);
   border-radius: 16px;
   padding: 40px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   margin-bottom: 30px;
+  border: 2px solid var(--accent);
 }
 
 .scan-form {
@@ -104,7 +119,7 @@ body {
   font-size: 16px;
   font-family: inherit;
   transition: all 0.3s;
-  background: white;
+  background: var(--white);
 }
 
 .form-field input::placeholder {
@@ -114,8 +129,8 @@ body {
 .form-field input:focus,
 .form-field select:focus {
   outline: none;
-  border-color: #0066cc;
-  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(201, 165, 108, 0.1);
 }
 
 .form-row-2 {
@@ -127,8 +142,8 @@ body {
 /* Button */
 .btn-scan {
   padding: 16px 24px;
-  background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
-  color: white;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+  color: var(--white);
   border: none;
   border-radius: 8px;
   font-size: 18px;
@@ -144,7 +159,8 @@ body {
 
 .btn-scan:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 102, 204, 0.3);
+  box-shadow: 0 8px 24px rgba(201, 165, 108, 0.3);
+  background: linear-gradient(135deg, var(--accent) 0%, var(--gold) 100%);
 }
 
 .btn-text {
@@ -173,8 +189,8 @@ body {
 
 .badge {
   padding: 8px 16px;
-  background: #f0f7ff;
-  color: #0066cc;
+  background: var(--light);
+  color: var(--primary);
   border-radius: 20px;
   font-size: 14px;
   font-weight: 600;
@@ -191,7 +207,7 @@ body {
   padding: 32px 24px;
   border-radius: 12px;
   text-align: center;
-  color: white;
+  color: var(--white);
   transition: transform 0.3s;
 }
 
@@ -204,11 +220,11 @@ body {
 }
 
 .visual-card.opportunity {
-  background: linear-gradient(135deg, #f39c12 0%, #f5a623 100%);
+  background: linear-gradient(135deg, var(--orange) 0%, #f5a623 100%);
 }
 
 .visual-card.good {
-  background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+  background: linear-gradient(135deg, var(--purple) 0%, #2ecc71 100%);
 }
 
 .visual-score {
@@ -229,14 +245,13 @@ body {
 }
 
 .checks-section h2,
-.preview-section h2,
 .how-it-works h2,
 .faq-section h2 {
   font-size: 36px;
   font-weight: 700;
   margin-bottom: 40px;
   text-align: center;
-  color: #1a1a1a;
+  color: var(--primary);
 }
 
 .checks-grid {
@@ -246,12 +261,13 @@ body {
 }
 
 .check-card {
-  background: white;
+  background: var(--white);
   padding: 32px 24px;
   border-radius: 12px;
   text-align: center;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
   transition: all 0.3s;
+  border-top: 4px solid var(--accent);
 }
 
 .check-card:hover {
@@ -267,112 +283,12 @@ body {
 .check-card h3 {
   font-size: 18px;
   margin-bottom: 12px;
-  color: #1a1a1a;
+  color: var(--primary);
 }
 
 .check-card p {
   font-size: 14px;
-  color: #666;
-}
-
-/* Preview section */
-.preview-section {
-  margin-bottom: 100px;
-}
-
-.preview-card {
-  background: white;
-  border-radius: 16px;
-  padding: 40px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  display: grid;
-  grid-template-columns: 180px 1fr;
-  gap: 40px;
-}
-
-.preview-score {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border-radius: 12px;
-  color: white;
-  padding: 20px;
-}
-
-.preview-score.critical {
-  background: linear-gradient(135deg, #ff6b6b 0%, #ff8787 100%);
-}
-
-.score-big {
-  font-size: 64px;
-  font-weight: 700;
-  line-height: 1;
-}
-
-.score-label {
-  font-size: 14px;
-  font-weight: 600;
-  margin-top: 8px;
-  opacity: 0.95;
-}
-
-.preview-findings {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.finding {
-  padding-bottom: 20px;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.finding:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-.finding h4 {
-  font-size: 16px;
-  color: #1a1a1a;
-  margin-bottom: 8px;
-  font-weight: 600;
-}
-
-.finding p {
-  font-size: 14px;
-  color: #666;
-  line-height: 1.6;
-}
-
-.preview-cta {
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 1px solid #e5e7eb;
-}
-
-.preview-cta p {
-  font-weight: 600;
-  margin-bottom: 12px;
-  color: #1a1a1a;
-}
-
-.btn-secondary {
-  width: 100%;
-  padding: 12px 24px;
-  background: #f0f7ff;
-  color: #0066cc;
-  border: 2px solid #0066cc;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.btn-secondary:hover {
-  background: #0066cc;
-  color: white;
+  color: var(--dark);
 }
 
 /* How it works */
@@ -388,7 +304,7 @@ body {
 }
 
 .step {
-  background: white;
+  background: var(--white);
   padding: 28px 24px;
   border-radius: 12px;
   text-align: center;
@@ -401,8 +317,8 @@ body {
   justify-content: center;
   width: 48px;
   height: 48px;
-  background: #0066cc;
-  color: white;
+  background: var(--accent);
+  color: var(--white);
   border-radius: 50%;
   font-weight: 700;
   font-size: 20px;
@@ -412,18 +328,18 @@ body {
 .step h3 {
   font-size: 18px;
   margin-bottom: 8px;
-  color: #1a1a1a;
+  color: var(--primary);
 }
 
 .step p {
   font-size: 14px;
-  color: #666;
+  color: var(--dark);
 }
 
 .arrow {
   display: none;
   font-size: 24px;
-  color: #ccc;
+  color: var(--accent);
   align-self: center;
 }
 
@@ -439,22 +355,23 @@ body {
 }
 
 .faq-item {
-  background: white;
+  background: var(--white);
   padding: 28px 24px;
   border-radius: 12px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid var(--accent);
 }
 
 .faq-item h4 {
   font-size: 16px;
-  color: #1a1a1a;
+  color: var(--primary);
   margin-bottom: 12px;
   font-weight: 600;
 }
 
 .faq-item p {
   font-size: 14px;
-  color: #666;
+  color: var(--dark);
   line-height: 1.6;
 }
 
@@ -462,8 +379,8 @@ body {
 .footer {
   text-align: center;
   padding: 40px 0;
-  border-top: 1px solid #e5e7eb;
-  color: #999;
+  border-top: 2px solid var(--accent);
+  color: var(--dark);
   font-size: 14px;
 }
 
@@ -472,7 +389,7 @@ body {
 }
 
 .footer a {
-  color: #0066cc;
+  color: var(--accent);
   text-decoration: none;
 }
 
@@ -508,12 +425,6 @@ body {
     grid-template-columns: 1fr;
   }
 
-  .preview-card {
-    grid-template-columns: 1fr;
-    gap: 24px;
-    padding: 28px 20px;
-  }
-
   .checks-grid {
     grid-template-columns: 1fr;
   }
@@ -536,4 +447,40 @@ body {
   .main {
     padding: 40px 0;
   }
+}
+
+/* Loading Spinner */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(201, 165, 108, 0.3);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 8px;
+}
+
+.btn-scan.loading {
+  opacity: 0.8;
+}
+
+.btn-scan.loading .btn-text {
+  display: flex;
+  align-items: center;
+}
+
+
+/* Check Description Text */
+.check-description {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+  margin-top: 12px;
+  font-style: italic;
 }

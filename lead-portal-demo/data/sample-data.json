@@ -1,0 +1,62 @@
+{
+  "_about": "Single source of truth for the demo's made-up numbers. The pages are plain HTML, so numbers are also typed into the pages. When you change a number here, change it on every page listed for it under shownOn, then run: npm run check",
+  "client": {
+    "name": "Northline Insurance",
+    "kind": "Independent home and auto insurance agency",
+    "city": "Tulsa, Oklahoma"
+  },
+  "timeline": {
+    "freeScanDone": "Oct 16",
+    "consultWeek": "Oct 19 – Oct 23",
+    "kickoff": "Oct 20",
+    "goLive": "Oct 30",
+    "portalPeriod": "Nov 1 – Nov 30",
+    "weeklyInsight": "Nov 23 – Nov 29",
+    "emailSent": "Mon, Nov 30, 8:00 AM"
+  },
+  "assumptions": {
+    "lifetimeCommissionShareOfPremium": 0.7
+  },
+  "channels": [
+    { "name": "Paid search", "group": "paid", "cost": 3000, "leads": 65, "qualified": 36, "policies": 10, "premium": 42300 },
+    { "name": "Paid social", "group": "paid", "cost": 3300, "leads": 71, "qualified": 31, "policies": 8, "premium": 24900 },
+    { "name": "Purchased shared leads", "group": "paid", "cost": 1500, "leads": 50, "qualified": 7, "policies": 1, "premium": 2400 },
+    { "name": "SEO", "group": "organic", "cost": 1200, "leads": 38, "qualified": 22, "policies": 6, "premium": 24600 },
+    { "name": "Google Business Profile", "group": "organic", "cost": 300, "leads": 41, "qualified": 21, "policies": 5, "premium": 19800 },
+    { "name": "AI answers", "group": "organic", "cost": 0, "leads": 7, "qualified": 5, "policies": 2, "premium": 8200 },
+    { "name": "Referrals", "group": "organic", "cost": 0, "leads": 15, "qualified": 11, "policies": 6, "premium": 21000 }
+  ],
+  "totals": { "cost": 9300, "leads": 287, "qualified": 133, "policies": 38, "premium": 143200, "costPerPolicy": 245 },
+  "priorMonth": { "leads": 274, "policies": 29, "premium": 109300, "costPerPolicy": 327, "organicShare": 0.48 },
+  "paidCampaigns": [
+    { "name": "Google · Home & auto quotes", "channel": "Paid search", "spend": 2600, "leads": 52, "qualified": 31, "policies": 9, "premium": 38700, "verdict": "Scale" },
+    { "name": "Meta · Bundle & save offer", "channel": "Paid social", "spend": 2100, "leads": 49, "qualified": 22, "policies": 5, "premium": 19500, "verdict": "Keep" },
+    { "name": "Meta · Free coverage review", "channel": "Paid social", "spend": 1200, "leads": 22, "qualified": 9, "policies": 3, "premium": 5400, "verdict": "Fix" },
+    { "name": "Purchased shared leads", "channel": "Purchased shared leads", "spend": 1500, "leads": 50, "qualified": 7, "policies": 1, "premium": 2400, "verdict": "Cut" },
+    { "name": "Google · Local Services Ads", "channel": "Paid search", "spend": 400, "leads": 13, "qualified": 5, "policies": 1, "premium": 3600, "verdict": "Watch" }
+  ],
+  "paidTotals": { "spend": 7800, "leads": 186, "qualified": 74, "policies": 19, "premium": 69600, "costPerQualified": 105, "lifetimeCommissionPerDollar": 6.25 },
+  "paidPrior": { "leads": 210, "qualifiedRate": 0.31, "costPerQualified": 123, "policies": 15, "lifetimeCommissionPerDollar": 4.8 },
+  "funnel": { "leads": 186, "replied60s": 181, "qualified": 74, "quoted": 51, "bound": 19 },
+  "funnelPrior": { "replied60sRate": 0.04, "qualifiedRate": 0.31, "quotedRate": 0.64, "boundRate": 0.36 },
+  "search": { "googleClicks": 1840, "googleClicksPrior": 1688, "mapsCalls": 29, "mapsCallsPrior": 24, "aiNamed": 5, "aiNamedPrior": 3, "aiQuestions": 20, "searchLeads": 86, "searchPolicies": 13 },
+  "freeScan": { "leads": 210, "medianReply": "3 hr 40 min", "within5min": 25, "score": 54, "aiNamed": 3 },
+  "week": { "leads": 68, "leadsPrior": 64, "policies": 9, "policiesPrior": 8, "premium": 33900, "premiumPrior": 30100, "aiNamed": 5, "aiNamedPrior": 4 },
+  "shownOn": [
+    { "text": "287", "pages": ["overview.html", "channels.html", "inbox.html"] },
+    { "text": "$143,200", "pages": ["overview.html", "channels.html"] },
+    { "text": "$245", "pages": ["channels.html"] },
+    { "text": "$105", "pages": ["overview.html", "lead-quality.html"] },
+    { "text": "$6.25", "pages": ["overview.html", "lead-quality.html"] },
+    { "text": "$69,600", "pages": ["overview.html", "lead-quality.html"] },
+    { "text": "186", "pages": ["overview.html", "lead-quality.html", "funnel.html"] },
+    { "text": "Nov 1 – Nov 30", "pages": ["overview.html", "channels.html", "search-ai.html", "lead-quality.html", "funnel.html"] },
+    { "text": "Oct 30", "pages": ["setup.html", "overview.html", "insights.html"] },
+    { "text": "Nov 23 – Nov 29", "pages": ["insights.html", "weekly-email.html"] },
+    { "text": "3 hr 40 min", "pages": ["website.html", "free-plan.html", "funnel.html"] },
+    { "text": "5 of 20", "pages": ["search-ai.html", "weekly-email.html"] },
+    { "text": "3 of 20", "pages": ["website.html", "free-plan.html", "search-ai.html"] },
+    { "text": "Oct 16", "pages": ["free-plan.html"] },
+    { "text": "Oct 20", "pages": ["setup.html", "lead-quality.html", "book-consult.html"] }
+  ]
+}

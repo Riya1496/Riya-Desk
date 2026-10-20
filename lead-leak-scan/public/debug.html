@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Debug - Check SessionStorage</title>
+  <style>
+    body { font-family: Arial; max-width: 800px; margin: 50px auto; padding: 20px; background: #f5f5f5; }
+    .section { background: white; padding: 20px; margin: 20px 0; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    button { padding: 10px 20px; margin: 5px; cursor: pointer; border: none; border-radius: 4px; background: #0066cc; color: white; }
+    button.danger { background: #cc0000; }
+    pre { background: #f0f0f0; padding: 15px; overflow: auto; border-radius: 4px; }
+    .success { color: green; font-weight: bold; }
+    .error { color: red; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Debug Dashboard</h1>
+
+  <div class="section">
+    <h2>SessionStorage Contents</h2>
+    <button onclick="showStorage()">Refresh Storage View</button>
+    <button class="danger" onclick="clearStorage()">CLEAR SessionStorage</button>
+    <pre id="storage-display">Loading...</pre>
+  </div>
+
+  <div class="section">
+    <h2>Submit Test Data & Go to Results</h2>
+    <form id="testForm">
+      <input type="text" id="businessName" placeholder="Business name" value="Melbourne Coffee Roasters" required style="width: 100%; padding: 8px; margin: 10px 0;">
+      <input type="url" id="website" placeholder="Website" value="https://melbournecoffee.com.au" required style="width: 100%; padding: 8px; margin: 10px 0;">
+      <input type="text" id="city" placeholder="City" value="Melbourne" required style="width: 100%; padding: 8px; margin: 10px 0;">
+      <input type="email" id="email" placeholder="Email" value="owner@melbournecoffee.com.au" required style="width: 100%; padding: 8px; margin: 10px 0;">
+      <button type="submit">1. Submit & Store Data</button>
+    </form>
+    <pre id="form-status">Not submitted yet</pre>
+  </div>
+
+  <div class="section">
+    <h2>Go to Results Page</h2>
+    <button onclick="goToResults()">2. Go to Results Page</button>
+    <p><small>After clicking, the results page should show YOUR data above, not mock data.</small></p>
+  </div>
+
+  <script>
+    function showStorage() {
+      const display = document.getElementById('storage-display');
+      const data = sessionStorage.getItem('scanResult');
+      if (data) {
+        try {
+          const parsed = JSON.parse(data);
+          display.textContent = JSON.stringify(parsed, null, 2);
+        } catch (e) {
+          display.textContent = 'ERROR: Invalid JSON in storage\n\n' + data;
+        }
+      } else {
+        display.textContent = '(empty - no data in sessionStorage)';
+      }
+    }
+
+    function clearStorage() {
+      if (confirm('Clear ALL sessionStorage? This will remove any saved results.')) {
+        sessionStorage.clear();
+        showStorage();
+        alert('SessionStorage cleared!');
+      }
+    }
+
+    function goToResults() {
+      const data = sessionStorage.getItem('scanResult');
+      if (!data) {
+        alert('No data in sessionStorage! Submit the form first.');
+        return;
+      }
+      window.location.href = '/results.html';
+    }
+
+    document.getElementById('testForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const status = document.getElementById('form-status');
+      status.textContent = 'Submitting...';
+
+      try {
+        const formData = {
+          businessName: document.getElementById('businessName').value,
+          website: document.getElementById('website').value,
+          city: document.getElementById('city').value,
+          email: document.getElementById('email').value
+        };
+
+        console.log('Sending to API:', formData);
+        
+        const response = await fetch('/api/scan', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        });
+
+        if (!response.ok) {
+          throw new Error(`API returned ${response.status}`);
+        }
+
+        const result = await response.json();
+        console.log('API Response:', result);
+
+        // Store in sessionStorage
+        sessionStorage.setItem('scanResult', JSON.stringify(result));
+        console.log('Stored in sessionStorage');
+
+        status.innerHTML = `<span class="success">✓ Success!</span><br>
+Data stored in sessionStorage:<br>
+Business: ${result.businessName}<br>
+City: ${result.city}<br>
+Score: ${result.overallScore}/100<br>
+Band: ${result.band}<br><br>
+Now click "2. Go to Results Page"`;
+
+        showStorage();
+      } catch (err) {
+        status.innerHTML = `<span class="error">✗ Error: ${err.message}</span>`;
+      }
+    });
+
+    // Show storage on load
+    showStorage();
+  </script>
+</body>
+</html>
