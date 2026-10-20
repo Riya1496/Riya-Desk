@@ -558,8 +558,9 @@ export async function checkReputation(businessName, city, html = '') {
 
     // If we found real data from Google or Trustpilot
     if (finalData && finalData.reviewCount > 0) {
-      // Analyze sentiment with Groq
-      const sentiment = await analyzeReviewSentiment(finalData.reviews);
+      // Sentiment analysis disabled (Groq models deprecated)
+      // TODO: Switch to stable AI service (OpenAI, Anthropic, etc.)
+      const sentiment = null; // await analyzeReviewSentiment(finalData.reviews);
 
       // Calculate score based on rating and review count
       let score = 15; // Base score
