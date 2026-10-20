@@ -88,6 +88,75 @@
                 </div>
               </div>
 
+              <!-- Optional: Review Data for Accurate Results -->
+              <div style="background: #f9f9f9; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #c9a56c;">
+                <div style="font-weight: 600; margin-bottom: 15px; color: #0d0b0a;">
+                  📊 Your Online Reputation (Optional - for more accurate results)
+                </div>
+
+                <div class="form-row-2">
+                  <div class="form-field">
+                    <label><strong>Your Google Rating</strong></label>
+                    <input
+                      type="number"
+                      id="userRating"
+                      name="userRating"
+                      placeholder="e.g., 4.5"
+                      min="1"
+                      max="5"
+                      step="0.1"
+                    >
+                    <div class="form-label-hint">Your current star rating (1-5)</div>
+                  </div>
+
+                  <div class="form-field">
+                    <label><strong>Your Review Count</strong></label>
+                    <input
+                      type="number"
+                      id="userReviewCount"
+                      name="userReviewCount"
+                      placeholder="e.g., 23"
+                      min="0"
+                    >
+                    <div class="form-label-hint">Total reviews you have</div>
+                  </div>
+                </div>
+
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e5e5e5;">
+                  <div style="font-size: 14px; color: #666; margin-bottom: 10px;">
+                    <strong>Main Competitor Rating & Reviews</strong> (helps us show you the gap)
+                  </div>
+
+                  <div class="form-row-2">
+                    <div class="form-field">
+                      <label><strong>Competitor 1 Rating</strong></label>
+                      <input
+                        type="number"
+                        id="competitor1Rating"
+                        name="competitor1Rating"
+                        placeholder="e.g., 4.7"
+                        min="1"
+                        max="5"
+                        step="0.1"
+                      >
+                      <div class="form-label-hint">Their star rating</div>
+                    </div>
+
+                    <div class="form-field">
+                      <label><strong>Competitor 1 Reviews</strong></label>
+                      <input
+                        type="number"
+                        id="competitor1Reviews"
+                        name="competitor1Reviews"
+                        placeholder="e.g., 156"
+                        min="0"
+                      >
+                      <div class="form-label-hint">Their review count</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <button type="submit" class="btn-scan">
                 <span class="btn-text">Get Free Scan</span>
                 <span class="btn-icon">→</span>

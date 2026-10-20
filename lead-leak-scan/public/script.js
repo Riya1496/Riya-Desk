@@ -8,13 +8,36 @@ document.addEventListener('DOMContentLoaded', function() {
       e.preventDefault();
       console.log('Form submitted');
 
-      // Collect only 4 basic fields
+      // Collect basic fields and optional reputation data
       const formData = {
         businessName: document.getElementById('businessName').value,
         website: document.getElementById('website').value,
         city: document.getElementById('city').value,
         email: document.getElementById('email').value
       };
+
+      // Add optional reputation data if provided
+      const userRating = document.getElementById('userRating').value;
+      const userReviewCount = document.getElementById('userReviewCount').value;
+      const competitor1Rating = document.getElementById('competitor1Rating').value;
+      const competitor1Reviews = document.getElementById('competitor1Reviews').value;
+
+      if (userRating || userReviewCount || competitor1Rating || competitor1Reviews) {
+        formData.reputationData = {
+          userRating: userRating ? parseFloat(userRating) : undefined,
+          userReviewCount: userReviewCount ? parseInt(userReviewCount) : undefined,
+          competitors: []
+        };
+
+        // Add competitor data if provided
+        if (competitor1Rating || competitor1Reviews) {
+          formData.reputationData.competitors.push({
+            name: 'Competitor 1',
+            rating: competitor1Rating ? parseFloat(competitor1Rating) : 4.6,
+            reviews: competitor1Reviews ? parseInt(competitor1Reviews) : 100
+          });
+        }
+      }
 
       console.log('Form data collected:', formData);
 
