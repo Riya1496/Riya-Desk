@@ -12,6 +12,8 @@ const GROQ_API_KEY = process.env.GROQ_API_KEY;
 const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
 const GOOGLE_PLACES_API_KEY = process.env.GOOGLE_PLACES_API_KEY;
 const GOOGLE_PLACES_URL = 'https://maps.googleapis.com/maps/api/place';
+const TRUSTPILOT_API_KEY = process.env.TRUSTPILOT_API_KEY;
+const TRUSTPILOT_API_URL = 'https://api.trustpilot.com/v1';
 
 // Pixel detection patterns
 const PIXEL_PATTERNS = {
@@ -295,6 +297,95 @@ async function fetchGoogleReviews(businessName, city) {
 }
 
 /**
+ * Fetch Trustpilot Reviews using public API
+ */
+async function fetchTrustpilotReviews(businessName, city) {
+  if (!TRUSTPILOT_API_KEY) {
+    console.log('⚠️ Trustpilot API key not configured');
+    return null;
+  }
+
+  try {
+    console.log(`🔍 Searching Trustpilot for "${businessName}" in ${city}`);
+
+    // Search for the business on Trustpilot
+    const searchParams = new URLSearchParams({
+      query: `${businessName} ${city}`,
+      locale: 'en-US'
+    });
+
+    const searchResponse = await fetch(
+      `${TRUSTPILOT_API_URL}/search/businesses?${searchParams}`,
+      {
+        headers: {
+          'Authorization': `Bearer ${TRUSTPILOT_API_KEY}`,
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+
+    if (!searchResponse.ok) {
+      console.log(`  Trustpilot search failed: ${searchResponse.status}`);
+      return null;
+    }
+
+    const searchData = await searchResponse.json();
+
+    if (!searchData.businesses || searchData.businesses.length === 0) {
+      console.log(`  No Trustpilot results for ${businessName}`);
+      return null;
+    }
+
+    const business = searchData.businesses[0];
+    const businessId = business.id;
+
+    console.log(`  Found on Trustpilot: ${business.name}`);
+
+    // Fetch reviews for the business
+    const reviewsResponse = await fetch(
+      `${TRUSTPILOT_API_URL}/businesses/${businessId}/reviews?pageSize=10&sort=LATEST`,
+      {
+        headers: {
+          'Authorization': `Bearer ${TRUSTPILOT_API_KEY}`,
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+
+    if (!reviewsResponse.ok) {
+      console.log(`  Failed to fetch Trustpilot reviews: ${reviewsResponse.status}`);
+      return null;
+    }
+
+    const reviewsData = await reviewsResponse.json();
+
+    const trustpilotRating = business.stars || 0;
+    const trustpilotReviewCount = business.reviewCount || 0;
+
+    // Convert Trustpilot review format to match Google format
+    const reviews = (reviewsData.reviews || []).map(review => ({
+      text: review.review || review.reviewContent?.title || '',
+      rating: review.rating || 0,
+      author: review.consumer?.name || 'Anonymous',
+      published: review.createdAt
+    }));
+
+    console.log(`  Rating: ${trustpilotRating}★ (${trustpilotReviewCount} reviews)`);
+
+    return {
+      name: business.name,
+      rating: trustpilotRating,
+      reviewCount: trustpilotReviewCount,
+      reviews: reviews,
+      source: 'trustpilot'
+    };
+  } catch (error) {
+    console.error('❌ Trustpilot API error:', error.message);
+    return null;
+  }
+}
+
+/**
  * Analyze reviews sentiment using Groq AI
  */
 async function analyzeReviewSentiment(reviews) {
@@ -303,35 +394,93 @@ async function analyzeReviewSentiment(reviews) {
   }
 
   try {
-    console.log(`📊 Analyzing sentiment for ${reviews.length} reviews with Groq`);
+    // Extract review text from various possible structures
+    const reviewsWithText = reviews
+      .map(r => {
+        // Google Places API returns review with .text field
+        let text = '';
+        if (typeof r === 'string') {
+          text = r;
+        } else if (r.text && typeof r.text === 'string') {
+          text = r.text;
+        } else if (r.originalText && typeof r.originalText === 'string') {
+          text = r.originalText;
+        } else if (typeof r === 'object' && Object.keys(r).length > 0) {
+          // Try to find any text-like field
+          const textField = Object.values(r).find(v => typeof v === 'string' && v.length > 20);
+          text = textField || '';
+        }
+        return {
+          text: text.trim(),
+          rating: r.rating || 5
+        };
+      })
+      .filter(r => r.text && r.text.length > 0)
+      .slice(0, 10); // Limit to 10 reviews for API efficiency
 
-    const reviewTexts = reviews
-      .slice(0, 10) // Limit to 10 reviews for API efficiency
+    if (reviewsWithText.length === 0) {
+      console.log(`⚠️ No review text available for sentiment analysis`);
+      return null;
+    }
+
+    console.log(`📊 Analyzing sentiment for ${reviewsWithText.length} reviews with Groq`);
+
+    const reviewTexts = reviewsWithText
       .map(r => `"${r.text}" (${r.rating}★)`)
       .join('\n');
 
-    const response = await fetch(GROQ_API_URL, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${GROQ_API_KEY}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        model: 'mixtral-8x7b-32768',
-        messages: [{
-          role: 'user',
-          content: `Analyze the sentiment of these reviews. For each, classify as POSITIVE, NEUTRAL, or NEGATIVE. Also identify the top 3 issues mentioned across negative reviews. Format your response as JSON with: { "sentiments": [list of classifications], "top_issues": ["issue1", "issue2", "issue3"], "overall_sentiment": "POSITIVE|NEUTRAL|NEGATIVE" }
+    // Try multiple models in case one is deprecated
+    const models = [
+      'llama-2-70b-4096',        // Most stable, been around longest
+      'llama-3.1-70b-versatile', // Newer alternative
+      'mixtral-8x7b-32k'         // Fallback
+    ];
+
+    let response = null;
+    let lastError = null;
+
+    for (const model of models) {
+      try {
+        response = await fetch(GROQ_API_URL, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${GROQ_API_KEY}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            model: model,
+            messages: [{
+              role: 'user',
+              content: `Analyze the sentiment of these ${reviewsWithText.length} reviews. For each, classify as POSITIVE, NEUTRAL, or NEGATIVE. Also identify the top 2-3 common issues mentioned across negative reviews (if any). Format your response as JSON: { "sentiments": [array of POSITIVE/NEUTRAL/NEGATIVE], "top_issues": ["issue1", "issue2"], "overall_sentiment": "POSITIVE|NEUTRAL|NEGATIVE" }
 
 Reviews:
 ${reviewTexts}`
-        }],
-        max_tokens: 500,
-        temperature: 0.3
-      })
-    });
+            }],
+            max_tokens: 500,
+            temperature: 0.3
+          })
+        });
+
+        if (response.ok) {
+          console.log(`  Using model: ${model}`);
+          break;
+        } else {
+          lastError = response.status;
+          response = null;
+        }
+      } catch (e) {
+        lastError = e.message;
+      }
+    }
+
+    if (!response) {
+      throw new Error(`No available Groq models (last error: ${lastError})`);
+    }
 
     if (!response.ok) {
-      throw new Error(`Groq sentiment analysis failed: ${response.status}`);
+      const errorText = await response.text();
+      console.log(`  HTTP ${response.status}: ${errorText.substring(0, 200)}`);
+      throw new Error(`Groq API error: ${response.status}`);
     }
 
     const data = await response.json();
@@ -342,10 +491,13 @@ ${reviewTexts}`
     if (jsonMatch) {
       const analysis = JSON.parse(jsonMatch[0]);
       console.log(`  Sentiment: ${analysis.overall_sentiment}`);
-      console.log(`  Top issues: ${analysis.top_issues.join(', ')}`);
+      if (analysis.top_issues && analysis.top_issues.length > 0) {
+        console.log(`  Top issues: ${analysis.top_issues.join(', ')}`);
+      }
       return analysis;
     }
 
+    console.log(`  No JSON found in response`);
     return null;
   } catch (error) {
     console.error('❌ Sentiment analysis error:', error.message);
@@ -355,7 +507,7 @@ ${reviewTexts}`
 
 /**
  * CHECK 4: Customer Reviews - REAL DATA
- * Fetches Google reviews + analyzes sentiment with Groq
+ * Fetches reviews from Google Places + Trustpilot + analyzes sentiment with Groq
  */
 export async function checkReputation(businessName, city, html = '') {
   try {
@@ -363,27 +515,66 @@ export async function checkReputation(businessName, city, html = '') {
 
     // STRATEGY 1: Try Google Places API first (real data)
     let googleData = await fetchGoogleReviews(businessName, city);
+    let trustpilotData = null;
+
+    // STRATEGY 2: Also try Trustpilot for enriched data
+    if (TRUSTPILOT_API_KEY) {
+      trustpilotData = await fetchTrustpilotReviews(businessName, city);
+    }
+
+    // STRATEGY 3: Combine or use best available data
+    let finalData = null;
+    let combinedSources = [];
 
     if (googleData && googleData.reviewCount > 0) {
+      finalData = googleData;
+      combinedSources.push('Google Places');
       console.log(`✅ Got Google Places data: ${googleData.rating}★ (${googleData.reviewCount} reviews)`);
+    }
 
+    if (trustpilotData && trustpilotData.reviewCount > 0) {
+      if (!finalData) {
+        finalData = trustpilotData;
+        console.log(`✅ Got Trustpilot data: ${trustpilotData.rating}★ (${trustpilotData.reviewCount} reviews)`);
+      } else {
+        // If we have both, combine the data
+        combinedSources.push('Trustpilot');
+        console.log(`✅ Also found on Trustpilot: ${trustpilotData.rating}★ (${trustpilotData.reviewCount} reviews)`);
+
+        // Use average rating if both sources available
+        const averageRating = ((googleData.rating || 0) + (trustpilotData.rating || 0)) / 2;
+        const totalReviews = (googleData.reviewCount || 0) + (trustpilotData.reviewCount || 0);
+
+        finalData = {
+          name: googleData.name || trustpilotData.name,
+          rating: averageRating,
+          reviewCount: totalReviews,
+          reviews: [...(googleData.reviews || []), ...(trustpilotData.reviews || [])],
+          source: 'google_places_trustpilot',
+          sources: combinedSources
+        };
+      }
+    }
+
+    // If we found real data from Google or Trustpilot
+    if (finalData && finalData.reviewCount > 0) {
       // Analyze sentiment with Groq
-      const sentiment = await analyzeReviewSentiment(googleData.reviews);
+      const sentiment = await analyzeReviewSentiment(finalData.reviews);
 
       // Calculate score based on rating and review count
       let score = 15; // Base score
 
-      if (googleData.rating >= 4.7) {
+      if (finalData.rating >= 4.7) {
         score += 8;
-      } else if (googleData.rating >= 4.5) {
+      } else if (finalData.rating >= 4.5) {
         score += 6;
-      } else if (googleData.rating >= 4.0) {
+      } else if (finalData.rating >= 4.0) {
         score += 4;
-      } else if (googleData.rating >= 3.5) {
+      } else if (finalData.rating >= 3.5) {
         score += 2;
       }
 
-      if (googleData.reviewCount >= 20) {
+      if (finalData.reviewCount >= 20) {
         score += 2;
       }
 
@@ -393,17 +584,21 @@ export async function checkReputation(businessName, city, html = '') {
       if (score >= 20) severity = 'good';
       else if (score >= 10) severity = 'warning';
 
+      const sourceLabel = finalData.sources?.length > 1
+        ? `${combinedSources.join(' + ')}`
+        : combinedSources[0] || finalData.source;
+
       return {
         checkId: 'reputation',
         checkName: '⭐ Customer Reviews',
-        rating: googleData.rating,
-        reviewCount: googleData.reviewCount,
-        source: 'Google Places',
+        rating: parseFloat(finalData.rating.toFixed(1)),
+        reviewCount: finalData.reviewCount,
+        source: sourceLabel,
         sentiment: sentiment,
         score,
         severity,
-        method: 'google_places_api',
-        note: `Found real Google reviews: ${googleData.rating}★ with ${googleData.reviewCount} reviews`
+        method: 'api_integrated',
+        note: `Found real reviews from ${sourceLabel}: ${finalData.rating?.toFixed(1)}★ with ${finalData.reviewCount} reviews`
       };
     }
 

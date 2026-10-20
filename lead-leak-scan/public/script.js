@@ -222,22 +222,23 @@ function renderCheckMeters(checks) {
         }
       }
 
-      if (check.method === 'google_places_api') {
+      // Handle different data sources
+      if (check.method === 'api_integrated' || check.method === 'google_places_api') {
         if (rating >= 4.5) {
-          return `<strong>We found:</strong> ${rating}★ (${reviewCount} Google reviews). <strong>Status:</strong> Excellent reputation. Keep asking for reviews.${sentimentText}`;
+          return `<strong>We found:</strong> ${rating}★ (${reviewCount} reviews from ${source}). <strong>Status:</strong> Excellent reputation. Keep asking for reviews.${sentimentText}`;
         } else if (rating >= 4.0) {
-          return `<strong>We found:</strong> ${rating}★ (${reviewCount} Google reviews). <strong>Status:</strong> Good reputation. Focus on the few concerns mentioned.${sentimentText}`;
+          return `<strong>We found:</strong> ${rating}★ (${reviewCount} reviews from ${source}). <strong>Status:</strong> Good reputation. Focus on the few concerns mentioned.${sentimentText}`;
         } else {
-          return `<strong>We found:</strong> ${rating}★ (${reviewCount} Google reviews). <strong>Problem:</strong> Low rating hurts conversions. <strong>Action:</strong> Address customer concerns immediately.${sentimentText}`;
+          return `<strong>We found:</strong> ${rating}★ (${reviewCount} reviews from ${source}). <strong>Problem:</strong> Low rating hurts conversions. <strong>Action:</strong> Address customer concerns immediately.${sentimentText}`;
         }
       } else if (check.method === 'baseline') {
         return '<strong>We found:</strong> No reviews detected on your website. <strong>Problem:</strong> Missing social proof. <strong>Action:</strong> Add Google Reviews widget or collect customer testimonials. Reviews increase conversions by 30%.';
       } else if (reviewCount === 0) {
         return `<strong>We found:</strong> Review system (${source}) but no reviews yet. <strong>Action:</strong> Actively collect reviews from customers. Start with 5-10 to build momentum.`;
       } else if (rating < 4.0) {
-        return `<strong>We found:</strong> ${reviewCount} reviews at ${rating}★. <strong>Problem:</strong> Rating below 4.0 hurts conversions. <strong>Action:</strong> Improve service + address negative reviews.`;
+        return `<strong>We found:</strong> ${reviewCount} reviews at ${rating}★ (from ${source}). <strong>Problem:</strong> Rating below 4.0 hurts conversions. <strong>Action:</strong> Improve service + address negative reviews.`;
       } else {
-        return `<strong>We found:</strong> ${reviewCount} reviews at ${rating}★. <strong>Status:</strong> Strong social proof. Keep asking for reviews.`;
+        return `<strong>We found:</strong> ${reviewCount} reviews at ${rating}★ (from ${source}). <strong>Status:</strong> Strong social proof. Keep asking for reviews.`;
       }
     }
   };

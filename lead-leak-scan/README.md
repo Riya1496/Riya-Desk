@@ -39,7 +39,9 @@ Analyzes: Contact form field count, phone link, scheduling, CTA visibility
 Panic hook: "Your 8-field form costs you 60% of inquiries. Competitors use 3 fields and convert 2x more."
 
 ### 4. **Reputation Velocity** (0-25 points)
-Compares: Business rating + review count vs. top 2 competitors
+Fetches **real review data** from: Google Places API + Trustpilot API
+
+Analyzes: Business rating, total reviews, sentiment of negative reviews (optional)
 
 Panic hook: "You're 4.2★ with 12 reviews. Competitor A is 4.8★ with 186 reviews. You're ranked 3rd."
 
@@ -99,21 +101,15 @@ Runs on `http://localhost:3000`
   "businessName": "Example Insurance Co.",
   "website": "https://example.com",
   "city": "Sydney",
-  "email": "user@email.com",
-  "aiData": {
-    "appearanceCount": 3,
-    "competitorCount": 11
-  },
-  "reputationData": {
-    "userRating": 4.2,
-    "userReviewCount": 12,
-    "competitors": [
-      { "name": "Competitor A", "rating": 4.8, "reviewCount": 186 },
-      { "name": "Competitor B", "rating": 4.7, "reviewCount": 94 }
-    ]
-  }
+  "email": "user@email.com"
 }
 ```
+
+**Note:** All data is auto-fetched. No need for manual input:
+- Website HTML is analyzed for pixels, forms, AI visibility signals
+- Google Places API fetches real reviews (rating, count, sentiment)
+- Trustpilot API enriches data if available
+- Optional: `aiData` and `reputationData` can still be provided to override auto-detection
 
 **Response:**
 ```json
@@ -139,10 +135,35 @@ Runs on `http://localhost:3000`
 }
 ```
 
+## API Credentials Required
+
+The scan uses **real data from public APIs**. You'll need to set up:
+
+### Google Places API (Required)
+- Get key: https://console.cloud.google.com/
+- Enable: Places API, Maps JavaScript API
+- Add to `.env`: `GOOGLE_PLACES_API_KEY=your_key`
+- Fetches: Real ratings, review counts, individual reviews
+
+### Trustpilot API (Optional)
+- Get credentials: https://developers.trustpilot.com/
+- Select: "Data Solutions" product tier
+- Add to `.env`: `TRUSTPILOT_API_KEY=your_key`
+- Enriches: Data from Trustpilot for businesses listed there
+
+### Groq AI (Optional)
+- Get key: https://console.groq.com/keys
+- Add to `.env`: `GROQ_API_KEY=your_key`
+- Analyzes: Review sentiment + identifies common issues
+- **Note:** Groq models deprecate frequently; sentiment is non-blocking
+
+See `.env.example` for template and `TRUSTPILOT_SETUP.md` for detailed credentials guide.
+
 ## MVP Features
 
 ✅ Landing page with scan form  
 ✅ 4 checks: pixels, AI visibility, lead friction, reputation  
+✅ **Real API data** - Google Places + Trustpilot reviews  
 ✅ Score calculation (0-100)  
 ✅ Results page with 3 score bands  
 ✅ Specific findings (no generic benchmarks)  
@@ -151,13 +172,18 @@ Runs on `http://localhost:3000`
 
 ## Future Enhancements (V2+)
 
+- ✅ ~~Review sentiment analysis~~ (Basic implementation done with Groq)
+- Competitor analysis (auto-find + compare)
 - Async Lighthouse reports (email after 10 min)
 - Schema markup validation
-- Review sentiment analysis
-- Multi-country language support
-- Lead capture to Airtable
-- Email notifications
-- CRM integration (Pipedrive, HubSpot)
+- Multi-country language support (German, Spanish, French)
+- Lead capture to Airtable with auto-sync
+- Email result notifications
+- CRM integration (Pipedrive, HubSpot, Zoho)
+- Slack integration for team notifications
+- Mobile app (React Native)
+- Dashboard for tracking scan trends
+- A/B testing recommendations (before/after audit)
 
 ## Hosting
 
