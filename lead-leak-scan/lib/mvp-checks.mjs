@@ -783,7 +783,6 @@ async function generateNarrativeFindings(businessName, city, checks, html) {
   try {
     const pixelCheck = checks[0];
     const aiCheck = checks[1];
-    const frictionCheck = checks[2];
     const reputationCheck = checks[3];
 
     // Prepare data summary for Gemini
@@ -792,35 +791,29 @@ async function generateNarrativeFindings(businessName, city, checks, html) {
     const aiScore = aiCheck.score;
     const reviewRating = reputationCheck.rating;
     const reviewCount = reputationCheck.reviewCount;
-    const formFieldCount = frictionCheck.fieldCount || 0;
 
-    const prompt = `You are a marketing analyst. Create 4-5 compelling, horoscope-style findings for this business scan.
+    const prompt = `Create 4 brief, catchy findings. 1-2 sentences ONLY. Only use numbers you're certain about.
 
 Business: ${businessName} in ${city}
-Data:
-- Missing tracking pixels: ${missingPixels.join(', ') || 'None detected'}
-- Found pixels: ${foundPixels.join(', ') || 'None'}
-- AI visibility score: ${aiScore}/25 (weak brand signals)
-- Customer rating: ${reviewRating}★ (${reviewCount} reviews)
-- Contact form complexity: ${formFieldCount} fields
+- Missing pixels: ${missingPixels.join(', ')}
+- AI visibility: ${aiScore}/25
+- Reviews: ${reviewRating}★ (${reviewCount})
 
-Tasks:
-1. Name 2-3 likely competitors in the ${businessName.split(' ').slice(-1)[0]} industry in ${city}
-2. For EACH competitor, imagine what they DO have (high review count, better pixels, etc)
-3. Create narrative findings (not bullet points) that are:
-   - Specific to THIS business (not generic)
-   - Interesting like a horoscope (not clinical)
-   - Show the gap vs competitors with real examples
-   - Include the missing pixels/issues in engaging language
+4 findings needed:
+1. 📊 Tracking gap (specific missing pixels vs competitor advantage)
+2. 🤖 AI search gap (why they rank lower in ChatGPT/Claude)
+3. 💡 Market insight (competitor strategy or market position gap)
+4. ⭐ Review power (how reviews translate to conversions)
 
-Format as JSON array:
+Names 2-3 actual competitors in ${city} for this industry.
+
+JSON format - keep insights SHORT & punchy:
 [
-  {"title": "The Visibility Gap", "insight": "Your business has ${reviewCount} reviews. Most ${city} competitors in this space have 200+. Meanwhile, you're missing ${missingPixels.length} tracking pixels that would tell you WHERE your customers come from."},
-  {"title": "The AI Blindspot", "insight": "..."},
+  {"title": "📊 Title", "insight": "Brief 1-2 sentence insight with specific competitor name."},
   ...
 ]
 
-Make each 2-3 sentences. Be specific. Mention competitor behaviors. Use the real numbers above.`;
+NO fluff. Only mention numbers if 100% certain from data above.`;
 
     const response = await geminiClient.models.generateContent({
       model: 'gemini-3.5-flash-lite',

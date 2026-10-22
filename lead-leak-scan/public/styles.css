@@ -489,11 +489,11 @@ body {
 .narrative-finding {
   background: linear-gradient(135deg, #f8f5f0 0%, #faf8f3 100%);
   border-left: 4px solid var(--accent);
-  padding: 24px;
+  padding: 16px 20px;
   border-radius: 8px;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   display: flex;
-  gap: 20px;
+  gap: 16px;
 }
 
 .narrative-finding:nth-child(odd) {
@@ -505,12 +505,13 @@ body {
 }
 
 .finding-number {
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 700;
   color: var(--accent);
-  min-width: 50px;
+  min-width: 40px;
   text-align: center;
   line-height: 1;
+  flex-shrink: 0;
 }
 
 .narrative-finding:nth-child(odd) .finding-number {
@@ -522,14 +523,14 @@ body {
 }
 
 .finding-title {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--primary);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .finding-text {
-  font-size: 15px;
-  color: #333;
-  line-height: 1.7;
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
 }
