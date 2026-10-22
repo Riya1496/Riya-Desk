@@ -775,6 +775,76 @@ export function calculateOverallScore(checks) {
 }
 
 /**
+ * Generate narrative findings with real data + AI competitor analysis
+ */
+async function generateNarrativeFindings(businessName, city, checks, html) {
+  if (!geminiClient) return null;
+
+  try {
+    const pixelCheck = checks[0];
+    const aiCheck = checks[1];
+    const frictionCheck = checks[2];
+    const reputationCheck = checks[3];
+
+    // Prepare data summary for Gemini
+    const missingPixels = pixelCheck.missing || [];
+    const foundPixels = pixelCheck.found || [];
+    const aiScore = aiCheck.score;
+    const reviewRating = reputationCheck.rating;
+    const reviewCount = reputationCheck.reviewCount;
+    const formFieldCount = frictionCheck.fieldCount || 0;
+
+    const prompt = `You are a marketing analyst. Create 4-5 compelling, horoscope-style findings for this business scan.
+
+Business: ${businessName} in ${city}
+Data:
+- Missing tracking pixels: ${missingPixels.join(', ') || 'None detected'}
+- Found pixels: ${foundPixels.join(', ') || 'None'}
+- AI visibility score: ${aiScore}/25 (weak brand signals)
+- Customer rating: ${reviewRating}★ (${reviewCount} reviews)
+- Contact form complexity: ${formFieldCount} fields
+
+Tasks:
+1. Name 2-3 likely competitors in the ${businessName.split(' ').slice(-1)[0]} industry in ${city}
+2. For EACH competitor, imagine what they DO have (high review count, better pixels, etc)
+3. Create narrative findings (not bullet points) that are:
+   - Specific to THIS business (not generic)
+   - Interesting like a horoscope (not clinical)
+   - Show the gap vs competitors with real examples
+   - Include the missing pixels/issues in engaging language
+
+Format as JSON array:
+[
+  {"title": "The Visibility Gap", "insight": "Your business has ${reviewCount} reviews. Most ${city} competitors in this space have 200+. Meanwhile, you're missing ${missingPixels.length} tracking pixels that would tell you WHERE your customers come from."},
+  {"title": "The AI Blindspot", "insight": "..."},
+  ...
+]
+
+Make each 2-3 sentences. Be specific. Mention competitor behaviors. Use the real numbers above.`;
+
+    const response = await geminiClient.models.generateContent({
+      model: 'gemini-3.5-flash-lite',
+      contents: [{ role: 'user', parts: [{ text: prompt }] }]
+    });
+
+    const responseText = response.candidates[0].content.parts[0].text;
+    const jsonMatch = responseText.match(/\[[\s\S]*\]/);
+
+    if (jsonMatch) {
+      const findings = JSON.parse(jsonMatch[0]);
+      console.log(`📖 Generated ${findings.length} narrative findings`);
+      return findings;
+    }
+
+    console.log(`⚠️ Could not parse narrative findings`);
+    return null;
+  } catch (error) {
+    console.error('❌ Narrative generation failed:', error.message);
+    return null;
+  }
+}
+
+/**
  * MAIN FUNCTION: Run all checks with REAL data
  */
 export async function runAllChecks(businessName, website, city, additionalData = {}) {
@@ -824,6 +894,10 @@ export async function runAllChecks(businessName, website, city, additionalData =
     const checks = [pixelCheck, aiCheck, frictionCheck, reputationCheck];
     const result = calculateOverallScore(checks);
 
+    // STEP 4: Generate narrative findings
+    console.log('\nStep 4: Generating personalized insights...');
+    const findings = await generateNarrativeFindings(businessName, city, checks, html);
+
     console.log(`\n✅ Scan complete!`);
     console.log(`   Score: ${result.overallScore}/100 (${result.band})`);
     console.log(`   Pixels: ${pixelCheck.score}/25`);
@@ -837,6 +911,7 @@ export async function runAllChecks(businessName, website, city, additionalData =
       city,
       websiteValid,
       ...result,
+      findings: findings || [],
       scannedAt: new Date().toISOString()
     };
 

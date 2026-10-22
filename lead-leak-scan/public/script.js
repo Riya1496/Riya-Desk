@@ -158,20 +158,36 @@ function initResultsPage() {
   if (bandTitle) bandTitle.textContent = bandTitleText;
   if (bandDescription) bandDescription.textContent = bandDescriptionText;
 
-  // Render check meters
-  renderCheckMeters(scanResult.checks);
+  // Render check meters or narrative findings
+  renderCheckMeters(scanResult.checks, scanResult.findings);
 
   // Setup CTA buttons
   setupCTAButtons(scanResult);
 
 }
 
-function renderCheckMeters(checks) {
+function renderCheckMeters(checks, findings) {
   const grid = document.getElementById('checks-grid');
   if (!grid) return;
 
   grid.innerHTML = '';
 
+  // If narrative findings are available, display those instead
+  if (findings && findings.length > 0) {
+    findings.forEach((finding, index) => {
+      const html = `
+        <div class="narrative-finding">
+          <div class="finding-number">${index + 1}</div>
+          <div class="finding-title">${finding.title || 'Finding'}</div>
+          <div class="finding-text">${finding.insight || ''}</div>
+        </div>
+      `;
+      grid.innerHTML += html;
+    });
+    return;
+  }
+
+  // Fallback to traditional check meters if no findings
   const checkDescriptions = {
     'pixel_audit': (check) => {
       const found = check.found?.length || 0;

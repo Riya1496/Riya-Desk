@@ -484,3 +484,52 @@ body {
   margin-top: 12px;
   font-style: italic;
 }
+
+/* Narrative Findings */
+.narrative-finding {
+  background: linear-gradient(135deg, #f8f5f0 0%, #faf8f3 100%);
+  border-left: 4px solid var(--accent);
+  padding: 24px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+.narrative-finding:nth-child(odd) {
+  border-left-color: var(--purple);
+}
+
+.narrative-finding:nth-child(even) {
+  border-left-color: var(--orange);
+}
+
+.finding-number {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--accent);
+  min-width: 50px;
+  text-align: center;
+  line-height: 1;
+}
+
+.narrative-finding:nth-child(odd) .finding-number {
+  color: var(--purple);
+}
+
+.narrative-finding:nth-child(even) .finding-number {
+  color: var(--orange);
+}
+
+.finding-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.finding-text {
+  font-size: 15px;
+  color: #333;
+  line-height: 1.7;
+}
