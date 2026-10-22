@@ -485,6 +485,39 @@ body {
   font-style: italic;
 }
 
+/* Score Breakdown */
+.score-breakdown {
+  background: #f0f7ff;
+  border-left: 4px solid #0066cc;
+  padding: 16px;
+  border-radius: 8px;
+  margin: 30px 0;
+  font-size: 13px;
+  color: #333;
+  line-height: 1.6;
+}
+
+.score-breakdown h4 {
+  margin: 0 0 10px 0;
+  color: #0066cc;
+  font-size: 14px;
+}
+
+.score-breakdown-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(0,102,204,0.1);
+}
+
+.score-breakdown-item:last-child {
+  border-bottom: none;
+}
+
+.score-breakdown-item strong {
+  font-weight: 600;
+}
+
 /* Narrative Findings */
 .narrative-finding {
   background: linear-gradient(135deg, #f8f5f0 0%, #faf8f3 100%);

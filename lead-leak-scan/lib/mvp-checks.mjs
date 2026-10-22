@@ -799,11 +799,11 @@ Business: ${businessName} in ${city}
 - AI visibility: ${aiScore}/25
 - Reviews: ${reviewRating}★ (${reviewCount})
 
-4 findings needed:
+4 findings needed in THIS ORDER:
 1. 📊 Tracking gap (specific missing pixels vs competitor advantage)
 2. 🤖 AI search gap (why they rank lower in ChatGPT/Claude)
-3. 💡 Market insight (competitor strategy or market position gap)
-4. ⭐ Review power (how reviews translate to conversions)
+3. ⭐ Review power (how reviews translate to conversions) - EMPHASIZE THE STRENGTH
+4. 💡 Market insight (competitor strategy or market position gap)
 
 Names 2-3 actual competitors in ${city} for this industry.
 

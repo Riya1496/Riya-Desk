@@ -158,12 +158,52 @@ function initResultsPage() {
   if (bandTitle) bandTitle.textContent = bandTitleText;
   if (bandDescription) bandDescription.textContent = bandDescriptionText;
 
+  // Render score breakdown
+  renderScoreBreakdown(scanResult.checks);
+
   // Render check meters or narrative findings
   renderCheckMeters(scanResult.checks, scanResult.findings);
 
   // Setup CTA buttons
   setupCTAButtons(scanResult);
 
+}
+
+function renderScoreBreakdown(checks) {
+  const container = document.getElementById('score-breakdown');
+  if (!container) return;
+
+  const checkNames = {
+    'pixel_audit': '📊 Website Tracking',
+    'ai_visibility': '🤖 AI Visibility',
+    'lead_friction': '📋 Contact Form',
+    'reputation': '⭐ Customer Reviews'
+  };
+
+  let html = `
+    <h4>📊 How Your Score Breaks Down</h4>
+    <p style="margin: 0 0 10px 0; font-size: 12px; color: #666;">Each area is scored out of 25 points. Here's where you stand:</p>
+  `;
+
+  checks.forEach(check => {
+    const name = checkNames[check.checkId] || check.checkName;
+    html += `
+      <div class="score-breakdown-item">
+        <span>${name}</span>
+        <strong>${check.score}/25</strong>
+      </div>
+    `;
+  });
+
+  const total = checks.reduce((sum, c) => sum + (c.score || 0), 0);
+  html += `
+    <div class="score-breakdown-item" style="border-top: 2px solid #0066cc; padding-top: 10px; margin-top: 10px; font-weight: bold;">
+      <span>Total Score</span>
+      <strong>${total}/100</strong>
+    </div>
+  `;
+
+  container.innerHTML = html;
 }
 
 function renderCheckMeters(checks, findings) {
