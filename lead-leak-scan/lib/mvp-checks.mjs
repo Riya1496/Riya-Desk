@@ -3,17 +3,29 @@
  *
  * Four core checks - all using actual website analysis:
  * 1. Website Tracking - Fetches website HTML and detects tracking pixels
- * 2. AI Visibility - Uses Groq to check if business appears in AI search
+ * 2. AI Visibility - Uses Google Gemini (AQ keys) to check if business appears in AI search
  * 3. Contact Form - Parses website HTML to count form fields
  * 4. Customer Reviews - Uses public review data (manual input or basic scraping)
  */
 
+import { GoogleGenAI } from '@google/genai';
+
 const GOOGLE_PLACES_API_KEY = process.env.GOOGLE_PLACES_API_KEY;
 const GOOGLE_PLACES_URL = 'https://maps.googleapis.com/maps/api/place';
-const GOOGLE_GEMINI_API_KEY = process.env.GOOGLE_GEMINI_API_KEY;
-const GOOGLE_GEMINI_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
+const GEMINI_API_KEY = process.env.GOOGLE_GEMINI_API_KEY;
 const TRUSTPILOT_API_KEY = process.env.TRUSTPILOT_API_KEY;
 const TRUSTPILOT_API_URL = 'https://api.trustpilot.com/v1';
+
+// Initialize Gemini client with explicit API key (works with AQ... keys)
+let geminiClient = null;
+if (GEMINI_API_KEY) {
+  try {
+    geminiClient = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
+    console.log('✅ Gemini client initialized with AQ key');
+  } catch (error) {
+    console.warn('⚠️ Failed to initialize Gemini client:', error.message);
+  }
+}
 
 // Pixel detection patterns
 const PIXEL_PATTERNS = {
@@ -75,23 +87,15 @@ export async function checkPixelAudit(html) {
  * Checks if business appears in AI recommendations using Gemini
  */
 async function checkAIVisibilityWithGemini(businessName, city) {
-  if (!GOOGLE_GEMINI_API_KEY) {
-    console.log('⚠️ Gemini API key not configured - using fallback');
+  if (!geminiClient) {
+    console.log('⚠️ Gemini API not configured - using fallback');
     return null;
   }
 
   try {
     console.log(`🔍 Checking real AI visibility for "${businessName}" in ${city} using Gemini`);
 
-    const response = await fetch(
-      `${GOOGLE_GEMINI_URL}?key=${GOOGLE_GEMINI_API_KEY}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{
-            parts: [{
-              text: `Imagine someone searches for "best ${businessName.split(' ').slice(-1)[0].toLowerCase()} in ${city}".
+    const prompt = `Imagine someone searches for "best ${businessName.split(' ').slice(-1)[0].toLowerCase()} in ${city}".
 
 Would "${businessName}" likely appear in the top 5 recommendations?
 
@@ -101,20 +105,14 @@ Consider:
 3. Brand recognition in the local market
 
 Respond with ONLY valid JSON (no markdown, no extra text):
-{"appears": true, "score": 15-25, "reason": "brief reason"} or {"appears": false, "score": 0-8, "reason": "brief reason"}`
-            }]
-          }]
-        })
-      }
-    );
+{"appears": true, "score": 15-25, "reason": "brief reason"} or {"appears": false, "score": 0-8, "reason": "brief reason"}`;
 
-    if (!response.ok) {
-      console.log(`  Gemini API error: ${response.status}`);
-      return null;
-    }
+    const response = await geminiClient.models.generateContent({
+      model: 'gemini-3.5-flash-lite',
+      contents: [{ role: 'user', parts: [{ text: prompt }] }]
+    });
 
-    const data = await response.json();
-    const text = data.candidates[0].content.parts[0].text;
+    const text = response.candidates[0].content.parts[0].text;
 
     // Extract JSON from response
     const jsonMatch = text.match(/\{[\s\S]*\}/);
@@ -123,13 +121,13 @@ Respond with ONLY valid JSON (no markdown, no extra text):
       return null;
     }
 
-    const result = JSON.parse(jsonMatch[0]);
-    console.log(`  AI Visibility: ${result.appears ? 'YES' : 'NO'} - ${result.reason}`);
+    const parsed = JSON.parse(jsonMatch[0]);
+    console.log(`  AI Visibility: ${parsed.appears ? 'YES' : 'NO'} - ${parsed.reason}`);
 
     return {
-      appears: result.appears,
-      score: result.score || (result.appears ? 20 : 5),
-      reason: result.reason,
+      appears: parsed.appears,
+      score: parsed.score || (parsed.appears ? 20 : 5),
+      reason: parsed.reason,
       method: 'gemini_ai'
     };
   } catch (error) {
@@ -449,10 +447,10 @@ async function fetchTrustpilotReviews(businessName, city) {
 }
 
 /**
- * Analyze reviews sentiment using Groq AI
+ * Analyze reviews sentiment using Gemini
  */
 async function analyzeReviewSentiment(reviews) {
-  if (!reviews || reviews.length === 0 || !GOOGLE_GEMINI_API_KEY) {
+  if (!reviews || reviews.length === 0 || !geminiClient) {
     return null;
   }
 
@@ -492,34 +490,20 @@ async function analyzeReviewSentiment(reviews) {
       .map(r => `"${r.text}" (${r.rating}★)`)
       .join('\n');
 
-    const response = await fetch(
-      `${GOOGLE_GEMINI_URL}?key=${GOOGLE_GEMINI_API_KEY}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{
-            parts: [{
-              text: `Analyze the sentiment of these ${reviewsWithText.length} reviews. For each, classify as POSITIVE, NEGATIVE, or NEUTRAL. Identify the top 2-3 most common issues from negative reviews.
+    const prompt = `Analyze the sentiment of these ${reviewsWithText.length} reviews. For each, classify as POSITIVE, NEGATIVE, or NEUTRAL. Identify the top 2-3 most common issues from negative reviews.
 
 Reviews:
 ${reviewTexts}
 
 Respond with ONLY valid JSON (no markdown, no extra text):
-{"sentiments": ["POSITIVE"|"NEGATIVE"|"NEUTRAL"], "top_issues": ["issue1", "issue2"], "overall_sentiment": "POSITIVE"|"NEGATIVE"|"NEUTRAL"}`
-            }]
-          }]
-        })
-      }
-    );
+{"sentiments": ["POSITIVE"|"NEGATIVE"|"NEUTRAL"], "top_issues": ["issue1", "issue2"], "overall_sentiment": "POSITIVE"|"NEGATIVE"|"NEUTRAL"}`;
 
-    if (!response.ok) {
-      console.log(`  Gemini error: ${response.status}`);
-      return null;
-    }
+    const response = await geminiClient.models.generateContent({
+      model: 'gemini-3.5-flash-lite',
+      contents: [{ role: 'user', parts: [{ text: prompt }] }]
+    });
 
-    const data = await response.json();
-    const analysisText = data.candidates[0].content.parts[0].text;
+    const analysisText = response.candidates[0].content.parts[0].text;
 
     // Parse JSON from response
     const jsonMatch = analysisText.match(/\{[\s\S]*\}/);

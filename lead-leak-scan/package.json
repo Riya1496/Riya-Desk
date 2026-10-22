@@ -8,12 +8,19 @@
     "dev": "node dev-server.mjs",
     "start": "node dev-server.mjs"
   },
-  "keywords": ["sme", "leads", "audit", "marketing", "free-scan"],
+  "keywords": [
+    "sme",
+    "leads",
+    "audit",
+    "marketing",
+    "free-scan"
+  ],
   "author": "Riya Desk",
   "license": "MIT",
   "engines": {
     "node": "18.x"
   },
   "dependencies": {
+    "@google/genai": "^2.30.0"
   }
 }
