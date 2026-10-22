@@ -92,10 +92,10 @@ async function checkAIVisibilityWithGemini(businessName, city) {
     return null;
   }
 
-  try {
-    console.log(`🔍 Checking real AI visibility for "${businessName}" in ${city} using Gemini`);
+  // Fallback models in priority order
+  const models = ['gemini-3.5-flash-lite', 'gemini-3.6-flash', 'gemini-3.5-flash'];
 
-    const prompt = `Imagine someone searches for "best ${businessName.split(' ').slice(-1)[0].toLowerCase()} in ${city}".
+  const prompt = `Imagine someone searches for "best ${businessName.split(' ').slice(-1)[0].toLowerCase()} in ${city}".
 
 Would "${businessName}" likely appear in the top 5 recommendations?
 
@@ -107,33 +107,41 @@ Consider:
 Respond with ONLY valid JSON (no markdown, no extra text):
 {"appears": true, "score": 15-25, "reason": "brief reason"} or {"appears": false, "score": 0-8, "reason": "brief reason"}`;
 
-    const response = await geminiClient.models.generateContent({
-      model: 'gemini-3.5-flash-lite',
-      contents: [{ role: 'user', parts: [{ text: prompt }] }]
-    });
+  for (const model of models) {
+    try {
+      console.log(`🔍 Checking real AI visibility for "${businessName}" in ${city} using Gemini (${model})`);
 
-    const text = response.candidates[0].content.parts[0].text;
+      const response = await geminiClient.models.generateContent({
+        model,
+        contents: [{ role: 'user', parts: [{ text: prompt }] }]
+      });
 
-    // Extract JSON from response
-    const jsonMatch = text.match(/\{[\s\S]*\}/);
-    if (!jsonMatch) {
-      console.log(`  Could not parse Gemini response`);
-      return null;
+      const text = response.candidates[0].content.parts[0].text;
+
+      // Extract JSON from response
+      const jsonMatch = text.match(/\{[\s\S]*\}/);
+      if (!jsonMatch) {
+        console.log(`  Could not parse Gemini response from ${model}`);
+        continue; // Try next model
+      }
+
+      const parsed = JSON.parse(jsonMatch[0]);
+      console.log(`  AI Visibility: ${parsed.appears ? 'YES' : 'NO'} - ${parsed.reason} (${model})`);
+
+      return {
+        appears: parsed.appears,
+        score: parsed.score || (parsed.appears ? 20 : 5),
+        reason: parsed.reason,
+        method: 'gemini_ai'
+      };
+    } catch (error) {
+      console.log(`  ⚠️ Model ${model} failed: ${error.message}`);
+      continue; // Try next model
     }
-
-    const parsed = JSON.parse(jsonMatch[0]);
-    console.log(`  AI Visibility: ${parsed.appears ? 'YES' : 'NO'} - ${parsed.reason}`);
-
-    return {
-      appears: parsed.appears,
-      score: parsed.score || (parsed.appears ? 20 : 5),
-      reason: parsed.reason,
-      method: 'gemini_ai'
-    };
-  } catch (error) {
-    console.error('❌ Gemini AI Visibility check failed:', error.message);
-    return null;
   }
+
+  console.error('❌ All Gemini models failed - using fallback');
+  return null;
 }
 
 export async function checkAIVisibility(businessName, city, html = '') {
@@ -454,43 +462,42 @@ async function analyzeReviewSentiment(reviews) {
     return null;
   }
 
-  try {
-    // Extract review text from various possible structures
-    const reviewsWithText = reviews
-      .map(r => {
-        // Google Places API returns review with .text field
-        let text = '';
-        if (typeof r === 'string') {
-          text = r;
-        } else if (r.text && typeof r.text === 'string') {
-          text = r.text;
-        } else if (r.originalText && typeof r.originalText === 'string') {
-          text = r.originalText;
-        } else if (typeof r === 'object' && Object.keys(r).length > 0) {
-          // Try to find any text-like field
-          const textField = Object.values(r).find(v => typeof v === 'string' && v.length > 20);
-          text = textField || '';
-        }
-        return {
-          text: text.trim(),
-          rating: r.rating || 5
-        };
-      })
-      .filter(r => r.text && r.text.length > 0)
-      .slice(0, 10); // Limit to 10 reviews for API efficiency
+  // Extract review text from various possible structures
+  const reviewsWithText = reviews
+    .map(r => {
+      // Google Places API returns review with .text field
+      let text = '';
+      if (typeof r === 'string') {
+        text = r;
+      } else if (r.text && typeof r.text === 'string') {
+        text = r.text;
+      } else if (r.originalText && typeof r.originalText === 'string') {
+        text = r.originalText;
+      } else if (typeof r === 'object' && Object.keys(r).length > 0) {
+        // Try to find any text-like field
+        const textField = Object.values(r).find(v => typeof v === 'string' && v.length > 20);
+        text = textField || '';
+      }
+      return {
+        text: text.trim(),
+        rating: r.rating || 5
+      };
+    })
+    .filter(r => r.text && r.text.length > 0)
+    .slice(0, 10); // Limit to 10 reviews for API efficiency
 
-    if (reviewsWithText.length === 0) {
-      console.log(`⚠️ No review text available for sentiment analysis`);
-      return null;
-    }
+  if (reviewsWithText.length === 0) {
+    console.log(`⚠️ No review text available for sentiment analysis`);
+    return null;
+  }
 
-    console.log(`📊 Analyzing sentiment for ${reviewsWithText.length} reviews with Gemini`);
+  const models = ['gemini-3.5-flash-lite', 'gemini-3.6-flash', 'gemini-3.5-flash'];
 
-    const reviewTexts = reviewsWithText
-      .map(r => `"${r.text}" (${r.rating}★)`)
-      .join('\n');
+  const reviewTexts = reviewsWithText
+    .map(r => `"${r.text}" (${r.rating}★)`)
+    .join('\n');
 
-    const prompt = `Analyze the sentiment of these ${reviewsWithText.length} reviews. For each, classify as POSITIVE, NEGATIVE, or NEUTRAL. Identify the top 2-3 most common issues from negative reviews.
+  const prompt = `Analyze the sentiment of these ${reviewsWithText.length} reviews. For each, classify as POSITIVE, NEGATIVE, or NEUTRAL. Identify the top 2-3 most common issues from negative reviews.
 
 Reviews:
 ${reviewTexts}
@@ -498,30 +505,38 @@ ${reviewTexts}
 Respond with ONLY valid JSON (no markdown, no extra text):
 {"sentiments": ["POSITIVE"|"NEGATIVE"|"NEUTRAL"], "top_issues": ["issue1", "issue2"], "overall_sentiment": "POSITIVE"|"NEGATIVE"|"NEUTRAL"}`;
 
-    const response = await geminiClient.models.generateContent({
-      model: 'gemini-3.5-flash-lite',
-      contents: [{ role: 'user', parts: [{ text: prompt }] }]
-    });
+  for (const model of models) {
+    try {
+      console.log(`📊 Analyzing sentiment for ${reviewsWithText.length} reviews with Gemini (${model})`);
 
-    const analysisText = response.candidates[0].content.parts[0].text;
+      const response = await geminiClient.models.generateContent({
+        model,
+        contents: [{ role: 'user', parts: [{ text: prompt }] }]
+      });
 
-    // Parse JSON from response
-    const jsonMatch = analysisText.match(/\{[\s\S]*\}/);
-    if (jsonMatch) {
-      const analysis = JSON.parse(jsonMatch[0]);
-      console.log(`  Sentiment: ${analysis.overall_sentiment}`);
-      if (analysis.top_issues && analysis.top_issues.length > 0) {
-        console.log(`  Top issues: ${analysis.top_issues.join(', ')}`);
+      const analysisText = response.candidates[0].content.parts[0].text;
+
+      // Parse JSON from response
+      const jsonMatch = analysisText.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        const analysis = JSON.parse(jsonMatch[0]);
+        console.log(`  Sentiment: ${analysis.overall_sentiment} (${model})`);
+        if (analysis.top_issues && analysis.top_issues.length > 0) {
+          console.log(`  Top issues: ${analysis.top_issues.join(', ')}`);
+        }
+        return analysis;
       }
-      return analysis;
-    }
 
-    console.log(`  No JSON found in response`);
-    return null;
-  } catch (error) {
-    console.error('❌ Sentiment analysis error:', error.message);
-    return null;
+      console.log(`  No JSON found in response from ${model}`);
+      continue; // Try next model
+    } catch (error) {
+      console.log(`  ⚠️ Model ${model} failed: ${error.message}`);
+      continue; // Try next model
+    }
   }
+
+  console.error('❌ All Gemini sentiment models failed');
+  return null;
 }
 
 /**
