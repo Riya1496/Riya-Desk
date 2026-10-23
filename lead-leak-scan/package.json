@@ -18,7 +18,7 @@
   "author": "Riya Desk",
   "license": "MIT",
   "engines": {
-    "node": "18.x"
+    "node": "24.x"
   },
   "dependencies": {
     "@google/genai": "^2.30.0"
