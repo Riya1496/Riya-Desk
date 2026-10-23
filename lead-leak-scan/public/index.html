@@ -62,54 +62,52 @@
                 <div class="form-label-hint">We'll verify it's live and analyze what's on it. Must start with https://</div>
               </div>
 
+              <div class="form-field">
+                <label><strong>Your City</strong></label>
+                <input
+                  type="text"
+                  id="city"
+                  name="city"
+                  placeholder="e.g., Sydney"
+                  required
+                >
+                <div class="form-label-hint">Where customers find you</div>
+              </div>
+
               <div class="form-row-2">
                 <div class="form-field">
-                  <label><strong>Your City</strong></label>
+                  <label><strong>Your Email</strong></label>
                   <input
-                    type="text"
-                    id="city"
-                    name="city"
-                    placeholder="e.g., Sydney"
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="owner@company.com"
                     required
                   >
-                  <div class="form-label-hint">Where customers find you</div>
+                  <div class="form-label-hint">We'll send your results here</div>
                 </div>
 
-                <div class="form-row-2">
-                  <div class="form-field">
-                    <label><strong>Your Email</strong></label>
+                <div class="form-field">
+                  <label><strong>Your Phone (Optional)</strong></label>
+                  <div style="display: flex; gap: 8px;">
+                    <select id="country-code" style="width: 100px; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+                      <option value="+1">🇺🇸 +1</option>
+                      <option value="+44">🇬🇧 +44</option>
+                      <option value="+61">🇦🇺 +61</option>
+                      <option value="+64">🇳🇿 +64</option>
+                      <option value="+91">🇮🇳 +91</option>
+                      <option value="+1">🇨🇦 +1</option>
+                      <option value="+27">🇿🇦 +27</option>
+                    </select>
                     <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      placeholder="owner@company.com"
-                      required
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      placeholder="9876543210"
+                      pattern="[0-9]{10}"
                     >
-                    <div class="form-label-hint">We'll send your results here</div>
                   </div>
-
-                  <div class="form-field">
-                    <label><strong>Your Phone (Optional)</strong></label>
-                    <div style="display: flex; gap: 8px;">
-                      <select id="country-code" style="width: 100px; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
-                        <option value="+1">🇺🇸 +1</option>
-                        <option value="+44">🇬🇧 +44</option>
-                        <option value="+61">🇦🇺 +61</option>
-                        <option value="+64">🇳🇿 +64</option>
-                        <option value="+91">🇮🇳 +91</option>
-                        <option value="+1">🇨🇦 +1</option>
-                        <option value="+27">🇿🇦 +27</option>
-                      </select>
-                      <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        placeholder="9876543210"
-                        pattern="[0-9]{10}"
-                      >
-                    </div>
-                    <div class="form-label-hint">We'll call you in your free time</div>
-                  </div>
+                  <div class="form-label-hint">We'll call you in your free time</div>
                 </div>
               </div>
 
