@@ -41,14 +41,21 @@
             <form id="scanForm" class="scan-form">
               <div class="form-field">
                 <label><strong>Your Business Name</strong></label>
-                <input
-                  type="text"
-                  id="businessName"
-                  name="businessName"
-                  placeholder="e.g., Sydney Insurance Brokers"
-                  required
-                >
+                <div style="position: relative;">
+                  <input
+                    type="text"
+                    id="businessName"
+                    name="businessName"
+                    placeholder="Start typing your business name..."
+                    autocomplete="off"
+                    required
+                  >
+                  <div id="businessSuggestions" class="autocomplete-dropdown" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #ddd; border-top: none; border-radius: 0 0 6px 6px; max-height: 250px; overflow-y: auto; z-index: 1000; box-shadow: 0 2px 8px rgba(0,0,0,0.1);"></div>
+                </div>
                 <div class="form-label-hint">How your business appears (or should appear) on Google</div>
+                <div id="businessMatch" style="margin-top: 8px; padding: 8px; background: #f0f8ff; border-radius: 4px; display: none; font-size: 13px; color: #0066cc;">
+                  ✓ Business found: <span id="matchDetails"></span>
+                </div>
               </div>
 
               <div class="form-field">

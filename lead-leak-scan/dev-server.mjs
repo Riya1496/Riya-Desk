@@ -59,6 +59,59 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  if (req.method === 'GET' && req.url.startsWith('/api/businesses')) {
+    const url = new URL('http://localhost' + req.url);
+    const q = url.searchParams.get('q');
+    const city = url.searchParams.get('city');
+
+    if (!q || q.length < 2) {
+      res.writeHead(400, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: 'Query too short' }));
+      return;
+    }
+
+    const GOOGLE_PLACES_API_KEY = process.env.GOOGLE_PLACES_API_KEY;
+    if (!GOOGLE_PLACES_API_KEY) {
+      console.warn('⚠️ GOOGLE_PLACES_API_KEY not configured');
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ suggestions: [] }));
+      return;
+    }
+
+    try {
+      const searchQuery = city ? `${q} ${city}` : q;
+      const googleUrl = new URL('https://maps.googleapis.com/maps/api/place/autocomplete/json');
+      googleUrl.searchParams.append('input', searchQuery);
+      googleUrl.searchParams.append('components', 'country:au');
+      googleUrl.searchParams.append('types', 'establishment');
+      googleUrl.searchParams.append('key', GOOGLE_PLACES_API_KEY);
+
+      const response = await fetch(googleUrl.toString());
+      const data = await response.json();
+
+      if (data.status === 'ZERO_RESULTS' || !data.predictions) {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ suggestions: [] }));
+        return;
+      }
+
+      const suggestions = data.predictions.slice(0, 8).map(prediction => ({
+        name: prediction.main_text || '',
+        address: prediction.secondary_text || '',
+        placeId: prediction.place_id,
+        description: (prediction.main_text || '') + (prediction.secondary_text ? ` • ${prediction.secondary_text}` : '')
+      }));
+
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ suggestions }));
+    } catch (error) {
+      console.error('[DEV API] Business search error:', error);
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ suggestions: [] }));
+    }
+    return;
+  }
+
   if (req.method === 'POST' && req.url === '/api/scan') {
     let body = '';
 

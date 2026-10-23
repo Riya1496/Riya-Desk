@@ -16,6 +16,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  // Setup business name autocomplete
+  setupBusinessAutocomplete();
+
   const scanForm = document.getElementById('scanForm');
 
   if (scanForm) {
@@ -446,4 +449,91 @@ function renderFindings(scanResult) {
       location.reload();
     });
   }
+}
+
+// Business Name Autocomplete
+function setupBusinessAutocomplete() {
+  const businessInput = document.getElementById('businessName');
+  const suggestionsDropdown = document.getElementById('businessSuggestions');
+  const cityInput = document.getElementById('city');
+
+  if (!businessInput) return;
+
+  let debounceTimer;
+
+  businessInput.addEventListener('input', function() {
+    clearTimeout(debounceTimer);
+    const query = this.value.trim();
+
+    // Hide dropdown if query is empty
+    if (query.length < 2) {
+      suggestionsDropdown.style.display = 'none';
+      return;
+    }
+
+    // Debounce API call
+    debounceTimer = setTimeout(async () => {
+      try {
+        const city = cityInput ? cityInput.value : '';
+        const params = new URLSearchParams({ q: query, city });
+
+        const response = await fetch(`/api/businesses?${params}`);
+        const data = await response.json();
+
+        if (!data.suggestions || data.suggestions.length === 0) {
+          suggestionsDropdown.style.display = 'none';
+          return;
+        }
+
+        // Build dropdown HTML
+        let html = '';
+        data.suggestions.forEach(suggestion => {
+          html += `
+            <div class="autocomplete-item" style="padding: 12px 16px; border-bottom: 1px solid #eee; cursor: pointer; transition: background 0.2s;">
+              <div style="font-weight: 500; color: #1e3a5f;">${suggestion.name}</div>
+              <div style="font-size: 12px; color: #666; margin-top: 4px;">${suggestion.address}</div>
+            </div>
+          `;
+        });
+
+        suggestionsDropdown.innerHTML = html;
+        suggestionsDropdown.style.display = 'block';
+
+        // Add click handlers
+        document.querySelectorAll('.autocomplete-item').forEach((item, index) => {
+          item.addEventListener('click', () => {
+            const suggestion = data.suggestions[index];
+            businessInput.value = suggestion.name;
+            suggestionsDropdown.style.display = 'none';
+
+            // Show "business found" indicator
+            const matchIndicator = document.getElementById('businessMatch');
+            const matchDetails = document.getElementById('matchDetails');
+            matchDetails.textContent = suggestion.name + (suggestion.address ? ` (${suggestion.address})` : '');
+            matchIndicator.style.display = 'block';
+
+            console.log('✓ Business selected:', suggestion.name);
+          });
+
+          // Hover effect
+          item.addEventListener('mouseover', function() {
+            this.style.background = '#f5f5f5';
+          });
+          item.addEventListener('mouseout', function() {
+            this.style.background = 'white';
+          });
+        });
+      } catch (error) {
+        console.error('Autocomplete error:', error);
+        suggestionsDropdown.style.display = 'none';
+      }
+    }, 300); // 300ms debounce
+  });
+
+  // Hide dropdown when clicking outside
+  document.addEventListener('click', function(e) {
+    if (e.target !== businessInput) {
+      suggestionsDropdown.style.display = 'none';
+    }
+  });
 }
