@@ -1,7 +1,3 @@
 {
-  "outputDirectory": "public",
-  "env": {
-    "GOOGLE_GEMINI_API_KEY": "@google_gemini_api_key",
-    "GOOGLE_PLACES_API_KEY": "@google_places_api_key"
-  }
+  "outputDirectory": "public"
 }
