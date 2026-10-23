@@ -15,7 +15,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { businessName, website, city, email, aiData, reputationData } = req.body;
+    const { businessName, website, city, email, aiData, reputationData, manualReviews } = req.body;
 
     // Validate required fields
     if (!businessName || !website || !city || !email) {
