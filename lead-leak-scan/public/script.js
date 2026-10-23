@@ -65,8 +65,27 @@ document.addEventListener('DOMContentLoaded', function() {
           return;
         }
 
+        console.log('Step 2: Website verified. Checking for similar business names in', formData.city);
+
+        // Show confirmation with website info
+        const confirmScan = confirm(
+          `✓ Website verified!\n\n` +
+          `Business: ${formData.businessName}\n` +
+          `Website: ${formData.website}\n` +
+          `City: ${formData.city}\n\n` +
+          `Is this the correct business? Click OK to continue scan.`
+        );
+
+        if (!confirmScan) {
+          console.log('User cancelled scan confirmation');
+          submitBtn.innerHTML = originalText;
+          submitBtn.disabled = false;
+          submitBtn.classList.remove('loading');
+          return;
+        }
+
         submitBtn.innerHTML = '<span class="spinner"></span><span class="btn-text">🔎 Detecting your gaps...</span>';
-        console.log('Step 2: Website verified. Calling API...');
+        console.log('Step 3: User confirmed. Calling API...');
 
         // Call backend scan API
         const response = await fetch('/api/scan', {
