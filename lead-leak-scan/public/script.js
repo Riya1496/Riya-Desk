@@ -536,4 +536,6 @@ function setupBusinessAutocomplete() {
       suggestionsDropdown.style.display = 'none';
     }
   });
+
+  console.log('✓ Business autocomplete initialized (optional - manual entry works too)');
 }
