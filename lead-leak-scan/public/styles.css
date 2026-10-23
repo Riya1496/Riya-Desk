@@ -23,8 +23,34 @@
 body {
   font-family: 'Sohne', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   line-height: 1.6;
-  color: var(--primary);
-  background: #fafafa;
+  color: var(--text-primary);
+  background: #fafbfc;
+}
+
+/* OTP & Phone styling */
+.btn-verify {
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  width: 100%;
+}
+
+.btn-verify:hover {
+  background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+
+#email-otp {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  width: 100%;
 }
 
 .container {
