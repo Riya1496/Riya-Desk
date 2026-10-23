@@ -1,11 +1,6 @@
 {
   "buildCommand": "",
   "outputDirectory": "public",
-  "functions": {
-    "api/**/*.mjs": {
-      "runtime": "nodejs20.x"
-    }
-  },
   "rewrites": [
     {
       "source": "/(.*)",
