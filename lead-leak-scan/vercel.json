@@ -1,3 +1,17 @@
 {
-  "outputDirectory": "public"
+  "buildCommand": null,
+  "devCommand": "node dev-server.mjs",
+  "outputDirectory": "public",
+  "functions": {
+    "api/**/*.mjs": {
+      "memory": 128,
+      "maxDuration": 30
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "/api/:path*.mjs"
+    }
+  ]
 }
