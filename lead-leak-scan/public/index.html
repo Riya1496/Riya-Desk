@@ -146,6 +146,54 @@
         </div>
       </section>
 
+      <!-- RESULTS PAGE (Hidden by default, shown after scan) -->
+      <section id="results-section" style="display: none;">
+        <div class="results-container">
+          <div class="result-header">
+            <h1>Your Lead Leak Scan Results</h1>
+            <div class="business-info">
+              Business: <span id="business-name">-</span> | Location: <span id="business-city">-</span> | Scanned: <span id="scan-date">-</span>
+            </div>
+            <p>Here's how you're performing across the 4 key marketing levers.</p>
+          </div>
+
+          <!-- Score Circle -->
+          <div style="text-align: center; margin: 50px 0;">
+            <div id="score-circle" class="score-circle critical" style="width: 240px; height: 240px; border-radius: 50%; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 80px; font-weight: 800; color: white;">
+              <span id="overall-score">0</span>
+              <span style="font-size: 20px; margin-top: 10px;">/100</span>
+              <span id="band-label" style="font-size: 16px; margin-top: 15px;">-</span>
+            </div>
+          </div>
+
+          <!-- Score Breakdown -->
+          <div class="score-breakdown">
+            <h4>📊 How Your Score Breaks Down</h4>
+            <p style="font-size: 13px; margin-bottom: 15px;">Each area is scored out of 25 points. Here's where you stand:</p>
+            <div id="score-breakdown-items"></div>
+            <div class="score-breakdown-item" style="border-top: 2px solid rgba(0,102,204,0.2); margin-top: 10px; padding-top: 10px;">
+              <strong>Total Score</strong>
+              <strong id="total-score-display">0/100</strong>
+            </div>
+          </div>
+
+          <!-- Narrative Findings -->
+          <div style="margin-top: 40px; margin-bottom: 40px;">
+            <div id="findings-container"></div>
+          </div>
+
+          <!-- CTA Section -->
+          <div class="cta-section">
+            <h2>Let's Fix These Gaps</h2>
+            <p style="margin-bottom: 20px;">Most of these improvements can be implemented in 2-4 weeks. Let's discuss your situation and create a custom plan.</p>
+            <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+              <a href="mailto:hello@riyadesk.com" class="btn-scan" style="text-decoration: none;">Schedule Free Consultation</a>
+              <button id="email-results-btn" class="btn-scan" style="background: linear-gradient(135deg, #7621B0 0%, #5a16a0 100%);">Email My Results</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- What we check -->
       <section class="checks-section">
         <h2>We Check These 4 Things</h2>

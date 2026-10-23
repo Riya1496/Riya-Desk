@@ -116,9 +116,7 @@ function initResultsPage() {
   console.log('SessionStorage scanResult:', scanResultStr ? 'Found' : 'Not found');
 
   if (!scanResultStr) {
-    console.log('No scanResult in sessionStorage - redirecting to home');
-    // If no result, use mock data instead of redirecting
-    console.log('Using mock data for demo');
+    console.log('No scanResult in sessionStorage - using demo');
     const mockResult = {
       businessName: 'Demo Business',
       city: 'Demo City',
@@ -126,11 +124,24 @@ function initResultsPage() {
       band: 'opportunity'
     };
     sessionStorage.setItem('scanResult', JSON.stringify(mockResult));
-    return initResultsPage(); // Re-run with mock data
+    return initResultsPage();
   }
 
   const scanResult = JSON.parse(scanResultStr);
   console.log('Parsed scanResult:', scanResult);
+
+  // HIDE FORM, SHOW RESULTS
+  const heroSection = document.querySelector('.hero');
+  const resultsSection = document.getElementById('results-section');
+  const checksSection = document.querySelector('.checks-section');
+  const howItWorks = document.querySelector('.how-it-works');
+  const faqSection = document.querySelector('.faq-section');
+
+  if (heroSection) heroSection.style.display = 'none';
+  if (checksSection) checksSection.style.display = 'none';
+  if (howItWorks) howItWorks.style.display = 'none';
+  if (faqSection) faqSection.style.display = 'none';
+  if (resultsSection) resultsSection.style.display = 'block';
 
   // Update business info
   const businessName = document.getElementById('business-name');
@@ -152,44 +163,34 @@ function initResultsPage() {
 
   // Update overall score circle
   const overallScore = document.getElementById('overall-score');
+  const bandLabel = document.getElementById('band-label');
   if (overallScore) overallScore.textContent = scanResult.overallScore;
 
   // Update score circle color and band info
   const scoreCircle = document.getElementById('score-circle');
-  const bandTitle = document.getElementById('band-title');
-  const bandDescription = document.getElementById('band-description');
 
   // Determine band and update UI
   const score = scanResult.overallScore;
   let band = 'critical';
-  let bandTitleText = 'Critical Gaps Found';
-  let bandDescriptionText = 'You\'re losing leads to fixable gaps. These 4 areas need immediate attention.';
+  let bandLabelText = 'Critical';
 
   if (score >= 70) {
     band = 'good';
-    bandTitleText = 'You\'re Winning';
-    bandDescriptionText = 'You\'re ahead of 80% of competitors. Here\'s how to maintain your edge.';
+    bandLabelText = 'Excellent';
   } else if (score >= 40) {
     band = 'opportunity';
-    bandTitleText = 'Strategic Opportunities';
-    bandDescriptionText = 'You\'re competitive but leaving money on the table. Here\'s where to focus.';
+    bandLabelText = 'Opportunity';
   }
 
   // Update band UI
-  if (scoreCircle) {
-    scoreCircle.className = 'score-circle ' + band;
-  }
-  if (bandTitle) bandTitle.textContent = bandTitleText;
-  if (bandDescription) bandDescription.textContent = bandDescriptionText;
+  if (scoreCircle) scoreCircle.className = 'score-circle ' + band;
+  if (bandLabel) bandLabel.textContent = bandLabelText;
 
   // Render score breakdown
-  renderScoreBreakdown(scanResult.checks);
+  renderScoreBreakdown(scanResult);
 
-  // Render check meters or narrative findings
-  renderCheckMeters(scanResult.checks, scanResult.findings);
-
-  // Setup CTA buttons
-  setupCTAButtons(scanResult);
+  // Render narrative findings
+  renderFindings(scanResult);
 
 }
 
@@ -377,18 +378,62 @@ function setupCTAButtons(scanResult) {
 async function validateWebsite(url) {
   try {
     console.log('Checking if website is live:', url);
-
-    // Use a CORS-friendly method: check if the backend can reach it
-    const response = await fetch('/api/health', {
-      method: 'GET'
-    });
-
-    // If we can reach our backend, the network is good
-    // The backend will validate the actual website during the scan
+    const response = await fetch('/api/health', { method: 'GET' });
     console.log('Network connection OK');
     return true;
   } catch (error) {
     console.error('Network check failed:', error);
     return false;
   }
+}
+
+// Render score breakdown
+function renderScoreBreakdown(scanResult) {
+  const container = document.getElementById('score-breakdown-items');
+  if (!container) return;
+
+  const checks = scanResult.checks || [];
+  let html = '';
+
+  checks.forEach(check => {
+    const score = check.score || 0;
+    html += `
+      <div class="score-breakdown-item">
+        <strong>${check.checkName || check.checkId}</strong>
+        <strong>${score}/25</strong>
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
+
+  // Update total score
+  const totalDisplay = document.getElementById('total-score-display');
+  if (totalDisplay) {
+    totalDisplay.textContent = `${scanResult.overallScore}/100`;
+  }
+}
+
+// Render findings
+function renderFindings(scanResult) {
+  const container = document.getElementById('findings-container');
+  if (!container) return;
+
+  const findings = scanResult.findings || [];
+  let html = '';
+
+  findings.forEach((finding, index) => {
+    const number = index + 1;
+    html += `
+      <div class="narrative-finding">
+        <div class="finding-number">${number}</div>
+        <div>
+          <div class="finding-title">${finding.title || 'Finding ' + number}</div>
+          <div class="finding-text">${finding.insight || finding.description || ''}</div>
+        </div>
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
 }
