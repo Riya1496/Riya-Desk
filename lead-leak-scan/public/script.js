@@ -1,4 +1,21 @@
 document.addEventListener('DOMContentLoaded', function() {
+  // Check if we have results to display
+  const scanResultStr = sessionStorage.getItem('scanResult');
+
+  // Show results if they exist, otherwise show form
+  if (scanResultStr && window.location.pathname !== '/results.html') {
+    try {
+      const scanResult = JSON.parse(scanResultStr);
+      if (scanResult && scanResult.businessName) {
+        console.log('Found results in sessionStorage, initializing results page');
+        initResultsPage();
+        return;
+      }
+    } catch (e) {
+      console.error('Error parsing scanResult:', e);
+    }
+  }
+
   const scanForm = document.getElementById('scanForm');
 
   if (scanForm) {
@@ -70,9 +87,9 @@ document.addEventListener('DOMContentLoaded', function() {
         sessionStorage.setItem('scanResult', JSON.stringify(result));
         console.log('Result stored in sessionStorage');
 
-        // Redirect to results page
-        console.log('Redirecting to results page...');
-        window.location.href = '/results.html';
+        // Show results page
+        console.log('Showing results page...');
+        initResultsPage();
       } catch (error) {
         console.error('Error:', error);
         alert('Error running scan: ' + error.message);
