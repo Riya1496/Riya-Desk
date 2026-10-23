@@ -9,10 +9,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
       console.log('Form submitted');
 
+      // Normalize website URL
+      let website = document.getElementById('website').value.trim();
+      if (!website.startsWith('http')) {
+        website = 'https://' + website.replace(/^www\./, '');
+      }
+
       // Collect 4 basic fields only
       const formData = {
         businessName: document.getElementById('businessName').value,
-        website: document.getElementById('website').value,
+        website: website,
         city: document.getElementById('city').value,
         email: document.getElementById('email').value
       };
