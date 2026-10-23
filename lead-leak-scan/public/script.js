@@ -436,4 +436,14 @@ function renderFindings(scanResult) {
   });
 
   container.innerHTML = html;
+
+  // Setup "New Scan" button
+  const newScanBtn = document.getElementById('new-scan-btn');
+  if (newScanBtn) {
+    newScanBtn.addEventListener('click', function() {
+      // Clear session storage and show form
+      sessionStorage.removeItem('scanResult');
+      location.reload();
+    });
+  }
 }
