@@ -212,8 +212,8 @@ function initResultsPage() {
   // Render score breakdown
   renderScoreBreakdown(scanResult);
 
-  // Render ad intelligence (revenue impact) - MONETIZATION
-  renderAdIntelligence(scanResult);
+  // Render business intelligence (data-driven insights)
+  renderBusinessIntelligence(scanResult);
 
   // Render narrative findings
   renderFindings(scanResult);
@@ -440,71 +440,74 @@ function renderScoreBreakdown(scanResult) {
   }
 }
 
-// Render ad intelligence findings (MONETIZATION)
-function renderAdIntelligence(scanResult) {
-  const container = document.getElementById('ad-intelligence-container');
-  if (!container || !scanResult.adIntelligence) return;
+// Render business intelligence findings (DATA-DRIVEN)
+function renderBusinessIntelligence(scanResult) {
+  const container = document.getElementById('business-intelligence-container');
+  if (!container) return;
 
-  const { monthlyRevenueLoss, annualRevenueLoss, healthScore, recoveryTimeframe, potentialROI } = scanResult.adIntelligence;
-  const adFindings = scanResult.adFindings || [];
+  const findings = scanResult.businessIntelligenceFindings || [];
+  const techStack = scanResult.businessIntelligence?.techStack;
 
-  if (monthlyRevenueLoss === 0) {
-    container.innerHTML = `
-      <div style="color: #2e7d32; font-size: 14px;">
-        <strong>✓ Ad Tracking Healthy</strong><br>
-        Your business has proper conversion tracking pixels installed. Your ads are optimizable and ROI is measurable.
-      </div>
+  let html = '';
+
+  // Tech Stack Summary
+  if (techStack) {
+    html += `
+      <div style="background: white; padding: 12px; border-radius: 6px; margin-bottom: 15px;">
+        <strong>⚙️ Your Tech Stack:</strong><br>
+        <div style="font-size: 13px; color: #555; margin-top: 8px; line-height: 1.6;">
     `;
-    return;
+
+    if (techStack.cms) {
+      html += `<div>• CMS: <strong>${techStack.cms}</strong></div>`;
+    }
+
+    if (techStack.analytics.length > 0) {
+      html += `<div>• Analytics: <strong>${techStack.analytics.join(', ')}</strong></div>`;
+    } else {
+      html += `<div>• Analytics: <strong style="color: #d32f2f;">⚠️ None detected</strong></div>`;
+    }
+
+    if (techStack.marketing.length > 0) {
+      html += `<div>• Marketing: <strong>${techStack.marketing.join(', ')}</strong></div>`;
+    } else {
+      html += `<div>• Marketing: <strong style="color: #d32f2f;">⚠️ No pixels detected</strong></div>`;
+    }
+
+    if (techStack.missingSchemas.length > 0) {
+      html += `<div style="color: #d32f2f; margin-top: 8px;">⚠️ Missing: ${techStack.missingSchemas.join(', ')}</div>`;
+    }
+
+    html += `</div></div>`;
   }
 
-  let html = `
-    <div style="margin-bottom: 20px;">
-      <h4 style="color: #d32f2f; margin: 0 0 15px 0;">🚨 Critical: Ad Tracking Broken</h4>
-      <div style="background: white; padding: 15px; border-radius: 6px; margin-bottom: 15px;">
-        <div style="font-size: 28px; font-weight: bold; color: #d32f2f;">$${monthlyRevenueLoss.toLocaleString()}</div>
-        <div style="color: #666; font-size: 13px;">Estimated Monthly Revenue Loss</div>
-        <div style="color: #999; font-size: 12px; margin-top: 5px;">${annualRevenueLoss.toLocaleString()} per year</div>
-      </div>
+  // Findings
+  if (findings.length > 0) {
+    findings.forEach((finding, index) => {
+      const bgColor = finding.actionable ? '#fff8e1' : '#f5f5f5';
+      const borderColor = finding.actionable ? '#ff9800' : '#ccc';
 
-      <div style="background: white; padding: 12px; border-radius: 6px; margin-bottom: 10px; border-left: 4px solid #2196F3;">
-        <strong>Why This Happens:</strong><br>
-        <div style="font-size: 13px; color: #555; margin-top: 8px; line-height: 1.6;">
-          Without conversion pixels, your ads cannot be optimized. You're paying for clicks but not tracking which ones convert.
+      html += `
+        <div style="background: ${bgColor}; padding: 12px; border-radius: 6px; margin-bottom: 10px; border-left: 4px solid ${borderColor};">
+          <div style="font-weight: 600; color: #1976d2; margin-bottom: 5px;">${finding.title}</div>
+          <div style="font-size: 13px; color: #555; line-height: 1.5;">${finding.insight}</div>
+          ${finding.actionable ? '<div style="font-size: 12px; color: #ff9800; margin-top: 8px;">↳ Actionable opportunity</div>' : ''}
         </div>
-      </div>
+      `;
+    });
+  }
 
-      <div style="background: white; padding: 12px; border-radius: 6px; border-left: 4px solid #4CAF50;">
-        <strong>Recovery Plan:</strong><br>
-        <div style="font-size: 13px; color: #555; margin-top: 8px;">
-          <strong>Timeline:</strong> ${recoveryTimeframe}<br>
-          <strong>Expected ROI:</strong> ${potentialROI}
-        </div>
-      </div>
-    </div>
-  `;
-
-  // Add specific findings
-  adFindings.forEach((finding, index) => {
-    if (finding.actionable === false) return;
-    html += `
-      <div style="background: white; padding: 12px; border-radius: 6px; margin-bottom: 10px;">
-        <div style="font-weight: 600; color: #d32f2f; margin-bottom: 5px;">${finding.title}</div>
-        <div style="font-size: 13px; color: #666; line-height: 1.5;">${finding.insight}</div>
-      </div>
-    `;
-  });
-
-  // Add CTA
+  // Next Steps CTA
   html += `
-    <div style="background: white; padding: 15px; border-radius: 6px; margin-top: 15px; text-align: center;">
-      <div style="font-size: 14px; color: #666; margin-bottom: 12px;">
-        <strong>This is fixable in 2-4 weeks for $3000-5000.</strong><br>
-        Recover your investment 10x over in 90 days.
+    <div style="background: #e8f4f8; padding: 15px; border-radius: 6px; margin-top: 20px; border-left: 4px solid #0277bd; text-align: center;">
+      <div style="font-size: 14px; color: #01579b; margin-bottom: 12px; line-height: 1.6;">
+        <strong>Based on this analysis, we see clear opportunities for ${scanResult.businessName}.</strong><br>
+        We specialize in turning data insights into growth.<br>
+        <strong style="font-size: 15px;">Let's discuss how we'd approach your business.</strong>
       </div>
-      <a href="mailto:hello@riyadesk.com?subject=Fix Ad Tracking - ${scanResult.businessName}"
-         style="display: inline-block; padding: 12px 24px; background: #d32f2f; color: white; text-decoration: none; border-radius: 6px; font-weight: 600;">
-        💬 Schedule Free 15-Min Call
+      <a href="mailto:hello@riyadesk.com?subject=Discuss Opportunities - ${scanResult.businessName}"
+         style="display: inline-block; padding: 12px 24px; background: #0277bd; color: white; text-decoration: none; border-radius: 6px; font-weight: 600;">
+        📊 Schedule Free Strategy Call
       </a>
     </div>
   `;

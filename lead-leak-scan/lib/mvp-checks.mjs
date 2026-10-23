@@ -9,7 +9,7 @@
  */
 
 import { GoogleGenAI } from '@google/genai';
-import { calculateAdIntelligence, generateAdIntelligenceFindings } from './ad-intelligence.mjs';
+import { detectTechStackFromHTML, generateBusinessIntelligenceFindings } from './business-intelligence.mjs';
 
 const GOOGLE_PLACES_API_KEY = process.env.GOOGLE_PLACES_API_KEY;
 const GOOGLE_PLACES_URL = 'https://maps.googleapis.com/maps/api/place';
@@ -894,26 +894,31 @@ export async function runAllChecks(businessName, website, city, additionalData =
     const checks = [pixelCheck, aiCheck, frictionCheck, reputationCheck];
     const result = calculateOverallScore(checks);
 
-    // STEP 4: Generate narrative findings
-    console.log('\nStep 4: Generating personalized insights...');
+    // STEP 4: Tech Stack & Business Intelligence Analysis
+    console.log('\nStep 4: Analyzing tech stack and opportunities...');
+    const techStack = detectTechStackFromHTML(html);
+    const businessIntelligence = {
+      techStack,
+      searchVisibility: null, // Will be populated when GSC integrated
+      competitorAnalysis: null // Will be populated when Semrush integrated
+    };
+    const businessIntelligenceFindings = generateBusinessIntelligenceFindings(businessIntelligence, businessName, city);
+
+    // STEP 5: Generate narrative findings
+    console.log('\nStep 5: Generating personalized insights...');
     const findings = await generateNarrativeFindings(businessName, city, checks, html);
-
-    // STEP 5: Ad Intelligence Analysis
-    console.log('\nStep 5: Analyzing ad performance...');
-    const adIntelligence = calculateAdIntelligence(html, businessName, city);
-    const adFindings = generateAdIntelligenceFindings(adIntelligence, businessName, city);
-
-    console.log(`   Ad Health Score: ${adIntelligence.adHealthScore}/100`);
-    if (adIntelligence.monthlyRevenueLoss > 0) {
-      console.log(`   💰 Revenue Loss: $${adIntelligence.monthlyRevenueLoss}/month`);
-    }
 
     console.log(`\n✅ Scan complete!`);
     console.log(`   Score: ${result.overallScore}/100 (${result.band})`);
     console.log(`   Pixels: ${pixelCheck.score}/25`);
     console.log(`   AI Visibility: ${aiCheck.score}/25`);
     console.log(`   Form: ${frictionCheck.score}/25`);
-    console.log(`   Reviews: ${reputationCheck.score}/25\n`);
+    console.log(`   Reviews: ${reputationCheck.score}/25`);
+    console.log(`   Tech Stack: ${techStack.cms || 'Unknown CMS'}`);
+    if (techStack.missingSchemas.length > 0) {
+      console.log(`   ⚠️ Missing Schemas: ${techStack.missingSchemas.join(', ')}`);
+    }
+    console.log();
 
     return {
       businessName,
@@ -922,14 +927,8 @@ export async function runAllChecks(businessName, website, city, additionalData =
       websiteValid,
       ...result,
       findings: findings || [],
-      adIntelligence: {
-        healthScore: adIntelligence.adHealthScore,
-        monthlyRevenueLoss: adIntelligence.monthlyRevenueLoss,
-        annualRevenueLoss: adIntelligence.annualRevenueLoss,
-        recoveryTimeframe: adIntelligence.recoveryTimeframe,
-        potentialROI: adIntelligence.potentialROI
-      },
-      adFindings: adFindings || [],
+      businessIntelligence,
+      businessIntelligenceFindings: businessIntelligenceFindings || [],
       scannedAt: new Date().toISOString()
     };
 
