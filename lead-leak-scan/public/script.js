@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // Show loading state
       const submitBtn = scanForm.querySelector('button[type="submit"]');
       const originalText = submitBtn.innerHTML;
-      submitBtn.innerHTML = '<span class="spinner"></span><span class="btn-text">Verifying website...</span>';
+      submitBtn.innerHTML = '<span class="spinner"></span><span class="btn-text">🔍 Verifying your website...</span>';
       submitBtn.disabled = true;
       submitBtn.classList.add('loading');
 
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
           return;
         }
 
-        submitBtn.innerHTML = '<span class="spinner"></span><span class="btn-text">Scanning...</span>';
+        submitBtn.innerHTML = '<span class="spinner"></span><span class="btn-text">🔎 Detecting your gaps...</span>';
         console.log('Step 2: Website verified. Calling API...');
 
         // Call backend scan API

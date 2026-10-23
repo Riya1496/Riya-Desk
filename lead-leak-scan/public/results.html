@@ -40,16 +40,23 @@
     }
 
     .score-circle {
-      width: 200px;
-      height: 200px;
+      width: 240px;
+      height: 240px;
       border-radius: 50%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      margin: 40px auto;
+      margin: 50px auto;
       color: white;
       font-weight: 700;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25), inset -2px -2px 8px rgba(0,0,0,0.1);
+      transform: perspective(1000px) rotateX(5deg) rotateZ(-2deg);
+      transition: transform 0.3s ease;
+    }
+
+    .score-circle:hover {
+      transform: perspective(1000px) rotateX(0deg) rotateZ(0deg) scale(1.02);
     }
 
     .score-circle.critical {
@@ -65,14 +72,20 @@
     }
 
     .score-number {
-      font-size: 60px;
+      font-size: 80px;
       line-height: 1;
+      font-weight: 800;
+      letter-spacing: -2px;
+      font-family: 'Inter', 'Sohne', sans-serif;
     }
 
     .score-label {
-      font-size: 18px;
-      margin-top: 5px;
+      font-size: 16px;
+      margin-top: 10px;
       opacity: 0.95;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      font-family: 'Inter', 'Sohne', sans-serif;
     }
 
     .band-title {
