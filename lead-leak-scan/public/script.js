@@ -1,3 +1,43 @@
+// Custom confirmation modal
+function showConfirmationModal(businessName, website, city) {
+  return new Promise((resolve) => {
+    // Create modal HTML
+    const modalHTML = `
+      <div id="confirmation-modal" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 2000;">
+        <div style="background: white; padding: 30px; border-radius: 12px; max-width: 400px; box-shadow: 0 10px 40px rgba(0,0,0,0.2);">
+          <h3 style="margin-top: 0; color: #1976d2; font-size: 18px;">✓ Website Verified!</h3>
+          <div style="background: #f5f5f5; padding: 15px; border-radius: 8px; margin: 15px 0; font-size: 14px; line-height: 1.6;">
+            <div><strong>Business:</strong> ${businessName}</div>
+            <div><strong>Website:</strong> ${website}</div>
+            <div><strong>City:</strong> ${city}</div>
+          </div>
+          <p style="color: #666; font-size: 14px; margin: 15px 0;">Is this the correct business? Click "Continue Scan" to proceed.</p>
+          <div style="display: flex; gap: 10px; margin-top: 20px;">
+            <button id="cancel-btn" style="flex: 1; padding: 10px; border: 1px solid #ddd; background: white; border-radius: 6px; cursor: pointer; font-weight: 600;">Cancel</button>
+            <button id="confirm-btn" style="flex: 1; padding: 10px; background: #1976d2; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">Continue Scan</button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    // Append modal to body
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    const modal = document.getElementById('confirmation-modal');
+    const confirmBtn = document.getElementById('confirm-btn');
+    const cancelBtn = document.getElementById('cancel-btn');
+
+    confirmBtn.addEventListener('click', () => {
+      modal.remove();
+      resolve(true);
+    });
+
+    cancelBtn.addEventListener('click', () => {
+      modal.remove();
+      resolve(false);
+    });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
   // Check if we have results to display
   const scanResultStr = sessionStorage.getItem('scanResult');
@@ -68,14 +108,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         console.log('Step 2: Website verified. Checking for similar business names in', formData.city);
 
-        // Show confirmation with website info
-        const confirmScan = confirm(
-          `✓ Website verified!\n\n` +
-          `Business: ${formData.businessName}\n` +
-          `Website: ${formData.website}\n` +
-          `City: ${formData.city}\n\n` +
-          `Is this the correct business? Click OK to continue scan.`
-        );
+        // Show custom confirmation modal
+        const confirmScan = await showConfirmationModal(formData.businessName, formData.website, formData.city);
 
         if (!confirmScan) {
           console.log('User cancelled scan confirmation');
