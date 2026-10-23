@@ -9,6 +9,7 @@
  */
 
 import { GoogleGenAI } from '@google/genai';
+import { calculateAdIntelligence, generateAdIntelligenceFindings } from './ad-intelligence.mjs';
 
 const GOOGLE_PLACES_API_KEY = process.env.GOOGLE_PLACES_API_KEY;
 const GOOGLE_PLACES_URL = 'https://maps.googleapis.com/maps/api/place';
@@ -897,6 +898,16 @@ export async function runAllChecks(businessName, website, city, additionalData =
     console.log('\nStep 4: Generating personalized insights...');
     const findings = await generateNarrativeFindings(businessName, city, checks, html);
 
+    // STEP 5: Ad Intelligence Analysis
+    console.log('\nStep 5: Analyzing ad performance...');
+    const adIntelligence = calculateAdIntelligence(html, businessName, city);
+    const adFindings = generateAdIntelligenceFindings(adIntelligence, businessName, city);
+
+    console.log(`   Ad Health Score: ${adIntelligence.adHealthScore}/100`);
+    if (adIntelligence.monthlyRevenueLoss > 0) {
+      console.log(`   💰 Revenue Loss: $${adIntelligence.monthlyRevenueLoss}/month`);
+    }
+
     console.log(`\n✅ Scan complete!`);
     console.log(`   Score: ${result.overallScore}/100 (${result.band})`);
     console.log(`   Pixels: ${pixelCheck.score}/25`);
@@ -911,6 +922,14 @@ export async function runAllChecks(businessName, website, city, additionalData =
       websiteValid,
       ...result,
       findings: findings || [],
+      adIntelligence: {
+        healthScore: adIntelligence.adHealthScore,
+        monthlyRevenueLoss: adIntelligence.monthlyRevenueLoss,
+        annualRevenueLoss: adIntelligence.annualRevenueLoss,
+        recoveryTimeframe: adIntelligence.recoveryTimeframe,
+        potentialROI: adIntelligence.potentialROI
+      },
+      adFindings: adFindings || [],
       scannedAt: new Date().toISOString()
     };
 
