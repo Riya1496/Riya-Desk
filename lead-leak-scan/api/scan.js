@@ -15,7 +15,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { businessName, website, city, email, aiData, reputationData, manualReviews } = req.body;
+    const { businessName, website, city, email, businessType, aiData, reputationData, manualReviews } = req.body;
 
     // Validate required fields
     if (!businessName || !website || !city || !email) {
@@ -28,14 +28,15 @@ export default async function handler(req, res) {
       normalizedWebsite = 'https://' + normalizedWebsite;
     }
 
-    console.log(`[API] Scanning: ${businessName} (${normalizedWebsite})`);
+    console.log(`[API] Scanning: ${businessName} (${normalizedWebsite}) - Type: ${businessType || 'unknown'}`);
 
-    // Run all checks
+    // Run all checks with business context
     const result = await runAllChecks(
       businessName,
       normalizedWebsite,
       city,
       {
+        businessType: businessType || 'other',
         aiData,
         reputationData
       }

@@ -919,3 +919,30 @@ export async function runAllChecks(businessName, website, city, additionalData =
     throw error;
   }
 }
+
+// Add confidence scores based on data sources
+export function addConfidenceScores(checks, businessType = 'other') {
+  const confidenceMap = {
+    'pixel_audit': 'high', // We actually check HTML
+    'ai_visibility': 'low',  // Just checks website mentions, not actual AI
+    'lead_friction': 'high', // We count real form fields
+    'reputation': 'high'     // Real Google Places data
+  };
+
+  // If business type provided, adjust confidence for pixel audit
+  if (businessType && businessType !== 'other') {
+    // Pixel audit confidence stays high because we detect real pixels
+    // But findings confidence depends on relevance to business type
+  }
+
+  return checks.map(check => ({
+    ...check,
+    confidence: confidenceMap[check.checkId] || 'medium',
+    dataSource: {
+      'pixel_audit': 'HTML analysis (JavaScript detection)',
+      'ai_visibility': 'Website signals (heuristic)',
+      'lead_friction': 'HTML form parsing',
+      'reputation': 'Google Places API'
+    }[check.checkId]
+  }));
+}

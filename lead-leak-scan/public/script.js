@@ -35,12 +35,13 @@ document.addEventListener('DOMContentLoaded', function() {
         website = 'https://' + website.replace(/^www\./, '');
       }
 
-      // Collect 4 basic fields only
+      // Collect form fields
       const formData = {
         businessName: document.getElementById('businessName').value,
         website: website,
         city: document.getElementById('city').value,
-        email: document.getElementById('email').value
+        email: document.getElementById('email').value,
+        businessType: document.getElementById('businessType').value || 'other'
       };
 
       console.log('Form data collected:', formData);
