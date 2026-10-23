@@ -1,16 +1,17 @@
-/* Riya Desk Color Palette - Ultra Modern */
+/* Riya Desk Color Palette - Next-Gen */
 :root {
-  --primary: #0f172a;
+  --primary: #1e3a5f;
   --accent: #c9a56c;
   --light: #f1e2c4;
-  --cream: #f3ece0;
-  --dark: #1a1f3a;
-  --dark-navy: #0f172a;
+  --cream: #fafbfc;
+  --dark: #16213e;
+  --dark-navy: #0f1419;
   --gold: #a9864f;
   --purple: #7621B0;
   --orange: #BE4C00;
-  --navy: #2b3342;
+  --navy: #1e3a5f;
   --white: #fff;
+  --text-primary: #1e3a5f;
 }
 
 * {
