@@ -77,12 +77,18 @@ body {
   text-decoration: none;
   font-size: 14px;
   font-weight: 600;
-  transition: color 0.3s;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(201, 165, 108, 0.05);
 }
 
 .header-link:hover {
+  background: rgba(201, 165, 108, 0.15);
   color: var(--primary);
-  text-decoration: underline;
 }
 
 .logo-section {
