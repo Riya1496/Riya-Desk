@@ -184,13 +184,13 @@ export async function checkAIVisibility(businessName, city, html = '') {
       brandStrength += 1;
     }
 
-    let score = 0;
+    let score = 5; // Baseline: website exists and was analyzed
     if (brandStrength >= 5 && nameMatches >= 5) {
       score = 20;
     } else if (brandStrength >= 3 && nameMatches >= 2) {
       score = 15;
     } else if (brandStrength > 0 || nameMatches > 0) {
-      score = 8;
+      score = 10;
     }
 
     console.log(`  Brand signals: ${brandStrength}, Name mentions: ${nameMatches}`);
@@ -255,7 +255,8 @@ export async function checkLeadFriction(html) {
   let frictionScore = 100;
 
   if (totalFields === 0) {
-    score = 0; // No form at all
+    // No form detected - but still give baseline score if website has contact methods
+    score = (hasPhoneLink || hasScheduling) ? 8 : 5; // Baseline: contact info exists
     frictionScore = 100;
   } else if (totalFields <= 3) {
     score = 22; // Good
@@ -718,6 +719,11 @@ export async function checkReputation(businessName, city, html = '') {
       if (platformsFound.length > 1) {
         score += 3;
       }
+    }
+
+    // Add baseline: website analyzed is better than nothing
+    if (!foundReviewSignals && score === 0) {
+      score = 3; // Baseline: website exists
     }
 
     score = Math.max(0, Math.min(25, score));
