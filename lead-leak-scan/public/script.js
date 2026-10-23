@@ -212,6 +212,9 @@ function initResultsPage() {
   // Render score breakdown
   renderScoreBreakdown(scanResult);
 
+  // Render ad intelligence (revenue impact) - MONETIZATION
+  renderAdIntelligence(scanResult);
+
   // Render narrative findings
   renderFindings(scanResult);
 
@@ -435,6 +438,78 @@ function renderScoreBreakdown(scanResult) {
   if (totalDisplay) {
     totalDisplay.textContent = `${scanResult.overallScore}/100`;
   }
+}
+
+// Render ad intelligence findings (MONETIZATION)
+function renderAdIntelligence(scanResult) {
+  const container = document.getElementById('ad-intelligence-container');
+  if (!container || !scanResult.adIntelligence) return;
+
+  const { monthlyRevenueLoss, annualRevenueLoss, healthScore, recoveryTimeframe, potentialROI } = scanResult.adIntelligence;
+  const adFindings = scanResult.adFindings || [];
+
+  if (monthlyRevenueLoss === 0) {
+    container.innerHTML = `
+      <div style="color: #2e7d32; font-size: 14px;">
+        <strong>✓ Ad Tracking Healthy</strong><br>
+        Your business has proper conversion tracking pixels installed. Your ads are optimizable and ROI is measurable.
+      </div>
+    `;
+    return;
+  }
+
+  let html = `
+    <div style="margin-bottom: 20px;">
+      <h4 style="color: #d32f2f; margin: 0 0 15px 0;">🚨 Critical: Ad Tracking Broken</h4>
+      <div style="background: white; padding: 15px; border-radius: 6px; margin-bottom: 15px;">
+        <div style="font-size: 28px; font-weight: bold; color: #d32f2f;">$${monthlyRevenueLoss.toLocaleString()}</div>
+        <div style="color: #666; font-size: 13px;">Estimated Monthly Revenue Loss</div>
+        <div style="color: #999; font-size: 12px; margin-top: 5px;">${annualRevenueLoss.toLocaleString()} per year</div>
+      </div>
+
+      <div style="background: white; padding: 12px; border-radius: 6px; margin-bottom: 10px; border-left: 4px solid #2196F3;">
+        <strong>Why This Happens:</strong><br>
+        <div style="font-size: 13px; color: #555; margin-top: 8px; line-height: 1.6;">
+          Without conversion pixels, your ads cannot be optimized. You're paying for clicks but not tracking which ones convert.
+        </div>
+      </div>
+
+      <div style="background: white; padding: 12px; border-radius: 6px; border-left: 4px solid #4CAF50;">
+        <strong>Recovery Plan:</strong><br>
+        <div style="font-size: 13px; color: #555; margin-top: 8px;">
+          <strong>Timeline:</strong> ${recoveryTimeframe}<br>
+          <strong>Expected ROI:</strong> ${potentialROI}
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Add specific findings
+  adFindings.forEach((finding, index) => {
+    if (finding.actionable === false) return;
+    html += `
+      <div style="background: white; padding: 12px; border-radius: 6px; margin-bottom: 10px;">
+        <div style="font-weight: 600; color: #d32f2f; margin-bottom: 5px;">${finding.title}</div>
+        <div style="font-size: 13px; color: #666; line-height: 1.5;">${finding.insight}</div>
+      </div>
+    `;
+  });
+
+  // Add CTA
+  html += `
+    <div style="background: white; padding: 15px; border-radius: 6px; margin-top: 15px; text-align: center;">
+      <div style="font-size: 14px; color: #666; margin-bottom: 12px;">
+        <strong>This is fixable in 2-4 weeks for $3000-5000.</strong><br>
+        Recover your investment 10x over in 90 days.
+      </div>
+      <a href="mailto:hello@riyadesk.com?subject=Fix Ad Tracking - ${scanResult.businessName}"
+         style="display: inline-block; padding: 12px 24px; background: #d32f2f; color: white; text-decoration: none; border-radius: 6px; font-weight: 600;">
+        💬 Schedule Free 15-Min Call
+      </a>
+    </div>
+  `;
+
+  container.innerHTML = html;
 }
 
 // Render findings
