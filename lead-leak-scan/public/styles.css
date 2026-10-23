@@ -101,11 +101,15 @@ body {
 
 /* Hero Section */
 .hero {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
+  display: flex;
+  justify-content: center;
   align-items: center;
   margin-bottom: 100px;
+}
+
+.hero-content {
+  max-width: 700px;
+  width: 100%;
 }
 
 .hero-content h1 {

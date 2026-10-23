@@ -1,59 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
   const scanForm = document.getElementById('scanForm');
-  let emailVerified = false;
-  let otpSent = false;
-
-  // Email OTP verification
-  if (scanForm) {
-    const emailInput = document.getElementById('email');
-    const emailOtpSection = document.getElementById('email-otp-section');
-    const verifyEmailBtn = document.getElementById('verify-email-btn');
-    const phoneInput = document.getElementById('phone');
-
-    // Show OTP section when email loses focus
-    emailInput.addEventListener('blur', function() {
-      if (this.value && this.checkValidity()) {
-        emailOtpSection.style.display = 'block';
-        if (!otpSent) {
-          sendEmailOTP(this.value);
-          otpSent = true;
-        }
-      }
-    });
-
-    // Verify OTP
-    verifyEmailBtn.addEventListener('click', function() {
-      const otp = document.getElementById('email-otp').value;
-      if (otp.length === 6) {
-        emailVerified = true;
-        verifyEmailBtn.textContent = '✓ Email Verified';
-        verifyEmailBtn.disabled = true;
-        verifyEmailBtn.style.opacity = '0.6';
-        console.log('✅ Email verified with OTP');
-      } else {
-        alert('❌ Please enter a valid 6-digit OTP');
-      }
-    });
-  }
-
-  // Send email OTP (mock)
-  function sendEmailOTP(email) {
-    const mockOTP = '123456'; // In production, send real OTP via email
-    console.log(`📧 OTP sent to ${email}: ${mockOTP}`);
-    document.getElementById('otp-timer').innerHTML = '⏱️ OTP expires in 5 minutes';
-  }
 
   if (scanForm) {
     console.log('✓ Form found and listener attached');
 
     scanForm.addEventListener('submit', async function(e) {
       e.preventDefault();
-
-      // Check email verification
-      if (!emailVerified) {
-        alert('❌ Please verify your email with OTP first');
-        return;
-      }
 
       console.log('Form submitted');
 
