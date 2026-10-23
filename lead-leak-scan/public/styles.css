@@ -171,6 +171,12 @@ body {
   gap: 16px;
 }
 
+.form-row-2 .form-field:last-child > div {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
 /* Button */
 .btn-scan {
   padding: 16px 32px;
