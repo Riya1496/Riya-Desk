@@ -460,16 +460,54 @@ body.has-cursor .cursor-dot, body.has-cursor .cursor-ring { opacity: 1; }
 .about-ctas { display: flex; flex-direction: column; align-items: center; gap: 1.4rem; }
 .about-more { font: 500 12px/1 var(--hero-font); letter-spacing: .2em; text-transform: uppercase; color: var(--gold-hi); text-decoration: none; padding-bottom: 6px; border-bottom: 1px solid rgba(241, 226, 196, .35); transition: border-color .3s; }
 .about-more:hover { border-color: var(--gold-hi); }
-/* Free scan band */
-.scan-band { position: relative; background: var(--bg); padding: 6rem 1.25rem; text-align: center; overflow: hidden; }
-.scan-band::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(45% 60% at 50% 50%, rgba(196, 150, 96, .15), transparent 70%); }
-.scan-band-inner { position: relative; max-width: 46rem; margin: 0 auto; }
-.scan-band h2 { margin-top: .4rem; font: 700 clamp(2.1rem, 5.4vw, 4rem)/.95 var(--font); text-transform: uppercase; letter-spacing: -.01em;
+/* Free scan band (highlight) */
+.scan-band { position: relative; background: var(--bg); padding: 7rem 1.25rem; overflow: hidden; border-block: 1px solid rgba(241, 226, 196, .12); }
+.scan-band::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(40% 60% at 72% 50%, rgba(196, 150, 96, .2), transparent 70%), radial-gradient(30% 50% at 15% 30%, rgba(118, 33, 176, .12), transparent 70%); }
+.scan-band-inner { position: relative; max-width: 76rem; margin: 0 auto; display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(2rem, 6vw, 6rem); align-items: center; }
+.scan-kicker { display: inline-flex; align-items: center; gap: .6rem; padding: .55rem 1rem; border: 1px solid rgba(241, 226, 196, .3); border-radius: 999px; font: 500 11px/1 var(--hero-font); letter-spacing: .2em; text-transform: uppercase; color: var(--gold-hi); }
+.scan-kicker .dot, .lx-scan .dot, .site-nav .sn-scan .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 0 rgba(201, 165, 108, .6); animation: scanPulse 2s infinite; flex: none; }
+@keyframes scanPulse { 0% { box-shadow: 0 0 0 0 rgba(201, 165, 108, .6); } 70% { box-shadow: 0 0 0 9px rgba(201, 165, 108, 0); } 100% { box-shadow: 0 0 0 0 rgba(201, 165, 108, 0); } }
+.scan-band h2 { margin-top: 1.4rem; font: 700 clamp(2.3rem, 5.2vw, 4.4rem)/.94 var(--font); text-transform: uppercase; letter-spacing: -.01em;
   background: linear-gradient(180deg, var(--gold-hi), #a9864f); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.scan-band p.scan-text { margin: 1.4rem auto 0; max-width: 34rem; font: 400 1.05rem/1.7 var(--hero-font); color: rgba(239, 230, 214, .7); }
-.scan-checks { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem; margin: 2rem 0 2.4rem; list-style: none; }
-.scan-checks li { padding: .7rem 1.1rem; border: 1px solid rgba(241, 226, 196, .22); border-radius: 999px; font: 500 11px/1 var(--hero-font); letter-spacing: .16em; text-transform: uppercase; color: var(--gold-hi); }
-.scan-note { margin-top: 1.1rem; font: 500 11px/1 var(--hero-font); letter-spacing: .2em; text-transform: uppercase; color: rgba(239, 230, 214, .5); }
+.scan-band p.scan-text { margin-top: 1.4rem; max-width: 34rem; font: 400 1.08rem/1.7 var(--hero-font); color: rgba(239, 230, 214, .72); }
+.scan-checks { display: flex; flex-wrap: wrap; gap: .55rem; margin: 1.8rem 0 2.4rem; list-style: none; }
+.scan-checks li { padding: .65rem 1rem; border: 1px solid rgba(241, 226, 196, .2); border-radius: 999px; font: 500 11px/1 var(--hero-font); letter-spacing: .14em; text-transform: uppercase; color: rgba(241, 226, 196, .85); }
+.scan-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1.2rem 1.6rem; }
+.scan-note { font: 500 11px/1 var(--hero-font); letter-spacing: .18em; text-transform: uppercase; color: rgba(239, 230, 214, .5); }
+.scan-card { position: relative; display: flex; flex-direction: column; gap: 1.1rem; padding: 1.8rem; border-radius: 28px; text-decoration: none; color: var(--paper-ink); background: var(--paper);
+  box-shadow: 0 50px 100px -40px rgba(0, 0, 0, .95), 0 0 0 1px rgba(241, 226, 196, .25); transform: rotate(1.5deg); transition: transform .6s cubic-bezier(.22,1,.36,1); }
+.scan-card:hover { transform: rotate(0deg) translateY(-6px); }
+.scan-card:focus-visible { outline: 2px solid var(--gold-hi); outline-offset: 4px; }
+.sc-top { display: flex; justify-content: space-between; font: 500 10.5px/1 var(--hero-font); letter-spacing: .18em; text-transform: uppercase; color: #8a6a3c; }
+.sc-ring { align-self: center; position: relative; width: 150px; height: 150px; border-radius: 50%; display: grid; place-items: center;
+  background: conic-gradient(var(--gold) calc(var(--v) * 1%), rgba(23, 18, 14, .1) 0); }
+.sc-ring::before { content: ""; position: absolute; inset: 12px; border-radius: 50%; background: var(--paper); }
+.sc-ring > span { position: relative; display: flex; align-items: baseline; gap: 2px; }
+.sc-ring b { font: 500 3.4rem/1 var(--serif-word); }
+.sc-ring i { font: normal 500 13px/1 var(--hero-font); color: #6b6157; }
+.sc-band { align-self: center; padding: .45rem .9rem; border-radius: 999px; background: rgba(201, 165, 108, .22); font: 500 10.5px/1 var(--hero-font); letter-spacing: .18em; text-transform: uppercase; color: #6a4f2c; }
+.sc-rows { display: flex; flex-direction: column; gap: .75rem; margin-top: .3rem; }
+.sc-row { display: grid; grid-template-columns: 9.5rem 1fr; gap: .9rem; align-items: center; font: 400 13px/1.2 var(--hero-font); color: #4e463d; }
+.sc-bar { height: 7px; border-radius: 99px; background: rgba(23, 18, 14, .1); overflow: hidden; }
+.sc-bar i { display: block; height: 100%; width: var(--w); border-radius: 99px; background: linear-gradient(90deg, var(--gold-lo), var(--gold)); }
+.sc-cta { margin-top: .4rem; padding-top: 1rem; border-top: 1px solid rgba(23, 18, 14, .12); font: 500 12px/1 var(--hero-font); letter-spacing: .16em; text-transform: uppercase; color: var(--paper-ink); }
+/* hero + menu highlight */
+.lx-scan { display: inline-flex; align-items: center; gap: .6rem; margin-top: 1.1rem; padding: .6rem 1rem; border-radius: 999px; border: 1px solid rgba(241, 226, 196, .35); background: rgba(13, 11, 10, .35);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); font: 500 11px/1 var(--hero-font); letter-spacing: .16em; text-transform: uppercase; color: var(--gold-hi); text-decoration: none; transition: background-color .3s, border-color .3s; }
+.lx-scan:hover { background: rgba(241, 226, 196, .12); border-color: var(--gold-hi); }
+.lx-scan b { font-weight: 500; }
+.lx-scan { white-space: nowrap; }
+.lx-scan-short { display: none; }
+@media (max-width: 860px) { .lx-scan { margin-top: .8rem; padding: .5rem .8rem; font-size: 10px; letter-spacing: .12em; gap: .45rem; } .lx-scan-long { display: none; } .lx-scan-short { display: inline; } }
+.site-nav .sn-links a.sn-scan { display: inline-flex; align-items: center; gap: .5rem; border: 1px solid rgba(241, 226, 196, .35); color: var(--gold-hi); }
+@media (max-width: 1000px) {
+  .scan-band { padding: 5rem 1.25rem; }
+  .scan-band-inner { grid-template-columns: 1fr; }
+  .scan-card { max-width: 26rem; width: 100%; justify-self: center; transform: none; }
+  .site-nav .sn-links a.sn-scan { justify-content: center; margin: 4px 0; }
+}
+@media (max-width: 480px) { .sc-row { grid-template-columns: 7.5rem 1fr; font-size: 12px; } .scan-actions .magnetic, .scan-actions .btn-contact { width: 100%; text-align: center; } }
+@media (prefers-reduced-motion: reduce) { .scan-kicker .dot, .lx-scan .dot, .site-nav .sn-scan .dot { animation: none; } .scan-card { transform: none; } }
 .editing .ct .edit-link { width: min(420px, 80vw); }
 @media (max-width: 520px) { .ct-social a { width: 100%; justify-content: center; } }
 
@@ -620,7 +658,7 @@ body.has-cursor .cursor-dot, body.has-cursor .cursor-ring { opacity: 1; }
   <button type="button" class="sn-menu" id="snMenu" aria-expanded="false" aria-controls="snLinks">Menu</button>
   <ul class="sn-links" id="snLinks">
     <li><a href="about/">About</a></li>
-    <li><a href="https://scan.riyadesk.com/">Free scan</a></li>
+    <li><a class="sn-scan" href="https://scan.riyadesk.com/"><span class="dot"></span>Free scan</a></li>
     <li><a href="#process">Process</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#projects">Work</a></li>
@@ -670,6 +708,7 @@ body.has-cursor .cursor-dot, body.has-cursor .cursor-ring { opacity: 1; }
           <p class="lx-kicker" data-edit="heroKicker">( creative marketing desk )</p>
           <h2 class="lx-headline"><span data-edit="heroLine1">brands that grow.</span><br><span data-edit="heroLine2">stories that stay.</span></h2>
           <p class="lx-intro" data-edit="heroIntro">Brand strategy, creative marketing and AI solutions for businesses ready to grow.</p>
+          <a class="lx-scan" href="https://scan.riyadesk.com/"><span class="dot"></span><span class="lx-scan-long">New &middot; Free Lead Leak Scan</span><span class="lx-scan-short">Free scan</span> <b>&rarr;</b></a>
         </div>
         <a class="lx-scroll" href="#about" data-fade="1.1,0,10">scroll<i></i></a>
         <div class="lx-cta" data-fade="1,0,20"><span class="magnetic"><a class="btn-contact js-contact" href="#contact" data-edit="ctaLabel" data-open-enquiry>Start your story ↗</a></span></div>
@@ -723,6 +762,31 @@ body.has-cursor .cursor-dot, body.has-cursor .cursor-ring { opacity: 1; }
     </div>
   </section>
 
+  <!-- FREE SCAN (highlight) -->
+  <section class="scan-band" id="free-scan" aria-labelledby="scan-h">
+    <div class="scan-band-inner">
+      <div class="scan-copy">
+        <p class="scan-kicker" data-fade="0,0,20"><span class="dot"></span>New &middot; Free tool</p>
+        <h2 id="scan-h" data-fade="0,0,40">How many leads is your marketing losing?</h2>
+        <p class="scan-text" data-fade="0.1,0,20">Get a free Lead Leak Scan of your business in 60 seconds. See what&rsquo;s working, what&rsquo;s costing you customers, and what to fix first.</p>
+        <ul class="scan-checks" data-fade="0.15,0,20"><li>Website tracking</li><li>Contact forms</li><li>Customer reviews</li><li>AI visibility</li></ul>
+        <div class="scan-actions" data-fade="0.2,0,20"><span class="magnetic"><a class="btn-contact" href="https://scan.riyadesk.com/">Get your free scan ↗</a></span><span class="scan-note">60 seconds &middot; 100% free &middot; no card</span></div>
+      </div>
+      <a class="scan-card" href="https://scan.riyadesk.com/" aria-label="Open the free Lead Leak Scan" data-fade="0.15,0,40">
+        <span class="sc-top"><span>Lead Leak Scan</span><span>Sample result</span></span>
+        <span class="sc-ring" style="--v:58"><span><b>58</b><i>/100</i></span></span>
+        <span class="sc-band">Opportunity</span>
+        <span class="sc-rows">
+          <span class="sc-row"><span>Website tracking</span><span class="sc-bar"><i style="--w:72%"></i></span></span>
+          <span class="sc-row"><span>Contact forms</span><span class="sc-bar"><i style="--w:40%"></i></span></span>
+          <span class="sc-row"><span>Customer reviews</span><span class="sc-bar"><i style="--w:84%"></i></span></span>
+          <span class="sc-row"><span>AI visibility</span><span class="sc-bar"><i style="--w:28%"></i></span></span>
+        </span>
+        <span class="sc-cta">Scan your business &rarr;</span>
+      </a>
+    </div>
+  </section>
+
   <!-- PROCESS -->
   <section class="process" id="process" aria-label="How I work">
     <p class="sec-label" data-fade="0,0,20"><span>02</span>Process</p>
@@ -736,18 +800,6 @@ body.has-cursor .cursor-dot, body.has-cursor .cursor-ring { opacity: 1; }
     <p class="sec-label on-paper" data-fade="0,0,20"><span>03</span>Services</p>
     <h2 class="big-heading" data-fade="0,0,40" data-edit="servicesTitle">Services</h2>
     <div class="svc-list" id="svcList"></div>
-  </section>
-
-  <!-- FREE SCAN -->
-  <section class="scan-band" id="free-scan" aria-labelledby="scan-h">
-    <div class="scan-band-inner">
-      <p class="sec-label" data-fade="0,0,20">Free tool</p>
-      <h2 id="scan-h" data-fade="0,0,40">How many leads is your marketing losing?</h2>
-      <p class="scan-text" data-fade="0.1,0,20">Get a free Lead Leak Scan of your business in 60 seconds. See what&rsquo;s working, what&rsquo;s costing you customers, and what to fix first.</p>
-      <ul class="scan-checks" data-fade="0.15,0,20"><li>Website tracking</li><li>Contact forms</li><li>Customer reviews</li><li>AI visibility</li></ul>
-      <div data-fade="0.2,0,20"><span class="magnetic"><a class="btn-contact" href="https://scan.riyadesk.com/">Get your free scan ↗</a></span></div>
-      <p class="scan-note" data-fade="0.25,0,10">Takes 60 seconds &middot; 100% free</p>
-    </div>
   </section>
 
   <!-- PROJECTS -->
@@ -1226,7 +1278,7 @@ body.has-cursor .cursor-dot, body.has-cursor .cursor-ring { opacity: 1; }
         warm: Math.random() < 0.75, a: 0.03 + Math.random() * 0.04 });
       // keep the message clear: glitter dims over the text and CTA
       var hr = hero.getBoundingClientRect();
-      quiet = Array.prototype.map.call(hero.querySelectorAll('.lx-top, .lx-headline, .lx-intro, .lx-cta'), function (el) {
+      quiet = Array.prototype.map.call(hero.querySelectorAll('.lx-top, .lx-headline, .lx-intro, .lx-scan, .lx-cta'), function (el) {
         var r = el.getBoundingClientRect();
         return { l: r.left - hr.left - 28, t: r.top - hr.top - 28, r: r.right - hr.left + 28, b: r.bottom - hr.top + 28 };
       });
