@@ -1,3 +1,36 @@
+// Copy each completed scan into the Riya Desk Enquiries Google Sheet (same sheet as the website's enquiry form).
+// Fire-and-forget: the visitor's results never wait on it.
+const LEADS_SHEET_URL = 'https://script.google.com/macros/s/AKfycbw-Xs_36_DjZLHRP8lnQfTXEB3A-SzTD7R1SBqelopkf6T4ibDWOnc4UbeqdZAhIbVkmg/exec';
+
+function sendScanLeadToSheet(formData, result) {
+  try {
+    const phoneEl = document.getElementById('phone');
+    const codeEl = document.getElementById('country-code');
+    const phone = phoneEl && phoneEl.value.trim() ? `${codeEl ? codeEl.value : ''} ${phoneEl.value.trim()}`.trim() : '—';
+    const names = { pixel_audit: 'Tracking', ai_visibility: 'AI readiness', lead_friction: 'Contact form', reputation: 'Reviews' };
+    const breakdown = (result.checks || []).map(c => `${names[c.checkId] || c.checkName}: ${c.score}/25`).join(' · ');
+    const lead = {
+      'Name': '—',
+      'Business / brand': formData.businessName,
+      'Email': formData.email,
+      'Phone / WhatsApp': phone,
+      'Website / Instagram': formData.website,
+      'Industry': formData.businessType,
+      'Services': 'Free Lead Leak Scan',
+      'Goals': '—',
+      'Business stage': '—',
+      'Budget': '—',
+      'Preferred start': '—',
+      'Target market': formData.city,
+      'Message': `Scan score ${result.overallScore}/100 (${result.band || '—'}). ${breakdown}`,
+      'Sent from': 'scan.riyadesk.com'
+    };
+    fetch(LEADS_SHEET_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(lead) }).catch(() => {});
+  } catch (e) {
+    console.warn('Could not send scan lead to sheet', e);
+  }
+}
+
 // Custom confirmation modal
 function showConfirmationModal(businessName, website, city) {
   return new Promise((resolve) => {
@@ -89,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // Show loading state
       const submitBtn = scanForm.querySelector('button[type="submit"]');
       const originalText = submitBtn.innerHTML;
-      submitBtn.innerHTML = '<span class="spinner"></span><span class="btn-text">🔍 Verifying your website...</span>';
+      submitBtn.innerHTML = '<span class="spinner"></span><span class="btn-text">Verifying your website…</span>';
       submitBtn.disabled = true;
       submitBtn.classList.add('loading');
 
@@ -119,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function() {
           return;
         }
 
-        submitBtn.innerHTML = '<span class="spinner"></span><span class="btn-text">🔎 Detecting your gaps...</span>';
+        submitBtn.innerHTML = '<span class="spinner"></span><span class="btn-text">Finding your gaps…</span>';
         console.log('Step 3: User confirmed. Calling API...');
 
         // Call backend scan API
@@ -143,6 +176,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Store result in session storage for results page
         sessionStorage.setItem('scanResult', JSON.stringify(result));
         console.log('Result stored in sessionStorage');
+        sendScanLeadToSheet(formData, result);
 
         // Show results page
         console.log('Showing results page...');
@@ -259,10 +293,10 @@ function renderScoreBreakdown(checks) {
   if (!container) return;
 
   const checkNames = {
-    'pixel_audit': '📊 Website Tracking',
-    'ai_visibility': '🤖 AI Visibility',
-    'lead_friction': '📋 Contact Form',
-    'reputation': '⭐ Customer Reviews'
+    'pixel_audit': 'Website Tracking',
+    'ai_visibility': 'AI Readiness',
+    'lead_friction': 'Contact Form',
+    'reputation': 'Customer Reviews'
   };
 
   let html = `
@@ -329,11 +363,11 @@ function renderCheckMeters(checks, findings) {
       const mentioned = check.mentioned || false;
       const score = check.score || 0;
       if (score >= 15) {
-        return '<strong>We found:</strong> Strong brand signals in your website. <strong>Status:</strong> Your business appears prominent in AI search contexts.';
+        return '<strong>We found:</strong> Strong brand signals on your website. <strong>Status:</strong> AI assistants can clearly see who you are, where you are and what you offer.';
       } else if (score >= 8) {
-        return '<strong>We found:</strong> Some brand presence, but could be stronger. <strong>Action:</strong> Strengthen your online brand and SEO.';
+        return '<strong>We found:</strong> Some brand signals, but they could be clearer. <strong>Action:</strong> Make your name, location and services easier for AI and search engines to read.';
       } else {
-        return '<strong>We found:</strong> Weak brand signals. <strong>Issue:</strong> Your business may not appear in AI recommendations. 46% of your market asks AI before Google.';
+        return '<strong>We found:</strong> Weak brand signals. <strong>Issue:</strong> AI assistants may struggle to recommend you, because your website doesn&rsquo;t clearly say who you are, where you are and what you offer.';
       }
     },
     'lead_friction': (check) => {
@@ -385,10 +419,10 @@ function renderCheckMeters(checks, findings) {
   };
 
   const checkNames = {
-    'pixel_audit': '📊 Website Tracking',
-    'ai_visibility': '🤖 AI Visibility',
-    'lead_friction': '📋 Contact Form',
-    'reputation': '⭐ Customer Reviews'
+    'pixel_audit': 'Website Tracking',
+    'ai_visibility': 'AI Readiness',
+    'lead_friction': 'Contact Form',
+    'reputation': 'Customer Reviews'
   };
 
   checks.forEach(check => {
@@ -488,7 +522,7 @@ function renderBusinessIntelligence(scanResult) {
   if (techStack) {
     html += `
       <div style="background: rgba(255,255,255,0.6); border: 1px solid rgba(23,18,14,0.12); padding: 14px; border-radius: 14px; margin-bottom: 15px;">
-        <strong>⚙️ Your Tech Stack:</strong><br>
+        <strong>Your tech stack</strong><br>
         <div style="font-size: 13px; color: #555; margin-top: 8px; line-height: 1.6;">
     `;
 
@@ -499,17 +533,17 @@ function renderBusinessIntelligence(scanResult) {
     if (techStack.analytics.length > 0) {
       html += `<div>• Analytics: <strong>${techStack.analytics.join(', ')}</strong></div>`;
     } else {
-      html += `<div>• Analytics: <strong style="color: #d32f2f;">⚠️ None detected</strong></div>`;
+      html += `<div>• Analytics: <strong style="color: #a2452f;">None detected</strong></div>`;
     }
 
     if (techStack.marketing.length > 0) {
       html += `<div>• Marketing: <strong>${techStack.marketing.join(', ')}</strong></div>`;
     } else {
-      html += `<div>• Marketing: <strong style="color: #d32f2f;">⚠️ No pixels detected</strong></div>`;
+      html += `<div>• Marketing: <strong style="color: #a2452f;">No pixels detected</strong></div>`;
     }
 
     if (techStack.missingSchemas.length > 0) {
-      html += `<div style="color: #d32f2f; margin-top: 8px;">⚠️ Missing: ${techStack.missingSchemas.join(', ')}</div>`;
+      html += `<div style="color: #a2452f; margin-top: 8px;">Missing: ${techStack.missingSchemas.join(', ')}</div>`;
     }
 
     html += `</div></div>`;

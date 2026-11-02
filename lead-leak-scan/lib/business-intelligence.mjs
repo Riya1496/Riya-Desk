@@ -86,7 +86,7 @@ export function generateBusinessIntelligenceFindings(intelligence, businessName,
 
     if (cms) {
       findings.push({
-        title: '⚙️ Tech Stack Detected',
+        title: 'Tech stack detected',
         insight: `${businessName} runs on ${cms}. Good choice for scalability.`,
         confidence: 'high'
       });
@@ -94,8 +94,8 @@ export function generateBusinessIntelligenceFindings(intelligence, businessName,
 
     if (missingSchemas.length > 0) {
       findings.push({
-        title: '🤖 AI Search Gap - Missing Schema',
-        insight: `${missingSchemas.join(', ')} not found. This prevents AI (ChatGPT, Claude) from understanding your business structure. Installing these takes 2-4 hours and significantly improves AI visibility.`,
+        title: 'AI readiness gap: missing structured data',
+        insight: `${missingSchemas.join(', ')} not found. This structured data helps search engines and AI assistants understand your business details. Adding it usually takes a few hours and makes your business easier to recommend.`,
         confidence: 'high',
         actionable: true
       });
@@ -103,7 +103,7 @@ export function generateBusinessIntelligenceFindings(intelligence, businessName,
 
     if (analytics.length === 0) {
       findings.push({
-        title: '📊 No Analytics Installed',
+        title: 'No analytics installed',
         insight: `${businessName} has no analytics installed. You can't measure what you can't see. Installing GA4 is critical for understanding customer behavior.`,
         confidence: 'high',
         actionable: true
@@ -112,7 +112,7 @@ export function generateBusinessIntelligenceFindings(intelligence, businessName,
 
     if (marketing.length === 0) {
       findings.push({
-        title: '📢 No Marketing Pixels Detected',
+        title: 'No marketing pixels detected',
         insight: `No Facebook Pixel, Google Ads, or LinkedIn tracking found. If you run paid ads, you're flying blind. If not, this is less critical.`,
         confidence: 'high',
         actionable: true
@@ -126,14 +126,14 @@ export function generateBusinessIntelligenceFindings(intelligence, businessName,
 
     if (avgPosition > 10) {
       findings.push({
-        title: '🔍 Below Page 1 - Major Traffic Opportunity',
+        title: 'Below page 1: major traffic opportunity',
         insight: `${businessName} ranks outside top 10 for most keywords. Moving to page 1 (positions 1-3) could unlock significant organic traffic. This is a 4-8 week SEO project.`,
         confidence: 'high',
         actionable: true
       });
     } else if (avgPosition > 5) {
       findings.push({
-        title: '📈 Ranking Opportunity - Page 1, Lower Positions',
+        title: 'Ranking opportunity: page 1, lower positions',
         insight: `Currently on page 1 but positions 6-10. Moving to top 3 could double traffic. Requires on-page SEO + content strategy.`,
         confidence: 'high',
         actionable: true
@@ -142,7 +142,7 @@ export function generateBusinessIntelligenceFindings(intelligence, businessName,
 
     if (ctr < 2) {
       findings.push({
-        title: '💬 CTR Below Average',
+        title: 'Click-through rate below average',
         insight: `Only ${ctr}% of searchers click your result. Industry average is 3-5%. Your title/description aren't compelling. Fixing this takes 1-2 hours and is a quick win.`,
         confidence: 'high',
         actionable: true
@@ -151,7 +151,7 @@ export function generateBusinessIntelligenceFindings(intelligence, businessName,
 
     if (impressions > 1000 && clicks < 20) {
       findings.push({
-        title: '⚠️ High Impressions, Low Clicks',
+        title: 'High impressions, low clicks',
         insight: `${businessName} appears in search results ${impressions} times monthly but only gets ${clicks} clicks. Your title/description are underperforming. This is easily fixable.`,
         confidence: 'high',
         actionable: true
@@ -163,7 +163,7 @@ export function generateBusinessIntelligenceFindings(intelligence, businessName,
   if (intelligence.competitorAnalysis && intelligence.competitorAnalysis.length > 0) {
     const topCompetitor = intelligence.competitorAnalysis[0];
     findings.push({
-      title: '🏆 Competitive Landscape',
+      title: 'Competitive landscape',
       insight: `Top competitor (${topCompetitor.name}) ranks #${topCompetitor.position} vs. your #${intelligence.searchVisibility?.avgPosition || 'unknown'}. They get ~${topCompetitor.estimatedTraffic}/month vs. your estimated ${intelligence.searchVisibility?.estimatedTraffic || 'low'} monthly searches. The gap is closeable in 8-12 weeks.`,
       confidence: 'medium',
       actionable: true

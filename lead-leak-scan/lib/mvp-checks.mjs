@@ -47,7 +47,7 @@ export async function checkPixelAudit(html) {
   if (!html || html.length === 0) {
     return {
       checkId: 'pixel_audit',
-      checkName: '📊 Website Tracking',
+      checkName: 'Website Tracking',
       found: [],
       missing: Object.keys(PIXEL_PATTERNS),
       score: 0,
@@ -74,7 +74,7 @@ export async function checkPixelAudit(html) {
 
   return {
     checkId: 'pixel_audit',
-    checkName: '📊 Website Tracking',
+    checkName: 'Website Tracking',
     found,
     missing,
     score,
@@ -154,7 +154,7 @@ export async function checkAIVisibility(businessName, city, html = '') {
     if (geminiResult) {
       return {
         checkId: 'ai_visibility',
-        checkName: '🤖 AI Visibility',
+        checkName: 'AI Readiness',
         mentioned: geminiResult.appears,
         score: geminiResult.score,
         reason: geminiResult.reason,
@@ -198,7 +198,7 @@ export async function checkAIVisibility(businessName, city, html = '') {
 
     return {
       checkId: 'ai_visibility',
-      checkName: '🤖 AI Visibility',
+      checkName: 'AI Readiness',
       mentioned: score >= 8,
       score,
       severity: score >= 15 ? 'good' : score >= 8 ? 'warning' : 'critical',
@@ -208,7 +208,7 @@ export async function checkAIVisibility(businessName, city, html = '') {
     console.error('❌ AI Visibility check failed:', error.message);
     return {
       checkId: 'ai_visibility',
-      checkName: '🤖 AI Visibility',
+      checkName: 'AI Readiness',
       mentioned: false,
       score: 0,
       severity: 'critical',
@@ -226,7 +226,7 @@ export async function checkLeadFriction(html) {
   if (!html || html.length === 0) {
     return {
       checkId: 'lead_friction',
-      checkName: '📋 Contact Form',
+      checkName: 'Contact Form',
       fieldCount: 0,
       hasPhoneLink: false,
       hasScheduling: false,
@@ -275,7 +275,7 @@ export async function checkLeadFriction(html) {
 
   return {
     checkId: 'lead_friction',
-    checkName: '📋 Contact Form',
+    checkName: 'Contact Form',
     fieldCount: totalFields,
     hasPhoneLink,
     hasScheduling,
@@ -626,7 +626,7 @@ export async function checkReputation(businessName, city, html = '') {
 
       return {
         checkId: 'reputation',
-        checkName: '⭐ Customer Reviews',
+        checkName: 'Customer Reviews',
         rating: parseFloat(finalData.rating.toFixed(1)),
         reviewCount: finalData.reviewCount,
         source: sourceLabel,
@@ -735,7 +735,7 @@ export async function checkReputation(businessName, city, html = '') {
 
     return {
       checkId: 'reputation',
-      checkName: '⭐ Customer Reviews',
+      checkName: 'Customer Reviews',
       rating: averageRating,
       reviewCount,
       source: 'Website Analysis',
@@ -749,7 +749,7 @@ export async function checkReputation(businessName, city, html = '') {
     console.error('❌ Reputation check failed:', error.message);
     return {
       checkId: 'reputation',
-      checkName: '⭐ Customer Reviews',
+      checkName: 'Customer Reviews',
       rating: 0,
       reviewCount: 0,
       score: 0,
