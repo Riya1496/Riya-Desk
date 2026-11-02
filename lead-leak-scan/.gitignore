@@ -13,3 +13,7 @@ yarn-error.log*
 *.swo
 *~
 .vercel
+
+# Secrets: never commit keys
+service-account-key.json
+*-key.json
