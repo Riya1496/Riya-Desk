@@ -3,29 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lead Leak Scan - Free Marketing Audit for SMEs</title>
+  <title>Free Lead Leak Scan · Riya Desk</title>
+  <meta name="description" content="Free 60-second marketing audit from Riya Desk: see where your website, tracking, forms, reviews and AI visibility are losing you leads.">
+  <meta name="theme-color" content="#0d0b0a">
+  <link rel="icon" href="https://riyadesk.com/favicon.svg" type="image/svg+xml">
+  <meta property="og:title" content="Free Lead Leak Scan · Riya Desk">
+  <meta property="og:description" content="See exactly where your marketing is losing leads, in 60 seconds.">
+  <meta property="og:image" content="https://riyadesk.com/og-image.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Kanit:wght@500;600;700&family=Bodoni+Moda:opsz,wght@6..96,400&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <style>
-    .form-label-hint {
-      font-size: 12px;
-      color: #999;
-      margin-top: 4px;
-      font-weight: normal;
-    }
   </style>
 </head>
 <body>
   <div class="container">
     <!-- Header -->
     <header class="header">
-      <div class="logo-section">
-        <div class="logo-icon">🔍</div>
-        <div>
-          <div class="logo">Riya Desk</div>
-          <div class="tagline-small">Lead Leak Scan</div>
-        </div>
-      </div>
-      <a href="https://riyadesk.com" target="_blank" class="header-link">Our Portfolio →</a>
+      <a class="logo-section" href="https://riyadesk.com/" aria-label="Riya Desk home">
+        <span class="rd-mono" aria-hidden="true"><span class="r">R</span><span class="d">D</span><span class="stem"></span></span>
+        <span>
+          <span class="logo">Riya Desk</span>
+          <span class="tagline-small" style="display:block">Lead Leak Scan</span>
+        </span>
+      </a>
+      <nav class="header-nav" aria-label="Main">
+        <a href="https://riyadesk.com/">Home</a>
+        <a class="hide-md" href="https://riyadesk.com/about/">About</a>
+        <a class="hide-md" href="https://riyadesk.com/#projects">Work</a>
+        <a href="https://riyadesk.com/#start-your-story" class="header-link">Start your story ↗</a>
+      </nav>
     </header>
 
     <!-- Main content -->
@@ -33,8 +41,9 @@
       <!-- Hero section -->
       <section class="hero">
         <div class="hero-content">
-          <h1>Your Marketing Audit in 60 Seconds</h1>
-          <p>See exactly where you're losing leads with no guesswork.</p>
+          <p class="sec-label">Free scan · Riya Desk</p>
+          <h1>Your marketing audit <em>in 60 seconds</em></h1>
+          <p>See exactly where your business is losing leads: tracking, contact forms, reviews and AI visibility. No guesswork.</p>
 
           <!-- Form card -->
           <div class="form-card">
@@ -53,7 +62,7 @@
                   <div id="businessSuggestions" class="autocomplete-dropdown" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #ddd; border-top: none; border-radius: 0 0 6px 6px; max-height: 250px; overflow-y: auto; z-index: 1000; box-shadow: 0 2px 8px rgba(0,0,0,0.1);"></div>
                 </div>
                 <div class="form-label-hint">How your business appears (or should appear) on Google</div>
-                <div id="businessMatch" style="margin-top: 8px; padding: 8px; background: #f0f8ff; border-radius: 4px; display: none; font-size: 13px; color: #0066cc;">
+                <div id="businessMatch" style="margin-top: 8px; padding: 8px 10px; border-radius: 8px; display: none; font-size: 13px;">
                   ✓ Business found: <span id="matchDetails"></span>
                 </div>
               </div>
@@ -87,7 +96,6 @@
                 <select
                   id="businessType"
                   name="businessType"
-                  style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px;"
                   required
                 >
                   <option value="">Select your business type...</option>
@@ -117,7 +125,7 @@
                 <div class="form-field">
                   <label><strong>Your Phone (Optional)</strong></label>
                   <div style="display: flex; gap: 8px;">
-                    <select id="country-code" style="width: 100px; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+                    <select id="country-code" aria-label="Country code">
                       <option value="+1">🇺🇸 +1</option>
                       <option value="+44">🇬🇧 +44</option>
                       <option value="+61">🇦🇺 +61</option>
@@ -143,15 +151,15 @@
                 <span class="btn-icon">→</span>
               </button>
 
-              <p class="form-footer">✓ Takes 60 seconds ✓ 100% free ✓ No credit card ✓ No surprise emails</p>
+              <p class="form-footer">Takes 60 seconds · 100% free · No credit card · No surprise emails</p>
             </form>
           </div>
 
           <!-- Trust badges -->
           <div class="trust-badges">
-            <div class="badge">✓ Real Data</div>
-            <div class="badge">✓ No Guessing</div>
-            <div class="badge">✓ Actionable</div>
+            <div class="badge">Real data</div>
+            <div class="badge">No guessing</div>
+            <div class="badge">Actionable</div>
           </div>
         </div>
 
@@ -194,19 +202,19 @@
 
           <!-- Score Breakdown -->
           <div class="score-breakdown">
-            <h4>📊 How Your Score Breaks Down</h4>
+            <h4>How your score breaks down</h4>
             <p style="font-size: 13px; margin-bottom: 15px;">Each area is scored out of 25 points. Here's where you stand:</p>
             <div id="score-breakdown-items"></div>
-            <div class="score-breakdown-item" style="border-top: 2px solid rgba(0,102,204,0.2); margin-top: 10px; padding-top: 10px;">
+            <div class="score-breakdown-item" style="border-top: 1px solid rgba(23,18,14,.3); margin-top: 10px; padding-top: 10px;">
               <strong>Total Score</strong>
               <strong id="total-score-display">0/100</strong>
             </div>
           </div>
 
           <!-- 🔬 Business Intelligence Section -->
-          <div id="business-intelligence-section" style="margin-top: 50px; margin-bottom: 50px; padding: 25px; background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%); border-radius: 8px; border-left: 5px solid #2196F3;">
-            <h3 style="color: #1976d2; margin-top: 0;">🔬 Business Intelligence Analysis</h3>
-            <p style="color: #666; font-size: 13px; margin: 0 0 15px 0;">Detailed insights based on your website data, tech stack, and market position.</p>
+          <div id="business-intelligence-section" style="margin-top: 40px; margin-bottom: 40px; padding: 25px;">
+            <h3 style="margin-top: 0;">Business intelligence</h3>
+            <p style="color: #5e554b; font-size: 13px; margin: 6px 0 15px 0;">Detailed insights based on your website data, tech stack, and market position.</p>
             <div id="business-intelligence-container"></div>
           </div>
 
@@ -217,12 +225,12 @@
 
           <!-- CTA Section -->
           <div class="cta-section">
-            <h2>Let's Fix These Gaps</h2>
-            <p style="margin-bottom: 20px;">Most of these improvements can be implemented in 2-4 weeks. Let's discuss your situation and create a custom plan.</p>
+            <h2>Let's fix these gaps</h2>
+            <p style="margin-bottom: 24px;">Most of these improvements can be made in 2&ndash;4 weeks. Tell me about your business and I&rsquo;ll put together a plan.</p>
             <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-              <a href="mailto:hello@riyadesk.com" class="btn-scan" style="text-decoration: none;">Schedule Free Consultation</a>
-              <button id="email-results-btn" class="btn-scan" style="background: linear-gradient(135deg, #7621B0 0%, #5a16a0 100%);">Email My Results</button>
-              <button id="new-scan-btn" class="btn-scan" style="background: linear-gradient(135deg, #666 0%, #333 100%);">Start New Scan</button>
+              <a href="https://riyadesk.com/#start-your-story" class="btn-scan gold" style="text-decoration: none;">Get my free plan ↗</a>
+              <button id="email-results-btn" class="btn-scan line">Email my results</button>
+              <button id="new-scan-btn" class="btn-scan line">Start new scan</button>
             </div>
           </div>
         </div>
@@ -230,13 +238,14 @@
 
       <!-- What we check -->
       <section class="checks-section">
-        <h2>We Check These 4 Things</h2>
-        <p style="text-align: center; color: #666; margin-bottom: 30px; font-size: 16px;">
+        <p class="sec-label">What we check</p>
+        <h2>Four places leads leak</h2>
+        <p class="section-intro">
           We visit your website and public data to find specific gaps costing you leads.
         </p>
         <div class="checks-grid">
           <div class="check-card">
-            <div class="check-icon">📊</div>
+            <div class="check-icon">01</div>
             <h3>Website Tracking</h3>
             <p><strong>The Problem:</strong> Can Google/Facebook track visitors from your ads?</p>
             <p><strong>Why It Matters:</strong> Without tracking, you can't measure ROI or retarget visitors.</p>
@@ -244,7 +253,7 @@
           </div>
 
           <div class="check-card">
-            <div class="check-icon">🤖</div>
+            <div class="check-icon">02</div>
             <h3>AI Visibility</h3>
             <p><strong>The Problem:</strong> When people ask AI (ChatGPT, Perplexity, etc) for recommendations, does your business appear?</p>
             <p><strong>Why It Matters:</strong> 46% of your market asks AI before searching Google. AI recommends businesses with strong brand signals.</p>
@@ -252,7 +261,7 @@
           </div>
 
           <div class="check-card">
-            <div class="check-icon">📋</div>
+            <div class="check-icon">03</div>
             <h3>Contact Form</h3>
             <p><strong>The Problem:</strong> How many fields does your contact form have?</p>
             <p><strong>Why It Matters:</strong> 1-2 fields = 80% conversion. 8+ fields = 20% conversion.</p>
@@ -260,7 +269,7 @@
           </div>
 
           <div class="check-card">
-            <div class="check-icon">⭐</div>
+            <div class="check-icon">04</div>
             <h3>Customer Reviews</h3>
             <p><strong>The Problem:</strong> How many reviews do you have vs competitors?</p>
             <p><strong>Why It Matters:</strong> More reviews = more trust = more conversions.</p>
@@ -271,7 +280,8 @@
 
       <!-- How it works -->
       <section class="how-it-works">
-        <h2>How It Works</h2>
+        <p class="sec-label">How it works</p>
+        <h2>Four simple steps</h2>
         <div class="steps-visual">
           <div class="step">
             <div class="step-number">1</div>
@@ -307,35 +317,36 @@
 
       <!-- FAQ -->
       <section class="faq-section">
-        <h2>How Reliable Is This?</h2>
+        <p class="sec-label">FAQ</p>
+        <h2>How reliable is this?</h2>
         <div class="faq-grid">
           <div class="faq-item">
-            <h4>📱 Do you actually check my website?</h4>
+            <h4>Do you actually check my website?</h4>
             <p>Yes. We fetch your website and read the HTML code (like a search engine crawler would). We look for actual tracking pixels, forms, and contact methods. Not guessing.</p>
           </div>
 
           <div class="faq-item">
-            <h4>🔍 Where do you get the AI visibility data?</h4>
+            <h4>Where does the AI visibility data come from?</h4>
             <p>We analyze your website HTML to measure brand signals (how prominent your name, location, and messaging appear). We check tracking pixels, forms, and contact methods directly from your live website. Your results show what we actually found, not estimates.</p>
           </div>
 
           <div class="faq-item">
-            <h4>⚠️ What if my website is down?</h4>
+            <h4>What if my website is down?</h4>
             <p>We'll tell you. If your site isn't live when we scan, we can't analyze it. Make sure it's working before you submit.</p>
           </div>
 
           <div class="faq-item">
-            <h4>🔒 What do you do with my data?</h4>
+            <h4>What do you do with my data?</h4>
             <p>We save your email to send results + let you contact us. We don't sell data, use it for marketing, or share it. Period.</p>
           </div>
 
           <div class="faq-item">
-            <h4>💯 Is this 100% accurate?</h4>
+            <h4>Is this 100% accurate?</h4>
             <p>No—it's a diagnostic, not gospel. We check what's publicly available + on your site. Use it to identify gaps, then verify with your own data.</p>
           </div>
 
           <div class="faq-item">
-            <h4>💰 Will you charge me later?</h4>
+            <h4>Will you charge me later?</h4>
             <p>No. The scan is free. You only pay if you hire us to implement fixes. We'll quote you per project based on complexity.</p>
           </div>
         </div>
@@ -344,8 +355,8 @@
 
     <!-- Footer -->
     <footer class="footer">
-      <p>&copy; 2026 Riya Desk. All rights reserved.</p>
-      <p><a href="#">Privacy</a> • <a href="#">Terms</a></p>
+      <p>&copy; 2026 Riya Desk</p>
+      <p class="foot-links"><a href="https://riyadesk.com/">riyadesk.com</a><a href="https://riyadesk.com/about/">About</a><a href="https://www.linkedin.com/in/rp-riya-p-marketing/" target="_blank" rel="noopener">LinkedIn</a><a href="https://www.instagram.com/riya_desk/" target="_blank" rel="noopener">Instagram</a></p>
     </footer>
   </div>
 

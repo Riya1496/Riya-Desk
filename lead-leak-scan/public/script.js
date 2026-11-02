@@ -3,18 +3,18 @@ function showConfirmationModal(businessName, website, city) {
   return new Promise((resolve) => {
     // Create modal HTML
     const modalHTML = `
-      <div id="confirmation-modal" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 2000;">
-        <div style="background: white; padding: 30px; border-radius: 12px; max-width: 400px; box-shadow: 0 10px 40px rgba(0,0,0,0.2);">
-          <h3 style="margin-top: 0; color: #1976d2; font-size: 18px;">✓ Website Verified!</h3>
-          <div style="background: #f5f5f5; padding: 15px; border-radius: 8px; margin: 15px 0; font-size: 14px; line-height: 1.6;">
+      <div id="confirmation-modal" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(13,11,10,0.6); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 2000; padding: 16px;">
+        <div style="background: #f3ece0; color: #17120e; padding: 30px; border-radius: 22px; max-width: 420px; width: 100%; box-shadow: 0 40px 90px -30px rgba(0,0,0,0.8); font-family: Archivo, Arial, sans-serif;">
+          <h3 style="margin-top: 0; color: #17120e; font: 600 20px/1.2 Kanit, Arial, sans-serif; text-transform: uppercase;">Website verified</h3>
+          <div style="background: rgba(255,255,255,0.6); border: 1px solid rgba(23,18,14,0.14); padding: 15px; border-radius: 14px; margin: 15px 0; font-size: 14px; line-height: 1.6;">
             <div><strong>Business:</strong> ${businessName}</div>
             <div><strong>Website:</strong> ${website}</div>
             <div><strong>City:</strong> ${city}</div>
           </div>
-          <p style="color: #666; font-size: 14px; margin: 15px 0;">Is this the correct business? Click "Continue Scan" to proceed.</p>
+          <p style="color: #5e554b; font-size: 14px; margin: 15px 0;">Is this the correct business? Click "Continue Scan" to proceed.</p>
           <div style="display: flex; gap: 10px; margin-top: 20px;">
-            <button id="cancel-btn" style="flex: 1; padding: 10px; border: 1px solid #ddd; background: white; border-radius: 6px; cursor: pointer; font-weight: 600;">Cancel</button>
-            <button id="confirm-btn" style="flex: 1; padding: 10px; background: #1976d2; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">Continue Scan</button>
+            <button id="cancel-btn" style="flex: 1; padding: 13px; border: 1px solid rgba(23,18,14,0.35); background: transparent; color: #17120e; border-radius: 999px; cursor: pointer; font: 500 12px/1 Archivo, Arial, sans-serif; letter-spacing: .14em; text-transform: uppercase;">Cancel</button>
+            <button id="confirm-btn" style="flex: 1; padding: 13px; background: #17120e; color: #f1e2c4; border: none; border-radius: 999px; cursor: pointer; font: 500 12px/1 Archivo, Arial, sans-serif; letter-spacing: .14em; text-transform: uppercase;">Continue Scan</button>
           </div>
         </div>
       </div>
@@ -266,8 +266,8 @@ function renderScoreBreakdown(checks) {
   };
 
   let html = `
-    <h4>📊 How Your Score Breaks Down</h4>
-    <p style="margin: 0 0 10px 0; font-size: 12px; color: #666;">Each area is scored out of 25 points. Here's where you stand:</p>
+    <h4>How your score breaks down</h4>
+    <p style="margin: 0 0 10px 0; font-size: 12px; color: #5e554b;">Each area is scored out of 25 points. Here's where you stand:</p>
   `;
 
   checks.forEach(check => {
@@ -282,7 +282,7 @@ function renderScoreBreakdown(checks) {
 
   const total = checks.reduce((sum, c) => sum + (c.score || 0), 0);
   html += `
-    <div class="score-breakdown-item" style="border-top: 2px solid #0066cc; padding-top: 10px; margin-top: 10px; font-weight: bold;">
+    <div class="score-breakdown-item" style="border-top: 1px solid rgba(23,18,14,0.3); padding-top: 10px; margin-top: 10px; font-weight: bold;">
       <span>Total Score</span>
       <strong>${total}/100</strong>
     </div>
@@ -421,7 +421,7 @@ function setupCTAButtons(scanResult) {
       const email = scanResult.email;
       const businessName = scanResult.businessName;
       const subject = `Lead Leak Scan Follow-up: ${businessName}`;
-      window.location.href = `mailto:hello@riyadesk.com?subject=${encodeURIComponent(subject)}&body=Hi,%0A%0AI just completed a Lead Leak Scan for ${businessName} in ${scanResult.city}. Let's discuss the results.%0A%0AEmail: ${email}`;
+      window.location.href = 'https://riyadesk.com/#start-your-story';
     });
   }
 
@@ -487,7 +487,7 @@ function renderBusinessIntelligence(scanResult) {
   // Tech Stack Summary
   if (techStack) {
     html += `
-      <div style="background: white; padding: 12px; border-radius: 6px; margin-bottom: 15px;">
+      <div style="background: rgba(255,255,255,0.6); border: 1px solid rgba(23,18,14,0.12); padding: 14px; border-radius: 14px; margin-bottom: 15px;">
         <strong>⚙️ Your Tech Stack:</strong><br>
         <div style="font-size: 13px; color: #555; margin-top: 8px; line-height: 1.6;">
     `;
@@ -518,14 +518,14 @@ function renderBusinessIntelligence(scanResult) {
   // Findings
   if (findings.length > 0) {
     findings.forEach((finding, index) => {
-      const bgColor = finding.actionable ? '#fff8e1' : '#f5f5f5';
-      const borderColor = finding.actionable ? '#ff9800' : '#ccc';
+      const bgColor = finding.actionable ? 'rgba(201,165,108,0.16)' : 'rgba(255,255,255,0.55)';
+      const borderColor = finding.actionable ? '#7a5d36' : 'rgba(23,18,14,0.2)';
 
       html += `
-        <div style="background: ${bgColor}; padding: 12px; border-radius: 6px; margin-bottom: 10px; border-left: 4px solid ${borderColor};">
-          <div style="font-weight: 600; color: #1976d2; margin-bottom: 5px;">${finding.title}</div>
-          <div style="font-size: 13px; color: #555; line-height: 1.5;">${finding.insight}</div>
-          ${finding.actionable ? '<div style="font-size: 12px; color: #ff9800; margin-top: 8px;">↳ Actionable opportunity</div>' : ''}
+        <div style="background: ${bgColor}; padding: 14px; border-radius: 14px; margin-bottom: 10px; border-left: 3px solid ${borderColor};">
+          <div style="font-weight: 600; color: #17120e; margin-bottom: 5px;">${finding.title}</div>
+          <div style="font-size: 13px; color: #5e554b; line-height: 1.5;">${finding.insight}</div>
+          ${finding.actionable ? '<div style="font-size: 12px; color: #7a5d36; margin-top: 8px; letter-spacing: .08em; text-transform: uppercase;">↳ Actionable opportunity</div>' : ''}
         </div>
       `;
     });
@@ -533,15 +533,15 @@ function renderBusinessIntelligence(scanResult) {
 
   // Next Steps CTA
   html += `
-    <div style="background: #e8f4f8; padding: 15px; border-radius: 6px; margin-top: 20px; border-left: 4px solid #0277bd; text-align: center;">
-      <div style="font-size: 14px; color: #01579b; margin-bottom: 12px; line-height: 1.6;">
+    <div style="background: #17120e; color: #efe6d6; padding: 22px; border-radius: 16px; margin-top: 20px; text-align: center;">
+      <div style="font-size: 14px; color: rgba(239,230,214,0.8); margin-bottom: 16px; line-height: 1.6;">
         <strong>Based on this analysis, we see clear opportunities for ${scanResult.businessName}.</strong><br>
         We specialize in turning data insights into growth.<br>
         <strong style="font-size: 15px;">Let's discuss how we'd approach your business.</strong>
       </div>
-      <a href="mailto:hello@riyadesk.com?subject=Discuss Opportunities - ${scanResult.businessName}"
-         style="display: inline-block; padding: 12px 24px; background: #0277bd; color: white; text-decoration: none; border-radius: 6px; font-weight: 600;">
-        📊 Schedule Free Strategy Call
+      <a href="https://riyadesk.com/#start-your-story"
+         style="display: inline-block; padding: 14px 24px; background: #f1e2c4; color: #17120e; text-decoration: none; border-radius: 999px; font: 500 12px/1 Archivo, Arial, sans-serif; letter-spacing: .14em; text-transform: uppercase;">
+        Book a free strategy call ↗
       </a>
     </div>
   `;
@@ -622,7 +622,7 @@ function setupBusinessAutocomplete() {
         data.suggestions.forEach(suggestion => {
           html += `
             <div class="autocomplete-item" style="padding: 12px 16px; border-bottom: 1px solid #eee; cursor: pointer; transition: background 0.2s;">
-              <div style="font-weight: 500; color: #1e3a5f;">${suggestion.name}</div>
+              <div style="font-weight: 500; color: #17120e;">${suggestion.name}</div>
               <div style="font-size: 12px; color: #666; margin-top: 4px;">${suggestion.address}</div>
             </div>
           `;

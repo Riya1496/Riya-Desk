@@ -3,252 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Lead Leak Scan Results</title>
+  <title>Your Lead Leak Scan Results · Riya Desk</title>
+  <meta name="theme-color" content="#0d0b0a">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="https://riyadesk.com/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Kanit:wght@500;600;700&family=Bodoni+Moda:opsz,wght@6..96,400&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <style>
-    .results-container {
-      background: white;
-      padding: 40px;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-      margin-bottom: 40px;
-    }
-
-    .result-header {
-      text-align: center;
-      margin-bottom: 40px;
-      padding-bottom: 30px;
-      border-bottom: 1px solid #e5e5e5;
-    }
-
-    .result-header h1 {
-      font-size: 32px;
-      margin-bottom: 10px;
-    }
-
-    .result-header p {
-      font-size: 16px;
-      color: #666;
-    }
-
-    .business-info {
-      background: #f9f9f9;
-      padding: 15px 20px;
-      border-radius: 6px;
-      margin-bottom: 20px;
-      font-size: 14px;
-    }
-
-    .score-circle {
-      width: 240px;
-      height: 240px;
-      border-radius: 50%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      margin: 50px auto;
-      color: white;
-      font-weight: 700;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.25), inset -2px -2px 8px rgba(0,0,0,0.1);
-      transform: perspective(1000px) rotateX(5deg) rotateZ(-2deg);
-      transition: transform 0.3s ease;
-    }
-
-    .score-circle:hover {
-      transform: perspective(1000px) rotateX(0deg) rotateZ(0deg) scale(1.02);
-    }
-
-    .score-circle.critical {
-      background: linear-gradient(135deg, #ff6b6b 0%, #ff8787 100%);
-    }
-
-    .score-circle.opportunity {
-      background: linear-gradient(135deg, #f39c12 0%, #f5a623 100%);
-    }
-
-    .score-circle.good {
-      background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
-    }
-
-    .score-number {
-      font-size: 80px;
-      line-height: 1;
-      font-weight: 800;
-      letter-spacing: -2px;
-      font-family: 'Inter', 'Sohne', sans-serif;
-    }
-
-    .score-label {
-      font-size: 16px;
-      margin-top: 10px;
-      opacity: 0.95;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      font-family: 'Inter', 'Sohne', sans-serif;
-    }
-
-    .band-title {
-      text-align: center;
-      font-size: 24px;
-      font-weight: 700;
-      margin: 30px 0 10px 0;
-      color: #1a1a1a;
-    }
-
-    .band-description {
-      text-align: center;
-      font-size: 16px;
-      color: #666;
-      margin-bottom: 40px;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .checks-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      margin-bottom: 50px;
-    }
-
-    .check-item {
-      background: #f9f9f9;
-      padding: 25px;
-      border-radius: 12px;
-      border-top: 4px solid var(--accent);
-    }
-
-    .check-name {
-      font-size: 14px;
-      font-weight: 600;
-      color: #666;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 15px;
-    }
-
-    .score-bar {
-      width: 100%;
-      height: 12px;
-      background: #e5e5e5;
-      border-radius: 6px;
-      overflow: hidden;
-      margin-bottom: 10px;
-    }
-
-    .score-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--accent), var(--gold));
-      border-radius: 6px;
-      transition: width 0.6s ease;
-    }
-
-    .score-text {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--primary);
-    }
-
-    .cta-section {
-      background: linear-gradient(135deg, rgba(201, 165, 108, 0.1) 0%, rgba(201, 165, 108, 0.05) 100%);
-      padding: 40px;
-      border-radius: 12px;
-      text-align: center;
-      border-left: 4px solid var(--accent);
-    }
-
-    .cta-section h2 {
-      font-size: 24px;
-      margin-bottom: 15px;
-      color: #1a1a1a;
-    }
-
-    .cta-section p {
-      font-size: 16px;
-      color: #666;
-      margin-bottom: 25px;
-    }
-
-    .cta-buttons {
-      display: flex;
-      gap: 15px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 12px 30px;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
-      color: white;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(201, 165, 108, 0.3);
-    }
-
-    .btn-secondary {
-      background: white;
-      color: var(--primary);
-      border: 2px solid var(--accent);
-    }
-
-    .btn-secondary:hover {
-      background: var(--light);
-    }
-
-    @media (max-width: 768px) {
-      .results-container {
-        padding: 20px;
-      }
-
-      .score-circle {
-        width: 150px;
-        height: 150px;
-      }
-
-      .score-number {
-        font-size: 48px;
-      }
-
-      .checks-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .cta-buttons {
-        flex-direction: column;
-      }
-
-      .btn {
-        width: 100%;
-      }
-    }
-  </style>
 </head>
 <body>
   <div class="container">
     <header class="header">
-      <div class="logo-section">
-        <div class="logo-icon">🔍</div>
-        <div>
-          <div class="logo">Riya Desk</div>
-          <div class="tagline-small">Lead Leak Scan</div>
-        </div>
-      </div>
+      <a class="logo-section" href="https://riyadesk.com/" aria-label="Riya Desk home">
+        <span class="rd-mono" aria-hidden="true"><span class="r">R</span><span class="d">D</span><span class="stem"></span></span>
+        <span>
+          <span class="logo">Riya Desk</span>
+          <span class="tagline-small" style="display:block">Lead Leak Scan</span>
+        </span>
+      </a>
+      <nav class="header-nav" aria-label="Main">
+        <a href="/">New scan</a>
+        <a class="hide-md" href="https://riyadesk.com/">Home</a>
+        <a href="https://riyadesk.com/#start-your-story" class="header-link">Start your story ↗</a>
+      </nav>
     </header>
 
-    <main class="main">
+    <main class="main" style="padding-top: clamp(2.5rem, 6vw, 4.5rem);">
       <div class="results-container">
         <div class="result-header">
           <h1>Your Lead Leak Scan Results</h1>
@@ -282,19 +63,19 @@
 
         <!-- CTA Section -->
         <div class="cta-section">
-          <h2>Let's Fix These Gaps</h2>
-          <p>Most of these improvements can be implemented in 2-4 weeks. Let's discuss your situation and create a custom plan.</p>
+          <h2>Let's fix these gaps</h2>
+          <p style="margin-bottom: 24px;">Most of these improvements can be made in 2&ndash;4 weeks. Tell me about your business and I&rsquo;ll put together a plan.</p>
           <div class="cta-buttons">
-            <button class="btn btn-primary" id="consult-btn">Schedule Free Consultation</button>
-            <button class="btn btn-secondary" id="email-btn">Email My Results</button>
+            <button class="btn-scan gold" id="consult-btn">Get my free plan ↗</button>
+            <button class="btn-scan line" id="email-btn">Email my results</button>
           </div>
         </div>
       </div>
     </main>
 
     <footer class="footer">
-      <p>&copy; 2026 Riya Desk. All rights reserved.</p>
-      <p><a href="#">Privacy</a> • <a href="#">Terms</a></p>
+      <p>&copy; 2026 Riya Desk</p>
+      <p class="foot-links"><a href="https://riyadesk.com/">riyadesk.com</a><a href="https://riyadesk.com/about/">About</a><a href="https://www.linkedin.com/in/rp-riya-p-marketing/" target="_blank" rel="noopener">LinkedIn</a><a href="https://www.instagram.com/riya_desk/" target="_blank" rel="noopener">Instagram</a></p>
     </footer>
   </div>
 
@@ -302,25 +83,3 @@
 </body>
 </html>
 
-<style>
-  .methodology-section {
-    background: #f0f7ff;
-    border-left: 4px solid #0066cc;
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 30px;
-    font-size: 14px;
-  }
-  .methodology-section h4 {
-    margin-top: 0;
-    color: #0066cc;
-  }
-  .methodology-section ul {
-    margin: 10px 0;
-    padding-left: 20px;
-  }
-  .methodology-section li {
-    margin: 5px 0;
-    color: #555;
-  }
-</style>
