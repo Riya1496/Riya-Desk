@@ -1,0 +1,11 @@
+{
+  "builds": [
+    { "src": "lead-leak-scan/api/*.js", "use": "@vercel/node", "config": { "maxDuration": 30 } },
+    { "src": "lead-leak-scan/public/**", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/api/([^/.]+)/?", "dest": "/lead-leak-scan/api/$1.js" },
+    { "src": "/", "dest": "/lead-leak-scan/public/index.html" },
+    { "src": "/(.*)", "dest": "/lead-leak-scan/public/$1" }
+  ]
+}
