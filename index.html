@@ -460,6 +460,16 @@ body.has-cursor .cursor-dot, body.has-cursor .cursor-ring { opacity: 1; }
 .about-ctas { display: flex; flex-direction: column; align-items: center; gap: 1.4rem; }
 .about-more { font: 500 12px/1 var(--hero-font); letter-spacing: .2em; text-transform: uppercase; color: var(--gold-hi); text-decoration: none; padding-bottom: 6px; border-bottom: 1px solid rgba(241, 226, 196, .35); transition: border-color .3s; }
 .about-more:hover { border-color: var(--gold-hi); }
+/* Free scan band */
+.scan-band { position: relative; background: var(--bg); padding: 6rem 1.25rem; text-align: center; overflow: hidden; }
+.scan-band::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(45% 60% at 50% 50%, rgba(196, 150, 96, .15), transparent 70%); }
+.scan-band-inner { position: relative; max-width: 46rem; margin: 0 auto; }
+.scan-band h2 { margin-top: .4rem; font: 700 clamp(2.1rem, 5.4vw, 4rem)/.95 var(--font); text-transform: uppercase; letter-spacing: -.01em;
+  background: linear-gradient(180deg, var(--gold-hi), #a9864f); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.scan-band p.scan-text { margin: 1.4rem auto 0; max-width: 34rem; font: 400 1.05rem/1.7 var(--hero-font); color: rgba(239, 230, 214, .7); }
+.scan-checks { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem; margin: 2rem 0 2.4rem; list-style: none; }
+.scan-checks li { padding: .7rem 1.1rem; border: 1px solid rgba(241, 226, 196, .22); border-radius: 999px; font: 500 11px/1 var(--hero-font); letter-spacing: .16em; text-transform: uppercase; color: var(--gold-hi); }
+.scan-note { margin-top: 1.1rem; font: 500 11px/1 var(--hero-font); letter-spacing: .2em; text-transform: uppercase; color: rgba(239, 230, 214, .5); }
 .editing .ct .edit-link { width: min(420px, 80vw); }
 @media (max-width: 520px) { .ct-social a { width: 100%; justify-content: center; } }
 
@@ -610,6 +620,7 @@ body.has-cursor .cursor-dot, body.has-cursor .cursor-ring { opacity: 1; }
   <button type="button" class="sn-menu" id="snMenu" aria-expanded="false" aria-controls="snLinks">Menu</button>
   <ul class="sn-links" id="snLinks">
     <li><a href="about/">About</a></li>
+    <li><a href="https://scan.riyadesk.com/">Free scan</a></li>
     <li><a href="#process">Process</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#projects">Work</a></li>
@@ -727,6 +738,18 @@ body.has-cursor .cursor-dot, body.has-cursor .cursor-ring { opacity: 1; }
     <div class="svc-list" id="svcList"></div>
   </section>
 
+  <!-- FREE SCAN -->
+  <section class="scan-band" id="free-scan" aria-labelledby="scan-h">
+    <div class="scan-band-inner">
+      <p class="sec-label" data-fade="0,0,20">Free tool</p>
+      <h2 id="scan-h" data-fade="0,0,40">How many leads is your marketing losing?</h2>
+      <p class="scan-text" data-fade="0.1,0,20">Get a free Lead Leak Scan of your business in 60 seconds. See what&rsquo;s working, what&rsquo;s costing you customers, and what to fix first.</p>
+      <ul class="scan-checks" data-fade="0.15,0,20"><li>Website tracking</li><li>Contact forms</li><li>Customer reviews</li><li>AI visibility</li></ul>
+      <div data-fade="0.2,0,20"><span class="magnetic"><a class="btn-contact" href="https://scan.riyadesk.com/">Get your free scan ↗</a></span></div>
+      <p class="scan-note" data-fade="0.25,0,10">Takes 60 seconds &middot; 100% free</p>
+    </div>
+  </section>
+
   <!-- PROJECTS -->
   <section class="projects" id="projects">
     <p class="sec-label" data-fade="0,0,20"><span>04</span>Selected work</p>
@@ -773,7 +796,7 @@ body.has-cursor .cursor-dot, body.has-cursor .cursor-ring { opacity: 1; }
       <span class="wordmark">Riya Desk</span>
       <span class="tagline" id="footTags">marketing<i>•</i>growth<i>•</i>creative<i>•</i>ai</span>
     </div>
-    <div class="signoff-bar"><span>&copy;<span data-edit="year">2026</span> <span class="js-brand">Riya Desk</span></span><span class="sb-links"><a href="about/">About</a><a class="js-li" href="https://www.linkedin.com/in/rp-riya-p-marketing/" target="_blank" rel="noopener">LinkedIn</a><a class="js-ig" href="https://www.instagram.com/riya_desk/" target="_blank" rel="noopener">Instagram</a><a href="#top">Back to top ↑</a></span></div>
+    <div class="signoff-bar"><span>&copy;<span data-edit="year">2026</span> <span class="js-brand">Riya Desk</span></span><span class="sb-links"><a href="about/">About</a><a href="https://scan.riyadesk.com/">Free scan</a><a class="js-li" href="https://www.linkedin.com/in/rp-riya-p-marketing/" target="_blank" rel="noopener">LinkedIn</a><a class="js-ig" href="https://www.instagram.com/riya_desk/" target="_blank" rel="noopener">Instagram</a><a href="#top">Back to top ↑</a></span></div>
   </footer>
 </main>
 
