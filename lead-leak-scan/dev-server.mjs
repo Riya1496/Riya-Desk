@@ -177,7 +177,7 @@ const server = http.createServer(async (req, res) => {
   }
 
   // Static files
-  let filePath = req.url;
+  let filePath = req.url.split('?')[0];
   if (filePath === '/') {
     filePath = '/index.html';
   }

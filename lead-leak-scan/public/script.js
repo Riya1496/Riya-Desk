@@ -23,11 +23,38 @@ function sendScanLeadToSheet(formData, result) {
       'Preferred start': '—',
       'Target market': formData.city,
       'Message': `Scan score ${result.overallScore}/100 (${result.band || '—'}). ${breakdown}`,
-      'Sent from': 'scan.riyadesk.com'
+      'Sent from': 'scan.riyadesk.com' + (scanRef() ? ` (outreach: ${scanRef()})` : '')
     };
     fetch(LEADS_SHEET_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(lead) }).catch(() => {});
   } catch (e) {
     console.warn('Could not send scan lead to sheet', e);
+  }
+}
+
+// Personal links from Riya's outreach emails, e.g. ?business=Bellissima&website=example.co.uk&city=Manchester&ref=uk-beauty-01
+// fill the form so the visitor only has to add their email. `ref` is kept so the sheet shows which email they came from.
+function scanRef() {
+  try { return sessionStorage.getItem('scanRef') || ''; } catch (e) { return ''; }
+}
+function prefillFromLink() {
+  const q = new URLSearchParams(location.search);
+  const map = { business: 'businessName', website: 'website', city: 'city', type: 'businessType' };
+  let filled = false;
+  Object.keys(map).forEach(k => {
+    const v = (q.get(k) || '').slice(0, 200);
+    const el = document.getElementById(map[k]);
+    if (v && el) {
+      if (el.tagName === 'SELECT' && ![...el.options].some(o => o.value === v)) return;
+      el.value = v; filled = true;
+    }
+  });
+  const ref = (q.get('ref') || '').replace(/[^A-Za-z0-9_-]/g, '').slice(0, 60);
+  if (ref) { try { sessionStorage.setItem('scanRef', ref); } catch (e) {} }
+  if (filled) {
+    const email = document.getElementById('email');
+    const card = document.querySelector('.form-card');
+    if (card) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (email) setTimeout(() => email.focus({ preventScroll: true }), 600);
   }
 }
 
@@ -91,6 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Setup business name autocomplete
   setupBusinessAutocomplete();
+  prefillFromLink();
 
   const scanForm = document.getElementById('scanForm');
 
