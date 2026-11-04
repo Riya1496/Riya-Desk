@@ -1,4 +1,5 @@
 import { runAllChecks } from '../lib/mvp-checks.mjs';
+import { saveScanToSupabase } from '../lib/supabase.mjs';
 
 export default async function handler(req, res) {
   // CORS headers
@@ -46,6 +47,9 @@ export default async function handler(req, res) {
     result.email = email;
 
     console.log(`[API] Scan complete for ${businessName}: score ${result.overallScore}`);
+
+    // Save to Supabase
+    await saveScanToSupabase(result);
 
     return res.status(200).json(result);
   } catch (error) {
