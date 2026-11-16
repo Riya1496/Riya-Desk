@@ -870,7 +870,6 @@ body.has-cursor .cursor-dot, body.has-cursor .cursor-ring { opacity: 1; }
     <h2 class="big-heading hero-heading" data-fade="0,0,40" data-edit="signoffTitle">Let&rsquo;s talk</h2>
     <div class="ct" data-fade="0.1,0,20">
       <p class="ct-invite" data-edit="contactInvite">Have a brand to grow, a launch to plan or a problem worth solving? Let&rsquo;s work together.</p>
-      <div class="ct-mailrow"><a class="ct-email js-mail" href="mailto:riyapatelbusiness@gmail.com" id="ctEmail">riyapatelbusiness@gmail.com</a><button type="button" class="ct-copy" id="ctCopy">Copy</button></div>
       <input class="edit-link" type="email" data-edit-input="contactEmail" id="ctEmailIn" placeholder="Email address" aria-label="Contact email">
       <div class="ct-social">
         <a class="js-li" href="https://www.linkedin.com/in/rp-riya-p-marketing/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M7.5 10.2v6.3M7.5 7.4v.1M11.3 16.5v-3.7c0-1.5.9-2.6 2.3-2.6s2.1 1 2.1 2.6v3.7M11.3 10.2v6.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>LinkedIn <small>rp-riya-p-marketing</small></a>
@@ -1048,7 +1047,8 @@ body.has-cursor .cursor-dot, body.has-cursor .cursor-ring { opacity: 1; }
       var el = document.getElementById(f[0]); if (el && el !== document.activeElement) el.value = f[1];
     });
   }
-  document.getElementById('ctCopy').addEventListener('click', function () {
+  var ctCopyBtn = document.getElementById('ctCopy');
+  if (ctCopyBtn) ctCopyBtn.addEventListener('click', function () {
     var b = this, mail = (content.contactEmail || '').trim();
     function done(ok) { b.textContent = ok ? 'Copied' : 'Copy failed'; setTimeout(function () { b.textContent = 'Copy'; }, 1800); }
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(mail).then(function () { done(true); }, function () { done(false); });
