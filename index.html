@@ -510,6 +510,18 @@ body.has-cursor .cursor-dot, body.has-cursor .cursor-ring { opacity: 1; }
 .sc-bar { height: 7px; border-radius: 99px; background: rgba(23, 18, 14, .1); overflow: hidden; }
 .sc-bar i { display: block; height: 100%; width: var(--w); border-radius: 99px; background: linear-gradient(90deg, var(--gold-lo), var(--gold)); }
 .sc-cta { margin-top: .4rem; padding-top: 1rem; border-top: 1px solid rgba(23, 18, 14, .12); font: 500 12px/1 var(--hero-font); letter-spacing: .16em; text-transform: uppercase; color: var(--paper-ink); }
+.scan-quick { display: flex; gap: 8px; max-width: 34rem; margin: 0 0 1.4rem; padding: 6px; border-radius: 999px; background: rgba(241, 226, 196, .06); border: 1px solid rgba(241, 226, 196, .3); }
+.scan-quick:focus-within { border-color: var(--gold-hi); background: rgba(241, 226, 196, .09); }
+.scan-quick input { flex: 1; min-width: 0; border: 0; background: transparent; color: var(--ink); font: 400 16px/1.2 var(--hero-font); padding: 12px 16px; }
+.scan-quick input:focus { outline: none; }
+.scan-quick input::placeholder { color: rgba(239, 230, 214, .4); }
+.scan-quick button { flex: none; padding: 13px 22px; border-radius: 999px; background: var(--gold-hi); color: #17120e; font: 500 12px/1 var(--hero-font); letter-spacing: .14em; text-transform: uppercase; transition: transform .3s; }
+.scan-quick button:hover { transform: translateY(-1px); }
+.lx-cta { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+.cta-short { display: none; }
+@media (max-width: 860px) { .cta-long { display: none; } .cta-short { display: inline; } }
+.lx-cta-note { font: 500 10.5px/1 var(--hero-font); letter-spacing: .18em; text-transform: uppercase; color: rgba(240, 240, 238, .7); }
+@media (max-width: 480px) { .scan-quick { flex-direction: column; border-radius: 22px; } .scan-quick button { padding: 14px; } }
 /* hero + menu highlight */
 .lx-scan { display: inline-flex; align-items: center; gap: .6rem; margin-top: 1.1rem; padding: .6rem 1rem; border-radius: 999px; border: 1px solid rgba(241, 226, 196, .35); background: rgba(13, 11, 10, .35);
   -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); font: 500 11px/1 var(--hero-font); letter-spacing: .16em; text-transform: uppercase; color: var(--gold-hi); text-decoration: none; transition: background-color .3s, border-color .3s; }
@@ -728,10 +740,10 @@ body.has-cursor .cursor-dot, body.has-cursor .cursor-ring { opacity: 1; }
           <p class="lx-kicker" data-edit="heroKicker">( creative marketing desk )</p>
           <h2 class="lx-headline"><span data-edit="heroLine1">brands that grow.</span><br><span data-edit="heroLine2">stories that stay.</span></h2>
           <p class="lx-intro" data-edit="heroIntro">Brand strategy, creative marketing and AI solutions for businesses ready to grow.</p>
-          <a class="lx-scan" href="https://scan.riyadesk.com/"><span class="dot"></span><span class="lx-scan-long">New &middot; Free Lead Leak Scan</span><span class="lx-scan-short">Free scan</span> <b>&rarr;</b></a>
+          <a class="lx-scan" href="#contact" data-open-enquiry><span class="lx-scan-long">Or start your story</span><span class="lx-scan-short">Start your story</span> <b>&rarr;</b></a>
         </div>
         <a class="lx-scroll" href="#about" data-fade="1.1,0,10">scroll<i></i></a>
-        <div class="lx-cta" data-fade="1,0,20"><span class="magnetic"><a class="btn-contact js-contact" href="#contact" data-edit="ctaLabel" data-open-enquiry>Start your story ↗</a></span></div>
+        <div class="lx-cta" data-fade="1,0,20"><span class="magnetic"><a class="btn-contact" href="https://scan.riyadesk.com/?ref=home-hero"><span class="cta-long">Get your free scan ↗</span><span class="cta-short">Free scan ↗</span></a></span><span class="lx-cta-note">60 seconds &middot; free</span></div>
       </div>
     </div>
   </section>
@@ -739,6 +751,37 @@ body.has-cursor .cursor-dot, body.has-cursor .cursor-ring { opacity: 1; }
   <!-- VELOCITY BAND -->
   <section class="band" aria-hidden="true">
     <div class="band-track" id="band"></div>
+  </section>
+
+  <!-- FREE SCAN (highlight) -->
+  <section class="scan-band" id="free-scan" aria-labelledby="scan-h">
+    <div class="scan-band-inner">
+      <div class="scan-copy">
+        <p class="scan-kicker" data-fade="0,0,20"><span class="dot"></span>New &middot; Free tool</p>
+        <h2 id="scan-h" data-fade="0,0,40">How many leads is your marketing losing?</h2>
+        <p class="scan-text" data-fade="0.1,0,20">Get a free Lead Leak Scan of your business in 60 seconds. See what&rsquo;s working, what&rsquo;s costing you customers, and what to fix first.</p>
+        <ul class="scan-checks" data-fade="0.15,0,20"><li>Website tracking</li><li>Contact forms</li><li>Customer reviews</li><li>AI readiness</li></ul>
+        <form class="scan-quick" action="https://scan.riyadesk.com/" method="get" data-fade="0.18,0,20">
+          <label for="scanSite" class="sr-only">Your website</label>
+          <input id="scanSite" name="website" type="text" inputmode="url" autocomplete="url" placeholder="yourwebsite.com" required>
+          <input type="hidden" name="ref" value="home-box">
+          <button type="submit">Scan my site ↗</button>
+        </form>
+        <div class="scan-actions" data-fade="0.2,0,20"><a class="scan-book" href="https://cal.com/riya-desk/15min" target="_blank" rel="noopener">or book a 15-minute call ↗</a><span class="scan-note">60 seconds &middot; 100% free &middot; no card</span></div>
+      </div>
+      <a class="scan-card" href="https://scan.riyadesk.com/" aria-label="Open the free Lead Leak Scan" data-fade="0.15,0,40">
+        <span class="sc-top"><span>Lead Leak Scan</span><span>Sample result</span></span>
+        <span class="sc-ring" style="--v:58"><span><b>58</b><i>/100</i></span></span>
+        <span class="sc-band">Opportunity</span>
+        <span class="sc-rows">
+          <span class="sc-row"><span>Website tracking</span><span class="sc-bar"><i style="--w:72%"></i></span></span>
+          <span class="sc-row"><span>Contact forms</span><span class="sc-bar"><i style="--w:40%"></i></span></span>
+          <span class="sc-row"><span>Customer reviews</span><span class="sc-bar"><i style="--w:84%"></i></span></span>
+          <span class="sc-row"><span>AI visibility</span><span class="sc-bar"><i style="--w:28%"></i></span></span>
+        </span>
+        <span class="sc-cta">Scan your business &rarr;</span>
+      </a>
+    </div>
   </section>
 
   <!-- TILE ROWS -->
@@ -779,31 +822,6 @@ body.has-cursor .cursor-dot, body.has-cursor .cursor-ring { opacity: 1; }
         <p class="anim-text" id="animText" data-edit="aboutText">I&rsquo;m Riya, founder of Riya Desk, and I help businesses become the brand people choose. With 7+ years of experience and an MBA from the UK, I get to the heart of your business challenges and combine strategy, creativity and AI to turn what makes you different into a reason customers notice, trust and buy from you.</p>
       </div>
       <div class="about-ctas" data-fade="0.2,0,20"><span class="magnetic"><a class="btn-contact js-contact" href="#contact" data-edit="ctaLabel" data-open-enquiry>Start your story ↗</a></span><a class="about-more" href="about/">More about me &rarr;</a></div>
-    </div>
-  </section>
-
-  <!-- FREE SCAN (highlight) -->
-  <section class="scan-band" id="free-scan" aria-labelledby="scan-h">
-    <div class="scan-band-inner">
-      <div class="scan-copy">
-        <p class="scan-kicker" data-fade="0,0,20"><span class="dot"></span>New &middot; Free tool</p>
-        <h2 id="scan-h" data-fade="0,0,40">How many leads is your marketing losing?</h2>
-        <p class="scan-text" data-fade="0.1,0,20">Get a free Lead Leak Scan of your business in 60 seconds. See what&rsquo;s working, what&rsquo;s costing you customers, and what to fix first.</p>
-        <ul class="scan-checks" data-fade="0.15,0,20"><li>Website tracking</li><li>Contact forms</li><li>Customer reviews</li><li>AI readiness</li></ul>
-        <div class="scan-actions" data-fade="0.2,0,20"><span class="magnetic"><a class="btn-contact" href="https://scan.riyadesk.com/">Get your free scan ↗</a></span><a class="scan-book" href="https://cal.com/riya-desk/15min" target="_blank" rel="noopener">or book a 15-minute call ↗</a><span class="scan-note">60 seconds &middot; 100% free &middot; no card</span></div>
-      </div>
-      <a class="scan-card" href="https://scan.riyadesk.com/" aria-label="Open the free Lead Leak Scan" data-fade="0.15,0,40">
-        <span class="sc-top"><span>Lead Leak Scan</span><span>Sample result</span></span>
-        <span class="sc-ring" style="--v:58"><span><b>58</b><i>/100</i></span></span>
-        <span class="sc-band">Opportunity</span>
-        <span class="sc-rows">
-          <span class="sc-row"><span>Website tracking</span><span class="sc-bar"><i style="--w:72%"></i></span></span>
-          <span class="sc-row"><span>Contact forms</span><span class="sc-bar"><i style="--w:40%"></i></span></span>
-          <span class="sc-row"><span>Customer reviews</span><span class="sc-bar"><i style="--w:84%"></i></span></span>
-          <span class="sc-row"><span>AI visibility</span><span class="sc-bar"><i style="--w:28%"></i></span></span>
-        </span>
-        <span class="sc-cta">Scan your business &rarr;</span>
-      </a>
     </div>
   </section>
 
@@ -1717,6 +1735,17 @@ body.has-cursor .cursor-dot, body.has-cursor .cursor-ring { opacity: 1; }
 })();
 </script>
 
+<script>
+/* Homepage scan box: tidy the website a visitor typed and record the start in analytics. */
+(function () {
+  var f = document.querySelector('.scan-quick'); if (!f) return;
+  f.addEventListener('submit', function () {
+    var i = f.querySelector('input[name="website"]');
+    i.value = i.value.trim().replace(/^https?:\/\//i, '').replace(/\/$/, '');
+    if (window.rdTrack) rdTrack('scan_start_home', { from: 'homepage_box' });
+  });
+})();
+</script>
 <script>
 /* Quick note form in the Contact section: emails Riya Desk through FormSubmit and copies the note to the
    enquiries Google Sheet. If FormSubmit can't be reached, it opens a ready-written email instead. */
