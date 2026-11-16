@@ -20,6 +20,7 @@
 <link rel="preload" as="image" href="riya-soft.webp" type="image/webp">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Riya Desk","description":"Brand strategy, creative marketing and AI solutions for businesses ready to grow.","founder":{"@type":"Person","name":"Riya"},"email":"riyapatelbusiness@gmail.com","url":"https://riyadesk.com/","image":"https://riyadesk.com/og-image.jpg","sameAs":["https://www.linkedin.com/in/rp-riya-p-marketing/","https://www.instagram.com/riya_desk/"],"knowsAbout":["Brand strategy","Social media marketing","Campaigns","Website design","Business consulting","AI solutions"]}</script>
 <style>:root{box-sizing:border-box}body{margin:0;padding:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<script src="/analytics.js" defer></script>
 </head>
 <body>
 <title>Riya Desk · Brand Strategy, Marketing & AI Studio</title>
@@ -1740,7 +1741,7 @@ body.has-cursor .cursor-dot, body.has-cursor .cursor-ring { opacity: 1; }
       .catch(function () { return false; })
       .then(function (ok) {
         btn.disabled = false;
-        if (ok) { status.textContent = 'Thank you, ' + name.split(' ')[0] + '. I\'ll reply within one working day.'; f.reset(); }
+        if (ok) { status.textContent = 'Thank you, ' + name.split(' ')[0] + '. I\'ll reply within one working day.'; f.reset(); if (window.rdTrack) rdTrack('generate_lead', { form: 'quick_note' }); }
         else { status.textContent = 'Opening your email app instead…'; location.href = 'mailto:' + TO + '?subject=' + encodeURIComponent('Quick note from ' + name) + '&body=' + encodeURIComponent(msg + '\n\n' + name + ' · ' + email); }
       });
   });
@@ -2123,6 +2124,7 @@ textarea.rq-input { resize: none; min-height: 86px; font-size: 22px; }
       .then(function () { clearTimeout(timer); });
     function finish(ok) {
       sending = false;
+      if (ok && window.rdTrack) rdTrack('generate_lead', { form: 'enquiry_popup' });
       ss("rq-sent", "1");
       state.screen = ok ? "done" : "fallback";
       render();

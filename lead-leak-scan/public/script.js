@@ -205,6 +205,7 @@ document.addEventListener('DOMContentLoaded', function() {
         sessionStorage.setItem('scanResult', JSON.stringify(result));
         console.log('Result stored in sessionStorage');
         sendScanLeadToSheet(formData, result);
+        if (window.rdTrack) rdTrack('scan_completed', { score: result.overallScore, band: result.band || '', outreach: scanRef() ? 'yes' : 'no' });
 
         // Show results page
         console.log('Showing results page...');
