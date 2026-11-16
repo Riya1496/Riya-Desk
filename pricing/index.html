@@ -58,15 +58,6 @@ h2 { font-size: clamp(2rem, 5vw, 3.4rem); line-height: .95; text-align: center; 
 .hero { position: relative; padding: clamp(3.5rem, 8vw, 6rem) 0 2rem; }
 .hero::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(45% 50% at 50% 30%, rgba(196, 150, 96, .15), transparent 70%); }
 
-.country { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 2.2rem auto 0; }
-.country button { font: 500 12px/1 var(--text); letter-spacing: .12em; text-transform: uppercase; padding: 12px 16px; border-radius: 999px; border: 1px solid rgba(241, 226, 196, .3); background: transparent; color: var(--ink); cursor: pointer; transition: background-color .3s, color .3s; }
-.country button[aria-pressed="true"] { background: var(--gold-hi); color: var(--paper-ink); border-color: var(--gold-hi); }
-.country-select { display: none; }
-@media (max-width: 700px) {
-  .country { display: none; }
-  .country-select { display: flex; flex-direction: column; align-items: center; gap: 8px; margin: 2rem auto 0; font: 500 11px/1 var(--text); letter-spacing: .2em; text-transform: uppercase; color: var(--label); }
-  .country-select select { font: 500 15px/1.2 var(--text); color: var(--paper-ink); background: var(--gold-hi); border: 0; border-radius: 999px; padding: 13px 20px; min-width: 260px; text-align: center; }
-}
 .country-note { text-align: center; margin-top: .9rem; font-size: 13px; color: var(--muted); }
 
 section.block { padding: clamp(3.5rem, 7vw, 5.5rem) 0; }
@@ -151,19 +142,7 @@ footer a { text-decoration: none; } footer a:hover { color: var(--gold-hi); }
       <p class="label">Pricing</p>
       <h1>Clear prices, in your currency</h1>
       <p class="lead">Start with a free scan, fix what's costing you customers, then add only what you need. Pick a single service, save with a bundle, or let me look after your growth every month.</p>
-      <div class="country" role="group" aria-label="Show prices for">
-        <button type="button" data-c="UK">🇬🇧 UK · £</button>
-        <button type="button" data-c="AE">🇦🇪 UAE · AED</button>
-        <button type="button" data-c="US">🇺🇸 US &amp; Canada · $</button>
-        <button type="button" data-c="AU">🇦🇺 Australia · A$</button>
-        <button type="button" data-c="IN">🇮🇳 India · ₹</button>
-        <button type="button" data-c="EU">🇪🇺 Europe · €</button>
-        <button type="button" data-c="SG">🇸🇬 Singapore · S$</button>
-        <button type="button" data-c="NZ">🇳🇿 New Zealand · NZ$</button>
-        <button type="button" data-c="SA">🇸🇦 Saudi Arabia · SAR</button>
-      </div>
-      <label class="country-select"><span>Show prices for</span><select id="countrySel" aria-label="Show prices for"></select></label>
-      <p class="country-note" id="countryNote">Showing prices for the UK. Choose another country above if this isn’t right.</p>
+      <p class="country-note" id="countryNote">All prices in British pounds (GBP).</p>
     </div>
   </section>
 
@@ -231,15 +210,15 @@ footer a { text-decoration: none; } footer a:hover { color: var(--gold-hi); }
    Prices are set in GBP below. Each country converts them with its own factor and rounds to a tidy number.
    To set an exact price for one country, add it to `exact`, e.g. exact: { IN: 30000 }. */
 var COUNTRIES = {
-  UK: { name: 'the UK', symbol: '£', factor: 1 },
-  AE: { name: 'the UAE', symbol: 'AED ', factor: 4.6 },
-  US: { name: 'the US and Canada', symbol: '$', factor: 1.25 },
-  AU: { name: 'Australia', symbol: 'A$', factor: 1.9 },
-  IN: { name: 'India', symbol: '₹', factor: 40 },
-  EU: { name: 'Europe', symbol: '€', factor: 1.15 },
-  SG: { name: 'Singapore', symbol: 'S$', factor: 1.7 },
-  NZ: { name: 'New Zealand', symbol: 'NZ$', factor: 2.1 },
-  SA: { name: 'Saudi Arabia', symbol: 'SAR ', factor: 4.7 }
+  UK: { name: 'the UK', symbol: '£', factor: 1, cur: 'British pounds (GBP)' },
+  AE: { name: 'the UAE', symbol: 'AED ', factor: 4.6, cur: 'UAE dirhams (AED)' },
+  US: { name: 'the US and Canada', symbol: '$', factor: 1.25, cur: 'US dollars (USD)' },
+  AU: { name: 'Australia', symbol: 'A$', factor: 1.9, cur: 'Australian dollars (AUD)' },
+  IN: { name: 'India', symbol: '₹', factor: 40, cur: 'Indian rupees (INR)' },
+  EU: { name: 'Europe', symbol: '€', factor: 1.15, cur: 'euros (EUR)' },
+  SG: { name: 'Singapore', symbol: 'S$', factor: 1.7, cur: 'Singapore dollars (SGD)' },
+  NZ: { name: 'New Zealand', symbol: 'NZ$', factor: 2.1, cur: 'New Zealand dollars (NZD)' },
+  SA: { name: 'Saudi Arabia', symbol: 'SAR ', factor: 4.7, cur: 'Saudi riyals (SAR)' }
 };
 var BOOK = 'https://cal.com/riya-desk/15min';
 
@@ -352,13 +331,10 @@ function render(c) {
       return '<div class="row"><h4>' + esc(s.name) + '</h4><div><p>' + esc(s.desc) + '</p>' + (s.incl ? '<p class="incl"><b>Included:</b> ' + esc(s.incl) + '</p>' : '') + '</div><span class="amt">' + fmt(c, priceIn(c, s.gbp)) + '<small>' + ({ month: 'per month', article: 'per article', campaign: 'per campaign' }[s.unit] || 'one-time') + '</small>' + '</span></div>';
     }).join('') + '</div>';
   }).join('');
-  document.getElementById('countryNote').textContent = 'Showing prices for ' + COUNTRIES[c].name + '. Choose another country above if this isn’t right.';
-  document.querySelectorAll('.country button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.c === c)); });
-  var sel = document.getElementById('countrySel'); if (sel) sel.value = c;
+  document.getElementById('countryNote').textContent = 'All prices in ' + COUNTRIES[c].cur + '.';
 }
 
 function detect() {
-  try { var saved = localStorage.getItem('rd-country'); if (saved && COUNTRIES[saved]) return saved; } catch (e) {}
   var tz = ''; try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
   if (/^Asia\/(Kolkata|Calcutta)/.test(tz)) return 'IN';
   if (/^Asia\/Dubai|^Asia\/Muscat/.test(tz)) return 'AE';
@@ -371,23 +347,9 @@ function detect() {
   if (/^America\//.test(tz)) return 'US';
   return 'UK';
 }
-document.querySelectorAll('.country button').forEach(function (b) {
-  b.addEventListener('click', function () {
-    try { localStorage.setItem('rd-country', b.dataset.c); } catch (e) {}
-    render(b.dataset.c);
-    if (window.rdTrack) rdTrack('pricing_country', { country: b.dataset.c });
-  });
-});
-(function () {
-  var sel = document.getElementById('countrySel');
-  document.querySelectorAll('.country button').forEach(function (b) { sel.add(new Option(b.textContent, b.dataset.c)); });
-  sel.addEventListener('change', function () {
-    try { localStorage.setItem('rd-country', sel.value); } catch (e) {}
-    render(sel.value);
-    if (window.rdTrack) rdTrack('pricing_country', { country: sel.value });
-  });
-})();
-render(detect());
+var COUNTRY = detect();
+render(COUNTRY);
+window.addEventListener('load', function () { if (window.rdTrack) rdTrack('pricing_view', { country: COUNTRY }); });
 </script>
 </body>
 </html>
