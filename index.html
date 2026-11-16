@@ -460,6 +460,9 @@ body.has-cursor .cursor-dot, body.has-cursor .cursor-ring { opacity: 1; }
 .about-ctas { display: flex; flex-direction: column; align-items: center; gap: 1.4rem; }
 .about-more { font: 500 12px/1 var(--hero-font); letter-spacing: .2em; text-transform: uppercase; color: var(--gold-hi); text-decoration: none; padding-bottom: 6px; border-bottom: 1px solid rgba(241, 226, 196, .35); transition: border-color .3s; }
 .about-more:hover { border-color: var(--gold-hi); }
+.ct-book { margin-top: 1.4rem; text-align: center; }
+.ct-book-link, .scan-book { display: inline-block; font: 500 12px/1 var(--hero-font); letter-spacing: .18em; text-transform: uppercase; color: var(--gold-hi); text-decoration: none; padding: 14px 22px; border-radius: 999px; border: 1px solid rgba(241, 226, 196, .45); transition: background-color .3s; }
+.ct-book-link:hover, .scan-book:hover { background: rgba(241, 226, 196, .1); }
 .ct-avail { max-width: 34rem; margin: 1.6rem auto 0; text-align: center; font: 400 13.5px/1.6 var(--hero-font); color: rgba(239, 230, 214, .62); }
 .qf { width: 100%; max-width: 36rem; margin: 2.2rem auto 0; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; text-align: left; }
 .qf-title { grid-column: 1 / -1; font: 500 11px/1 var(--hero-font); letter-spacing: .24em; text-transform: uppercase; color: #d8b77e; text-align: center; margin-bottom: 4px; }
@@ -784,8 +787,8 @@ body.has-cursor .cursor-dot, body.has-cursor .cursor-ring { opacity: 1; }
         <p class="scan-kicker" data-fade="0,0,20"><span class="dot"></span>New &middot; Free tool</p>
         <h2 id="scan-h" data-fade="0,0,40">How many leads is your marketing losing?</h2>
         <p class="scan-text" data-fade="0.1,0,20">Get a free Lead Leak Scan of your business in 60 seconds. See what&rsquo;s working, what&rsquo;s costing you customers, and what to fix first.</p>
-        <ul class="scan-checks" data-fade="0.15,0,20"><li>Website tracking</li><li>Contact forms</li><li>Customer reviews</li><li>AI visibility</li></ul>
-        <div class="scan-actions" data-fade="0.2,0,20"><span class="magnetic"><a class="btn-contact" href="https://scan.riyadesk.com/">Get your free scan ↗</a></span><span class="scan-note">60 seconds &middot; 100% free &middot; no card</span></div>
+        <ul class="scan-checks" data-fade="0.15,0,20"><li>Website tracking</li><li>Contact forms</li><li>Customer reviews</li><li>AI readiness</li></ul>
+        <div class="scan-actions" data-fade="0.2,0,20"><span class="magnetic"><a class="btn-contact" href="https://scan.riyadesk.com/">Get your free scan ↗</a></span><a class="scan-book" href="https://cal.com/riya-desk/15min" target="_blank" rel="noopener">or book a 15-minute call ↗</a><span class="scan-note">60 seconds &middot; 100% free &middot; no card</span></div>
       </div>
       <a class="scan-card" href="https://scan.riyadesk.com/" aria-label="Open the free Lead Leak Scan" data-fade="0.15,0,40">
         <span class="sc-top"><span>Lead Leak Scan</span><span>Sample result</span></span>
@@ -857,6 +860,7 @@ body.has-cursor .cursor-dot, body.has-cursor .cursor-ring { opacity: 1; }
       <input class="edit-link" type="url" data-edit-input="contactLinkedIn" id="ctLiIn" placeholder="LinkedIn URL" aria-label="LinkedIn URL">
       <input class="edit-link" type="url" data-edit-input="contactInstagram" id="ctIgIn" placeholder="Instagram URL" aria-label="Instagram URL">
       <div data-fade="0.15,0,20"><span class="magnetic"><a class="btn-contact js-mail" href="mailto:riyapatelbusiness@gmail.com" data-edit="contactCta" data-open-enquiry>Tell me about your brand ↗</a></span></div>
+      <p class="ct-book"><a class="ct-book-link" href="https://cal.com/riya-desk/15min" target="_blank" rel="noopener">Book a 15-minute call ↗</a></p>
       <p class="ct-avail">Based in India, working with clients in the UK and worldwide. Calls 9am&ndash;5pm UK time (2:30&ndash;10:30pm IST).</p>
       <form class="qf" id="quickForm" novalidate>
         <p class="qf-title">Or send a quick note</p>

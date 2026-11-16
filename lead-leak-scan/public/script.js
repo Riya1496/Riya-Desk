@@ -483,7 +483,7 @@ function setupCTAButtons(scanResult) {
       const email = scanResult.email;
       const businessName = scanResult.businessName;
       const subject = `Lead Leak Scan Follow-up: ${businessName}`;
-      window.location.href = 'https://riyadesk.com/#start-your-story';
+      window.open('https://cal.com/riya-desk/15min', '_blank', 'noopener');
     });
   }
 
@@ -601,9 +601,9 @@ function renderBusinessIntelligence(scanResult) {
         We specialize in turning data insights into growth.<br>
         <strong style="font-size: 15px;">Let's discuss how we'd approach your business.</strong>
       </div>
-      <a href="https://riyadesk.com/#start-your-story"
+      <a href="https://cal.com/riya-desk/15min" target="_blank" rel="noopener"
          style="display: inline-block; padding: 14px 24px; background: #f1e2c4; color: #17120e; text-decoration: none; border-radius: 999px; font: 500 12px/1 Archivo, Arial, sans-serif; letter-spacing: .14em; text-transform: uppercase;">
-        Book a free strategy call ↗
+        Book a 15-minute walkthrough ↗
       </a>
     </div>
   `;
