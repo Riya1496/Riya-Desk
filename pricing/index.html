@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="Riya Desk">
 <meta property="og:url" content="https://riyadesk.com/pricing/">
 <meta property="og:title" content="Pricing · Riya Desk">
-<meta property="og:description" content="Fixed prices in your currency: fix the leaks, build an AI-ready website, or grow every month.">
+<meta property="og:description" content="Fix the leaks, build an AI-ready website, or grow every month: packages, bundles and individual services.">
 <meta property="og:image" content="https://riyadesk.com/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -140,9 +140,8 @@ footer a { text-decoration: none; } footer a:hover { color: var(--gold-hi); }
   <section class="hero">
     <div class="wrap">
       <p class="label">Pricing</p>
-      <h1>Clear prices, in your currency</h1>
-      <p class="lead">Start with a free scan, fix what's costing you customers, then add only what you need. Pick a single service, save with a bundle, or let me look after your growth every month.</p>
-      <p class="country-note" id="countryNote">All prices in British pounds (GBP).</p>
+      <h1>Pricing that grows with you</h1>
+      <p class="lead" style="margin-bottom:.5rem">Start with a free scan, fix what's costing you customers, then add only what you need. Pick a single service, save with a bundle, or let me look after your growth every month.</p>
     </div>
   </section>
 
@@ -331,7 +330,6 @@ function render(c) {
       return '<div class="row"><h4>' + esc(s.name) + '</h4><div><p>' + esc(s.desc) + '</p>' + (s.incl ? '<p class="incl"><b>Included:</b> ' + esc(s.incl) + '</p>' : '') + '</div><span class="amt">' + fmt(c, priceIn(c, s.gbp)) + '<small>' + ({ month: 'per month', article: 'per article', campaign: 'per campaign' }[s.unit] || 'one-time') + '</small>' + '</span></div>';
     }).join('') + '</div>';
   }).join('');
-  document.getElementById('countryNote').textContent = 'All prices in ' + COUNTRIES[c].cur + '.';
 }
 
 function detect() {
