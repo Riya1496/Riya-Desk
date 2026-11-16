@@ -4,7 +4,7 @@
    Pages include it with <script src="https://riyadesk.com/analytics.js" defer></script>. */
 (function () {
   var GA_ID = 'G-FMJX23ERQ7';
-  var CLARITY_ID = '';               // add the Microsoft Clarity project ID here when it exists
+  var CLARITY_ID = 'zeho4dpym1';     // Microsoft Clarity project
   var KEY = 'rd-consent';            // 'granted' | 'denied'
 
   window.dataLayer = window.dataLayer || [];
@@ -27,7 +27,7 @@
       y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
     })(window, document, 'clarity', 'script', CLARITY_ID);
   }
-  function grant() { gtag('consent', 'update', { analytics_storage: 'granted' }); loadClarity(); }
+  function grant() { gtag('consent', 'update', { analytics_storage: 'granted' }); loadClarity(); try { window.clarity('consent'); } catch (e) {} }
 
   /* Small helper other scripts call: window.rdTrack('event_name', { optional: 'params' }) */
   window.rdTrack = function (name, params) { try { gtag('event', name, params || {}); } catch (e) {} };
